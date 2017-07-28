@@ -1,0 +1,460 @@
+---
+title: "Understanding Portfolio Selection - Pfaff"
+author: "Stefan Glogger"
+date: "13 Juli 2017"
+output: pdf_document
+---
+
+# Code beschleunigen:
+
+* Zwischenschritte nur 1x berechnen, speichern, dann mit gespeicherterm rechnen (e.g. marginal contribution of risk)
+* möglichst Variablen lokal weitergeben (f bekommt Gewichtungsvektor, default ist Gleichgewichtung)
+* allgemein: libraries da einbinden, wo erstmals benötigt
+* mit echten Zahlen rechnen (statt mit x% und dann mit *100 und /100 rumwerfen)
+
+# R Preparation
+
+Install and load Packages
+
+```{r}
+# install.packages("FRAPO","mco")
+library(FRAPO)
+library(mco)
+```
+
+# Data Preparation
+
+## Loading of Data
+
+MultiAsset contains Month-end price data of stock and bond indices and gold.
+
+```{r}
+data(MultiAsset)
+Prices <- timeSeries(MultiAsset, charvec = rownames(MultiAsset))
+NAssets <- ncol(Prices)
+R <- returns(Prices, method = "discrete", percentage = TRUE)
+```
+
+## Defining parameters
+
+```{r}
+# Return
+TargetRpa <- 6 ## targeted return of 6 % p.a.
+TargetR <- 100 * ((1 + TargetRpa / 100)^(1 / 12) - 1) # % per month
+
+# Volatility
+TargetVol <- 4 ## % p.a.
+
+# Further parameters
+l <- rep(1, 3) ## goal weighting, alle gleichgewichtet (lambda)
+WeightedSum <- FALSE
+mu <- colMeans(R)
+S <- cov(R)
+```
+
+Note: Used as global parameters lateron.
+
+## Defining functions
+
+Objective Function f.
+
+* Input: Weights
+* Calculation:
+    + y[1]: return: -1 \* weight for return in objective function (with $\lambda_1$) \* portfolio return (weighted with $x$) / Target Return
+    + y[2]: volatility: weight for volatility in objective function (with $\lambda_2$) \* yearly volatility of portfolio / Target Volatility
+    + y[3]: marginal contribution to portfolio risk (in terms of portfolio standard deviation) -> variance (as it is squared), takes dispersion into account 
+* Output: Either the weighted sum directly or the three (weighted) components
+
+Idea: Normalization of objective function components by dividing by target value
+
+
+```{r}
+f <- function(x){
+  y <- numeric(3)
+  y[1] <- -1.0 * l[1] * drop(crossprod(x, mu)) / TargetR
+  y[2] <- l[2] * drop(sqrt(t(x) %*% S %*% x)) * sqrt(12) / TargetVol
+   
+  #die MRC-Funktion berechnet die Marginal contributions zum Portfolio Risk, x sind die weights
+  ## vgl. "Portfolio Analysis"
+  y[3] <- l[3] * sum((mrc(x, S) / 100)^2)
+   if(WeightedSum){
+    return(sum(y))
+     } else {
+     return(y)
+      }
+  }
+```
+
+Restriction function g
+Input: Weights
+Idea: Weights should sum up to 1
+
+```{r}
+g <- function(x){
+  c(1.01 - sum(x), sum(x) - 0.99)
+}
+```
+
+# Calculation
+
+## Optimization by nsga2
+```{r, eval = F}
+?nsga2
+```
+
+
+```{r}
+ans <- nsga2(f, NAssets, 3, lower.bounds = rep(0, NAssets), upper.bounds = rep(1, NAssets), constraints = g, cdim = 2, popsize = 500)
+```
+so constraints are evaluated as $\geq 0$.
+
+
+## Preparation of Results
+
+? Das ist dann so nicht sinnvoll: wenn nsga2 nur pareto effiziente ausgibt, muss ich nicht nur die pareto-optimalen zurückgeben (bzw. die Funktion nsga2 müsste gar nicht die Information pareto.optimal zurückgeben, da ja eh TRUE)
+
+
+```{r}
+mco <- data.frame(ans$value[ans$pareto.optimal, ])
+
+mco[, 1] <- ((1 + (-1.0 * mco[, 1] * TargetR) / 100)^12- 1.0) * 100
+colnames(mco) <- c("Return", "Risk", "Diversification")
+```
+
+1. Spalte von mco enthält Funktionswert von f_1(x), also normierten Return (monatlich). jetzt multiplizieren mit Normierungsfaktor -> monatlicher Return, dann hochskalieren auf Jahr
+2. Spalte müsste auch noch entnormiert werden (*TargetVol)
+3. Spalte unsicher, ob monatliches Ergebnis rauskommt
+
+## Visualization of Results
+
+### Scatterplot
+
+Needed Packages
+
+```{r}
+# install.packages("scatterplot3d")
+library(scatterplot3d)
+```
+
+```{r}
+scatterplot3d(mco,
+              main = "Pareto Efficient Solutions",
+              sub = "Pareto Frontier (Surface)",
+              xlab = "Return Objective",
+              ylab = "Risk Objective",
+              zlab = "Dispersion of MRC",
+              angle = 15,
+              highlight.3d = FALSE,
+              box = TRUE,
+              color = "steelblue",
+              pch = 19, type = "p",
+              cex.symbols = 0.6)
+```
+
+
+### Plot 2
+```{r}
+# install.packages("akima") # Interpolation of Irregularly and Regularly Spaced Data
+# install.packages("fields") # Tools for Spatial Data
+library(akima)
+library(fields)
+
+# install.packages("fPortfolio")
+### install.packages("fAssets")
+# install.packages("Rdonlp2", repos="http://R-Forge.R-project.org")
+# install.packages("PerformanceAnalytics")
+# install.packages("ggtern")
+library(fPortfolio) ### needs package fAssets, ecodist, Rsymphony
+library(Rdonlp2)
+library(ggtern)
+```
+
+### Further calculation
+
+interpolate (to draw smoothly)
+
+```{r}
+s <- interp(mco[, 2], mco[, 1], mco[, 3],xo = seq(min(mco[, 2]), max(mco[, 2]), length = 100),
+            yo = seq(min(mco[, 1]), max(mco[, 1]), length = 100),
+            duplicate = "mean"
+            )
+```
+
+### Plot Image
+```{r}
+par(mar = c(5, 6, 5, 6))
+
+image.plot(s, nlevel = 50,
+           main = "Image plot of efficient set",
+           legend.lab = "Dispersion of MRC",
+           xlab = "Risk Objective",
+           ylab = "Return Objective",
+           legend.mar = 4,
+           horizontal = TRUE,
+           legend.shrink = 0.7,
+           col = topo.colors(50))
+
+contour(s, add = TRUE, nlevels = 20, labcex = 0.8)
+```
+
+verstehe noch nicht genau, was ich hier sehe. Vermute: 3 Informationen 2-dimensional dargestellt. Farbe als dritte Information. Sehe, welche Ausprägungen efficient portfolios haben
+
+
+## Plot 3
+
+### Further calculations
+
+Erstelle Gewichtung von Portfolio. mögliche Aufteilung von 1 auf drei verschiedene Kriterien, wobei jedem Kriterium mindestens Gewicht 0.05 gegeben wird.
+-> Gewichtung für die Zielkriterien wird vorgegeben (f_1, f_2, f_3)
+gespeichert in wobj
+
+Programmierstil: letztes Kriterium kann (hier) schon mal Gewicht von 0 bekommen
+
+```{r}
+grid <- expand.grid(x = seq(0.05, 0.95, by = 0.05),
+                    y = seq(0.05, 0.95, by = 0.05))
+grid <- grid[which(rowSums(grid) <= 1.0), ]
+wobj <- as.matrix(cbind(grid, 1 - rowSums(grid)),
+                  nrow = nrow(grid), ncol = 3)
+#Wobj ist eine Art Gitterverfahren und W ist die Lösung des Optimierers, wie viel jedes Asset zum Ziel beisteuert ?? -> siehe oben
+```
+
+W hat in Zeilen alle möglichen Gewichtungen der drei Zielfunktionen und in Spalten die verschiedenen verwendeten Assets (wie viel dem Asset in dem optimalen Portfolio zugeteilt wird)
+
+verwende donlp2NLP, um optimale Portfoliogewichtung unter gegebener Gewichtung der drei Zielkriterien zu finden
+* start: gleichverteilte Gewichte
+* objective: die Funktion f mit ihren drei Zielkriterien, 
+  ACHTUNG: WeightedSum ist auf TRUE gesetzt, damit schaut f nach einem Vektor l, der die Gewichtung der drei Zielfunktionen enthält, diese wird in jedem Durchlauf der for-Schleife angepasst (miserabler Programmierstil)
+* par.lower: jeder Parameter (Gewicht für Assets) ist mindestens 0 -> kein short-sell erlaubt
+* ineqA, ineqA.lower, ineqA.upper: die Gewichte der Assets sollen zu 1 aufsummieren
+
+:D In package fPortfolio wird function donlp2NLP erneut definiert -> masked die Version vom Originalpackage -> muss Zielfunktion mit "objective = " übergeben, statt mit "fun = "
+bzw. wenn Code am Stück durchläuft, dann doch mit "fun = f"
+
+```{r}
+W <- matrix(NA, nrow = nrow(wobj), ncol = NAssets)
+WeightedSum <- TRUE
+IneqA <- matrix(1, nrow = 1, ncol = NAssets)
+ew <- rep(1 / NAssets, NAssets) # starte mit gleichverteilter Gewichtung
+library(fPortfolio) ## for donlp2NLP ### sollte schon eingebunden sein
+for(i in 1:nrow(wobj)){
+  l <- c(wobj[i, ])
+  W[i, ] <- donlp2NLP(start = ew, fun = f,
+                      par.lower = rep(0, NAssets),
+                      ineqA = IneqA, ineqA.lower = 1.0,
+                      ineqA.upper = 1.0)$solution
+}
+```
+
+calculate expected shortfall for the different portfolios (found above and stored in W)
+anscheinend spezielles Format benötigt, dass ES() rechnen kann
+
+Programmierstil: Funktion vorher definieren, dann apply mit der Funktion
+
+```{r}
+#ES ist aus PerformanceAnalytics
+library(PerformanceAnalytics)
+
+Es95Mod <- apply(W, 1, function(x){
+  r <- timeSeries(R %*% x / 100, time(R))
+  -100 * ES(r)
+}) 
+```
+
+### Plot
+
+Daten abspeichern (Gewichtung der Zielkriterien zusammen mit expected shortfall von gefundenem, optimalem Portfolio)
+
+```{r}
+terndat <- data.frame(cbind(wobj, Es95Mod))
+colnames(terndat) <- c("x", "y", "z", "value")
+```
+
+Bereite ternary-Plot vor.
+
+```{r}
+#Theme for ternary plot
+terntheme <- function(){
+  list(theme_rgbg(), theme(legend.position = c(0, 1),legend.justification = c(0, 1),
+                           plot.margin=unit(c(0, 2,0, 2), "cm")))
+}
+```
+
+Und jetzt der ternary plot
+
+alte Version
+
+```{r, eval=F}
+ggtern(terndat, aes(x = x, y = y, z = z, value = value)) +
+  geom_interpolate_tern(aes(value = value, color = ..level..), binwidth = 1.0) +
+  terntheme() +
+  theme_hidegrid_minor() +
+  theme_showgrid_major() +
+  Lline(0.2, color = "blue", linetype = 2) + ## x
+  Tline(0.3, colour = "red2", linetype = 2) + ## y
+  Rline(0.5, color = "brown", linetype = 2) + ## z
+  scale_color_gradient(low = "green", high = "red") +
+  labs(x = "Return", y = "Risk", z = "MRC",
+         title = "Ternary Plot with ES Contour Lines",
+         color = "Level")
+```
+
+
+meine Version
+
+es kommen Warnmeldungen, dass eine Version veraltet ist, aber das liegt an ggtern
+
+```{r, warning=F}
+ggtern(terndat, aes(x, y, z, value)) +
+  geom_interpolate_tern(aes(value = value, color = ..level..), binwidth = 1.0) +
+  terntheme() +
+  theme_hidegrid_minor() +
+  theme_showgrid_major() +
+  Lline(Lintercept =  0.2, colour = "blue", linetype = 2, lwd=2) + ## x
+  Tline(Tintercept = 0.3, colour = "red2", linetype = 2, lwd=2) + ## y
+  Rline(Rintercept = 0.5, color = "green", linetype = 2, lwd=2) + ## z
+  scale_color_gradient(low = "green", high = "red") +
+  labs(x = "Return", y = "Risk", z = "MRC",
+         title = "Ternary Plot with ES Contour Lines",
+         color = "Level")
+```
+
+keine Ahnung, warum er return auf 0.2 (blue), risk auf 0.3 (red2), MRC auf 0.5 setzt.
+
+```{r}
+terndat[terndat$x==0.2 & terndat$y==0.3,]
+```
+
+
+
+Der minimale value wird erreicht bei
+```{r}
+terndat[which(terndat$value == min(terndat$value)),]
+```
+
+
+
+
+
+## Backtest
+
+Passe die Zeiten an
+ep enthält nur noch die hinteren zeiten (erste 59 werden rausgelöscht)
+
+```{r}
+library(cccp) ## for ERC portolio
+## backtest, extending window
+ep <- time(R)[-c(1:59)]
+bs <- length(ep)
+sp <- rep(start(R), bs)
+```
+
+Initialisiere Objecte
+verschiedene Matrizen mit Zeilen (Anzahl Zeitpunkte), Spalten (verschiedene Assets)
+
+
+```{r}
+## initialising object
+Wmco <- matrix(NA, nrow = bs, ncol = NAssets)
+Wmsr <- Wmdp <- Wgmv <- Werc <- Wmco
+```
+
+Goal weighting
+
+```{r}
+l <- c(0.2, 0.1, 0.7) ## goal weighting
+```
+
+berechne die ganzen Daten zu jedem Zeitpunkt die optimalen Portfolios
+Wmco  unser optimales Portfolio (mit den Gewichten wie oben)
+Werc  riskp parity solution (long only portfolio with budget constraint)
+Wgmv  global minimum variance portfolio (long only)
+Wmdp  most diversified portfolio (long only)
+Wmsr  tangencyPortfolio (portfolio with the highest return/risk ratio on the efficient frontier)
+
+```{r, results='hide'}
+for(i in 1:bs){
+	rdat <- window(R, start = sp[i], end = ep[i])
+	mu <- colMeans(rdat)
+	S <- cov(rdat)
+	
+	Wmco[i, ] <- donlp2NLP(start = ew, fun = f, 
+	                       par.lower = rep(0, NAssets), ineqA = IneqA, 
+	                       ineqA.lower = 1.0, ineqA.upper = 1.0)$solution
+	# manchmal "fun= ", manchmal "objective=" needed
+	
+	ans <- tangencyPortfolio(rdat)
+	Wmsr[i, ] <- getWeights(ans)
+	
+	ans <- PMD(rdat)
+	Wmdp[i, ] <- FRAPO::Weights(ans) / 100
+	
+	ans <- PGMV(rdat)
+	Wgmv[i, ] <- FRAPO::Weights(ans) / 100
+	
+	ans <- rp(ew, S, ew, optctrl = ctrl(trace = FALSE))
+	Werc[i, ] <- c(getx(ans))
+	}
+
+W <- list("MCO" = Wmco, "MSR" = Wmsr, "MDP" = Wmdp,
+	"GMV" = Wgmv, "ERC" = Werc)
+```
+
+
+Nehme jedes Listenelement von W (jede Portfoliokategorie)
+dazu die timeSeries (je fixes Portfolio)
+wTSL1 ist immer 1 hinten dran
+berechne die Portfolioreturns zu jedem Zeitpunkt 
+berechne wie sich Portfolio über Zeit entwickelt (cumprod = kumuliertes Produkt)
+
+
+```{r}
+E <- lapply(W, function(x){
+	wTs <- timeSeries(x, charvec = ep)
+	wTsL1 <- lag(wTs, 1)
+	RetFac <- 1 + rowSums(R[ep, ] * wTsL1) / 100.0
+	RetFac[1] <- 100
+	timeSeries(cumprod(RetFac), charvec = ep)
+})
+```
+
+### Plot
+
+```{r}
+cols <- topo.colors(6)
+plot(E[[1]], lwd = 2,
+	ylab = "Index", xlab = "", col = cols[1],
+	main = "Comparison of Allocation Strategies")
+lines(E[[2]], col = cols[2])
+lines(E[[3]], col = cols[3])
+lines(E[[4]], col = cols[4])
+lines(E[[5]], col = cols[5])
+legend("topleft", legend = c("MCO", "MSR", "MDP", "GMW", "ERC"), col = cols, lty = 1, lwd = 2)
+abline(h = 100, col = "gray")
+
+```
+
+da funktioniert unsere Strategie am besten (aber wie zu den Gewichten gekommen???)
+
+RstratTs is same as Rstrat but other format (xts = extensible time-series object)
+Bench hat 0 überall
+
+S1 nimmt dann die RstratTs und berechnet die annualisierten returns, annualized std.dev and annualized sharpe
+S2 ist Value at Risk (wird mit - multipliziert)
+??? aber warum mit -100???
+
+
+```{r}
+Rstrat <- matrix(unlist(lapply(E, Return.calculate)), ncol = 5)
+RstratTs <- na.omit(xts(Rstrat, order.by = as.Date(ep)))
+Bench <- xts(rep(0, nrow(RstratTs)), order.by = as.Date(ep)[-1])
+
+S1 <- as.matrix(table.AnnualizedReturns(RstratTs, Rf = Bench, scale = 12))
+S2 <- VaR(RstratTs)
+
+ans <- rbind(S1, -100 * S2)
+colnames(ans) <- c("MCO", "MSR", "MDP", "GMV", "ERC")
+rownames(ans) <- c("Return (p.a.)", "StdDev. Risk (p.a.)", "Sharpe Ratio", "VaR (p.a.)")
+round(ans, 3)
+```
+
