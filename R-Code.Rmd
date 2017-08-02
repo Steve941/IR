@@ -1,0 +1,125 @@
+---
+title: "R-Code Visualizing of IR"
+author: "Stefan Glogger"
+date: "2 August 2017"
+output: pdf_document
+---
+
+# Overview
+
+Here we do the visualization. The mathematical formulas and setting of the parameters are done in separate files. Use the cache option in Markdown to safe computation time.
+
+
+1. Calculate Sentiment 
+
+     1.1. 1 month Sentiment (survey regarding expectations for one month)
+     
+     1.2. 6 month Sentimen (survey regarding expectations for six months)
+     
+2. Import Data
+
+    2.1. Sentix
+
+
+# Open Questions
+
+-> QUEST
+
+
+# Functions and Parameters separate
+
+```{r}
+source("parameters.R")
+source("functions.R")
+```
+
+\newpage
+# Data Import
+
+sheets=c("DAX","DAXm","TEC","TECm","ESX50","ESX50m","SP5","SP5m","NASDAQ","NASDAQm","NIKKEI","NIKKEIm","BUND","BUNDm","TBOND","TBONDm")
+
+### Sentix
+```{r}
+load(file.path(folderData, "Sentix", "SentixCalculated"))
+```
+
+There might be a problem with duplicated dates!
+
+```{r}
+dates <- as.Date(sentix[[1]][,1], format = "%d.%m.%Y")
+sum(duplicated(dates))
+sum(dates==as.Date("2013-04-05"))
+dates <- unique(dates)
+```
+
+##### dispersion
+
+```{r}
+sentixP1disp <- data.frame(DAX = unique(sentix[["DAX"]])$P_disp, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixP1disp$TEC = unique(sentix[["TEC"]])$P_disp[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixP1disp$SP5 = unique(sentix[["SP5"]])$P_disp[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixP1disp$NASDAQ = unique(sentix[["NASDAQ"]])$P_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixP1disp$NIKKEI = unique(sentix[["NIKKEI"]])$P_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixP1disp$BUND = unique(sentix[["BUND"]])$P_disp[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixP1disp$TBOND = unique(sentix[["TBOND"]])$P_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
+
+
+sentixI1disp <- data.frame(DAX = unique(sentix[["DAX"]])$I_disp, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixI1disp$TEC = unique(sentix[["TEC"]])$I_disp[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixI1disp$SP5 = unique(sentix[["SP5"]])$I_disp[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixI1disp$NASDAQ = unique(sentix[["NASDAQ"]])$I_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixI1disp$NIKKEI = unique(sentix[["NIKKEI"]])$I_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixI1disp$BUND = unique(sentix[["BUND"]])$I_disp[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixI1disp$TBOND = unique(sentix[["TBOND"]])$I_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
+
+
+sentixG1disp <- data.frame(DAX = unique(sentix[["DAX"]])$G_disp, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixG1disp$TEC = unique(sentix[["TEC"]])$G_disp[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixG1disp$SP5 = unique(sentix[["SP5"]])$G_disp[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixG1disp$NASDAQ = unique(sentix[["NASDAQ"]])$G_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixG1disp$NIKKEI = unique(sentix[["NIKKEI"]])$G_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixG1disp$BUND = unique(sentix[["BUND"]])$G_disp[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixG1disp$TBOND = unique(sentix[["TBOND"]])$G_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
+```
+
+##### herfindah
+
+```{r}
+sentixP1herf <- data.frame(DAX = unique(sentix[["DAX"]])$P_herf, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixP1herf$TEC = unique(sentix[["TEC"]])$P_herf[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixP1herf$SP5 = unique(sentix[["SP5"]])$P_herf[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixP1herf$NASDAQ = unique(sentix[["NASDAQ"]])$P_herf[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixP1herf$NIKKEI = unique(sentix[["NIKKEI"]])$P_herf[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixP1herf$BUND = unique(sentix[["BUND"]])$P_herf[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixP1herf$TBOND = unique(sentix[["TBOND"]])$P_herf[unique(sentix[["TBOND"]])$Datum %in% dates]
+
+
+sentixI1herf <- data.frame(DAX = unique(sentix[["DAX"]])$I_herf, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixI1herf$TEC = unique(sentix[["TEC"]])$I_herf[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixI1herf$SP5 = unique(sentix[["SP5"]])$I_herf[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixI1herf$NASDAQ = unique(sentix[["NASDAQ"]])$I_herf[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixI1herf$NIKKEI = unique(sentix[["NIKKEI"]])$I_herf[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixI1herf$BUND = unique(sentix[["BUND"]])$I_herf[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixI1herf$TBOND = unique(sentix[["TBOND"]])$I_herf[unique(sentix[["TBOND"]])$Datum %in% dates]
+
+
+sentixG1herf <- data.frame(DAX = unique(sentix[["DAX"]])$G_herf, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixG1herf$TEC = unique(sentix[["TEC"]])$G_herf[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixG1herf$SP5 = unique(sentix[["SP5"]])$G_herf[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixG1herf$NASDAQ = unique(sentix[["NASDAQ"]])$G_herf[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixG1herf$NIKKEI = unique(sentix[["NIKKEI"]])$G_herf[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixG1herf$BUND = unique(sentix[["BUND"]])$G_herf[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixG1herf$TBOND = unique(sentix[["TBOND"]])$G_herf[unique(sentix[["TBOND"]])$Datum %in% dates]
+```
+
+
+### Stocks
+
+QUEST: take data of Yahoo Finance
+
