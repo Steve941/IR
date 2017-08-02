@@ -367,7 +367,7 @@ E <- lapply(W, function(x){
 })
 
 cols <- topo.colors(8)
-pdf(file = paste0(getwd(), "/Plot/", "optimal Portfolios", ".pdf"), 
+pdf(file = paste0(getwd(), "/Plot/", "optimal Portfolios extended", ".pdf"), 
     width = 12, height = 8)
 plot(E[[1]], lwd = 2,
      ylab = "Index", xlab = "", col = cols[1],
@@ -377,6 +377,9 @@ plot(E[[1]], lwd = 2,
 for(i in 2:8){
   lines(E[[i]], col = cols[i])
 }
-legend("topleft", legend = c("MCOI1", "MCOI6", "MCOP1", "MCOP6", "MSR", "MDP", "GMW", "ERC"), col = cols, lty = 1, lwd = 2)
+legend("topleft", legend = c("Multiple Criteria Institution 1 month period", "Multiple Criteria Institution 6 month period",
+                             "Multiple Criteria Private 1 month period", "Multiple Criteria Private 6 month period", 
+                             "Tangency Portfolio (max Sharpe Ratio)", "Most diversified Portfolio", 
+                             "Global Minimum Variance", "Risk Parity Optimized"), col = cols, lty = 1, lwd = 2)
 abline(h = 100, col = "gray")
 dev.off()
