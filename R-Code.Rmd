@@ -287,33 +287,60 @@ getSymbols("FGBLU7.EX", env = bund, src = "yahoo", from = dateMin, to = dateMax)
 getSymbols("FGBLH8.EX" env = bund, src = "yahoo", from = dateMin, to = dateMax)
 ```
 
-
-Bundesanleihen von <https://www.bundesbank.de/Navigation/DE/Statistiken/Zeitreihen_Datenbanken/Makrooekonomische_Zeitreihen/its_details_value_node.html?tsId=BBK01.WT0557>
-Zeitreihe BBK01.WT0557: Ungewogene Umlaufsrendite der an der EUREX jeweils lieferbaren Bundeswertpapiere / Mittlere RLZ von 9 bis einschl. 10 Jahre / Tageswerte 
-
+*new*: Den Bund-Future habe ich bei onvista in 5-Jahresstücken geladen und zusammengebaut. Dezimaltrennzeichen umgestellt im .csv
 ```{r, cache=T}
-BUND <- read.csv(file.path(folderData, "Indexdaten", "BBK01.WT0557.csv"), sep = "\t")
-colnames(BUND) <- c("Datum", "Kurs")
+BUND <- read.csv(file.path(folderData, "Bundfuture", "Bundfuture2001-2017.csv"), sep = ";")
 BUND[,1] <- as.Date(BUND[,1], format = "%d.%m.%Y")
 BUND <- BUND[BUND[,1] %in% dates,]
 BUND <- as.data.frame(BUND)
 
-stocks$BUND <- merge(stocks, BUND, by = "Datum", all.x = T)$Kurs
+stocks$BUND <- merge(stocks, BUND, by = "Datum", all.x = T)$Schluss
+```
+
+
+
+*old*: Bundesanleihen von <https://www.bundesbank.de/Navigation/DE/Statistiken/Zeitreihen_Datenbanken/Makrooekonomische_Zeitreihen/its_details_value_node.html?tsId=BBK01.WT0557>
+Zeitreihe BBK01.WT0557: Ungewogene Umlaufsrendite der an der EUREX jeweils lieferbaren Bundeswertpapiere / Mittlere RLZ von 9 bis einschl. 10 Jahre / Tageswerte 
+
+```{r, cache=T}
+# BUND <- read.csv(file.path(folderData, "Indexdaten", "BBK01.WT0557.csv"), sep = "\t")
+# colnames(BUND) <- c("Datum", "Kurs")
+# BUND[,1] <- as.Date(BUND[,1], format = "%d.%m.%Y")
+# BUND <- BUND[BUND[,1] %in% dates,]
+# BUND <- as.data.frame(BUND)
+# 
+# stocks$BUND <- merge(stocks, BUND, by = "Datum", all.x = T)$Kurs
 ```
 
 Treasury bond
-from [*Link Yahoo*](<https://finance.yahoo.com/quote/TLH?p=TLH>)
+
+*new*: Beim T-Bond ist es die 10 Year Treasury Note, auf welche das TBOND Sentiment abzielt. Diese habe ich bei FRED geladen: <https://fred.stlouisfed.org/series/DGS10>
+
+
+```{r, cache=T}
+TBOND <- read.csv(file.path(folderData, "10 year T-Notes", "DGS10.csv"), sep = ",")
+TBOND[,1] <- as.Date(TBOND[,1], format = "%Y-%m-%d")
+TBOND[,2] <- as.numeric(as.character(TBOND[,2])) # was a factor first and factors are stored via index of factor level
+colnames(TBOND) <- c("Datum", "DGS10")
+TBOND <- TBOND[TBOND[,1] %in% dates,]
+TBOND <- as.data.frame(TBOND)
+
+stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$DGS10
+```
+
+
+*old*: from [*Link Yahoo*](<https://finance.yahoo.com/quote/TLH?p=TLH>)
 iShares 10-20 Year Treasury Bond ETF (TLH)
 
 ```{r, cache=T}
-tbond <- new.env()
-
-getSymbols("TLH", env = tbond, src = "yahoo", from = dateMin, to = dateMax)
-TBOND <- data.frame(tbond$TLH[dates,"TLH.Close"])
-colnames(TBOND) <- "Close" 
-TBOND$Datum <- as.Date(row.names(TBOND))
-
-stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$Close
+# tbond <- new.env()
+# 
+# getSymbols("TLH", env = tbond, src = "yahoo", from = dateMin, to = dateMax)
+# TBOND <- data.frame(tbond$TLH[dates,"TLH.Close"])
+# colnames(TBOND) <- "Close" 
+# TBOND$Datum <- as.Date(row.names(TBOND))
+# 
+# stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$Close
 ```
 
 ## Data Preparation
