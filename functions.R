@@ -66,19 +66,35 @@ plotIndexSent <- function(dat){
 
 library(FSelector) # to generate formula easily
 
-dispersionSent <- function(dat){
-  temp <- dat
-  
-  for(i in 1:nrow(dat)){
-    for(k in colnames(dat)){
-      # generate formula (regress one column on all the others while using all the previous data (including today))
-      form <- as.simple.formula(setdiff(colnames(dat), k), k)
-      temp[i, k] <- unname(lm(form, data = dat[1:i,])$coefficients[1])
+### developped further to regSent
+# dispersionSent <- function(dat){
+#   temp <- dat
+#   
+#   for(i in 1:nrow(dat)){
+#     for(k in colnames(dat)){
+#       # generate formula (regress one column on all the others while using all the previous data (including today))
+#       form <- as.simple.formula(setdiff(colnames(dat), k), k)
+#       temp[i, k] <- unname(lm(form, data = dat[1:i,])$coefficients[1])
+#     }
+#   }
+#   
+#   return(temp)
+# }
+
+regSent <- function(dat, consider = 50){
+    temp <- dat
+    
+    for(i in 1:nrow(dat)){
+        for(k in colnames(dat)){
+            # generate formula (regress one column on all the others while using 'consider' previous points)
+            form <- as.simple.formula(setdiff(colnames(dat), k), k)
+            temp[i, k] <- unname(lm(form, data = dat[max((i-consider),1):i,])$coefficients[1])
+        }
     }
-  }
-  
-  return(temp)
+    
+    return(temp)
 }
+
 
 
 # ** Actual Optimization -----------------------------------------------------

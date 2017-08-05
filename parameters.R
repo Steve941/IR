@@ -22,3 +22,7 @@ dateMax <- as.Date("02.09.2016", format = "%d.%m.%Y")
 # Assets
 numAsset <- 8
 
+# Sentix Data (these are updated multiple times)
+sentixDataNames <- c("sentixI1disp", "sentixP1disp", "sentixG1disp", "sentixI1herf", "sentixG1herf", "sentixP1herf", 
+  "sentixI6disp", "sentixP6disp", "sentixG6disp", "sentixI6herf", "sentixG6herf", "sentixP6herf")
+

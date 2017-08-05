@@ -19,6 +19,14 @@ Here we do the visualization. The mathematical formulas and setting of the param
 2. Import Data
 
     2.1. Sentix
+    
+    2.2. Stocks
+    
+3. Preparation of Data
+
+    3.1. exclude NAs
+    
+    3.2. regress Sentiment 
 
 
 # Open Questions
@@ -343,7 +351,9 @@ iShares 10-20 Year Treasury Bond ETF (TLH)
 # stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$Close
 ```
 
-## Data Preparation
+# Data Preparation
+
+## na's
 
 There might be dates missing.
 
@@ -351,7 +361,10 @@ There might be dates missing.
 colSums(is.na.data.frame(stocks))
 ```
 
-We delete dates with missing values.
+We delete dates with missing values. 
+
+Work with expressions to keep code nice:
+<https://stackoverflow.com/questions/1743698/evaluate-expression-given-as-a-string>
 
 ```{r}
 stocks <- stocks[complete.cases(stocks),]
@@ -360,18 +373,76 @@ dates <- stocks[,1]
 updateDates <- function(d){
     return(d[as.Date(rownames(d)) %in% dates, ])
 }
-sentixI1disp <- updateDates(sentixI1disp)
-sentixP1disp <- updateDates(sentixI1disp)
-sentixG1disp <- updateDates(sentixI1disp)
-sentixI1herf <- updateDates(sentixI1herf)
-sentixG1herf <- updateDates(sentixI1herf)
-sentixP1herf <- updateDates(sentixI1herf)
 
-sentixI6disp <- updateDates(sentixI6disp)
-sentixP6disp <- updateDates(sentixI6disp)
-sentixG6disp <- updateDates(sentixI6disp)
-sentixI6herf <- updateDates(sentixI6herf)
-sentixG6herf <- updateDates(sentixI6herf)
-sentixP6herf <- updateDates(sentixI6herf)
+
+i = sentixDataNames[1]
+parse(text = paste0(i, " <- ", "updateDates(", i, ")"))
+for (i in sentixDataNames){
+    eval(parse(text = paste0(i, " <- ", "updateDates(", i, ")")))
+}
+### not needed any more (done in three lines above) :) :) :)
+# sentixI1disp <- updateDates(sentixI1disp)
+# sentixP1disp <- updateDates(sentixP1disp)
+# sentixG1disp <- updateDates(sentixG1disp)
+# sentixI1herf <- updateDates(sentixI1herf)
+# sentixG1herf <- updateDates(sentixP1herf)
+# sentixP1herf <- updateDates(sentixG1herf)
+# 
+# sentixI6disp <- updateDates(sentixI6disp)
+# sentixP6disp <- updateDates(sentixP6disp)
+# sentixG6disp <- updateDates(sentixG6disp)
+# sentixI6herf <- updateDates(sentixI6herf)
+# sentixG6herf <- updateDates(sentixP6herf)
+# sentixP6herf <- updateDates(sentixG6herf)
+
+colSums(is.na.data.frame(stocks))
+colSums(is.na.data.frame(sentixI1disp)) + colSums(is.na.data.frame(sentixP1disp)) + colSums(is.na.data.frame(sentixG1disp)) + colSums(is.na.data.frame(sentixI1herf)) + colSums(is.na.data.frame(sentixI1herf)) + colSums(is.na.data.frame(sentixI1herf))
+colSums(is.na.data.frame(sentixI6disp)) + colSums(is.na.data.frame(sentixP6disp)) + colSums(is.na.data.frame(sentixG6disp)) + colSums(is.na.data.frame(sentixI6herf)) + colSums(is.na.data.frame(sentixI6herf)) + colSums(is.na.data.frame(sentixI6herf))
 ```
+
+remove TBOND
+```{r}
+stocks <- stocks[,-which(colnames(stocks)=="TBOND")]
+
+i <- sentixDataNames[1]
+parse(text = paste0(i, " <- ", i, "[,-which(colnames(", i, ") == \"TBOND\")]"))
+for (i in sentixDataNames){
+    eval(parse(text = paste0(i, " <- ", i, "[,-which(colnames(", i, ") == \"TBOND\")]")))
+}
+```
+
+
+## regress Sentiment
+
+We first regress each sentiment on the other sentiments and just go with the non-explained intercept. From these, we calculate the covariance matrix.
+
+```{r, cache=T}
+i <- sentixDataNames[1]
+parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")"))
+for (i in sentixDataNames){
+    eval(parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")")))
+}
+```
+
+```{r}
+i <- sentixDataNames[i]
+parse(text = paste0(i, "RegCov", " <- ", "cov(", i, "Reg)"))
+for(i in sentixDataNames){
+    eval(parse(text = paste0(i, "RegCov", " <- ", "cov(", i, "Reg)")))
+}
+```
+
+## returns
+
+
+```{r}
+ret <- stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1
+rownames(ret) <- stocks[2:nrow(stocks), 1]
+
+mu <- mean(ret)
+S <- cov(ret)
+```
+
+
+# Optimization of Portfolios
 
