@@ -295,7 +295,7 @@ getSymbols("FGBLU7.EX", env = bund, src = "yahoo", from = dateMin, to = dateMax)
 getSymbols("FGBLH8.EX" env = bund, src = "yahoo", from = dateMin, to = dateMax)
 ```
 
-*new*: Den Bund-Future habe ich bei onvista in 5-Jahresstücken geladen und zusammengebaut. Dezimaltrennzeichen umgestellt im .csv
+*new*: Den Bund-Future habe ich bei onvista in 5-Jahresst?cken geladen und zusammengebaut. Dezimaltrennzeichen umgestellt im .csv
 ```{r, cache=T}
 BUND <- read.csv(file.path(folderData, "Bundfuture", "Bundfuture2001-2017.csv"), sep = ";")
 BUND[,1] <- as.Date(BUND[,1], format = "%d.%m.%Y")
@@ -515,12 +515,20 @@ Generate a list holding all data with structure (levels of list)
 weights of goal function -> strategy -> dates -> weights of assets
 
 
-roughly 30 seconds per strategy and weight
+roughly 30 seconds per strategy and weight (on laptop stefan)
 ```{r}
 nrow(grid)*length(sentixDataNamesReg)*30 # Sekunden
 nrow(grid)*length(sentixDataNamesReg)*30/60 # Minuten
 nrow(grid)*length(sentixDataNamesReg)*30/60/60 # Stunden
 ```
+
+roughly 14 seconds per strategy and weight (on laptop stefan)
+```{r}
+nrow(grid)*length(sentixDataNamesReg)*14 # Sekunden
+nrow(grid)*length(sentixDataNamesReg)*14/60 # Minuten
+nrow(grid)*length(sentixDataNamesReg)*14/60/60 # Stunden
+```
+
 
 
 ```{r}
@@ -564,6 +572,7 @@ for(weightInd in 1:2){
         tt[(weightInd-1)*nrow(grid) + which(sentixDataNamesReg == strategy)] <- proc.time()[3]
     }
 }
+save(E, file = paste0("Eserver_", format(Sys.time(), "%Y-%m-%d")))
 ```
 
 
