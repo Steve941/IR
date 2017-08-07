@@ -455,12 +455,15 @@ S <- cov(ret)
 \newpage
 # Optimization of Portfolios
 
-Grid Search
+We evaluate an optimal portfolio at each date within our test season and assume that we can redistribute our wealth at no cost.
 
 ```{r}
 datesEval <- dates[dates >= "2015-06-15" & dates <= "2016-08-19"]
 length(datesEval)
 ```
+
+
+## with sentiment (Grid Search)
 
 
 Setup Grid. Take care that weights sum up to 1.
@@ -474,12 +477,6 @@ grid <- grid[abs(rowSums(grid) - 1.0) < 0.0001,]
 ```
 
 With this setup, we have `r nrow(grid)` combinations of weights.
-
-## Fixation of Portfolio at start
-
-We evaluate an optimal portfolio at the starting date of our test season and stick to it.
-
-### with sentiment
 
 variables for lookback
 ```{r}
@@ -570,12 +567,52 @@ for(weightInd in 1:2){
 ```
 
 
-### withoud sentiment (classsic)
+## without sentiment (classsic)
+
+classical portfolio optimization
+
+```{r, results='hide'}
+t <- rownames(ret) # convert rownames back to date format (character!)
+class(t) <- "Date"
+rdatTimeSource <- timeSeries(ret, charvec = as.character(t))
+
+ew <- rep(1/numAsset, numAsset)
+
+Wmsr <- matrix(NA, nrow = length(datesEval), ncol = numAsset)
+Wmdp <- Wgmv <- Werc <- Wmsr
+
+for(d in datesEval){
+    dInd <- which(datesEval==d)
+    class(d) <- "Date"
+    rdatTime <- window(rdatTimeSource, start = start(rdatTimeSource), end = d-1) # just look at period before
+    
+    ans <- tangencyPortfolio(rdatTime)
+    Wmsr[dInd, ] <- getWeights(ans)
+    
+    ### most diversified
+    ans <- PMD(rdatTime)
+    Wmdp[dInd, ] <- FRAPO::Weights(ans) / 100
+    
+    ### global minimum variance
+    ans <- PGMV(rdatTime)
+    Wgmv[dInd, ] <- FRAPO::Weights(ans) / 100
+    
+    ### risk parity optimization
+    SStock <- cov(rdatTime)
+    ans <- rp(ew, SStock, ew, optctrl = ctrl(trace = FALSE)) # maybe invisible() makes output silent
+    Werc[dInd, ] <- c(getx(ans))
+}
+
+Eclassic <- list("MSR" = Wmsr, "MDP" = Wmdp, "GMV" = Wgmv, "ERC" = Werc)
+```
+
+
+# Portfolio Analysis
+
+```{r}
+
+```
 
 
 
-
-## Rolling
-
-We evaluate an optimal portfolio at each date within our test season and assume that we can redistribute our wealth at no cost.
-
+# Portfolio Visualization

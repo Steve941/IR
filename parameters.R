@@ -1,6 +1,6 @@
 # Files
 ### Data
-folderData <- file.path(getwd(), "..", "Data")
+folderData <- file.path(getwd(), "Data")
 ### Plots
 folderPlotIndexSent <- file.path(getwd(), "Plot_Index_Sent")
 
