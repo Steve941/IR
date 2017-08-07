@@ -20,7 +20,7 @@ dateMin <- as.Date("23.02.2001", format = "%d.%m.%Y")
 dateMax <- as.Date("02.09.2016", format = "%d.%m.%Y")
 
 # Assets
-numAsset <- 8
+numAsset <- 7 # ehemalig 8, aber dann TBOND gegickt
 
 # Sentix Data (these are updated multiple times)
 sentixDataNames <- c("sentixI1disp", "sentixP1disp", "sentixG1disp", "sentixI1herf", "sentixG1herf", "sentixP1herf", 

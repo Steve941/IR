@@ -422,6 +422,14 @@ parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")"))
 for (i in sentixDataNames){
     eval(parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")")))
 }
+
+sentixDataNamesReg <- c()
+i = 1
+parse(text = paste0("sentixDataNamesReg <- ", "c(sentixDataNamesReg, \"", sentixDataNames[i], "Reg\")"))
+for(i in sentixDataNames){
+    eval(parse(text = paste0("sentixDataNamesReg <- ", "c(sentixDataNamesReg, \"", i, "Reg\")")))
+}
+
 ```
 
 ```{r}
@@ -439,10 +447,135 @@ for(i in sentixDataNames){
 ret <- stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1
 rownames(ret) <- stocks[2:nrow(stocks), 1]
 
-mu <- mean(ret)
+mu <- colMeans(ret)
 S <- cov(ret)
 ```
 
 
+\newpage
 # Optimization of Portfolios
+
+Grid Search
+
+```{r}
+datesEval <- dates[dates >= "2015-06-15" & dates <= "2016-08-19"]
+length(datesEval)
+```
+
+
+Setup Grid. Take care that weights sum up to 1.
+
+```{r}
+bySteps <- 0.05
+wmin <- 0.05
+wmax <- 0.95
+grid <- expand.grid(w1 = seq(wmin, wmax, by = bySteps), w2 = seq(wmin, wmax, by = bySteps), w3 = seq(wmin, wmax, by = bySteps) )
+grid <- grid[abs(rowSums(grid) - 1.0) < 0.0001,]
+```
+
+With this setup, we have `r nrow(grid)` combinations of weights.
+
+## Fixation of Portfolio at start
+
+We evaluate an optimal portfolio at the starting date of our test season and stick to it.
+
+### with sentiment
+
+variables for lookback
+```{r}
+sentLookback <- 20
+
+# overview of what is used
+
+head(ret) # returns
+
+### no as if you want to reduce, reduce all data (also sentix data)
+# # reduce for simplicity
+# ret <- ret[rownames(ret) > "2014-01-01",]
+
+targetRpm
+targetVolpa
+
+IneqA <- matrix(1, nrow = 1, ncol = numAsset)
+
+# also typecast date to integer to speed up calculations
+rownames(ret) <- as.integer(as.Date(rownames(ret)))
+```
+
+
+start optimization with equal weights and then start each iteration with result of previous iteration
+
+```{r}
+ergSentixNames <- c()
+i = 1
+parse(text = paste0("ergSentixNames <- ", "c(ergSentixNames, \"erg", sentixDataNames[i], "\")"))
+for(i in sentixDataNames){
+    eval(parse(text = paste0("ergSentixNames <- ", "c(ergSentixNames, \"erg", i, "\")")))
+}
+```
+
+Generate a list holding all data with structure (levels of list)
+weights of goal function -> strategy -> dates -> weights of assets
+
+
+roughly 30 seconds per strategy and weight
+```{r}
+nrow(grid)*length(sentixDataNamesReg)*30 # Sekunden
+nrow(grid)*length(sentixDataNamesReg)*30/60 # Minuten
+nrow(grid)*length(sentixDataNamesReg)*30/60/60 # Stunden
+```
+
+
+```{r}
+library(Rdonlp2) ## needed for donlp2NLP
+library(fPortfolio)
+library(FRAPO)
+library(mco) ## mrc
+```
+
+
+```{r}
+E <- list()
+tt <- numeric(nrow(grid)*length(sentixDataNamesReg))
+
+for(weightInd in 1:2){
+    w <- as.numeric(grid[weightInd,])
+    weightName <- paste(w, collapse = "-") # needed later to store result
+    
+    for(strategy in sentixDataNamesReg[1:3]){
+        SentData <- get(strategy)
+        rownames(SentData) <- as.integer(as.Date(rownames(SentData))) # for faster comparison below -> cast date to integer
+        erg <- matrix(NA, nrow = length(datesEval)+1, ncol = numAsset) # +1 to lookup every weight
+        rownames(erg) <- c("1000-01-01", paste(datesEval))
+        erg[1, ] <- rep(1/numAsset, numAsset)
+        
+        for(d in datesEval){
+            dInd <- which(datesEval==d)
+            
+            SSent <- cov(SentData[(which(rownames(SentData) == d)-sentLookback):
+                                      which(rownames(SentData) == d) - 1, ]) # -1 to just look in past
+            rdat <- ret[unique(pmax(which(rownames(ret)<=d) - 1,1)),] # from beginning to one day in past
+            muStock <- colMeans(rdat)
+            SStock <- cov(rdat)
+            
+            erg[dInd+1,] <- donlp2NLP(start = erg[dInd,], obj = hWeighted, 
+                         par.lower = rep(0, numAsset), ineqA = IneqA, 
+                         ineqA.lower = 1.0, ineqA.upper = 1.0)$solution
+        }
+        
+        E[[weightName]][[strategy]] <- erg
+        tt[(weightInd-1)*nrow(grid) + which(sentixDataNamesReg == strategy)] <- proc.time()[3]
+    }
+}
+```
+
+
+### withoud sentiment (classsic)
+
+
+
+
+## Rolling
+
+We evaluate an optimal portfolio at each date within our test season and assume that we can redistribute our wealth at no cost.
 
