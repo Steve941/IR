@@ -543,11 +543,11 @@ library(mco) ## mrc
 E <- list()
 tt <- numeric(nrow(grid)*length(sentixDataNamesReg))
 
-for(weightInd in 1:2){
+for(weightInd in 1:nrow(grid)){
     w <- as.numeric(grid[weightInd,])
     weightName <- paste(w, collapse = "-") # needed later to store result
     
-    for(strategy in sentixDataNamesReg[1:3]){
+    for(strategy in sentixDataNamesReg){
         SentData <- get(strategy)
         rownames(SentData) <- as.integer(as.Date(rownames(SentData))) # for faster comparison below -> cast date to integer
         erg <- matrix(NA, nrow = length(datesEval)+1, ncol = numAsset) # +1 to lookup every weight
@@ -572,7 +572,7 @@ for(weightInd in 1:2){
         tt[(weightInd-1)*nrow(grid) + which(sentixDataNamesReg == strategy)] <- proc.time()[3]
     }
 }
-save(E, file = paste0("Eserver_", format(Sys.time(), "%Y-%m-%d")))
+save(E, file = paste0("Eserver_", format(Sys.time(), "%Y-%m-%d---%H-%M")))
 ```
 
 
