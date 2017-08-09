@@ -572,7 +572,7 @@ for(weightInd in 1:nrow(grid)){
         tt[(weightInd-1)*nrow(grid) + which(sentixDataNamesReg == strategy)] <- proc.time()[3]
     }
 }
-save(E, file = paste0("Eserver_", format(Sys.time(), "%Y-%m-%d---%H-%M")))
+save(E, file = file.path(folderData, "Optimization", paste0("Eserver_", format(Sys.time(), "%Y-%m-%d---%H-%M"))))
 ```
 
 
@@ -619,9 +619,231 @@ Eclassic <- list("MSR" = Wmsr, "MDP" = Wmdp, "GMV" = Wgmv, "ERC" = Werc)
 # Portfolio Analysis
 
 ```{r}
+library(PerformanceAnalytics)
+```
 
+
+## with sentiment
+
+```{r}
+evolve
+```
+
+```{r}
+Eevolving <- list()
+for(weight in names(E)){
+    Eevolving[[weight]] <- lapply(E[[weight]], evolve)
+}
+```
+
+somehow an lapply doesn't work, so I implement everything again
+
+```{r}
+Eanalysis <- list()
+for(weight in names(Eevolving)){
+    # Eanalysis[[weight]] <- lapply(Eevolving[[weight]], analysePortfolio) # TODO somehow not working
+    l <- Eevolving[[weight]]
+    RsClassic <- matrix(unlist(lapply(l, Return.calculate)), ncol = length(l)) # return from time to time
+    RsTSClassic <- na.omit(xts(RsClassic, order.by = as.Date(datesEval)))
+    bench <- xts(rep(0, nrow(RsTSClassic)), order.by = as.Date(datesEval)[-1]) # benchmark 0 everytime
+    
+    S1 <- as.matrix(table.AnnualizedReturns(RsTSClassic, Rf = bench)) # scale is chosen automatically to 'weekly'
+    S2 <- -1*VaR(RsTSClassic) # 95% as default (outputs small negative value)
+    
+    ans <- rbind(S1, S2)
+    colnames(ans) <- names(l)
+    rownames(ans) <- c("Return (p.a.)", "StdDev. Risk (p.a.)", "Sharpe Ratio", "VaR 95% (p.a.)")
+    
+    Eanalysis[[weight]] <- round(ans,3)
+}
+```
+
+```{r}
+names(Eanalysis)[20]
+Eanalysis[[20]]
+
+names(Eanalysis)[100]
+Eanalysis[[100]]
+
+names(Eanalysis)[150]
+Eanalysis[[150]]
+```
+
+### find best portfolio
+
+we have to apply our goaling function again to come up with best portfolios
+TODO do this directly when determining the portfolios
+
+for all weights: go through all dates, add corresponding objective value to objective value and divide at the very end through the number of dates -> average objective value per weight and strategy
+
+```{r}
+wNames <- character(nrow(grid))
+for(k in 1:length(wNames)){
+    wNames[k] <- paste0(grid[k,1], "-", grid[k,2], "-", grid[k,3])
+}
+
+i <- sentixDataNames[1]
+parse(text = paste0(i, "ObjValue <- data.frame(\"w1\" = grid[,1], \"w2\" = grid[,2], \"w3\" = grid[,3], \"h\" = 0)"))
+for(i in sentixDataNamesReg){
+    eval(parse(text = paste0(i, "ObjValue <- data.frame(\"w1\" = grid[,1], \"w2\" = grid[,2], \"w3\" = grid[,3], \"h\" = 0)")))
+    eval(parse(text = paste0("rownames(", i, "ObjValue) <- wNames")))
+}
+
+for(d in datesEval){
+    d <- as.integer(d)
+    dInd <- which(datesEval==d)+1 # +1 to skip the first entry (start with equal weights)
+    SSent <- cov(SentData[(which(rownames(SentData) == d)-sentLookback):
+                              which(rownames(SentData) == d) - 1, ]) # -1 to just look in past
+    rdat <- ret[unique(pmax(which(rownames(ret)<=d) - 1,1)),] # from beginning to one day in past
+    muStock <- colMeans(rdat)
+    SStock <- cov(rdat)
+    
+    for(i in sentixDataNamesReg){
+        for(k in 1:nrow(grid)){
+            w <- as.numeric(grid[k,])
+            weight <- paste(w, collapse = "-")
+            eval(parse(text = paste0(i, "ObjValue[weight,] <- ", i, "ObjValue[weight,] + hWeighted(E[[weight]][[i]][dInd,])")))   
+        }
+    }
+}
+```
+
+```{r}
+n <- length(datesEval)
+for(i in sentixDataNamesReg){
+    eval(parse(text = paste0(i, "ObjValue[,4] <- ", i, "ObjValue[,4]/n")))
+}
+sentixG1dispRegObjValue
+```
+
+not useful as higher weight for sentix results in higher objective value
+
+```{r}
+for(i in sentixDataNamesReg){
+    eval(parse(text = paste0(i, "ObjValue[,4] <- ", i, "ObjValue[,4]/", i, "ObjValue[,3]")))
+}
+sentixG1dispRegObjValue
+```
+objective value stays roughly the same after dividing through weight
+
+### highest return
+
+```{r}
+sentixReturns <- matrix(NA, nrow = length(Eanalysis), ncol = ncol(Eanalysis[[1]]))
+rownames(sentixReturns) <- names(Eanalysis)
+colnames(sentixReturns) <- colnames(Eanalysis[[1]])
+for(i in 1:length(Eanalysis)){
+    sentixReturns[i,] <- Eanalysis[[i]][1,]
+}
+sentixReturns
+colMeans(sentixReturns)
+```
+```{r}
+m1 <- apply(sentixReturns, 2, function(x) max(x))
+m2 <- apply(sentixReturns, 2, function(x) which.max(x))
+m3 <- rownames(sentixReturns)[apply(sentixReturns, 2, function(x) which.max(x))]
+
+data.frame("maximum return" = m1, "index of max return" = m2, "weights for function" = m3)
+```
+
+```{r}
+strategy <- which.max(m1)
+weight <- m2[strategy]
+sentPfMaxReturn <- Eevolving[[weight]][[strategy]]
+```
+
+
+### highest Sharpe Ratio
+
+```{r}
+sentixSharpe <- matrix(NA, nrow = length(Eanalysis), ncol = ncol(Eanalysis[[1]]))
+rownames(sentixSharpe) <- names(Eanalysis)
+colnames(sentixSharpe) <- colnames(Eanalysis[[1]])
+for(i in 1:length(Eanalysis)){
+    sentixSharpe[i,] <- Eanalysis[[i]][3,]
+}
+# sentixSharpe
+colMeans(sentixSharpe)
+```
+
+```{r}
+m1 <- apply(sentixSharpe, 2, function(x) max(x))
+m2 <- apply(sentixSharpe, 2, function(x) which.max(x))
+m3 <- rownames(sentixSharpe)[apply(sentixSharpe, 2, function(x) which.max(x))]
+
+data.frame("maximum return" = m1, "index of max return" = m2, "weights for function" = m3)
+```
+```{r}
+strategy <- which.max(m1)
+weight <- m2[strategy]
+sentPfMaxSharpe <- Eevolving[[weight]][[strategy]]
+```
+
+
+
+
+
+## without sentiment (classic)
+
+Calculate Portfolio evolvement (start with 100, how does it evolve)
+
+```{r}
+EclassicEvolving <- lapply(Eclassic, evolve)
+```
+
+
+TODO: look at implementation of VaR (Pfaff multiplied value by -100)
+
+```{r}
+analysePortfolio
+```
+
+
+```{r}
+analysePortfolio(EclassicEvolving)
+```
+
+## Comparison
+
+```{r}
+# install.packages("SharpeR") # installs many other packages as well
+library(SharpeR)
+```
+
+
+```{r}
+Rsent <- Return.calculate(sentPfMaxSharpe)
+Rclas <- Return.calculate(EclassicEvolving[["GMV"]])
+
+table.AnnualizedReturns(Rsent)
+table.AnnualizedReturns(Rclas)
+
+sr_test(x = Rsent, y = Rclas, paired = TRUE,alternative="greater")
 ```
 
 
 
 # Portfolio Visualization
+
+```{r}
+library(grDevices) # for color
+```
+
+
+```{r}
+# pdf(file = paste0(getwd(), "/Plot/optimal 08-08/", "optimal Portfolios all", ".pdf"), width = 12, height = 8)
+cols <- topo.colors(4)
+plot(EclassicEvolving[[1]], lwd = 1, ylab = "Index", xlab = "", 
+     col = cols[1], main = "Comparison of Allocation Strategies", 
+     ylim = c(min(unlist(lapply(EclassicEvolving, min)), sentPfMaxReturn, sentPfMaxSharpe),
+              max(unlist(lapply(EclassicEvolving, max)), sentPfMaxReturn, sentPfMaxSharpe)))
+for(i in 2:length(EclassicEvolving)){
+    eval(parse(text = paste0("lines(EclassicEvolving[[", i, "]], col = cols[", i, "])")))
+}
+legend("topleft", legend = c(names(EclassicEvolving), "sMaxR", "sMaxS"), col = c(cols, "red", "orange"), lty = 1, lwd = 2)
+abline(h = 100, col = "gray")
+
+lines(sentPfMaxReturn, col = "red", lwd = 2)
+lines(sentPfMaxSharpe, col = "orange", lwd = 2)
+# dev.off()
+```

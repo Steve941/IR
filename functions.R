@@ -153,7 +153,32 @@ minSentiment <- function(SSent){
 }
 
 
+# Analysis of Portfolio --------------------------------------------------
 
+## Take weights in each date of datesEval and calculate the portfolio return
+evolve <- function(x){
+    retFac <- ret[rownames(ret)%in%datesEval[2:length(datesEval)],]*
+        x[1:(length(datesEval)-1),] # weight at time t and on these returns to time t+1 made
+    retFac <- 1+rowSums(retFac)
+    retFac <- c(100, retFac) # initialize with 100 and multiply the returns (next line)
+    return(timeSeries(cumprod(retFac), charvec = datesEval))
+}
+
+## Take list (each element is another portfolio) as input and return portfolio characteristics
+## uses global variables: ret, datesEval
+analysePortfolio <- function(l){
+    RsClassic <- matrix(unlist(lapply(l, Return.calculate)), ncol = length(l)) # return from time to time
+    RsTSClassic <- na.omit(xts(RsClassic, order.by = as.Date(datesEval)))
+    bench <- xts(rep(0, nrow(RsTSClassic)), order.by = as.Date(datesEval)[-1]) # benchmark 0 everytime
+    
+    S1 <- as.matrix(table.AnnualizedReturns(RsTSClassic, Rf = bench)) # scale is chosen automatically to 'weekly'
+    S2 <- -1*VaR(RsTSClassic) # 95% as default (outputs small negative value)
+    
+    ans <- rbind(S1, S2)
+    colnames(ans) <- names(l)
+    rownames(ans) <- c("Return (p.a.)", "StdDev. Risk (p.a.)", "Sharpe Ratio", "VaR 95% (p.a.)")
+    return(round(ans, 3))
+}
 
 # Spielwiese --------------------------------------------------------------
 
