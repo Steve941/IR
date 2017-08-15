@@ -81,6 +81,7 @@ library(FSelector) # to generate formula easily
 #   return(temp)
 # }
 
+### take data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
 regSent <- function(dat, consider = 50){
     temp <- dat
     
@@ -127,6 +128,18 @@ h <- function(x){
 hWeighted <- function(x){
   return(sum(h(x)))
 }
+
+
+## take dispersion directly and sum ist up, which we want to minimize
+## global parameters: w, muStock, targetRpm, SStock, targetVolpa, dispersion (sentiment values direct)
+hDispersionDirectMin <- function(x){
+    y <- numeric(3)
+    y[1] <- -1.0 * w[1] * drop(crossprod(x, muStock)) / targetRpm
+    y[2] <- w[2] * drop(sqrt(t(x) %*% SStock %*% x)) * sqrt(12) / targetVolpa
+    y[3] <- w[3] * 
+    return(sum(y))
+}
+
 
 library(mco)
 library(FRAPO)

@@ -442,14 +442,75 @@ for(i in sentixDataNames){
 
 ## returns
 
+Discrete returns. First return ist 0 to start of with (first date).
+
 
 ```{r}
-ret <- stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1
+ret <- as.matrix(stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1)
 rownames(ret) <- stocks[2:nrow(stocks), 1]
 
 mu <- colMeans(ret)
 S <- cov(ret)
 ```
+
+# Data Visualization
+
+## Stocks
+
+Start of with 100 for each stock and then plot the returns.
+
+```{r}
+retPlot <- matrix(100, nrow = nrow(stocks), ncol = ncol(stocks)-1)
+retPlot[2:nrow(stocks), ] <- 1+ret # to multiply lateron, we have to add 1
+retPlot <- apply(retPlot, 2, cumprod)
+rownames(retPlot) <- stocks[,1]
+
+x <- rownames(retPlot)
+xNames <- x
+class(xNames) <- "Date"   # convert to date
+
+cols <- rainbow(ncol(retPlot))
+ylim <- c(min(retPlot), max(retPlot))
+plot(xNames, retPlot[,1], type = "l", xlab = "Date", ylab = "Value", col = cols[1],
+     ylim = ylim)
+for(i in 2:ncol(retPlot)){
+    par(new=T)
+    plot(xNames, retPlot[,i], type = "l", col = cols[i], axes = F, xlab="", ylab="", ylim = ylim)
+}
+legend("topleft", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1)
+```
+
+```{r}
+library(ggplot2)
+```
+
+need data frame as input for ggplot
+
+```{r}
+retPlot <- matrix(100, nrow = nrow(stocks), ncol = ncol(stocks)-1)
+retPlot[2:nrow(stocks), ] <- 1+ret # to multiply lateron, we have to add 1
+retPlot <- apply(retPlot, 2, cumprod)
+
+retPlot <- as.data.frame(retPlot)
+colnames(retPlot) <- colnames(stocks)[2:ncol(stocks)]
+retPlot$dates <- stocks[,1]
+class(retPlot$dates) <- "Date"   # convert to date
+
+cols <- rainbow(ncol(retPlot))
+ylim <- c(min(retPlot[,1:(ncol(retPlot)-1)]), max(retPlot[,1:(ncol(retPlot)-1)]))
+
+
+ggplot() +
+    geom_line(data = retPlot, aes(x = dates, y = DAX, colour = "DAX")) +
+    geom_line(data = retPlot, aes(x = dates, y = TEC, colour = "TEC")) +
+    geom_line(data = retPlot, aes(x = dates, y = ESX50, colour = "ESX50")) +
+    geom_line(data = retPlot, aes(x = dates, y = NASDAQ, colour = "NASDAQ")) +
+    geom_line(data = retPlot, aes(x = dates, y = NIKKEI, colour = "NIKKEI")) +
+    geom_line(data = retPlot, aes(x = dates, y = BUND, colour = "BUND")) +
+    geom_rect(aes(xmin = dateMinEvalLast, xmax = dateMaxEvalLast, ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = "orange") +
+    labs(x = "Time", y = "Value")
+```
+
 
 
 \newpage
@@ -458,13 +519,21 @@ S <- cov(ret)
 We evaluate an optimal portfolio at each date within our test season and assume that we can redistribute our wealth at no cost.
 
 ```{r}
-datesEval <- dates[dates >= "2015-06-15" & dates <= "2016-08-19"]
-length(datesEval)
+datesEvalLast <- dates[dates >= dateMinEvalLast & dates <= dateMaxEvalLast]
+length(datesEvalLast)
 ```
 
 
 ## with sentiment (Grid Search)
 
+### general setup
+
+```{r}
+library(Rdonlp2) ## needed for donlp2NLP
+library(fPortfolio)
+library(FRAPO)
+library(mco) ## mrc
+```
 
 Setup Grid. Take care that weights sum up to 1.
 
@@ -500,7 +569,6 @@ rownames(ret) <- as.integer(as.Date(rownames(ret)))
 ```
 
 
-start optimization with equal weights and then start each iteration with result of previous iteration
 
 ```{r}
 ergSentixNames <- c()
@@ -511,8 +579,11 @@ for(i in sentixDataNames){
 }
 ```
 
-Generate a list holding all data with structure (levels of list)
-weights of goal function -> strategy -> dates -> weights of assets
+
+### mrc
+
+
+start optimization with equal weights and then start each iteration with result of previous iteration
 
 
 roughly 30 seconds per strategy and weight (on laptop stefan)
@@ -530,18 +601,12 @@ nrow(grid)*length(sentixDataNamesReg)*14/60/60 # Stunden
 ```
 
 
-
-```{r}
-library(Rdonlp2) ## needed for donlp2NLP
-library(fPortfolio)
-library(FRAPO)
-library(mco) ## mrc
-```
-
+Generate a list holding all data with structure (levels of list)
+weights of goal function -> strategy -> dates -> weights of assets
 
 ```{r}
 E <- list()
-tt <- numeric(nrow(grid)*length(sentixDataNamesReg))
+tt <- numeric(nrow(grid)*length(sentixDataNamesReg)) # track time to evaluate code
 
 for(weightInd in 1:nrow(grid)){
     w <- as.numeric(grid[weightInd,])
@@ -550,12 +615,12 @@ for(weightInd in 1:nrow(grid)){
     for(strategy in sentixDataNamesReg){
         SentData <- get(strategy)
         rownames(SentData) <- as.integer(as.Date(rownames(SentData))) # for faster comparison below -> cast date to integer
-        erg <- matrix(NA, nrow = length(datesEval)+1, ncol = numAsset) # +1 to lookup every weight
-        rownames(erg) <- c("1000-01-01", paste(datesEval))
+        erg <- matrix(NA, nrow = length(datesEvalLast)+1, ncol = numAsset) # +1 to lookup every weight
+        rownames(erg) <- c("1000-01-01", paste(datesEvalLast))
         erg[1, ] <- rep(1/numAsset, numAsset)
         
-        for(d in datesEval){
-            dInd <- which(datesEval==d)
+        for(d in datesEvalLast){
+            dInd <- which(datesEvalLast==d)
             
             SSent <- cov(SentData[(which(rownames(SentData) == d)-sentLookback):
                                       which(rownames(SentData) == d) - 1, ]) # -1 to just look in past
@@ -575,6 +640,51 @@ for(weightInd in 1:nrow(grid)){
 save(E, file = file.path(folderData, "Optimization", paste0("Eserver_", format(Sys.time(), "%Y-%m-%d---%H-%M"))))
 ```
 
+### dispersion direct min
+
+do same calculations but plug in dispersion (sentiment) directly as third factor and want to minimize the dispersion
+
+Generate a list holding all data with structure (levels of list)
+weights of goal function -> dispersion (sentixDataNames) -> dates -> weights of assets
+
+
+```{r}
+E <- list()
+tt <- numeric(nrow(grid)*length(sentixDataNamesReg)) # track time to evaluate code
+
+for(weightInd in 1:2){
+    w <- as.numeric(grid[weightInd,])
+    weightName <- paste(w, collapse = "-") # needed later to store result
+    
+    for(strategy in sentixDataNames[1:2]){
+        SentData <- get(strategy)
+        rownames(SentData) <- as.integer(as.Date(rownames(SentData))) # for faster comparison below -> cast date to integer
+        erg <- matrix(NA, nrow = length(datesEvalLast)+1, ncol = numAsset) # +1 to lookup every weight
+        rownames(erg) <- c("1000-01-01", paste(datesEvalLast))
+        erg[1, ] <- rep(1/numAsset, numAsset)
+        
+        for(d in datesEvalLast){
+            dInd <- which(datesEvalLast==d)
+            
+            
+            dispersion <- SentData[which(rownames(SentData) == d)- 1, ] # -1 to just look at the sentiment in past
+            rdat <- ret[unique(pmax(which(rownames(ret)<=d) - 1,1)),] # from beginning to one day in past
+            muStock <- colMeans(rdat)
+            SStock <- cov(rdat)
+            
+            erg[dInd+1,] <- donlp2NLP(start = erg[dInd,], obj = hWeighted, 
+                         par.lower = rep(0, numAsset), ineqA = IneqA, 
+                         ineqA.lower = 1.0, ineqA.upper = 1.0)$solution
+        }
+        
+        E[[weightName]][[strategy]] <- erg
+        tt[(weightInd-1)*nrow(grid) + which(sentixDataNamesReg == strategy)] <- proc.time()[3]
+    }
+}
+save(E, file = file.path(folderData, "Optimization", paste0("EDispersionMin_server_", format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+```
+
+
 
 ## without sentiment (classsic)
 
@@ -587,11 +697,11 @@ rdatTimeSource <- timeSeries(ret, charvec = as.character(t))
 
 ew <- rep(1/numAsset, numAsset)
 
-Wmsr <- matrix(NA, nrow = length(datesEval), ncol = numAsset)
+Wmsr <- matrix(NA, nrow = length(datesEvalLast), ncol = numAsset)
 Wmdp <- Wgmv <- Werc <- Wmsr
 
-for(d in datesEval){
-    dInd <- which(datesEval==d)
+for(d in datesEvalLast){
+    dInd <- which(datesEvalLast==d)
     class(d) <- "Date"
     rdatTime <- window(rdatTimeSource, start = start(rdatTimeSource), end = d-1) # just look at period before
     
@@ -644,8 +754,8 @@ for(weight in names(Eevolving)){
     # Eanalysis[[weight]] <- lapply(Eevolving[[weight]], analysePortfolio) # TODO somehow not working
     l <- Eevolving[[weight]]
     RsClassic <- matrix(unlist(lapply(l, Return.calculate)), ncol = length(l)) # return from time to time
-    RsTSClassic <- na.omit(xts(RsClassic, order.by = as.Date(datesEval)))
-    bench <- xts(rep(0, nrow(RsTSClassic)), order.by = as.Date(datesEval)[-1]) # benchmark 0 everytime
+    RsTSClassic <- na.omit(xts(RsClassic, order.by = as.Date(datesEvalLast)))
+    bench <- xts(rep(0, nrow(RsTSClassic)), order.by = as.Date(datesEvalLast)[-1]) # benchmark 0 everytime
     
     S1 <- as.matrix(table.AnnualizedReturns(RsTSClassic, Rf = bench)) # scale is chosen automatically to 'weekly'
     S2 <- -1*VaR(RsTSClassic) # 95% as default (outputs small negative value)
@@ -689,9 +799,9 @@ for(i in sentixDataNamesReg){
     eval(parse(text = paste0("rownames(", i, "ObjValue) <- wNames")))
 }
 
-for(d in datesEval){
+for(d in datesEvalLast){
     d <- as.integer(d)
-    dInd <- which(datesEval==d)+1 # +1 to skip the first entry (start with equal weights)
+    dInd <- which(datesEvalLast==d)+1 # +1 to skip the first entry (start with equal weights)
     SSent <- cov(SentData[(which(rownames(SentData) == d)-sentLookback):
                               which(rownames(SentData) == d) - 1, ]) # -1 to just look in past
     rdat <- ret[unique(pmax(which(rownames(ret)<=d) - 1,1)),] # from beginning to one day in past
@@ -709,7 +819,7 @@ for(d in datesEval){
 ```
 
 ```{r}
-n <- length(datesEval)
+n <- length(datesEvalLast)
 for(i in sentixDataNamesReg){
     eval(parse(text = paste0(i, "ObjValue[,4] <- ", i, "ObjValue[,4]/n")))
 }
