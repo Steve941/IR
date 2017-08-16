@@ -8,3 +8,6 @@ install.packages("quantmod")
 install.packages("grDevices")
 install.packages("PerformanceAnalytics")
 install.packages("SharpeR")
+
+install.packages("doParallel")
+install.packages("doSNOW")
