@@ -96,7 +96,61 @@ regSent <- function(dat, consider = 50){
     return(temp)
 }
 
+### input:  data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+###         days to consider
+### output: list containing regression results
+### problem:    resulting object is large (~ 200mb)
+regSentAll <- function(dat, consider = 50){
+    temp <- list()
+    
+    for(i in 1:nrow(dat)){
+        temp[[i]] <- list()
+        for(k in colnames(dat)){
+            # generate formula (regress one column on all the others while using 'consider' previous points)
+            form <- as.simple.formula(setdiff(colnames(dat), k), k)
+            temp[[i]][[k]] <- unname(lm(form, data = dat[max((i-consider),1):i,]))
+        }
+    }
+    
+    return(temp)
+}
 
+### input:  data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+###         days to consider
+###         func function to apply on residuals
+### output: object of same structure as dat, containing the results of func applied on the residuals
+regSentResidual <- function(dat, consider = 50, func = mean){
+    temp <- dat
+    
+    for(i in 1:nrow(dat)){
+        for(k in colnames(dat)){
+            # generate formula (regress one column on all the others while using 'consider' previous points)
+            form <- as.simple.formula(setdiff(colnames(dat), k), k)
+            temp[i,k] <- func(unname(lm(form, data = dat[max((i-consider),1):i,])$residuals))
+        }
+    }
+    
+    return(temp)
+}
+
+### input:  data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+###         days to consider
+###         func function to apply on residuals
+### proced: regress on everything before
+### output: object of same structure as dat, containing the results of func applied on the residuals
+regSentResidualCorrect <- function(dat, consider = 50, func = mean){
+    temp <- dat
+    
+    for(i in 1:nrow(dat)){
+        for(k in colnames(dat)){
+            # generate formula (regress one column on all the others while using 'consider' previous points)
+            form <- as.simple.formula(setdiff(colnames(dat), k), k)
+            temp[i,k] <- func(unname(lm(form, data = dat[max((i-consider),1):i,])$residuals))
+        }
+    }
+    
+    return(temp)
+}
 
 # ** Actual Optimization -----------------------------------------------------
 
