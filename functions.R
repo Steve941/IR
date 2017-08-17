@@ -190,7 +190,7 @@ hDispersionDirectMin <- function(x){
     y <- numeric(3)
     y[1] <- -1.0 * w[1] * drop(crossprod(x, muStock)) / targetRpm
     y[2] <- w[2] * drop(sqrt(t(x) %*% SStock %*% x)) * sqrt(12) / targetVolpa
-    y[3] <- w[3] * 
+    y[3] <- w[3] * drop(crossprod(x, dispersion))
     return(sum(y))
 }
 
