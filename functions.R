@@ -64,7 +64,7 @@ plotIndexSent <- function(dat){
 
 # ** Upgrade Sentex Data --------------------------------------------------
 
-library(FSelector) # to generate formula easily
+# library(FSelector) # to generate formula easily
 
 ### developped further to regSent
 # dispersionSent <- function(dat){
@@ -195,8 +195,8 @@ hDispersionDirectMin <- function(x){
 }
 
 
-library(mco)
-library(FRAPO)
+# library(mco)
+# library(FRAPO)
 # minimize sentiment via marginal contribution to risk 
 ### TODO take closer look if this is really how Sentiment can be included (-> portfolio analysis)
 # minSentiment <- function(muStock, SStock, targetRpm, targetVolpa, SSent, w = w, f = f, g = g){
@@ -250,7 +250,7 @@ analysePortfolio <- function(l){
 # Spielwiese --------------------------------------------------------------
 
 
-library(Rdonlp2) ## needed for donlp2NLP
+# library(Rdonlp2) ## needed for donlp2NLP
 optMinSent <- function(SSent){
   
 }

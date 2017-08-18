@@ -11,3 +11,5 @@ install.packages("SharpeR")
 
 install.packages("doParallel")
 install.packages("doSNOW")
+
+install.packages("openxlsx")

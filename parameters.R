@@ -16,9 +16,6 @@ targetVolpa <- 0.04 ## % p.a.
 w <- rep(1, 3) ## goal weighting
 
 # Dates
-dateMin <- as.Date("23.02.2001", format = "%d.%m.%Y")
-dateMax <- as.Date("02.09.2016", format = "%d.%m.%Y")
-
 dateMinEvalLast <- as.Date("2015-06-15")
 dateMaxEvalLast <- as.Date("2016-08-19")
 

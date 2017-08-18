@@ -5,544 +5,8 @@ date: "2 August 2017"
 output: pdf_document
 ---
 
-# Overview
-
-Here we do the visualization. The mathematical formulas and setting of the parameters are done in separate files. Use the cache option in Markdown to safe computation time.
-
-
-1. Calculate Sentiment 
-
-     1.1. 1 month Sentiment (survey regarding expectations for one month)
-     
-     1.2. 6 month Sentimen (survey regarding expectations for six months)
-     
-2. Import Data
-
-    2.1. Sentix
-    
-    2.2. Stocks
-    
-3. Preparation of Data
-
-    3.1. exclude NAs
-    
-    3.2. regress Sentiment 
-
-
-# Open Questions
-
--> QUEST
-
-
-# Functions and Parameters separate
-
-```{r}
-source("parameters.R")
-source("functions.R")
-```
 
 \newpage
-# Data Import
-
-## Sentix
-```{r}
-load(file.path(folderData, "Sentix", "SentixCalculated"))
-```
-
-There might be a problem with duplicated dates!
-
-```{r}
-dates <- as.Date(sentix[[1]][,1], format = "%d.%m.%Y")
-sum(duplicated(dates))
-sum(dates==as.Date("2013-04-05"))
-dates <- unique(dates)
-```
-
-### dispersion
-
-```{r, cache=T}
-sentixP1disp <- data.frame(DAX = unique(sentix[["DAX"]])$P_disp, 
-                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
-sentixP1disp$TEC = unique(sentix[["TEC"]])$P_disp[unique(sentix[["TEC"]])$Datum %in% dates]
-sentixP1disp$ESX50 = unique(sentix[["ESX50"]])$P_disp[unique(sentix[["ESX50"]])$Datum %in% dates]
-sentixP1disp$SP5 = unique(sentix[["SP5"]])$P_disp[unique(sentix[["SP5"]])$Datum %in% dates]
-sentixP1disp$NASDAQ = unique(sentix[["NASDAQ"]])$P_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
-sentixP1disp$NIKKEI = unique(sentix[["NIKKEI"]])$P_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
-sentixP1disp$BUND = unique(sentix[["BUND"]])$P_disp[unique(sentix[["BUND"]])$Datum %in% dates]
-sentixP1disp$TBOND = unique(sentix[["TBOND"]])$P_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
-
-sentixI1disp <- data.frame(DAX = unique(sentix[["DAX"]])$I_disp, 
-                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
-sentixI1disp$TEC = unique(sentix[["TEC"]])$I_disp[unique(sentix[["TEC"]])$Datum %in% dates]
-sentixI1disp$ESX50 = unique(sentix[["ESX50"]])$I_disp[unique(sentix[["ESX50"]])$Datum %in% dates]
-sentixI1disp$SP5 = unique(sentix[["SP5"]])$I_disp[unique(sentix[["SP5"]])$Datum %in% dates]
-sentixI1disp$NASDAQ = unique(sentix[["NASDAQ"]])$I_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
-sentixI1disp$NIKKEI = unique(sentix[["NIKKEI"]])$I_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
-sentixI1disp$BUND = unique(sentix[["BUND"]])$I_disp[unique(sentix[["BUND"]])$Datum %in% dates]
-sentixI1disp$TBOND = unique(sentix[["TBOND"]])$I_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
-
-
-sentixG1disp <- data.frame(DAX = unique(sentix[["DAX"]])$G_disp, 
-                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
-sentixG1disp$TEC = unique(sentix[["TEC"]])$G_disp[unique(sentix[["TEC"]])$Datum %in% dates]
-sentixG1disp$ESX50 = unique(sentix[["ESX50"]])$G_disp[unique(sentix[["ESX50"]])$Datum %in% dates]
-sentixG1disp$SP5 = unique(sentix[["SP5"]])$G_disp[unique(sentix[["SP5"]])$Datum %in% dates]
-sentixG1disp$NASDAQ = unique(sentix[["NASDAQ"]])$G_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
-sentixG1disp$NIKKEI = unique(sentix[["NIKKEI"]])$G_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
-sentixG1disp$BUND = unique(sentix[["BUND"]])$G_disp[unique(sentix[["BUND"]])$Datum %in% dates]
-sentixG1disp$TBOND = unique(sentix[["TBOND"]])$G_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
-
-
-
-sentixP6disp <- data.frame(DAX = unique(sentix[["DAXm"]])$P_disp, 
-                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
-sentixP6disp$TEC = unique(sentix[["TECm"]])$P_disp[unique(sentix[["TECm"]])$Datum %in% dates]
-sentixP6disp$ESX50 = unique(sentix[["ESX50m"]])$P_disp[unique(sentix[["ESX50m"]])$Datum %in% dates]
-sentixP6disp$SP5 = unique(sentix[["SP5m"]])$P_disp[unique(sentix[["SP5m"]])$Datum %in% dates]
-sentixP6disp$NASDAQ = unique(sentix[["NASDAQm"]])$P_disp[unique(sentix[["NASDAQm"]])$Datum %in% dates]
-sentixP6disp$NIKKEI = unique(sentix[["NIKKEIm"]])$P_disp[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
-sentixP6disp$BUND = unique(sentix[["BUNDm"]])$P_disp[unique(sentix[["BUNDm"]])$Datum %in% dates]
-sentixP6disp$TBOND = unique(sentix[["TBONDm"]])$P_disp[unique(sentix[["TBONDm"]])$Datum %in% dates]
-
-
-sentixI6disp <- data.frame(DAX = unique(sentix[["DAXm"]])$I_disp, 
-                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
-sentixI6disp$TEC = unique(sentix[["TECm"]])$I_disp[unique(sentix[["TECm"]])$Datum %in% dates]
-sentixI6disp$ESX50 = unique(sentix[["ESX50m"]])$I_disp[unique(sentix[["ESX50m"]])$Datum %in% dates]
-sentixI6disp$SP5 = unique(sentix[["SP5m"]])$I_disp[unique(sentix[["SP5m"]])$Datum %in% dates]
-sentixI6disp$NASDAQ = unique(sentix[["NASDAQm"]])$I_disp[unique(sentix[["NASDAQm"]])$Datum %in% dates]
-sentixI6disp$NIKKEI = unique(sentix[["NIKKEIm"]])$I_disp[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
-sentixI6disp$BUND = unique(sentix[["BUNDm"]])$I_disp[unique(sentix[["BUNDm"]])$Datum %in% dates]
-sentixI6disp$TBOND = unique(sentix[["TBONDm"]])$I_disp[unique(sentix[["TBONDm"]])$Datum %in% dates]
-
-
-sentixG6disp <- data.frame(DAX = unique(sentix[["DAXm"]])$G_disp, 
-                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
-sentixG6disp$TEC = unique(sentix[["TECm"]])$G_disp[unique(sentix[["TECm"]])$Datum %in% dates]
-sentixG6disp$ESX50 = unique(sentix[["ESX50m"]])$G_disp[unique(sentix[["ESX50m"]])$Datum %in% dates]
-sentixG6disp$SP5 = unique(sentix[["SP5m"]])$G_disp[unique(sentix[["SP5m"]])$Datum %in% dates]
-sentixG6disp$NASDAQ = unique(sentix[["NASDAQm"]])$G_disp[unique(sentix[["NASDAQm"]])$Datum %in% dates]
-sentixG6disp$NIKKEI = unique(sentix[["NIKKEIm"]])$G_disp[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
-sentixG6disp$BUND = unique(sentix[["BUNDm"]])$G_disp[unique(sentix[["BUNDm"]])$Datum %in% dates]
-sentixG6disp$TBOND = unique(sentix[["TBONDm"]])$G_disp[unique(sentix[["TBONDm"]])$Datum %in% dates]
-```
-
-### herfindah
-
-```{r, cache=T}
-sentixP1herf <- data.frame(DAX = unique(sentix[["DAX"]])$P_herf, 
-                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
-sentixP1herf$TEC = unique(sentix[["TEC"]])$P_herf[unique(sentix[["TEC"]])$Datum %in% dates]
-sentixP1herf$ESX50 = unique(sentix[["ESX50"]])$P_herf[unique(sentix[["ESX50"]])$Datum %in% dates]
-sentixP1herf$SP5 = unique(sentix[["SP5"]])$P_herf[unique(sentix[["SP5"]])$Datum %in% dates]
-sentixP1herf$NASDAQ = unique(sentix[["NASDAQ"]])$P_herf[unique(sentix[["NASDAQ"]])$Datum %in% dates]
-sentixP1herf$NIKKEI = unique(sentix[["NIKKEI"]])$P_herf[unique(sentix[["NIKKEI"]])$Datum %in% dates]
-sentixP1herf$BUND = unique(sentix[["BUND"]])$P_herf[unique(sentix[["BUND"]])$Datum %in% dates]
-sentixP1herf$TBOND = unique(sentix[["TBOND"]])$P_herf[unique(sentix[["TBOND"]])$Datum %in% dates]
-
-
-sentixI1herf <- data.frame(DAX = unique(sentix[["DAX"]])$I_herf, 
-                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
-sentixI1herf$TEC = unique(sentix[["TEC"]])$I_herf[unique(sentix[["TEC"]])$Datum %in% dates]
-sentixI1herf$ESX50 = unique(sentix[["ESX50"]])$I_herf[unique(sentix[["ESX50"]])$Datum %in% dates]
-sentixI1herf$SP5 = unique(sentix[["SP5"]])$I_herf[unique(sentix[["SP5"]])$Datum %in% dates]
-sentixI1herf$NASDAQ = unique(sentix[["NASDAQ"]])$I_herf[unique(sentix[["NASDAQ"]])$Datum %in% dates]
-sentixI1herf$NIKKEI = unique(sentix[["NIKKEI"]])$I_herf[unique(sentix[["NIKKEI"]])$Datum %in% dates]
-sentixI1herf$BUND = unique(sentix[["BUND"]])$I_herf[unique(sentix[["BUND"]])$Datum %in% dates]
-sentixI1herf$TBOND = unique(sentix[["TBOND"]])$I_herf[unique(sentix[["TBOND"]])$Datum %in% dates]
-
-
-sentixG1herf <- data.frame(DAX = unique(sentix[["DAX"]])$G_herf, 
-                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
-sentixG1herf$TEC = unique(sentix[["TEC"]])$G_herf[unique(sentix[["TEC"]])$Datum %in% dates]
-sentixG1herf$ESX50 = unique(sentix[["ESX50"]])$G_herf[unique(sentix[["ESX50"]])$Datum %in% dates]
-sentixG1herf$SP5 = unique(sentix[["SP5"]])$G_herf[unique(sentix[["SP5"]])$Datum %in% dates]
-sentixG1herf$NASDAQ = unique(sentix[["NASDAQ"]])$G_herf[unique(sentix[["NASDAQ"]])$Datum %in% dates]
-sentixG1herf$NIKKEI = unique(sentix[["NIKKEI"]])$G_herf[unique(sentix[["NIKKEI"]])$Datum %in% dates]
-sentixG1herf$BUND = unique(sentix[["BUND"]])$G_herf[unique(sentix[["BUND"]])$Datum %in% dates]
-sentixG1herf$TBOND = unique(sentix[["TBOND"]])$G_herf[unique(sentix[["TBOND"]])$Datum %in% dates]
-
-
-
-sentixP6herf <- data.frame(DAX = unique(sentix[["DAXm"]])$P_herf, 
-                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
-sentixP6herf$TEC = unique(sentix[["TECm"]])$P_herf[unique(sentix[["TECm"]])$Datum %in% dates]
-sentixP6herf$ESX50 = unique(sentix[["ESX50m"]])$P_herf[unique(sentix[["ESX50m"]])$Datum %in% dates]
-sentixP6herf$SP5 = unique(sentix[["SP5m"]])$P_herf[unique(sentix[["SP5m"]])$Datum %in% dates]
-sentixP6herf$NASDAQ = unique(sentix[["NASDAQm"]])$P_herf[unique(sentix[["NASDAQm"]])$Datum %in% dates]
-sentixP6herf$NIKKEI = unique(sentix[["NIKKEIm"]])$P_herf[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
-sentixP6herf$BUND = unique(sentix[["BUNDm"]])$P_herf[unique(sentix[["BUNDm"]])$Datum %in% dates]
-sentixP6herf$TBOND = unique(sentix[["TBONDm"]])$P_herf[unique(sentix[["TBONDm"]])$Datum %in% dates]
-
-
-sentixI6herf <- data.frame(DAX = unique(sentix[["DAXm"]])$I_herf, 
-                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
-sentixI6herf$TEC = unique(sentix[["TECm"]])$I_herf[unique(sentix[["TECm"]])$Datum %in% dates]
-sentixI6herf$ESX50 = unique(sentix[["ESX50m"]])$I_herf[unique(sentix[["ESX50m"]])$Datum %in% dates]
-sentixI6herf$SP5 = unique(sentix[["SP5m"]])$I_herf[unique(sentix[["SP5m"]])$Datum %in% dates]
-sentixI6herf$NASDAQ = unique(sentix[["NASDAQm"]])$I_herf[unique(sentix[["NASDAQm"]])$Datum %in% dates]
-sentixI6herf$NIKKEI = unique(sentix[["NIKKEIm"]])$I_herf[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
-sentixI6herf$BUND = unique(sentix[["BUNDm"]])$I_herf[unique(sentix[["BUNDm"]])$Datum %in% dates]
-sentixI6herf$TBOND = unique(sentix[["TBONDm"]])$I_herf[unique(sentix[["TBONDm"]])$Datum %in% dates]
-
-
-sentixG6herf <- data.frame(DAX = unique(sentix[["DAXm"]])$G_herf, 
-                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
-sentixG6herf$TEC = unique(sentix[["TECm"]])$G_herf[unique(sentix[["TECm"]])$Datum %in% dates]
-sentixG6herf$ESX50 = unique(sentix[["ESX50m"]])$G_herf[unique(sentix[["ESX50m"]])$Datum %in% dates]
-sentixG6herf$SP5 = unique(sentix[["SP5m"]])$G_herf[unique(sentix[["SP5m"]])$Datum %in% dates]
-sentixG6herf$NASDAQ = unique(sentix[["NASDAQm"]])$G_herf[unique(sentix[["NASDAQm"]])$Datum %in% dates]
-sentixG6herf$NIKKEI = unique(sentix[["NIKKEIm"]])$G_herf[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
-sentixG6herf$BUND = unique(sentix[["BUNDm"]])$G_herf[unique(sentix[["BUNDm"]])$Datum %in% dates]
-sentixG6herf$TBOND = unique(sentix[["TBONDm"]])$G_herf[unique(sentix[["TBONDm"]])$Datum %in% dates]
-```
-
-
-## Stocks
-
-QUEST: take data of Yahoo Finance
-
-Take data from Yahoo Finance. Take closing course from *dateMin* to *dateMax* for several indexes.
-
-Take the following as sources of the data:
-
-* DAX   [*\^GDAXI*](<https://finance.yahoo.com/quote/%5EGDAXI?p=%5EGDAXI>)
-* TEC   [*\^TECDAX*](<https://finance.yahoo.com/quote/%5ETECDAX?p=^TECDAX>)
-* ESX50 [*\^STOXX50E*](<https://finance.yahoo.com/quote/%5ESTOXX50E?p=^STOXX50E>)
-* SP500 [*\^GSPC*](<https://finance.yahoo.com/quote/%5EGSPC?p=^GSPC>)
-* NASDAQ    [*\^NDX*](<https://finance.yahoo.com/quote/%5ENDX?p=^NDX>)
-* NIKKEI    [*\^N225*](<https://finance.yahoo.com/quote/%5EN225?p=^N225>)
-* BUND  not from yahoo, manually from bundesbank [*BBK01.WT0557*](<https://www.bundesbank.de/Navigation/DE/Statistiken/Zeitreihen_Datenbanken/Makrooekonomische_Zeitreihen/its_details_value_node.html?tsId=BBK01.WT0557>)
-* TBOND workaround with ETF [*TLH*](<https://finance.yahoo.com/quote/TLH?p=TLH>)
-
-
-```{r}
-# install.packages("quantmod")
-library(quantmod)
-# ?getSymbols
-```
-
-```{r, cache=T}
-stocks <- data.frame(Datum = dates)
-
-# DAX
-dax <- new.env()
-getSymbols("^GDAXI", env = dax, src = "yahoo", from = dateMin, to = dateMax)
-DAX <- data.frame(dax$GDAXI[dates,"GDAXI.Close"])
-colnames(DAX) <- "Close" # somehow the column name cannot be given directly
-DAX$Datum <- as.Date(row.names(DAX))
-
-stocks$DAX <- merge(stocks, DAX, by = "Datum", all.x = T)$Close
-
-
-# TEC
-tec <- new.env()
-getSymbols("^TECDAX", env = tec, src = "yahoo", from = dateMin, to = dateMax)
-TEC <- data.frame(tec$TECDAX[dates, "TECDAX.Close"])
-colnames(TEC) <- "Close"
-TEC$Datum <- as.Date(row.names(TEC))
-
-stocks$TEC <- merge(stocks, TEC, by = "Datum", all.x = T)$Close
-
-
-# ESX50
-esx50 <- new.env()
-getSymbols("^STOXX50E", env = esx50, src = "yahoo", from = dateMin, to = dateMax)
-ESX50 <- data.frame(esx50$STOXX50E[dates,"STOXX50E.Close"])
-colnames(ESX50) <- "Close"
-ESX50$Datum <- as.Date(row.names(ESX50))
-
-stocks$ESX50 <- merge(stocks, ESX50, by = "Datum", all.x = T)$Close
-
-
-# SP500
-sp500 <- new.env()
-getSymbols("^GSPC", env = sp500, src = "yahoo", from = dateMin, to = dateMax)
-SP500 <- data.frame(sp500$GSPC[dates,"GSPC.Close"])
-colnames(SP500) <- "Close" 
-SP500$Datum <- as.Date(row.names(SP500))
-# sum(is.na(SP500$Close))
-
-stocks$SP5 <- merge(stocks, SP500, by = "Datum", all.x = T)$Close
-
-
-# NASDAQ
-nasdaq <- new.env()
-getSymbols("^NDX", env = nasdaq, src = "yahoo", from = dateMin, to = dateMax)
-NASDAQ <- data.frame(nasdaq$NDX[dates,"NDX.Close"])
-# sum(is.na(NASDAQ[,"NDX.Close"]))
-colnames(NASDAQ) <- "Close"
-NASDAQ$Datum <- as.Date(row.names(NASDAQ))
-
-stocks$NASDAQ <- merge(stocks, NASDAQ, by = "Datum", all.x = T)$Close
-
-
-# NIKKEI
-nikkei <- new.env()
-getSymbols("^N225", env = nikkei, src = "yahoo", from = dateMin, to = dateMax)
-NIKKEI <- data.frame(nikkei$N225[dates,"N225.Close"])
-colnames(NIKKEI) <- "Close"
-NIKKEI$Datum <- as.Date(row.names(NIKKEI))
-
-stocks$NIKKEI <- merge(stocks, NIKKEI, by = "Datum", all.x = T)$Close
-```
-
-Bundesanleihe not to get from yahoo
-```{r, eval=F}
-env <- new.env()
-getSymbols("FGBLU7.EX", env = bund, src = "yahoo", from = dateMin, to = dateMax)
-getSymbols("FGBLH8.EX" env = bund, src = "yahoo", from = dateMin, to = dateMax)
-```
-
-*new*: Den Bund-Future habe ich bei onvista in 5-Jahresst?cken geladen und zusammengebaut. Dezimaltrennzeichen umgestellt im .csv
-```{r, cache=T}
-BUND <- read.csv(file.path(folderData, "Bundfuture", "Bundfuture2001-2017.csv"), sep = ";")
-BUND[,1] <- as.Date(BUND[,1], format = "%d.%m.%Y")
-BUND <- BUND[BUND[,1] %in% dates,]
-BUND <- as.data.frame(BUND)
-
-stocks$BUND <- merge(stocks, BUND, by = "Datum", all.x = T)$Schluss
-```
-
-
-
-*old*: Bundesanleihen von <https://www.bundesbank.de/Navigation/DE/Statistiken/Zeitreihen_Datenbanken/Makrooekonomische_Zeitreihen/its_details_value_node.html?tsId=BBK01.WT0557>
-Zeitreihe BBK01.WT0557: Ungewogene Umlaufsrendite der an der EUREX jeweils lieferbaren Bundeswertpapiere / Mittlere RLZ von 9 bis einschl. 10 Jahre / Tageswerte 
-
-```{r, cache=T}
-# BUND <- read.csv(file.path(folderData, "Indexdaten", "BBK01.WT0557.csv"), sep = "\t")
-# colnames(BUND) <- c("Datum", "Kurs")
-# BUND[,1] <- as.Date(BUND[,1], format = "%d.%m.%Y")
-# BUND <- BUND[BUND[,1] %in% dates,]
-# BUND <- as.data.frame(BUND)
-# 
-# stocks$BUND <- merge(stocks, BUND, by = "Datum", all.x = T)$Kurs
-```
-
-Treasury bond
-
-*new*: Beim T-Bond ist es die 10 Year Treasury Note, auf welche das TBOND Sentiment abzielt. Diese habe ich bei FRED geladen: <https://fred.stlouisfed.org/series/DGS10>
-
-
-```{r, cache=T}
-TBOND <- read.csv(file.path(folderData, "10 year T-Notes", "DGS10.csv"), sep = ",")
-TBOND[,1] <- as.Date(TBOND[,1], format = "%Y-%m-%d")
-TBOND[,2] <- as.numeric(as.character(TBOND[,2])) # was a factor first and factors are stored via index of factor level
-colnames(TBOND) <- c("Datum", "DGS10")
-TBOND <- TBOND[TBOND[,1] %in% dates,]
-TBOND <- as.data.frame(TBOND)
-
-stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$DGS10
-```
-
-
-*old*: from [*Link Yahoo*](<https://finance.yahoo.com/quote/TLH?p=TLH>)
-iShares 10-20 Year Treasury Bond ETF (TLH)
-
-```{r, cache=T}
-# tbond <- new.env()
-# 
-# getSymbols("TLH", env = tbond, src = "yahoo", from = dateMin, to = dateMax)
-# TBOND <- data.frame(tbond$TLH[dates,"TLH.Close"])
-# colnames(TBOND) <- "Close" 
-# TBOND$Datum <- as.Date(row.names(TBOND))
-# 
-# stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$Close
-```
-
-# Data Preparation
-
-## na's
-
-There might be dates missing.
-
-```{r}
-colSums(is.na.data.frame(stocks))
-```
-
-We delete dates with missing values. 
-
-Work with expressions to keep code nice:
-<https://stackoverflow.com/questions/1743698/evaluate-expression-given-as-a-string>
-
-```{r}
-stocks <- stocks[complete.cases(stocks),]
-dates <- stocks[,1]
-
-updateDates <- function(d){
-    return(d[as.Date(rownames(d)) %in% dates, ])
-}
-
-
-i = sentixDataNames[1]
-parse(text = paste0(i, " <- ", "updateDates(", i, ")"))
-for (i in sentixDataNames){
-    eval(parse(text = paste0(i, " <- ", "updateDates(", i, ")")))
-}
-### not needed any more (done in three lines above) :) :) :)
-# sentixI1disp <- updateDates(sentixI1disp)
-# sentixP1disp <- updateDates(sentixP1disp)
-# sentixG1disp <- updateDates(sentixG1disp)
-# sentixI1herf <- updateDates(sentixI1herf)
-# sentixG1herf <- updateDates(sentixP1herf)
-# sentixP1herf <- updateDates(sentixG1herf)
-# 
-# sentixI6disp <- updateDates(sentixI6disp)
-# sentixP6disp <- updateDates(sentixP6disp)
-# sentixG6disp <- updateDates(sentixG6disp)
-# sentixI6herf <- updateDates(sentixI6herf)
-# sentixG6herf <- updateDates(sentixP6herf)
-# sentixP6herf <- updateDates(sentixG6herf)
-
-colSums(is.na.data.frame(stocks))
-colSums(is.na.data.frame(sentixI1disp)) + colSums(is.na.data.frame(sentixP1disp)) + colSums(is.na.data.frame(sentixG1disp)) + colSums(is.na.data.frame(sentixI1herf)) + colSums(is.na.data.frame(sentixI1herf)) + colSums(is.na.data.frame(sentixI1herf))
-colSums(is.na.data.frame(sentixI6disp)) + colSums(is.na.data.frame(sentixP6disp)) + colSums(is.na.data.frame(sentixG6disp)) + colSums(is.na.data.frame(sentixI6herf)) + colSums(is.na.data.frame(sentixI6herf)) + colSums(is.na.data.frame(sentixI6herf))
-```
-
-remove TBOND
-```{r}
-stocks <- stocks[,-which(colnames(stocks)=="TBOND")]
-
-i <- sentixDataNames[1]
-parse(text = paste0(i, " <- ", i, "[,-which(colnames(", i, ") == \"TBOND\")]"))
-for (i in sentixDataNames){
-    eval(parse(text = paste0(i, " <- ", i, "[,-which(colnames(", i, ") == \"TBOND\")]")))
-}
-```
-
-
-## regress Sentiment
-
-We first regress each sentiment on the other sentiments and just go with the non-explained intercept. From these, we calculate the covariance matrix.
-
-```{r, cache=T}
-i <- sentixDataNames[1]
-parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")"))
-for (i in sentixDataNames){
-    eval(parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")")))
-}
-
-sentixDataNamesReg <- c()
-i = 1
-parse(text = paste0("sentixDataNamesReg <- ", "c(sentixDataNamesReg, \"", sentixDataNames[i], "Reg\")"))
-for(i in sentixDataNames){
-    eval(parse(text = paste0("sentixDataNamesReg <- ", "c(sentixDataNamesReg, \"", i, "Reg\")")))
-}
-
-```
-
-```{r}
-i <- sentixDataNames[i]
-parse(text = paste0(i, "RegCov", " <- ", "cov(", i, "Reg)"))
-for(i in sentixDataNames){
-    eval(parse(text = paste0(i, "RegCov", " <- ", "cov(", i, "Reg)")))
-}
-```
-
-## returns
-
-Discrete returns. First return ist 0 to start of with (first date).
-
-
-```{r}
-ret <- as.matrix(stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1)
-rownames(ret) <- stocks[2:nrow(stocks), 1]
-
-mu <- colMeans(ret)
-S <- cov(ret)
-```
-
-
-## find time window
-
-Determine length of time window (*l*). Calculate return for all stocks (*retWindow*) for all possible time windows (l, l+1, l+2, ..., T). Equal weights for all returns. Calculate (arithmetic) average of all returns at each possible time window (*retTotal*). Choose the one with lowest (*datesEvalBear*) and highest (*datesEvalBull*).
-
-$$ \text{retWindow}_{\text{stock}} = \prod_{k=1}^{l} (1+\text{ret}_{\text{stock}}(k)) - 1 $$
-
-Take care as *ret* already contains return from day before to actual day (in each row).
-
-```{r}
-l <- 50
-
-retWindow <- matrix(0, nrow = nrow(ret)-l+1, ncol = ncol(ret))
-rownames(retWindow) <- rownames(ret)[l:nrow(ret)]
-class(rownames(retWindow)) <- "Date"
-for(i in 1:nrow(retWindow)){
-    retWindow[i,] <- apply(ret[i:(i+l-1),]+1, 2, function(x) prod(x)-1)
-}
-
-retTotal <- numeric(nrow(retWindow))
-retTotal <- apply(retWindow, 1, mean)
-names(retTotal) <- rownames(retWindow)
-
-iMin <- which(retTotal==min(retTotal))
-iMax <- which(retTotal==max(retTotal))
-
-# need l+1 values (start, end (= where max is), l steps in btw)
-datesEvalBear <- rownames(ret)[(iMin-1):(iMin+l-1)]
-datesEvalBull <- rownames(ret)[(iMax-1):(iMax+l-1)]
-class(datesEvalBear) <- "Date"
-class(datesEvalBull) <- "Date"
-```
-
-additional visualization of the resturns over each time window
-
-```{r}
-plot(retTotal, type = "l", axes = FALSE)
-abline(v = iMin, col = "red")
-abline(v = iMax, col = "green")
-axis(1, pretty(1:length(retTotal)), names(retTotal)[pretty(1:length(retTotal))+1])
-axis(2)
-```
-
-remove variables
-```{r}
-rm(retWindow, retTotal)
-rm(iMin, iMax)
-```
-
-
-## regression
-
-### regress one on all others
-
-We regress one sentiment variable on all other sentiment variables and take the residuals. 
-
-```{r}
-regSentResidual
-```
-
-
-```{r}
-sentixI1dispResiduals50 <- regSentResidual(sentixI1disp, consider = 50, func = mean)
-summary(sentixI1dispResiduals50)
-
-sentixI1dispResiduals10 <- regSentResidual(sentixI1disp, consider = 10, func = mean)
-summary(sentixI1dispResiduals10)
-```
-
-That is not useful! The values differ after the 16th position after decimal point.
-
-Look at what causes this good explanation of one variable by its others:
-
-```{r}
-dat <- sentixI1disp
-for(k in colnames(dat)){
-    # generate formula (regress one column on all the others while using 'consider' previous points)
-    print(form <- as.simple.formula(setdiff(colnames(dat), k), k))
-    print(summary(lm(form, data = dat[max((200-50),1):200,])))
-}
-```
-
-### do (correct?) adoptation
-
-get Covariance to 0 by regressing one on all before and so on (compare to Portfolio Analysis Theorem 3.5)
-
-```{r}
-
-```
-
-
 
 
 # Data Visualization
@@ -653,7 +117,7 @@ legend("topleft", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1
 ```
 
 ```{r}
-library(ggplot2)
+# library(ggplot2)
 ```
 
 need data frame as input for ggplot
@@ -728,10 +192,10 @@ length(datesEvalLast)
 ### general setup
 
 ```{r}
-library(Rdonlp2) ## needed for donlp2NLP
-library(fPortfolio)
-library(FRAPO)
-library(mco) ## mrc
+# library(Rdonlp2) ## needed for donlp2NLP
+# library(fPortfolio)
+# library(FRAPO)
+# library(mco) ## mrc
 ```
 
 Setup Grid. Take care that weights sum up to 1.
@@ -849,9 +313,9 @@ weights of goal function -> dispersion (sentixDataNames) -> dates -> weights of 
 parallel programming with 
 
 ```{r}
-library(foreach)
-library(doParallel)
-library(doSNOW)
+# library(foreach)
+# library(doParallel)
+# library(doSNOW)
 ```
 
 
@@ -950,7 +414,7 @@ Eclassic <- list("MSR" = Wmsr, "MDP" = Wmdp, "GMV" = Wgmv, "ERC" = Werc)
 # Portfolio Analysis
 
 ```{r}
-library(PerformanceAnalytics)
+# library(PerformanceAnalytics)
 ```
 
 
@@ -1060,6 +524,12 @@ objective value stays roughly the same after dividing through weight
 ### highest return
 
 ```{r}
+load(file.path(folderData, "Optimization", "EDispersionMin_gloggest2017-08-16---11-35"))
+Eanalysis <- E
+```
+
+
+```{r}
 sentixReturns <- matrix(NA, nrow = length(Eanalysis), ncol = ncol(Eanalysis[[1]]))
 rownames(sentixReturns) <- names(Eanalysis)
 colnames(sentixReturns) <- colnames(Eanalysis[[1]])
@@ -1138,7 +608,7 @@ analysePortfolio(EclassicEvolving)
 
 ```{r}
 # install.packages("SharpeR") # installs many other packages as well
-library(SharpeR)
+# library(SharpeR)
 ```
 
 
@@ -1157,7 +627,7 @@ sr_test(x = Rsent, y = Rclas, paired = TRUE,alternative="greater")
 # Portfolio Visualization
 
 ```{r}
-library(grDevices) # for color
+# library(grDevices) # for color
 ```
 
 

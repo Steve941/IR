@@ -1,0 +1,272 @@
+---
+title: "10 Data"
+author: "Stefan Glogger"
+date: "18 August 2017"
+output: pdf_document
+---
+
+```{r, include=FALSE}
+source("parameters.R")
+```
+
+
+# Data Import
+
+We import the sentiment data. We also import the prices of each index over the relevant time frame.
+
+## Sentix
+
+Read the raw sentiment data and save it in the list *sentixRaw* with each list element containing the results of the survey for the different indices. As the number of rows (dates of observation) in data differ, we extract the unique dates (*datesSentix*) and reduce the data to it. We also determine *dateMin* and *dateMax*, which we use lateron to get the stock data.
+
+```{r}
+library(openxlsx)
+```
+
+```{r}
+folderSentix <- (file.path(getwd(), "Data", "Sentix"))
+
+sheets <- c("DAX","DAXm","TEC","TECm","ESX50","ESX50m","SP5","SP5m","NASDAQ","NASDAQm","NIKKEI","NIKKEIm","BUND","BUNDm","TBOND","TBONDm")
+relevant_rows <- c("Datum","P+","Pn","P-","I+","In","I-","G+","Gn","G-")
+```
+
+```{r}
+sentixRaw <- list()
+
+for(i in sheets){
+  sentixRaw[[i]] <- read.xlsx(file.path(folderSentix, "sentix_anzahlen_bis_02092016xlsx.xlsx"),sheet=i,colNames=T,rowNames=F,detectDates=T)
+  sentixRaw[[i]] <- sentixRaw[[i]][,relevant_rows]
+  sentixRaw[[i]] <- sentixRaw[[i]][order(sentixRaw[[i]][,1]),]
+}
+```
+
+```{r}
+unlist(lapply(sentixRaw, nrow))
+
+datesSentix <- unique(sentixRaw[[1]]$Datum)
+for(i in names(sentixRaw)[2:length(sentixRaw)]){
+  if(!(setequal(datesSentix, sentixRaw[[i]]$Datum)))
+    stop("Sentix Data of different indices have not same dates. Handle manually.")
+}
+
+for(i in names(sentixRaw)){
+  sentixRaw[[i]] <- unique(sentixRaw[[i]])
+}
+unlist(lapply(sentixRaw, nrow))
+
+(dateMin <- min(datesSentix))
+(dateMax <- max(datesSentix))
+```
+
+
+```{r}
+rm(folderSentix, sheets, relevant_rows, i)
+detach("package:openxlsx", unload = T)
+```
+
+
+## Stocks
+
+We take data mainly from Yahoo Finance. We take closing course from *dateMin* to *dateMax* for several indexes and store in the data frame *stocks* the closing stock price at each date of the sentiment data (*datesSentix*).
+
+We take the following as sources of the data:
+
+* DAX   [*\^GDAXI*](<https://finance.yahoo.com/quote/%5EGDAXI?p=%5EGDAXI>)
+* TEC   [*\^TECDAX*](<https://finance.yahoo.com/quote/%5ETECDAX?p=^TECDAX>)
+* ESX50 [*\^STOXX50E*](<https://finance.yahoo.com/quote/%5ESTOXX50E?p=^STOXX50E>)
+* SP500 [*\^GSPC*](<https://finance.yahoo.com/quote/%5EGSPC?p=^GSPC>)
+* NASDAQ    [*\^NDX*](<https://finance.yahoo.com/quote/%5ENDX?p=^NDX>)
+* NIKKEI    [*\^N225*](<https://finance.yahoo.com/quote/%5EN225?p=^N225>)
+* BUND  from Sebastian: Den Bund-Future habe ich bei onvista in 5-Jahresst?cken geladen und zusammengebaut. Dezimaltrennzeichen umgestellt im .csv ---- not from yahoo, manually from bundesbank [*BBK01.WT0557*](<https://www.bundesbank.de/Navigation/DE/Statistiken/Zeitreihen_Datenbanken/Makrooekonomische_Zeitreihen/its_details_value_node.html?tsId=BBK01.WT0557>)
+* TBOND from Sebastian: Beim T-Bond ist es die 10 Year Treasury Note, auf welche das TBOND Sentiment abzielt. Diese habe ich bei FRED geladen: <https://fred.stlouisfed.org/series/DGS10>
+
+
+```{r}
+# install.packages("quantmod")
+library(quantmod)
+# ?getSymbols
+```
+
+```{r, cache=T}
+stocks <- data.frame(Datum = datesSentix)
+
+# DAX
+dax <- new.env()
+getSymbols("^GDAXI", env = dax, src = "yahoo", from = dateMin, to = dateMax)
+DAX <- data.frame(dax$GDAXI[datesSentix,"GDAXI.Close"])
+colnames(DAX) <- "Close" # somehow the column name cannot be given directly
+DAX$Datum <- as.Date(row.names(DAX))
+
+stocks$DAX <- merge(stocks, DAX, by = "Datum", all.x = T)$Close
+
+
+# TEC
+tec <- new.env()
+getSymbols("^TECDAX", env = tec, src = "yahoo", from = dateMin, to = dateMax)
+TEC <- data.frame(tec$TECDAX[datesSentix, "TECDAX.Close"])
+colnames(TEC) <- "Close"
+TEC$Datum <- as.Date(row.names(TEC))
+
+stocks$TEC <- merge(stocks, TEC, by = "Datum", all.x = T)$Close
+
+
+# ESX50
+esx50 <- new.env()
+getSymbols("^STOXX50E", env = esx50, src = "yahoo", from = dateMin, to = dateMax)
+ESX50 <- data.frame(esx50$STOXX50E[datesSentix,"STOXX50E.Close"])
+colnames(ESX50) <- "Close"
+ESX50$Datum <- as.Date(row.names(ESX50))
+
+stocks$ESX50 <- merge(stocks, ESX50, by = "Datum", all.x = T)$Close
+
+
+# SP500
+sp500 <- new.env()
+getSymbols("^GSPC", env = sp500, src = "yahoo", from = dateMin, to = dateMax)
+SP500 <- data.frame(sp500$GSPC[datesSentix,"GSPC.Close"])
+colnames(SP500) <- "Close" 
+SP500$Datum <- as.Date(row.names(SP500))
+# sum(is.na(SP500$Close))
+
+stocks$SP5 <- merge(stocks, SP500, by = "Datum", all.x = T)$Close
+
+
+# NASDAQ
+nasdaq <- new.env()
+getSymbols("^NDX", env = nasdaq, src = "yahoo", from = dateMin, to = dateMax)
+NASDAQ <- data.frame(nasdaq$NDX[datesSentix,"NDX.Close"])
+# sum(is.na(NASDAQ[,"NDX.Close"]))
+colnames(NASDAQ) <- "Close"
+NASDAQ$Datum <- as.Date(row.names(NASDAQ))
+
+stocks$NASDAQ <- merge(stocks, NASDAQ, by = "Datum", all.x = T)$Close
+
+
+# NIKKEI
+nikkei <- new.env()
+getSymbols("^N225", env = nikkei, src = "yahoo", from = dateMin, to = dateMax)
+NIKKEI <- data.frame(nikkei$N225[datesSentix,"N225.Close"])
+colnames(NIKKEI) <- "Close"
+NIKKEI$Datum <- as.Date(row.names(NIKKEI))
+
+stocks$NIKKEI <- merge(stocks, NIKKEI, by = "Datum", all.x = T)$Close
+```
+
+
+Bund 
+
+```{r, cache=T}
+BUND <- read.csv(file.path(folderData, "Bundfuture", "Bundfuture2001-2017.csv"), sep = ";")
+BUND[,1] <- as.Date(BUND[,1], format = "%d.%m.%Y")
+BUND <- BUND[BUND[,1] %in% datesSentix,]
+BUND <- as.data.frame(BUND)
+
+stocks$BUND <- merge(stocks, BUND, by = "Datum", all.x = T)$Schluss
+```
+
+Treasury bond
+
+```{r, cache=T}
+TBOND <- read.csv(file.path(folderData, "10 year T-Notes", "DGS10.csv"), sep = ",")
+TBOND[,1] <- as.Date(TBOND[,1], format = "%Y-%m-%d")
+TBOND[,2] <- as.numeric(as.character(TBOND[,2])) # was a factor first and factors are stored via index of factor level
+colnames(TBOND) <- c("Datum", "DGS10")
+TBOND <- TBOND[TBOND[,1] %in% datesSentix,]
+TBOND <- as.data.frame(TBOND)
+
+stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$DGS10
+```
+
+
+```{r}
+rm(BUND, DAX, ESX50, NASDAQ, NIKKEI, SP500, TBOND, TEC,
+   dax, esx50, nasdaq, nikkei, sp500, tec, i)
+```
+
+
+\newpage
+# Data Preparation
+
+We look at how many people participated in the survey on average and remove TBOND.
+
+We look at the number of dates on which not all stocks report prices and remove those to end up with the dates on which all data is available *datesAll*.
+
+## Sentix - number of participants in survey
+
+```{r}
+cols <- 8:10
+colnames(sentixRaw[[1]])[cols]
+
+unlist(lapply(sentixRaw, function(x) {round(mean(rowSums(x[cols])), 0)}))
+rm(cols)
+```
+
+
+We remove TBOND, as just very few people voted for it over time in comparison to the other indices.
+
+```{r}
+sentixRaw[["TBOND"]] <- NULL
+sentixRaw[["TBONDm"]] <- NULL
+stocks <- stocks[,-which(colnames(stocks)=="TBOND")]
+```
+
+
+```{r}
+unlist(lapply(sentixRaw, function(x) {sum(is.na.data.frame(x))}))
+```
+
+
+## Stocks - na's
+
+There might be dates missing (we just have to look at stocks as we found the *datesSentix* as those dates, for which all sentiment is there).
+
+```{r}
+colSums(is.na.data.frame(stocks))
+```
+
+Visualize the missing dates (missing date = 1, not missing date = 0 on y-axis).
+
+```{r}
+cols <- rainbow(ncol(stocks)-1)
+
+plot(stocks[,1], is.na(stocks[,2]), main = "Missing Dates", ylab = "missing", xlab = "Date", col = cols[1], pch = 4)
+for(i in 2:(ncol(stocks)-1)){
+  par(new=T)
+  plot(stocks[,1], is.na(stocks[,i+1]), col = cols[i], axes = F, xlab = "", ylab = "", pch = 4)
+}
+legend("topleft", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1)
+
+rm(cols, i)
+```
+
+Determine, how many dates do have all data available.
+
+```{r}
+nrow(stocks)
+nrow(stocks[complete.cases(stocks),])
+
+nrow(stocks) - nrow(stocks[complete.cases(stocks),])
+(nrow(stocks) - nrow(stocks[complete.cases(stocks),]))/nrow(stocks)
+```
+
+So we would delete `r (nrow(stocks) - nrow(stocks[complete.cases(stocks),]))/nrow(stocks)*100` % of the data. 
+
+### delete
+
+We delete dates with missing values. 
+
+```{r}
+stocks <- stocks[complete.cases(stocks),]
+
+datesAll <- stocks[,1]
+rm(datesSentix)
+
+sentixRaw <- lapply(sentixRaw, function(x) {x[(x[,1] %in% datesAll),]})
+
+unlist(lapply(sentixRaw, nrow))
+```
+
+
+### approach
+
+One way of approaching this might be via linear regression of the stock data when no stock price is available. but this assumes a linear relationship and might cause trouble.
+

@@ -1,0 +1,34 @@
+---
+title: "The Magic in R"
+author: "Stefan Glogger"
+date: "17 August 2017"
+output: pdf_document
+---
+
+# Overview
+
+Please look at the titles to get an overview of what is done when. You can also refer to the introducing sentences of each main title.
+
+
+# Packages, Functions and Parameters
+
+First we load all the relevant packages (are saved separetly in *libraries.R*). Then we show the global parameters (*parameters.R*) and also load the functions (which are shown when needed).
+
+```{r, include=FALSE}
+source("libraries.R")
+```
+
+
+```{r}
+source("parameters.R", echo = T)
+source("functions.R")
+```
+
+\newpage
+
+```{r, child="10 Data Import, Preparation.Rmd"}
+```
+
+```{r, child="20 Data Derivations.Rmd"}
+```
+

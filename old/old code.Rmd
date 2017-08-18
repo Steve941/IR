@@ -1,0 +1,92 @@
+---
+title: "old stuff"
+author: "Stefan Glogger"
+date: "18 August 2017"
+output: pdf_document
+---
+
+# Data -> Sentix -> Dispersion
+
+get results of calculation of dispersion
+
+
+```{r}
+load(file.path(folderData, "Sentix", "SentixCalculated"))
+```
+
+There might be a problem with duplicated dates!
+
+```{r}
+dates <- as.Date(sentix[[1]][,1], format = "%d.%m.%Y")
+sum(duplicated(dates))
+sum(dates==as.Date("2013-04-05"))
+dates <- unique(dates)
+```
+
+
+```{r, cache=T}
+sentixP1disp <- data.frame(DAX = unique(sentix[["DAX"]])$P_disp, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixP1disp$TEC = unique(sentix[["TEC"]])$P_disp[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixP1disp$ESX50 = unique(sentix[["ESX50"]])$P_disp[unique(sentix[["ESX50"]])$Datum %in% dates]
+sentixP1disp$SP5 = unique(sentix[["SP5"]])$P_disp[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixP1disp$NASDAQ = unique(sentix[["NASDAQ"]])$P_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixP1disp$NIKKEI = unique(sentix[["NIKKEI"]])$P_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixP1disp$BUND = unique(sentix[["BUND"]])$P_disp[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixP1disp$TBOND = unique(sentix[["TBOND"]])$P_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
+
+sentixI1disp <- data.frame(DAX = unique(sentix[["DAX"]])$I_disp, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixI1disp$TEC = unique(sentix[["TEC"]])$I_disp[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixI1disp$ESX50 = unique(sentix[["ESX50"]])$I_disp[unique(sentix[["ESX50"]])$Datum %in% dates]
+sentixI1disp$SP5 = unique(sentix[["SP5"]])$I_disp[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixI1disp$NASDAQ = unique(sentix[["NASDAQ"]])$I_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixI1disp$NIKKEI = unique(sentix[["NIKKEI"]])$I_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixI1disp$BUND = unique(sentix[["BUND"]])$I_disp[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixI1disp$TBOND = unique(sentix[["TBOND"]])$I_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
+
+
+sentixG1disp <- data.frame(DAX = unique(sentix[["DAX"]])$G_disp, 
+                           row.names = as.Date(unique(sentix[["DAX"]])[,1], format = "%d.%m.%Y"))
+sentixG1disp$TEC = unique(sentix[["TEC"]])$G_disp[unique(sentix[["TEC"]])$Datum %in% dates]
+sentixG1disp$ESX50 = unique(sentix[["ESX50"]])$G_disp[unique(sentix[["ESX50"]])$Datum %in% dates]
+sentixG1disp$SP5 = unique(sentix[["SP5"]])$G_disp[unique(sentix[["SP5"]])$Datum %in% dates]
+sentixG1disp$NASDAQ = unique(sentix[["NASDAQ"]])$G_disp[unique(sentix[["NASDAQ"]])$Datum %in% dates]
+sentixG1disp$NIKKEI = unique(sentix[["NIKKEI"]])$G_disp[unique(sentix[["NIKKEI"]])$Datum %in% dates]
+sentixG1disp$BUND = unique(sentix[["BUND"]])$G_disp[unique(sentix[["BUND"]])$Datum %in% dates]
+sentixG1disp$TBOND = unique(sentix[["TBOND"]])$G_disp[unique(sentix[["TBOND"]])$Datum %in% dates]
+
+
+
+sentixP6disp <- data.frame(DAX = unique(sentix[["DAXm"]])$P_disp, 
+                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
+sentixP6disp$TEC = unique(sentix[["TECm"]])$P_disp[unique(sentix[["TECm"]])$Datum %in% dates]
+sentixP6disp$ESX50 = unique(sentix[["ESX50m"]])$P_disp[unique(sentix[["ESX50m"]])$Datum %in% dates]
+sentixP6disp$SP5 = unique(sentix[["SP5m"]])$P_disp[unique(sentix[["SP5m"]])$Datum %in% dates]
+sentixP6disp$NASDAQ = unique(sentix[["NASDAQm"]])$P_disp[unique(sentix[["NASDAQm"]])$Datum %in% dates]
+sentixP6disp$NIKKEI = unique(sentix[["NIKKEIm"]])$P_disp[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
+sentixP6disp$BUND = unique(sentix[["BUNDm"]])$P_disp[unique(sentix[["BUNDm"]])$Datum %in% dates]
+sentixP6disp$TBOND = unique(sentix[["TBONDm"]])$P_disp[unique(sentix[["TBONDm"]])$Datum %in% dates]
+
+
+sentixI6disp <- data.frame(DAX = unique(sentix[["DAXm"]])$I_disp, 
+                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
+sentixI6disp$TEC = unique(sentix[["TECm"]])$I_disp[unique(sentix[["TECm"]])$Datum %in% dates]
+sentixI6disp$ESX50 = unique(sentix[["ESX50m"]])$I_disp[unique(sentix[["ESX50m"]])$Datum %in% dates]
+sentixI6disp$SP5 = unique(sentix[["SP5m"]])$I_disp[unique(sentix[["SP5m"]])$Datum %in% dates]
+sentixI6disp$NASDAQ = unique(sentix[["NASDAQm"]])$I_disp[unique(sentix[["NASDAQm"]])$Datum %in% dates]
+sentixI6disp$NIKKEI = unique(sentix[["NIKKEIm"]])$I_disp[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
+sentixI6disp$BUND = unique(sentix[["BUNDm"]])$I_disp[unique(sentix[["BUNDm"]])$Datum %in% dates]
+sentixI6disp$TBOND = unique(sentix[["TBONDm"]])$I_disp[unique(sentix[["TBONDm"]])$Datum %in% dates]
+
+
+sentixG6disp <- data.frame(DAX = unique(sentix[["DAXm"]])$G_disp, 
+                           row.names = as.Date(unique(sentix[["DAXm"]])[,1], format = "%d.%m.%Y"))
+sentixG6disp$TEC = unique(sentix[["TECm"]])$G_disp[unique(sentix[["TECm"]])$Datum %in% dates]
+sentixG6disp$ESX50 = unique(sentix[["ESX50m"]])$G_disp[unique(sentix[["ESX50m"]])$Datum %in% dates]
+sentixG6disp$SP5 = unique(sentix[["SP5m"]])$G_disp[unique(sentix[["SP5m"]])$Datum %in% dates]
+sentixG6disp$NASDAQ = unique(sentix[["NASDAQm"]])$G_disp[unique(sentix[["NASDAQm"]])$Datum %in% dates]
+sentixG6disp$NIKKEI = unique(sentix[["NIKKEIm"]])$G_disp[unique(sentix[["NIKKEIm"]])$Datum %in% dates]
+sentixG6disp$BUND = unique(sentix[["BUNDm"]])$G_disp[unique(sentix[["BUNDm"]])$Datum %in% dates]
+sentixG6disp$TBOND = unique(sentix[["TBONDm"]])$G_disp[unique(sentix[["TBONDm"]])$Datum %in% dates]
+```
