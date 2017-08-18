@@ -335,7 +335,7 @@ tt <- numeric(nrow(grid)*length(sentixDataNamesReg)) # track time to evaluate co
 
 # registerDoParallel(cl)
 registerDoSNOW(cl)
-E <- foreach(weightInd = 1:nrow(grid), .export = sentixDataNames, .packages = c("fPortfolio", "FRAPO")) %dopar% {
+E <- foreach(weightInd = 1:2, .export = sentixDataNames, .packages = c("fPortfolio", "FRAPO")) %do% {
     w <- as.numeric(grid[weightInd,])
     weightName <- paste(w, collapse = "-") # needed later to store result
     
@@ -355,7 +355,7 @@ E <- foreach(weightInd = 1:nrow(grid), .export = sentixDataNames, .packages = c(
             muStock <- colMeans(rdat)
             SStock <- cov(rdat)
             
-            erg[dInd+1,] <- donlp2NLP(start = erg[dInd,], obj = hWeighted, 
+            erg[dInd+1,] <- donlp2NLP(start = erg[dInd,], obj = hDispersionDirectMin, 
                          par.lower = rep(0, numAsset), ineqA = IneqA, 
                          ineqA.lower = 1.0, ineqA.upper = 1.0)$solution
         }
