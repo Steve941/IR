@@ -9,6 +9,10 @@ output: pdf_document
 source("parameters.R")
 ```
 
+```{r, include=FALSE, cache=T, results='hide'}
+knitr::knit_child("10 Data Import Preparation.Rmd")
+```
+
 
 # Data Derivations
 
@@ -151,7 +155,7 @@ rm(groupP, groupI, groupG, sHerfColumn,
 
 We first regress each sentiment on the other sentiments and just go with the non-explained intercept. From these, we calculate the covariance matrix.
 
-```{r, cache=T}
+```{r, eval=F, cache=T}
 i <- sentixDataNames[1]
 parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")"))
 for (i in sentixDataNames){
@@ -167,7 +171,7 @@ for(i in sentixDataNames){
 
 ```
 
-```{r}
+```{r, eval=F}
 i <- sentixDataNames[i]
 parse(text = paste0(i, "RegCov", " <- ", "cov(", i, "Reg)"))
 for(i in sentixDataNames){
@@ -181,7 +185,7 @@ for(i in sentixDataNames){
 Discrete returns. First return ist 0 to start of with (first date).
 
 
-```{r}
+```{r, eval=F}
 ret <- as.matrix(stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1)
 rownames(ret) <- stocks[2:nrow(stocks), 1]
 
@@ -198,7 +202,7 @@ $$ \text{retWindow}_{\text{stock}} = \prod_{k=1}^{l} (1+\text{ret}_{\text{stock}
 
 Take care as *ret* already contains return from day before to actual day (in each row).
 
-```{r}
+```{r, eval=F}
 l <- 50
 
 retWindow <- matrix(0, nrow = nrow(ret)-l+1, ncol = ncol(ret))
@@ -224,7 +228,7 @@ class(datesEvalBull) <- "Date"
 
 additional visualization of the resturns over each time window
 
-```{r}
+```{r, eval=F}
 plot(retTotal, type = "l", axes = FALSE)
 abline(v = iMin, col = "red")
 abline(v = iMax, col = "green")
@@ -233,7 +237,7 @@ axis(2)
 ```
 
 remove variables
-```{r}
+```{r, eval=F}
 rm(retWindow, retTotal)
 rm(iMin, iMax)
 ```
@@ -245,12 +249,12 @@ rm(iMin, iMax)
 
 We regress one sentiment variable on all other sentiment variables and take the residuals. 
 
-```{r}
+```{r, eval=F}
 regSentResidual
 ```
 
 
-```{r}
+```{r, eval=F}
 sentixI1dispResiduals50 <- regSentResidual(sentixI1disp, consider = 50, func = mean)
 summary(sentixI1dispResiduals50)
 
@@ -262,7 +266,7 @@ That is not useful! The values differ after the 16th position after decimal poin
 
 Look at what causes this good explanation of one variable by its others:
 
-```{r}
+```{r, eval=F}
 dat <- sentixI1disp
 for(k in colnames(dat)){
     # generate formula (regress one column on all the others while using 'consider' previous points)
@@ -275,6 +279,6 @@ for(k in colnames(dat)){
 
 get Covariance to 0 by regressing one on all before and so on (compare to Portfolio Analysis Theorem 3.5)
 
-```{r}
+```{r, eval=F}
 
 ```
