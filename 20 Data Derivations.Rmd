@@ -1,7 +1,7 @@
 ---
-title: "10 Data"
+title: "Data - Derivations"
 author: "Stefan Glogger"
-date: "18 August 2017"
+date: "August 2017"
 output: pdf_document
 ---
 
@@ -148,9 +148,125 @@ rm(groupP, groupI, groupG, sHerfColumn,
 
 
 
+## Stocks
 
+We calculate discrete returns for each date and each stock.
+
+### returns
+
+Discrete returns. Be aware that we "loose" the first date now, as we have no idea of the return on day one. Therefore we might also exclude the first date for the other (sentix) variables. We will go on with carefully matching the dates to always consider information ot the actual day.
+
+
+```{r}
+ret <- as.matrix(stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1)
+rownames(ret) <- stocks[2:nrow(stocks), 1]
+
+mu <- colMeans(ret)
+C <- cov(ret)
+```
+
+```{r}
+# sentixRaw <- lapply(sentixRaw, function(x) {x <- x[2:nrow(x), ]})
+# sDisp <- lapply(sDisp, function(x) {x <- x[2:nrow(x), ]})
+# sHerf <- lapply(sHerf, function(x) {x <- x[2:nrow(x), ]})
+# 
+# stocks <- stocks[2:nrow(stocks), ]
+# datesAll <- datesAll[2:nrow(datesAll)]
+```
+
+
+
+### time window 
+
+#### bull and bear
+
+Fix length of time window (*l*). Calculate return for all stocks (*retWindow*) for all possible time windows (1, l+1, l+2, ..., T). Equal weights for all returns (of the different indices). Calculate (arithmetic) average of all returns in each possible time window (*retTotal*). Choose the one with lowest (*datesEvalBear*) and highest (*datesEvalBull*).
+
+$$ \text{retWindow}_{\text{stock}} = \prod_{k=1}^{l} (1+\text{ret}_{\text{stock}}(k)) - 1 $$
+
+As we calculate with closing prices, we assume that the return is actually of that day (or better spoken of that week). We investment at the very beginning to the opening price, which should be rathly the closing price of the day (week) before).
+
+```{r}
+l <- 50
+
+retWindow <- matrix(0, nrow = nrow(ret)-l+1, ncol = ncol(ret))
+rownames(retWindow) <- rownames(ret)[l:nrow(ret)]
+class(rownames(retWindow)) <- "Date"
+
+for(i in 1:nrow(retWindow)){
+    retWindow[i,] <- apply(ret[i:(i+l-1),]+1, 2, function(x) prod(x)-1) # 2 -> columnwise
+}
+
+retTotal <- numeric(nrow(retWindow))
+retTotal <- apply(retWindow, 1, mean) # 1 -> rowwise
+names(retTotal) <- rownames(retWindow)
+
+iMin <- which(retTotal==min(retTotal))
+iMax <- which(retTotal==max(retTotal))
+
+# dates of which the returns have been calculated
+datesEvalBear <- rownames(ret)[(iMin):(iMin+l-1)]
+datesEvalBull <- rownames(ret)[(iMax):(iMax+l-1)]
+class(datesEvalBear) <- "Date"
+class(datesEvalBull) <- "Date"
+```
+
+additional visualization of the resturns over each time window
+
+```{r}
+plot(retTotal, type = "l", axes = FALSE, main = "returns over the time window")
+abline(v = iMin, col = "red", lwd = 2)
+abline(v = iMax, col = "green", lwd = 2)
+axis(1, pretty(1:length(retTotal)), names(retTotal)[pretty(1:length(retTotal))+1])
+axis(2)
+```
+
+#### last data
+
+We also look at the most actual data.
+
+```{r}
+datesEvalLast <- rownames(ret)[(nrow(ret)-l+1):nrow(ret)]
+class(datesEvalLast) <- "Date"
+```
+
+used later for storing results. trick *deparse(substitute())* to get an error when a window is deleted.
+
+
+
+#### test period
+
+We furthermore define a test period to determine the optimal weights of the goal function. Therefore we choose the first time period before the actual evaluating time periods. From *startDateTest* up to *startEvalTime* minus *timeBefore*, to leave some space before the actual analysis starts.
+
+```{r}
+startDateTest <- 50
+timeBefore <- 50
+(startEvalTime <- which(datesAll == min(c(min(datesEvalBear), min(datesEvalBull), min(datesEvalLast)))))
+
+datesTest <- rownames(ret)[startDateTest:(startEvalTime-timeBefore)]
+class(datesTest) <- "Date"
+length(datesTest)
+```
+
+
+#### cleanup
+
+```{r}
+datesNames <- c(deparse(substitute(datesEvalBear)), deparse(substitute(datesEvalBull)), deparse(substitute(datesEvalLast)))
+```
+
+
+remove variables
+```{r}
+rm(l, i)
+rm(retWindow, retTotal)
+rm(iMin, iMax, startDateTest)
+```
 
 # TODO further consideration
+
+For the moment, I (Stefan) don't think that the regressing is thoroughly based, so this (updating of code) is skipped for now.
+
 ## regress Sentiment
 
 We first regress each sentiment on the other sentiments and just go with the non-explained intercept. From these, we calculate the covariance matrix.
@@ -179,68 +295,6 @@ for(i in sentixDataNames){
 }
 ```
 
-
-## returns
-
-Discrete returns. First return ist 0 to start of with (first date).
-
-
-```{r, eval=F}
-ret <- as.matrix(stocks[2:nrow(stocks),2:ncol(stocks)]/stocks[1:(nrow(stocks)-1),2:ncol(stocks)] - 1)
-rownames(ret) <- stocks[2:nrow(stocks), 1]
-
-mu <- colMeans(ret)
-S <- cov(ret)
-```
-
-
-## find time window
-
-Determine length of time window (*l*). Calculate return for all stocks (*retWindow*) for all possible time windows (l, l+1, l+2, ..., T). Equal weights for all returns. Calculate (arithmetic) average of all returns at each possible time window (*retTotal*). Choose the one with lowest (*datesEvalBear*) and highest (*datesEvalBull*).
-
-$$ \text{retWindow}_{\text{stock}} = \prod_{k=1}^{l} (1+\text{ret}_{\text{stock}}(k)) - 1 $$
-
-Take care as *ret* already contains return from day before to actual day (in each row).
-
-```{r, eval=F}
-l <- 50
-
-retWindow <- matrix(0, nrow = nrow(ret)-l+1, ncol = ncol(ret))
-rownames(retWindow) <- rownames(ret)[l:nrow(ret)]
-class(rownames(retWindow)) <- "Date"
-for(i in 1:nrow(retWindow)){
-    retWindow[i,] <- apply(ret[i:(i+l-1),]+1, 2, function(x) prod(x)-1)
-}
-
-retTotal <- numeric(nrow(retWindow))
-retTotal <- apply(retWindow, 1, mean)
-names(retTotal) <- rownames(retWindow)
-
-iMin <- which(retTotal==min(retTotal))
-iMax <- which(retTotal==max(retTotal))
-
-# need l+1 values (start, end (= where max is), l steps in btw)
-datesEvalBear <- rownames(ret)[(iMin-1):(iMin+l-1)]
-datesEvalBull <- rownames(ret)[(iMax-1):(iMax+l-1)]
-class(datesEvalBear) <- "Date"
-class(datesEvalBull) <- "Date"
-```
-
-additional visualization of the resturns over each time window
-
-```{r, eval=F}
-plot(retTotal, type = "l", axes = FALSE)
-abline(v = iMin, col = "red")
-abline(v = iMax, col = "green")
-axis(1, pretty(1:length(retTotal)), names(retTotal)[pretty(1:length(retTotal))+1])
-axis(2)
-```
-
-remove variables
-```{r, eval=F}
-rm(retWindow, retTotal)
-rm(iMin, iMax)
-```
 
 
 ## regression

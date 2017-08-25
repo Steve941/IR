@@ -1,7 +1,7 @@
 ---
 title: "The Magic in R"
 author: "Stefan Glogger"
-date: "17 August 2017"
+date: "August 2017"
 output: pdf_document
 ---
 
@@ -21,7 +21,7 @@ source("libraries.R")
 
 ```{r}
 source("parameters.R", echo = T)
-source("functions.R")
+# source("functions.R")
 ```
 
 \newpage
@@ -30,5 +30,22 @@ source("functions.R")
 
 \newpage
 ```{r, child="20 Data Derivations.Rmd"}
+```
+
+\newpage
+```{r, child="30 Data Visualization.Rmd"}
+```
+
+\newpage
+```{r, child="40 Analysis.Rmd"}
+```
+
+
+\newpage
+```{r, child="50 Optimization.Rmd"}
+```
+
+\newpage
+```{r, child="70 Visualization.Rmd"}
 ```
 

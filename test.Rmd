@@ -2,8 +2,12 @@
 title: "test"
 author: "Stefan Glogger"
 date: "3 August 2017"
-output: pdf_document
+output: 
+    pdf_document:
+        includes:
+            in_header: "\usepackage{pdfpages}"
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -13,10 +17,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see [Markdown](<http://rmarkdown.rstudio.com>).
 
-<http://rmarkdown.rstudio.com>
+[text](<C:\Dropbox\Dateien\Dropbox\IR-Phase FIM-Statistik\R-Research Project Statistics\Plot Data\>)
 
 Take the following as sources of the data:
 
 1+1 = `r 1+1`
 
 *ret*
+
+Be carefull to work with annualized quantities.
+
+\begin{tabular}{lll}
+1. & return & max$\left(w_1 \cdot \frac{x^T\mu}{\mu_{target}}\right)$\\
+2. & volatility & min$\left(w_2 \cdot \frac{\sqrt{x^T C x}}{\sigma_\text{target}}\right)$)\\
+3. & dispersion & min$\left(w_3 \cdot \frac{x^T\text{d}}{\text{d}_\text{target}}\right)$
+\end{tabular}
+
+
+\includepdf[pages={1}]{10_Data_Import_Preparation.pdf}
+\includegraphics{10_Data_Import_Preparation.pdf}

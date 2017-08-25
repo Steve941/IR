@@ -1,0 +1,102 @@
+---
+title: "Analysis"
+author: "Stefan Glogger"
+date: "August 2017"
+output: pdf_document
+---
+
+```{r, include=FALSE}
+source("parameters.R")
+```
+
+```{r, include=FALSE, cache=T, results='hide'}
+knitr::knit_child("30 Data Visualization.Rmd")
+```
+
+# Analysis
+
+## Dispersion to Returns
+
+We first want to look on how dispersion affects returns. We hypothesize that (future) return is higher if dispersion is lower. Therefore, we look at the mean return of the *q* quantil of dispersion and the mean return of its *1-q* quantil. We do this for all the sentiments in comparison with all stocks. 
+
+We depict this value. row: index, column: sentiment
+We also depict the ranks (higher rank = higher value). Be careful as the absolute values of returns are different across indices (therefore ranking is not really justified) Comparing in each row is justified and higher value is good (should expecially be greater than 0).
+
+Let *n* be the number of periods considered (n=1: just this period, n=2: this and next period) and let *m* be the time lapse (m=0: returns starting right now, m=1: returns starting 1 one period behind).
+
+```{r}
+q <- 0.1
+
+compareDispRes <- function(n, m=0){
+    res <- matrix(NA, nrow = ncol(ret), ncol = length(sDisp))
+    rownames(res) <- colnames(ret)
+    colnames(res) <- names(sDisp)
+    
+    for(d in 1:length(names(sDisp))){
+        for(s in 1:ncol(ret)){
+            dat <- data.frame(disp = sDisp[[d]][2:(nrow(sDisp[[d]])-n+1-m),s+1])
+            for(k in 1:(nrow(ret)-n+1-m)){
+                dat[k,"r"] <- prod(1+ret[(k+m):(k+m+n-1),s])-1
+            }
+            dat <- dat[order(dat$disp),] # ascending by default
+            res[s, d] <- round( mean(dat[1:(q*nrow(dat)),"r"]) - mean(dat[((1-q)*nrow(dat)):nrow(dat), "r"]) , 3)
+        }
+    }
+    return(res)
+}
+```
+
+
+
+### actual dispersion to actual return, no lag
+
+dispersion in connection with return of same period
+
+So I1 seems to be able to predict returns, while P6 does not. 
+
+
+
+```{r}
+res <- compareDispRes(1)
+res
+matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
+```
+
+### actual dispersion to actual return, lag of 1
+
+dispersion in connection with return of same period
+
+
+```{r}
+res <- compareDispRes(1, 1)
+res
+matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
+```
+
+### actual dispersion with future return (n=3), no lag
+
+dispersion of one period with return over next *n* periods (this period up to n-1 period).
+
+```{r}
+res <- compareDispRes(3)
+res
+matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
+
+```
+
+### actual dispersion with future return (n=6), no lag
+
+dispersion of one period with return over next *n* periods (this period up to n-1 period).
+
+```{r}
+res <- compareDispRes(6)
+res
+matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
+```
+
+
+
+```{r}
+rm(q, res, n)
+```
+

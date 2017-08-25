@@ -1,0 +1,198 @@
+---
+title: "Data - Visualization"
+author: "Stefan Glogger"
+date: "21 August 2017"
+output: pdf_document
+---
+
+```{r, include=FALSE}
+source("parameters.R")
+```
+
+```{r, include=FALSE, cache=T, results='hide'}
+knitr::knit_child("20 Data Derivations.Rmd")
+```
+
+# Data Visualization
+
+We visualize the data (stocks and sentix). For consistency, we first specify general parameters on how to display each index and the time periods. 
+
+## overall parameters
+
+### Lines with data
+
+```{r}
+geomLineDataDAX <- function(x){
+    parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = DAX, colour = \"DAX\"))")) 
+}
+geomLineDataTEC <- function(x){
+    parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = TEC, colour = \"TEC\"))"))
+}
+geomLineDataESX50 <- function(x){
+    parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = ESX50, colour = \"ESX50\"))")) 
+}
+geomLineDataSP5 <- function(x){
+    parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = SP5, colour = \"SP5\"))")) 
+}
+geomLineDataNASDAQ <- function(x){
+    parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = NASDAQ, colour = \"NASDAQ\"))"))
+}
+geomLineDataNIKKEI <- function(x){
+    parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = NIKKEI, colour = \"NIKKEI\"))"))
+}
+geomLineDataBUND <- function(x){
+    parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = BUND, colour = \"BUND\"))")) 
+}
+```
+
+
+probierer, funktioniert nicht (wollte alle linien auf einmal plotten)
+```{r, run = FALSE}
+# geomLineData <- function(x){
+#     parse(text = paste0("eval(geomLineDataDAX(\"", x , "\")) + eval(geomLineDataTEC(\"", x , "\"))"))
+# }
+# 
+# ggplot() +
+#     eval(geomLineData("retPlot")) +
+#     eval(geomRectDateLast) +
+#     labs(x = "Time", y = "Value")
+```
+
+
+### Rectangle for Date periods
+
+store as function to keep structure similar to above (and store at same Place in environment)
+
+```{r}
+geomRectDateLast <- function(){
+    parse(text = "geom_rect(aes(xmin = min(datesEvalLast), xmax = max(datesEvalLast), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"orange\")")}
+
+geomRectDateBear <- function(){
+    parse(text = "geom_rect(aes(xmin = min(datesEvalBear), xmax = max(datesEvalBear), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"red\")")}
+
+geomRectDateBull <- function(){
+    parse(text = "geom_rect(aes(xmin = min(datesEvalBull), xmax = max(datesEvalBull), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"green\")")}
+
+geomRectDateTest <- function(){
+    parse(text = "geom_rect(aes(xmin = min(datesTest), xmax = max(datesTest), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"blue\")")}
+```
+
+### Function for plotting
+
+```{r}
+plotData <- function(x, title = "Indices"){
+    ggplot() +
+        eval(geomLineDataDAX(x)) +
+        eval(geomLineDataTEC(x)) +
+        eval(geomLineDataESX50(x)) +
+        eval(geomLineDataNASDAQ(x)) +
+        eval(geomLineDataNIKKEI(x)) +
+        eval(geomLineDataBUND(x)) +
+        eval(geomRectDateLast()) +
+        eval(geomRectDateBear()) +
+        eval(geomRectDateBull()) +
+        eval(geomRectDateTest()) +
+        labs(x = "Time", y = "Value") + 
+        labs(title = title) +
+        theme(plot.title = element_text(hjust = 0.5)) # align title in center
+}
+
+## if a special name is given, take it, otherwise take x (plot sentix by using same dataframe (adopted))
+plotDataPDF <- function(x, xName = x){
+    pdf(file.path(getwd(), "Plot Data", paste0(xName, ".pdf")), width = 10, height = 4)
+    plot(plotData(x))
+    dev.off()
+}
+```
+
+
+## Stocks
+
+Start of with a value of 100 for each stock and then plot the evolvment of this stock.
+
+### plot()
+
+```{r}
+retPlot <- matrix(100, nrow = nrow(stocks), ncol = ncol(stocks)-1)
+retPlot[2:nrow(stocks), ] <- 1+ret # to multiply lateron, we have to add 1
+retPlot <- apply(retPlot, 2, cumprod)
+rownames(retPlot) <- stocks[,1]
+
+xNames <- rownames(retPlot)
+class(xNames) <- "Date"   # convert to date
+
+cols <- rainbow(ncol(retPlot))
+ylim <- c(min(retPlot), max(retPlot))
+plot(xNames, retPlot[,1], type = "l", xlab = "Date", ylab = "Value", main = "Indices over time", 
+     col = cols[1], ylim = ylim)
+for(i in 2:ncol(retPlot)){
+    par(new=T)
+    plot(xNames, retPlot[,i], type = "l", col = cols[i], axes = F, xlab="", ylab="", ylim = ylim)
+}
+legend("topleft", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1)
+
+rm(retPlot, xNames, ylim, i)
+```
+
+### ggplot()
+
+```{r}
+library(ggplot2)
+```
+
+need data frame as input for ggplot
+
+```{r, warning=FALSE}
+retPlot <- matrix(100, nrow = nrow(stocks), ncol = ncol(stocks)-1)
+retPlot[2:nrow(stocks), ] <- 1+ret # to multiply lateron, we have to add 1
+retPlot <- apply(retPlot, 2, cumprod)
+
+retPlot <- as.data.frame(retPlot)
+colnames(retPlot) <- colnames(stocks)[2:ncol(stocks)]
+retPlot$Datum <- stocks[,1]
+class(retPlot$Datum) <- "Date"   # convert to date
+
+cols <- rainbow(ncol(retPlot))
+ylim <- c(min(retPlot[,1:(ncol(retPlot)-1)]), max(retPlot[,1:(ncol(retPlot)-1)]))
+
+
+plotData("retPlot")
+plotDataPDF("retPlot")
+```
+
+
+
+## Dispersion
+
+Graphs can be found in "\\R-Research Project Statistics\\Plot Data".
+
+```{r, warning=FALSE}
+for(i in names(sDisp)){
+    sPlot <- sDisp[[i]]
+    plotDataPDF("sPlot", paste("sDisp", i))
+}
+```
+
+And we provide summary statistics.
+
+```{r}
+lapply(sDisp, function(x) {base::summary(x[,-1], digits = 2)})
+```
+
+
+## Herfindahl
+
+Graphs can be found in "\\R-Research Project Statistics\\Plot Data".
+
+```{r, warning=FALSE}
+for(i in names(sHerf)){
+    sPlot <- sHerf[[i]]
+    plotDataPDF("sPlot", paste("sHerf", i))
+}
+```
+
+And we provide summary statistics.
+
+```{r}
+lapply(sHerf, function(x) {base::summary(x[,-1], digits = 2)})
+```

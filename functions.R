@@ -4,23 +4,23 @@ source("parameters.R")
 
 
 
-# data input of Sentex files
-dataSentex <- function(fileName){
-  temp <- read.csv2(fileName, stringsAsFactors = F)
-  for (i in 2:ncol(temp)){
-    temp[,i] <- as.numeric((temp[,i]))
-  }
-  temp[,1] <- as.Date(temp[,1], format = "%d.%m.%Y")
-  return(temp)
-}
+# # data input of Sentex files
+# dataSentex <- function(fileName){
+#   temp <- read.csv2(fileName, stringsAsFactors = F)
+#   for (i in 2:ncol(temp)){
+#     temp[,i] <- as.numeric((temp[,i]))
+#   }
+#   temp[,1] <- as.Date(temp[,1], format = "%d.%m.%Y")
+#   return(temp)
+# }
 
-# update data
-## take data, reduced dates, indexes where duplicated
-updateDataSentex <- function(dat, dateRed){
-  temp <- dat[dat$Datum %in% dateRed,]
-  temp <- unique(temp)
-  return(temp)
-}
+# # update data
+# ## take data, reduced dates, indexes where duplicated
+# updateDataSentex <- function(dat, dateRed){
+#   temp <- dat[dat$Datum %in% dateRed,]
+#   temp <- unique(temp)
+#   return(temp)
+# }
 
 
 
@@ -28,73 +28,73 @@ updateDataSentex <- function(dat, dateRed){
 
 
 
-# plot index with sentiment
-plotIndexSent <- function(dat){
-  ### in same graph
-  # https://stackoverflow.com/questions/6142944/how-can-i-plot-with-2-different-y-axes
-  
-  pdf(file = paste0(folderPlotIndexSent, "/", deparse(substitute(dat)), ".pdf"), 
-      width = 12, height = 8)
-  
-  # parameter for second y-axis (for sentiment)
-  ylim2 = c(0.3, 0.9)
-  # add extra space to right margin of plot within frame
-  par(mar=c(5, 4, 4, 5) + 0.1)
-  
-  plot(dat$Datum, dat$Index, type = "l", xlab = "Date", ylab = "Index",  lwd = 2)
-  par(new=T)
-  plot(dat$Datum, dat$Sent_Is, type = "l",  axes = F, 
-       xlab="", ylab="", col = "red", ylim = ylim2)
-  par(new=T)
-  plot(dat$Datum, dat$Sent_Ps, type = "l",  axes = F, 
-       xlab="", ylab="", col = "blue", ylim = ylim2)
-  
-  title(deparse(substitute(dat)))
-  legend("topleft",legend=c("Index","Is", "Ps"),
-         text.col=c("black","red", "blue"),lty=c(1,1,1),col=c("black","red", "blue"))
-  axis(side=4, at = pretty(ylim2))
-  mtext("Sentiment",side=4,line=3) 
-  
-  dev.off()
-}
-
-
-# Optimization ------------------------------------------------------------
-
-
-# ** Upgrade Sentex Data --------------------------------------------------
-
-# library(FSelector) # to generate formula easily
-
-### developped further to regSent
-# dispersionSent <- function(dat){
-#   temp <- dat
+# # plot index with sentiment
+# plotIndexSent <- function(dat){
+#   ### in same graph
+#   # https://stackoverflow.com/questions/6142944/how-can-i-plot-with-2-different-y-axes
 #   
-#   for(i in 1:nrow(dat)){
-#     for(k in colnames(dat)){
-#       # generate formula (regress one column on all the others while using all the previous data (including today))
-#       form <- as.simple.formula(setdiff(colnames(dat), k), k)
-#       temp[i, k] <- unname(lm(form, data = dat[1:i,])$coefficients[1])
-#     }
-#   }
+#   pdf(file = paste0(folderPlotIndexSent, "/", deparse(substitute(dat)), ".pdf"), 
+#       width = 12, height = 8)
 #   
-#   return(temp)
+#   # parameter for second y-axis (for sentiment)
+#   ylim2 = c(0.3, 0.9)
+#   # add extra space to right margin of plot within frame
+#   par(mar=c(5, 4, 4, 5) + 0.1)
+#   
+#   plot(dat$Datum, dat$Index, type = "l", xlab = "Date", ylab = "Index",  lwd = 2)
+#   par(new=T)
+#   plot(dat$Datum, dat$Sent_Is, type = "l",  axes = F, 
+#        xlab="", ylab="", col = "red", ylim = ylim2)
+#   par(new=T)
+#   plot(dat$Datum, dat$Sent_Ps, type = "l",  axes = F, 
+#        xlab="", ylab="", col = "blue", ylim = ylim2)
+#   
+#   title(deparse(substitute(dat)))
+#   legend("topleft",legend=c("Index","Is", "Ps"),
+#          text.col=c("black","red", "blue"),lty=c(1,1,1),col=c("black","red", "blue"))
+#   axis(side=4, at = pretty(ylim2))
+#   mtext("Sentiment",side=4,line=3) 
+#   
+#   dev.off()
 # }
-
-### take data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
-regSent <- function(dat, consider = 50){
-    temp <- dat
-    
-    for(i in 1:nrow(dat)){
-        for(k in colnames(dat)){
-            # generate formula (regress one column on all the others while using 'consider' previous points)
-            form <- as.simple.formula(setdiff(colnames(dat), k), k)
-            temp[i, k] <- unname(lm(form, data = dat[max((i-consider),1):i,])$coefficients[1])
-        }
-    }
-    
-    return(temp)
-}
+# 
+# 
+# # Optimization ------------------------------------------------------------
+# 
+# 
+# # ** Upgrade Sentex Data --------------------------------------------------
+# 
+# # library(FSelector) # to generate formula easily
+# 
+# ### developped further to regSent
+# # dispersionSent <- function(dat){
+# #   temp <- dat
+# #   
+# #   for(i in 1:nrow(dat)){
+# #     for(k in colnames(dat)){
+# #       # generate formula (regress one column on all the others while using all the previous data (including today))
+# #       form <- as.simple.formula(setdiff(colnames(dat), k), k)
+# #       temp[i, k] <- unname(lm(form, data = dat[1:i,])$coefficients[1])
+# #     }
+# #   }
+# #   
+# #   return(temp)
+# # }
+# 
+# ### take data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+# regSent <- function(dat, consider = 50){
+#     temp <- dat
+#     
+#     for(i in 1:nrow(dat)){
+#         for(k in colnames(dat)){
+#             # generate formula (regress one column on all the others while using 'consider' previous points)
+#             form <- as.simple.formula(setdiff(colnames(dat), k), k)
+#             temp[i, k] <- unname(lm(form, data = dat[max((i-consider),1):i,])$coefficients[1])
+#         }
+#     }
+#     
+#     return(temp)
+# }
 
 ### input:  data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
 ###         days to consider
