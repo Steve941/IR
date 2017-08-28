@@ -97,6 +97,6 @@ matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)
 
 
 ```{r}
-rm(q, res, n)
+rm(q, res)
 ```
 

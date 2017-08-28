@@ -241,7 +241,7 @@ We furthermore define a test period to determine the optimal weights of the goal
 ```{r}
 startDateTest <- 50
 timeBefore <- 50
-(startEvalTime <- which(datesAll == min(c(min(datesEvalBear), min(datesEvalBull), min(datesEvalLast)))))
+( startEvalTime <- which(datesAll == min(c(min(datesEvalBear), min(datesEvalBull), min(datesEvalLast)))) )
 
 datesTest <- rownames(ret)[startDateTest:(startEvalTime-timeBefore)]
 class(datesTest) <- "Date"
@@ -265,7 +265,7 @@ remove variables
 ```{r}
 rm(l, i)
 rm(retWindow, retTotal)
-rm(iMin, iMax, startDateTest)
+rm(iMin, iMax, startDateTest, startEvalTime, timeBefore)
 ```
 
 # TODO further consideration

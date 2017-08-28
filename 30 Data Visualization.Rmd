@@ -21,7 +21,13 @@ We visualize the data (stocks and sentix). For consistency, we first specify gen
 
 ### Lines with data
 
+TODO: environments in R, plug functions into environments to keep structure
+<http://adv-r.had.co.nz/Environments.html>
+
+
 ```{r}
+ePlot <- new.env()
+
 geomLineDataDAX <- function(x){
     parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = DAX, colour = \"DAX\"))")) 
 }
@@ -43,6 +49,8 @@ geomLineDataNIKKEI <- function(x){
 geomLineDataBUND <- function(x){
     parse(text = paste0("geom_line(data = ", x, ", aes(x = Datum, y = BUND, colour = \"BUND\"))")) 
 }
+
+ls.str(envir = ePlot)
 ```
 
 

@@ -227,8 +227,9 @@ unname((c*r^2 - 2*a*r + b)/(a-c*r)^2)
 ### cleanup
 
 ```{r}
-rm(a, anCRisky1, b, c, d, elWith, elWithout, i, k, K, mvRandom, r, retPlot, sPlot, x, ylim)
-rm(anC, anCOpt, anCRisky, anRet, anRetRisky, CRisky, xMarket, anMuRisky, muRisky)
+rm(a, anCRisky1, b, c, d, elWith, elWithout, i, k, K, mvRandom, r, x)
+rm(anC, anCRisky, anRet, anRetRisky, CRisky, xMarket, anMuRisky, muRisky, retRisky, xMVPwithoutRF)
+rm(compareDispRes)
 ```
 
 
@@ -247,13 +248,6 @@ We use several packages for the optimization.
 library(Rdonlp2)
 ```
 
-
-```{r}
-# library(Rdonlp2) ## needed for donlp2NLP
-# library(fPortfolio)
-# library(FRAPO) ## mrc (package of Pfaff)
-# library(mco) ## mrc
-```
 
 Setup Grid. Take care that weights sum up to 1, each weight is at least *wmin* and at most *wmax*.
 
@@ -356,7 +350,7 @@ if(Sys.getenv("USERNAME") == "Stefan"){
 xDispConstTest <- list()
 
 registerDoSNOW(cl)
-xDispConstTest <- foreach(t = datesTestNames, .export = c(datesTestNames), .packages = c("Rdonlp2")) %do%{
+xDispConstTest <- foreach(t = datesTestNames, .export = c(datesTestNames), .packages = c("Rdonlp2")) %dopar%{
     L <- list()
     timeInd <- which(datesAll == min(get(t)))-1 ## one day before start of time window
     
@@ -417,7 +411,7 @@ PROBLEM: from *t=1* to *t=50*, we have negative returns of the stocks, therefore
 
 
 ```{r}
-rm(muTest, sigmaTest, rf)
+rm(temp, cl)
 ```
 
 
@@ -451,7 +445,7 @@ xDispVarTest <- list()
 
 for(t in datesTestNames){
     
-    xDispVarTest[[t]] <- foreach(i = names(sDisp)[1], .export = c(datesTestNames), .packages = c("Rdonlp2")) %dopar%{
+    xDispVarTest[[t]] <- foreach(i = names(sDisp), .export = c(datesTestNames), .packages = c("Rdonlp2")) %dopar%{
         L <- list()
         
         for(weightInd in 1:nrow(grid)){
@@ -480,7 +474,7 @@ for(t in datesTestNames){
             tim[1] <- as.numeric(erg$elapsed)
             ### -------------------
             
-            for(j in 1:(length(get(t))-1)){
+            for(j in 2:(length(get(t))-1)){
                 tInd <- which(datesAll == get(t)[j])
                 retOpt <- ret[(tInd-k+1):tInd,]
                 anMuOpt <- (1+colMeans(retOpt))^52-1
@@ -503,6 +497,7 @@ for(t in datesTestNames){
     names(xDispVarTest[[t]]) <- names(sDisp)
 }
 
+stopCluster(cl)
 ```
 
 
