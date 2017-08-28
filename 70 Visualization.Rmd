@@ -92,7 +92,7 @@ retOverTime[j-1,] take return of today (j is one step ahead)
 Remove numbering of x-axis by *xaxt='n'*.
 
 ```{r}
-for(d in datesNames){
+for(d in datesEvalNames){
     cols <- rainbow(length(xClassicConst[[d]]))
     retOverTime <- 1+ret[get(d),]
     retPlotDates <- get(d)

@@ -252,8 +252,13 @@ length(datesTest)
 #### cleanup
 
 ```{r}
-datesNames <- c(deparse(substitute(datesEvalBear)), deparse(substitute(datesEvalBull)), deparse(substitute(datesEvalLast)))
+datesEvalNames <- c(deparse(substitute(datesEvalBear)), deparse(substitute(datesEvalBull)), deparse(substitute(datesEvalLast)))
 ```
+
+```{r}
+datesTestNames <- c(deparse(substitute(datesTest)))
+```
+
 
 
 remove variables

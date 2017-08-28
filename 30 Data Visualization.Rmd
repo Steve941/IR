@@ -158,6 +158,8 @@ ylim <- c(min(retPlot[,1:(ncol(retPlot)-1)]), max(retPlot[,1:(ncol(retPlot)-1)])
 
 plotData("retPlot")
 plotDataPDF("retPlot")
+
+rm(retPlot, cols, ylim)
 ```
 
 
@@ -171,6 +173,7 @@ for(i in names(sDisp)){
     sPlot <- sDisp[[i]]
     plotDataPDF("sPlot", paste("sDisp", i))
 }
+rm(sPlot, i)
 ```
 
 And we provide summary statistics.
@@ -189,6 +192,7 @@ for(i in names(sHerf)){
     sPlot <- sHerf[[i]]
     plotDataPDF("sPlot", paste("sHerf", i))
 }
+rm(sPlot, i)
 ```
 
 And we provide summary statistics.
