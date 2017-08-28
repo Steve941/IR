@@ -497,6 +497,8 @@ for(t in datesTestNames){
     names(xDispVarTest[[t]]) <- names(sDisp)
 }
 
+saveRDS(xDispVarTest, file = file.path(getwd(), "Optimization", paste0("EDispersionMinVaryingTest_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+
 stopCluster(cl)
 ```
 
