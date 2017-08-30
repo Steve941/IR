@@ -711,7 +711,7 @@ xSentixVarying <- list()
 
 registerDoSNOW(cl)
 for(t in datesEvalNames){
-    timeInd <- datesAll[which(datesAll == min(get(t)))-1] ## one day before start of time window
+    # timeInd <- datesAll[which(datesAll == min(get(t)))-1] ## one day before start of time window ### not used any more, as we move up to actual date
     
     xSentixVarying[[t]] <- foreach(i = names(sDisp), .export = c(datesEvalNames), .packages = c("Rdonlp2")) %dopar%{
         L <- list()
@@ -787,7 +787,7 @@ We also do some classical portfolio optimization, namely
 6. & ew & own & equal weight
 \end{tabular}
 
-safe results in *xClassic* in an anolous manner to above 
+safe results in *xClassicConst* in an anolous manner to above 
 
 time window -> portfolio optimizing -> weights of assets
 
@@ -838,12 +838,81 @@ for(t in datesEvalNames){
 
 
 
-### TODO different portfolio weights over time window
+### different portfolio weights over time window
 
 IDEA: look at portfolio-rollingPortfolios {fPortfolio}
 
 
 manually rolling
+
+safe results in *xClassicVar* in an anolous manner to above 
+
+time window -> portfolio (classic) -> weights of assets
+
+NOTE: change the weights of the test data, if different test time windows are used to get weights for different eval time weights
+
+We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual dispersion.
+
+
+
+
+```{r}
+k <- 50
+
+xClassicVar <- list()
+
+# convert rownames back to date format (character!)
+t <- rownames(ret) 
+class(t) <- "Date"
+rdatTimeSource <- timeSeries(ret, charvec = as.character(t))
+
+# equal weights to start with (maybe)
+ew <- rep(1/ncol(ret), ncol(ret))
+
+for(timeWindowName in datesEvalNames){
+    datesEvalNow <- get(timeWindowName)
+    
+    mat <- matrix(NA, nrow = (length(datesEvalNow)-1), ncol = ncol(rdatTimeSource))
+    colnames(mat) <- colnames(ret)
+    rownames(mat) <- datesEvalNow[1:(length(datesEvalNow)-1)]
+    
+    xClassicVar[[timeWindowName]][["tanPort"]]$x <- mat
+    xClassicVar[[timeWindowName]][["mVaPort"]]$x <- mat 
+    xClassicVar[[timeWindowName]][["rp"]]$x <- mat 
+    xClassicVar[[timeWindowName]][["PGMV"]]$x <- mat 
+    xClassicVar[[timeWindowName]][["PMD"]]$x <- mat 
+    xClassicVar[[timeWindowName]][["ew"]]$x <- mat 
+    
+    for(d in 1:(length(datesEvalNow)-1)){ # last date no portfolio weights
+        
+        timeEndInd <- which(datesAll == datesEvalNow[d]) ## one day before start of time window => NO, we can go up to the date
+        timeEnd <- datesAll[timeEndInd]
+        timeStart <- datesAll[timeEndInd-k+1]
+
+        rdatTime <- timeSeries::window(rdatTimeSource, start = timeStart, end = timeEnd) # note: first day is missing as returns miss first day of datesAll (naturally as no return at start)
+        
+        ans <- tangencyPortfolio(rdatTime)
+        xClassicVar[[timeWindowName]][["tanPort"]]$x[d,] <- getWeights(ans)
+        
+        ans <- minvariancePortfolio(rdatTime)
+        xClassicVar[[timeWindowName]][["mVaPort"]]$x[d,] <- getWeights(ans)
+        
+        C <- cov(rdatTime)
+        ans <- rp(ew, C, ew, optctrl = ctrl(trace = FALSE)) 
+        xClassicVar[[timeWindowName]][["rp"]]$x[d,] <- c(getx(ans))
+        
+        ans <- PGMV(rdatTime, optctrl = ctrl(trace = FALSE))
+        xClassicVar[[timeWindowName]][["PGMV"]]$x[d,] <- Weights(ans) / 100
+        
+        ans <- PMD(rdatTime, optctrl = ctrl(trace = FALSE))
+        xClassicVar[[timeWindowName]][["PMD"]]$x[d,] <- Weights(ans) / 100
+        
+        xClassicVar[[timeWindowName]][["ew"]]$x[d,] <- ew
+    }
+}
+```
+
+
 
 ```{r, results='hide', eval=FALSE}
 

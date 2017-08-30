@@ -16,6 +16,176 @@ knitr::knit_child("50 Optimization.Rmd")
 
 # Visualization
 
+## Functions
+
+### Evaluation of Varying Portfolio
+
+We want to visualize the evolvement of a portfolio over each time window.
+
+Be aware of the index shifting:
+retPlot[j-1, i] take wealth of previous day
+retOverTime[j-1,] take return of today (j is one step ahead)
+
+Remove numbering of x-axis by *xaxt='n'*.
+
+Generate *retPortSentixVarying*, the returns of portfolios with varying portfolio weights using sentix as third factor with optimal weights. It has the following structure:
+
+time window -> dispersion (sentixGroup) -> return of Portfolio, sharpe ratio
+
+R: return of portfolio on each date
+r: mean return of portfolio over whole time window
+sd: standard deviation of return of portfolio over whole time window
+sr: sharpe ratio (weekly)
+anR: annualized return of portfolio over whole time window
+anSd: annualized standard deiation
+anSR: sharpe ratio (annual)
+fweight: mean of goal function value
+
+Use an adoption of *calcTestVar()*
+
+difference in function is that fweight is not there for classic portfolios
+```{r}
+calcEvalVarSentix <- function(dat){
+    res <- calcEvalVarClassic(dat)
+    for(timeWindowName in names(dat)){
+        for(portfolioName in names(dat[[timeWindowName]])){
+            fweight = mean(dat[[timeWindowName]][[portfolioName]]$obj)
+            res[[timeWindowName]][[portfolioName]]$fweight <- fweight
+        }
+    }
+    return(res)
+}
+```
+
+```{r}
+calcEvalVarClassic <- function(dat){
+    res <- list()
+    for(timeWindowName in names(dat)){
+        timeWindow <- get(timeWindowName)
+        retTimeWindow <- ret[timeWindow,]
+        retTimeWindow <- retTimeWindow[-1,]
+        colnames(retTimeWindow) <- colnames(ret)
+        
+        rf <- mean(retTimeWindow[,"BUND"])
+        
+        for(portfolioName in names(dat[[timeWindowName]])){
+            
+            
+            R <- rowSums(dat[[timeWindowName]][[portfolioName]]$x * retTimeWindow)
+            
+            r <- mean(R)
+            sd <- sd(R)
+            
+            anR <- (1+r)^52-1
+            anSd <- sqrt((sd^2)*52)
+            
+            
+            res[[timeWindowName]][[portfolioName]] <- list(R = R, r = r, sd = sd, sr = r/sd,
+                                                                           anR = anR, anSd = anSd, anSR = anR/anSd)
+            
+        }
+    }
+    return(res)
+}
+```
+
+### plot performance
+
+We now optimize the plotting for ggplot(). (DOESN'T WORK)
+
+Therefore our dataframe to plot should have the following structure:
+date: Date
+value: worth of Portfolio
+portfolio: Portfolio (SentixGroup)
+
+first in separate list, then in one dataframe
+
+NOTE: returns occur one date later as stated here (in the data)
+
+
+There has been an issue with *date*. It is getted as character and we need to transform it to integer and then back to date to store date as a numeric value (formatted as a date) and then used as x-axis
+
+```{r}
+plotPortfolio <- function(data, timeWindowName){
+    datWork <- data[[timeWindowName]]
+    timeWindow <- get(timeWindowName)
+    
+    retPlot <- data.frame(date = as.integer(as.Date(get(timeWindowName))))# date is read as character, we need double to plot for x-axis
+    class(retPlot$date) <- "Date"
+    
+    for(s in names(datWork)){
+        ret <- cumprod(1+datWork[[s]]$R)
+        retPlot[[s]] <- c(100, 100*ret)
+    }
+
+    
+    ggplot(retPlot, aes(x=date))+
+        geom_line(aes(y=retPlot[,2], color = colnames(retPlot)[2]))
+    
+    
+    plotCommand <- paste0(text = "ggplot(retPlot, aes(x=date))+")
+    for (i in 2:(ncol(retPlot)-1)){
+        plotCommand <- paste0(plotCommand, "geom_line(aes(y=retPlot[,",i,"], color = colnames(retPlot)[",i,"])) + ")
+    }
+    plotCommand <- paste0(plotCommand, "geom_line(aes(y=retPlot[,",ncol(retPlot),"], color = colnames(retPlot)[",ncol(retPlot),"])) ")
+    
+    eval(parse(text = plotCommand))+  
+        labs(title = paste("Time:", timeWindowName),
+             y = "Value",
+             x = "Date") +
+        scale_color_discrete(name = "Index")
+}
+
+```
+
+### change of weights
+
+```{r}
+plotWeightsLines <- function(datName, d, s){
+    dat <- datName[[d]][[s]]$x
+    dat <- as.data.frame(dat)
+    dat$date <- as.Date(rownames(dat))
+    
+    plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
+    for(i in 1:(ncol(dat)-2)){
+        plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
+    }
+    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-1,"], color = colnames(dat)[", ncol(dat)-1, "]))")
+        
+    eval(parse(text = plotCommand))+
+        labs(title = paste("Time:", d),
+             subtitle = paste("Portfolio:", s),
+             y = "Weight",
+             x = "Date") +
+        scale_color_discrete(name = "Index")
+}
+```
+
+### summary statistics
+
+print the summary (in matrix to pass it on to LaTeX-Table lateron)
+
+```{r}
+summaryClassic <- function(datName, d, roundTo = 2){
+    dat <- datName[[d]]
+    
+    mat <- matrix(NA, nrow = 3, ncol = length(dat))
+    rownames(mat) <- c("Mean Return (an)", "Volatility (an)", "Sharpe Ratio (an)")
+    colnames(mat) <- names(dat)
+    
+    for(sInd in 1:length(dat)){
+        mat[1,sInd] <- round(dat[[sInd]]$anR, roundTo)
+        mat[2,sInd] <- round(dat[[sInd]]$anSd, roundTo)
+        mat[3,sInd] <- round(dat[[sInd]]$anSR, roundTo)
+    }
+    return(mat)
+}
+```
+
+
+
+
+
 ## One Dispersion, different weights
 
 We visualize the different portfolio returns of each time window of each dispersion in a histogram.
@@ -127,6 +297,42 @@ for(d in datesEvalNames){
 }
 ```
 
+### Varying of portfolio weights
+
+#### change of portfolio weights
+
+
+```{r}
+for(d in datesEvalNames){
+    for(s in names(xClassicVar[[d]])){
+        # plotWeightsLines(xClassicVar, d, s)
+        
+        pdf(file.path(getwd(), "Plot", paste0("Weights Classic-", d,"-", s, ".pdf")), width = 10, height = 4)
+        plot(plotWeightsLines(xClassicVar, d, s))
+        dev.off()
+    }
+}
+```
+
+
+#### performance of portfolio
+
+```{r}
+retPortClassicVarying <- calcEvalVarClassic(xClassicVar)
+```
+
+```{r}
+for(d in datesEvalNames){
+    plotPortfolio(retPortClassicVarying, d)
+    
+    pdf(file.path(getwd(), "Plot", paste0("Performance-Classic-", d, ".pdf")), width = 10, height = 4)
+    plot(plotPortfolio(retPortClassicVarying, d))
+    dev.off()
+}
+```
+
+
+
 ## Sentix Optimization
 
 ### Change of Portfolio weights
@@ -170,26 +376,7 @@ plotWeightsArea(xSentixVarying[["datesEvalBear"]][["P1"]])
 As the area might be a bit complicated to understand (just the visible height of the area matters, not the absolute maximal y value), we use a line plot for visualization.
 
 ```{r}
-plotWeightsLines <- function(datName, d, s){
-    dat <- datName[[d]][[s]]$x
-    rn <- rownames(dat)
-    dat <- as.data.frame(dat)
-    dat$date <- as.Date(rownames(dat))
-    
-    ggplot(dat, aes(x=date)) +
-        geom_line(aes(y=dat[,7], color = colnames(dat)[7])) +
-        geom_line(aes(y=dat[,6], color = colnames(dat)[6])) +
-        geom_line(aes(y=dat[,5], color = colnames(dat)[5])) +
-        geom_line(aes(y=dat[,4], color = colnames(dat)[4])) +
-        geom_line(aes(y=dat[,3], color = colnames(dat)[3])) +
-        geom_line(aes(y=dat[,2], color = colnames(dat)[2])) +
-        geom_line(aes(y=dat[,1], color = colnames(dat)[1])) +
-        labs(title = paste("Time:", d),
-             subtitle = paste("SentixGroup:", s),
-             y = "Weight",
-             x = "Date") +
-        scale_color_discrete(name = "Index")
-}
+plotWeightsLines
 ```
 
 ```{r}
@@ -197,191 +384,62 @@ for(d in datesEvalNames){
     for(s in names(xSentixVarying[[d]])){
         # plotWeightsLines(xSentixVarying, d, s)
         
-        pdf(file.path(getwd(), "Plot", paste0("Weights-", d,"-", s, ".pdf")), width = 10, height = 4)
+        pdf(file.path(getwd(), "Plot", paste0("Weights Sentix-", d,"-", s, ".pdf")), width = 10, height = 4)
         plot(plotWeightsLines(xSentixVarying, d, s))
         dev.off()
     }
 }
 ```
 
+
+
 ### Resulting Portfolios
 
-We want to visualize the evolvement of a portfolio over each time window.
-
-Be aware of the index shifting:
-retPlot[j-1, i] take wealth of previous day
-retOverTime[j-1,] take return of today (j is one step ahead)
-
-Remove numbering of x-axis by *xaxt='n'*.
-
-Generate *retPortSentixVarying*, the returns of portfolios with varying portfolio weights using sentix as third factor with optimal weights. It has the following structure:
-
-time window -> dispersion (sentixGroup) -> return of Portfolio, sharpe ratio
-
-R: return of portfolio on each date
-r: mean return of portfolio over whole time window
-sd: standard deviation of return of portfolio over whole time window
-sr: sharpe ratio (weekly)
-anR: annualized return of portfolio over whole time window
-anSd: annualized standard deiation
-anSR: sharpe ratio (annual)
-fweight: mean of goal function value
-
-Use an adoption of *calcTestVar()*
 
 ```{r}
-calcEvalVar <- function(dat){
-    res <- list()
-    for(timeWindowName in names(dat)){
-        timeWindow <- get(timeWindowName)
-        retTimeWindow <- ret[timeWindow,]
-        retTimeWindow <- retTimeWindow[-1,]
-        colnames(retTimeWindow) <- colnames(ret)
-        
-        rf <- mean(retTimeWindow[,"BUND"])
-        
-        for(sentixGroupName in names(dat[[timeWindowName]])){
-            
-            
-            R <- rowSums(dat[[timeWindowName]][[sentixGroupName]]$x * retTimeWindow)
-            
-            r <- mean(R)
-            sd <- sd(R)
-            
-            anR <- (1+r)^52-1
-            anSd <- sqrt((sd^2)*52)
-            
-            fweight = mean(dat[[timeWindowName]][[sentixGroupName]]$obj)
-            
-            res[[timeWindowName]][[sentixGroupName]] <- list(R = R, r = r, sd = sd, sr = r/sd,
-                                                                           anR = anR, anSd = anSd, anSR = anR/anSd,
-                                                                           fweight = fweight)
-            
-        }
-    }
-    return(res)
-}
+retPortSentixVarying <- calcEvalVarSentix(xSentixVarying)
 ```
-
-
-```{r}
-retPortSentixVarying <- calcEvalVar(xSentixVarying)
-```
-
-We now optimize the plotting for ggplot().
-
-DOESN'T WORK
-
-Therefore our dataframe to plot should have the following structure:
-date: Date
-value: worth of Portfolio
-portfolio: Portfolio (SentixGroup)
-
-first in separate list, then in one dataframe
-
-NOTE: returns occur one date later as stated here (in the data)
-
-```{r}
-plotPortfolio <- function(dat, timeWindowName){
-    datWork <- dat[[timeWindowName]]
-    timeWindow <- get(timeWindowName)
-    retTemp <- list()
-    
-    retPlot <- data.frame(date = get(timeWindowName))
-    
-    
-    
-    for(s in names(datWork)){
-        ret <- cumprod(1+datWork[[s]]$R)
-        retPlot[[s]] <- c(100, 100*ret)
-    }
-    retPlot$date <- as.Date(retPlot$date)
-    
-    for(s in names(datWork)){
-        retTemp[[s]] <- data.frame(date = get(timeWindowName)[1])
-        retTemp[[s]]$value <- as.numeric(100.0)
-        retTemp[[s]]$portfolio <- as.character(names(datWork)[1])
-        
-        for(j in 1:length(datWork[[s]]$R)){
-            retTemp[[s]] <- rbind(retTemp[[s]], list(timeWindow[j+1], unlist(retTemp[[s]][j,"value"]*(1+datWork[[s]]$R[j])), s))
-        }
-    }
-    retPlot <- retTemp[[1]]
-    for(j in 2:length(retTemp)){
-        retPlot <- rbind(retPlot, retTemp[[j]])
-    }
-    retPlot$Datum <- as.Date(retPlot$date)
-    retPlot$DatumInt <- as.integer(retPlot$date)
-    
-    ggplot(retPlot, aes(x=DatumInt)) +
-        geom_line(aes(y=retPlot[,7], color = colnames(retPlot)[7])) +
-        geom_line(aes(y=retPlot[,6], color = colnames(retPlot)[6])) +
-        geom_line(aes(y=retPlot[,5], color = colnames(retPlot)[5])) +
-        geom_line(aes(y=retPlot[,4], color = colnames(retPlot)[4])) +
-        geom_line(aes(y=retPlot[,3], color = colnames(retPlot)[3])) +
-        geom_line(aes(y=retPlot[,2], color = colnames(retPlot)[2])) +
-        labs(title = paste("Time:", timeWindowName),
-             y = "Value",
-             x = "Date") +
-        scale_color_discrete(name = "Index")
-}
-
-```
-
-```{r}
-plotPortfolio <- function(dat, timeWindowName){
-    datWork <- dat[[timeWindowName]]
-    timeWindow <- get(timeWindowName)
-    
-    
-    
-    ggplot(retPlot, aes(x=date)) +
-        geom_line()
-}
-```
-
-
-
-
-
-
 
 ```{r}
 for(d in datesEvalNames){
     plotPortfolio(retPortSentixVarying, d)
-}
-
-for(d in datesEvalNames){
-    cols <- rainbow(length(xClassicConst[[d]]))
-    retOverTime <- 1+ret[get(d),]
-    retPlotDates <- get(d)
-    retPlotDates <- c(datesAll[which(datesAll==min(retPlotDates))-1], retPlotDates)
-    retPlot <- data.frame(Datum = retPlotDates)
     
-    for(i in names(xClassicConst[[d]])){
-        retPlot[1,i] <- 100
-        for(j in 2:nrow(retPlot)){
-            retPlot[j,i] <- retPlot[j-1,i]*crossprod(xClassicConst[[d]][[i]], retOverTime[j-1,])
-        }
-    }
-    
-    ylim = c(min(retPlot[,-1]), max(retPlot[,-1]))
-    plot(retPlot[,2], type = "l", ylim = ylim, col = cols[1], main = d, xlab = "Date", ylab = "Value", xaxt='n')
-    for(i in 3:ncol(retPlot)){
-        par(new=T)
-        plot(retPlot[,i], type = "l", ylim = ylim, axes = F, xlab = "", ylab = "", col = cols[i-1])
-    }
-    axis(1, at = c(0, 10, 20, 30, 40, 50), labels = retPlot[c(0, 10, 20, 30, 40, 50)+1,1])
-    legend("bottomright", legend = names(xClassicConst[[d]]), col = cols, lty = 1)
-    
-    pdf(file.path(getwd(), "Plot Optimization", "Classical Const", paste0(d, ".pdf")), width = 10, height = 8)
-    plot(retPlot[,2], type = "l", ylim = ylim, col = cols[1], main = d, xlab = "Date", ylab = "Value", xaxt='n')
-    for(i in 3:ncol(retPlot)){
-        par(new=T)
-        plot(retPlot[,i], type = "l", ylim = ylim, axes = F, xlab = "", ylab = "", col = cols[i-1])
-    }
-    axis(1, at = c(0, 10, 20, 30, 40, 50), labels = retPlot[c(0, 10, 20, 30, 40, 50)+1,1])
-    legend("bottomright", legend = names(xClassicConst[[d]]), col = cols, lty = 1)
+    pdf(file.path(getwd(), "Plot", paste0("Performance-Sentix-", d, ".pdf")), width = 10, height = 4)
+    plot(plotPortfolio(retPortSentixVarying, d))
     dev.off()
+}
 ```
 
+
+
+## All together
+
+### Performance
+
+```{r}
+retAllVarying <- retPortClassicVarying
+for(timeWindowName in names(retAllVarying)){
+    retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortSentixVarying[[timeWindowName]])
+}
+```
+
+```{r}
+for(d in datesEvalNames){
+    plotPortfolio(retAllVarying, d)
+    
+    pdf(file.path(getwd(), "Plot", paste0("Performance-All-", d, ".pdf")), width = 10, height = 4)
+    plot(plotPortfolio(retAllVarying, d))
+    dev.off()
+}
+```
+
+
+### Summary Statistics
+
+```{r}
+for(d in datesEvalNames){
+    print(d)
+    print(summaryClassic(retAllVarying, d, 2))
+    cat("\n\n")
+}
+```

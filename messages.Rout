@@ -101,3 +101,20 @@ Error in FUN(X[[i]], ...) : object 'Datum' not found
 Error: geom_line requires the following missing aesthetics: y
 Error: Discrete value supplied to continuous scale
 Error: Invalid input: date_trans works with objects of class Date only
+Error in as.Date.numeric(retPlot$date) : 'origin' muss angegeben werden
+Error in file(filename, "r") : cannot open the connection
+Error in file(filename, "r") : cannot open the connection
+Error in parse(text = plotCommand) : <text>:2:0: unexpected end of input
+1: lot)[3])) +geom_line(aes(y=retPlot[,4], color = colnames(retPlot)[4])) +geom_line(aes(y=retPlot[,5], color = colnames(retPlot)[5])) +geom_line(aes(y=retPlot[,6], color = colnames(retPlot)[6]))
+   ^
+Error in parse(text = paste0(plotCommand, "labs(y = \"Value\", x = \"Date\"")) : 
+  <text>:2:0: unexpected end of input
+1: etPlot[,4], color = colnames(retPlot)[4])) +geom_line(aes(y=retPlot[,5], color = colnames(retPlot)[5])) +geom_line(aes(y=retPlot[,6], color = colnames(retPlot)[6])) +geom_line(aes(y=retPlot[,7
+   ^
+Error in parse(text = paste0(plotCommand, "labs(y = \"Value\", x = \"Date\"")) : 
+  <text>:2:0: unexpected end of input
+1: etPlot[,4], color = colnames(retPlot)[4])) +geom_line(aes(y=retPlot[,5], color = colnames(retPlot)[5])) +geom_line(aes(y=retPlot[,6], color = colnames(retPlot)[6])) +geom_line(aes(y=retPlot[,7
+   ^
+Error in file(filename, "r") : cannot open the connection
+In addition: Warning message:
+In file(filename, "r") : cannot open file 'eval': No such file or directory
