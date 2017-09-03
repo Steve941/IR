@@ -5,10 +5,6 @@ date: "August 2017"
 output: pdf_document
 ---
 
-```{r, include=FALSE}
-source("parameters.R")
-```
-
 
 # Data Import
 
@@ -16,9 +12,10 @@ We import the sentiment data. We also import the prices of each index over the r
 
 ## Sentix
 
-Read the raw sentiment data and save it in the list *sentixRaw* with each list element containing the results of the survey for the different indices. As the number of rows (dates of observation) in data differ, we extract the unique dates (*datesSentix*) and reduce the data to it. We also determine *dateMin* and *dateMax*, which we use lateron to get the stock data.
+Read the raw sentiment data and save it in the list *sentixRaw* with each list element containing the results of the survey for the different indices. As the number of rows (dates of observation) in data differ, we extract the unique dates (*datesSentix*) and reduce the data to it. We also determine *min(datesSentix)* and *max(datesSentix)*, which we use lateron to get the stock data.
 
 ```{r}
+# install.packages("openxlsx")
 library(openxlsx)
 ```
 
@@ -52,9 +49,6 @@ for(i in names(sentixRaw)){
   sentixRaw[[i]] <- unique(sentixRaw[[i]])
 }
 unlist(lapply(sentixRaw, nrow))
-
-(dateMin <- min(datesSentix))
-(dateMax <- max(datesSentix))
 ```
 
 
@@ -66,7 +60,7 @@ detach("package:openxlsx", unload = T)
 
 ## Stocks
 
-We take data mainly from Yahoo Finance. We take closing course from *dateMin* to *dateMax* for several indexes and store in the data frame *stocks* the closing stock price at each date of the sentiment data (*datesSentix*).
+We take data mainly from Yahoo Finance. We take closing course from *min(datesSentix)* to *max(datesSentix)* for several indexes and store in the data frame *stocks* the closing stock price at each date of the sentiment data (*datesSentix*).
 
 We take the following as sources of the data:
 
@@ -91,7 +85,7 @@ stocks <- data.frame(Datum = datesSentix)
 
 # DAX
 dax <- new.env()
-getSymbols("^GDAXI", env = dax, src = "yahoo", from = dateMin, to = dateMax)
+getSymbols("^GDAXI", env = dax, src = "yahoo", from = min(datesSentix), to = max(datesSentix))
 DAX <- data.frame(dax$GDAXI[datesSentix,"GDAXI.Close"])
 colnames(DAX) <- "Close" # somehow the column name cannot be given directly
 DAX$Datum <- as.Date(row.names(DAX))
@@ -101,7 +95,7 @@ stocks$DAX <- merge(stocks, DAX, by = "Datum", all.x = T)$Close
 
 # TEC
 tec <- new.env()
-getSymbols("^TECDAX", env = tec, src = "yahoo", from = dateMin, to = dateMax)
+getSymbols("^TECDAX", env = tec, src = "yahoo", from = min(datesSentix), to = max(datesSentix))
 TEC <- data.frame(tec$TECDAX[datesSentix, "TECDAX.Close"])
 colnames(TEC) <- "Close"
 TEC$Datum <- as.Date(row.names(TEC))
@@ -111,7 +105,7 @@ stocks$TEC <- merge(stocks, TEC, by = "Datum", all.x = T)$Close
 
 # ESX50
 esx50 <- new.env()
-getSymbols("^STOXX50E", env = esx50, src = "yahoo", from = dateMin, to = dateMax)
+getSymbols("^STOXX50E", env = esx50, src = "yahoo", from = min(datesSentix), to = max(datesSentix))
 ESX50 <- data.frame(esx50$STOXX50E[datesSentix,"STOXX50E.Close"])
 colnames(ESX50) <- "Close"
 ESX50$Datum <- as.Date(row.names(ESX50))
@@ -121,7 +115,7 @@ stocks$ESX50 <- merge(stocks, ESX50, by = "Datum", all.x = T)$Close
 
 # SP500
 sp500 <- new.env()
-getSymbols("^GSPC", env = sp500, src = "yahoo", from = dateMin, to = dateMax)
+getSymbols("^GSPC", env = sp500, src = "yahoo", from = min(datesSentix), to = max(datesSentix))
 SP500 <- data.frame(sp500$GSPC[datesSentix,"GSPC.Close"])
 colnames(SP500) <- "Close" 
 SP500$Datum <- as.Date(row.names(SP500))
@@ -132,7 +126,7 @@ stocks$SP5 <- merge(stocks, SP500, by = "Datum", all.x = T)$Close
 
 # NASDAQ
 nasdaq <- new.env()
-getSymbols("^NDX", env = nasdaq, src = "yahoo", from = dateMin, to = dateMax)
+getSymbols("^NDX", env = nasdaq, src = "yahoo", from = min(datesSentix), to = max(datesSentix))
 NASDAQ <- data.frame(nasdaq$NDX[datesSentix,"NDX.Close"])
 # sum(is.na(NASDAQ[,"NDX.Close"]))
 colnames(NASDAQ) <- "Close"
@@ -143,7 +137,7 @@ stocks$NASDAQ <- merge(stocks, NASDAQ, by = "Datum", all.x = T)$Close
 
 # NIKKEI
 nikkei <- new.env()
-getSymbols("^N225", env = nikkei, src = "yahoo", from = dateMin, to = dateMax)
+getSymbols("^N225", env = nikkei, src = "yahoo", from = min(datesSentix), to = max(datesSentix))
 NIKKEI <- data.frame(nikkei$N225[datesSentix,"N225.Close"])
 colnames(NIKKEI) <- "Close"
 NIKKEI$Datum <- as.Date(row.names(NIKKEI))
@@ -179,7 +173,8 @@ stocks$TBOND <- merge(stocks, TBOND, by = "Datum", all.x = T)$DGS10
 
 ```{r}
 rm(BUND, DAX, ESX50, NASDAQ, NIKKEI, SP500, TBOND, TEC,
-   dax, esx50, nasdaq, nikkei, sp500, tec, i)
+   dax, esx50, nasdaq, nikkei, sp500, tec)
+detach("package:quantmod", unload = T)
 ```
 
 
@@ -191,6 +186,8 @@ We look at how many people participated in the survey on average and remove TBON
 We look at the number of dates on which not all stocks report prices and remove those to end up with the dates on which all data is available *datesAll*.
 
 ## Sentix - number of participants in survey
+
+NOTE: maybe also delete the "G" columns in the sentix data lateron (but it might produce quite interesting results)
 
 ```{r}
 cols <- 8:10
@@ -230,10 +227,20 @@ cols <- rainbow(ncol(stocks)-1)
 
 plot(stocks[,1], is.na(stocks[,2]), main = "Missing Dates", ylab = "missing", xlab = "Date", col = cols[1], pch = 4)
 for(i in 2:(ncol(stocks)-1)){
-  par(new=T)
-  plot(stocks[,1], is.na(stocks[,i+1]), col = cols[i], axes = F, xlab = "", ylab = "", pch = 4)
+    par(new=T)
+    plot(stocks[,1], is.na(stocks[,i+1]), col = cols[i], axes = F, xlab = "", ylab = "", pch = 4)
 }
-legend("topleft", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1)
+legend("right", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1)
+
+pdf(file.path(getwd(), "Plot", "missingDates.pdf"), width = 10, height = 4)
+cols <- rainbow(ncol(stocks)-1)
+plot(stocks[,1], is.na(stocks[,2]), main = "Missing Dates", ylab = "missing", xlab = "Date", col = cols[1], pch = 4)
+for(i in 2:(ncol(stocks)-1)){
+    par(new=T)
+    plot(stocks[,1], is.na(stocks[,i+1]), col = cols[i], axes = F, xlab = "", ylab = "", pch = 4)
+}
+legend("right", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1)
+dev.off()
 
 rm(cols, i)
 ```
@@ -266,7 +273,7 @@ unlist(lapply(sentixRaw, nrow))
 ```
 
 
-### approach
+### other approach (not implemented)
 
 One way of approaching this might be via linear regression of the stock data when no stock price is available. but this assumes a linear relationship and might cause trouble.
 

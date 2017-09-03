@@ -142,3 +142,543 @@ sentixG6disp$TBOND = unique(sentix[["TBONDm"]])$G_disp[unique(sentix[["TBONDm"]]
 # 
 # save(E, file = file.path(folderData, "Optimization", paste0("EDispersionMin_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
 ```
+
+
+
+\newpage
+# Data Derivations ->  further consideration
+
+For the moment, I (Stefan) don't think that the regressing is thoroughly based, so this (updating of code) is skipped for now.
+
+## regress Sentiment
+
+We first regress each sentiment on the other sentiments and just go with the non-explained intercept. From these, we calculate the covariance matrix.
+
+```{r, eval=F, cache=T}
+i <- sentixDataNames[1]
+parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")"))
+for (i in sentixDataNames){
+    eval(parse(text = paste0(i, "Reg", " <- ", "regSent(", i, ")")))
+}
+
+sentixDataNamesReg <- c()
+i = 1
+parse(text = paste0("sentixDataNamesReg <- ", "c(sentixDataNamesReg, \"", sentixDataNames[i], "Reg\")"))
+for(i in sentixDataNames){
+    eval(parse(text = paste0("sentixDataNamesReg <- ", "c(sentixDataNamesReg, \"", i, "Reg\")")))
+}
+
+```
+
+```{r, eval=F}
+i <- sentixDataNames[i]
+parse(text = paste0(i, "RegCov", " <- ", "cov(", i, "Reg)"))
+for(i in sentixDataNames){
+    eval(parse(text = paste0(i, "RegCov", " <- ", "cov(", i, "Reg)")))
+}
+```
+
+
+
+## regression
+
+### regress one on all others
+
+We regress one sentiment variable on all other sentiment variables and take the residuals. 
+
+```{r, eval=F}
+regSentResidual
+```
+
+
+```{r, eval=F}
+sentixI1dispResiduals50 <- regSentResidual(sentixI1disp, consider = 50, func = mean)
+summary(sentixI1dispResiduals50)
+
+sentixI1dispResiduals10 <- regSentResidual(sentixI1disp, consider = 10, func = mean)
+summary(sentixI1dispResiduals10)
+```
+
+That is not useful! The values differ after the 16th position after decimal point.
+
+Look at what causes this good explanation of one variable by its others:
+
+```{r, eval=F}
+dat <- sentixI1disp
+for(k in colnames(dat)){
+    # generate formula (regress one column on all the others while using 'consider' previous points)
+    print(form <- as.simple.formula(setdiff(colnames(dat), k), k))
+    print(summary(lm(form, data = dat[max((200-50),1):200,])))
+}
+```
+
+### do (correct?) adoptation
+
+get Covariance to 0 by regressing one on all before and so on (compare to Portfolio Analysis Theorem 3.5)
+
+```{r, eval=F}
+
+```
+
+
+# Optimization -> mrc
+
+```{r, eval=FALSE}
+ergSentixNames <- c()
+i = 1
+parse(text = paste0("ergSentixNames <- ", "c(ergSentixNames, \"erg", sentixDataNames[i], "\")"))
+for(i in sentixDataNames){
+    eval(parse(text = paste0("ergSentixNames <- ", "c(ergSentixNames, \"erg", i, "\")")))
+}
+```
+
+
+
+
+### mrc
+
+
+start optimization with equal weights and then start each iteration with result of previous iteration
+
+
+roughly 30 seconds per strategy and weight (on laptop stefan)
+```{r, eval=FALSE}
+nrow(grid)*length(sentixDataNamesReg)*30 # Sekunden
+nrow(grid)*length(sentixDataNamesReg)*30/60 # Minuten
+nrow(grid)*length(sentixDataNamesReg)*30/60/60 # Stunden
+```
+
+roughly 14 seconds per strategy and weight (on laptop stefan)
+```{r, eval=FALSE}
+nrow(grid)*length(sentixDataNamesReg)*14 # Sekunden
+nrow(grid)*length(sentixDataNamesReg)*14/60 # Minuten
+nrow(grid)*length(sentixDataNamesReg)*14/60/60 # Stunden
+```
+
+
+Generate a list holding all data with structure (levels of list)
+weights of goal function -> strategy -> dates -> weights of assets
+
+```{r, eval=FALSE}
+# sentLookback <- 20
+# 
+# E <- list()
+# tt <- numeric(nrow(grid)*length(sentixDataNamesReg)) # track time to evaluate code
+# 
+# for(weightInd in 1:nrow(grid)){
+#     w <- as.numeric(grid[weightInd,])
+#     weightName <- paste(w, collapse = "-") # needed later to store result
+#     
+#     for(strategy in sentixDataNamesReg){
+#         SentData <- get(strategy)
+#         rownames(SentData) <- as.integer(as.Date(rownames(SentData))) # for faster comparison below -> cast date to integer
+#         erg <- matrix(NA, nrow = length(datesEvalLast)+1, ncol = numAsset) # +1 to lookup every weight
+#         rownames(erg) <- c("1000-01-01", paste(datesEvalLast))
+#         erg[1, ] <- rep(1/numAsset, numAsset)
+#         
+#         for(d in datesEvalLast){
+#             dInd <- which(datesEvalLast==d)
+#             
+#             SSent <- cov(SentData[(which(rownames(SentData) == d)-sentLookback):
+#                                       which(rownames(SentData) == d) - 1, ]) # -1 to just look in past
+#             rdat <- ret[unique(pmax(which(rownames(ret)<=d) - 1,1)),] # from beginning to one day in past
+#             muStock <- colMeans(rdat)
+#             SStock <- cov(rdat)
+#             
+#             erg[dInd+1,] <- donlp2NLP(start = erg[dInd,], obj = hWeighted, 
+#                          par.lower = rep(0, numAsset), ineqA = IneqA, 
+#                          ineqA.lower = 1.0, ineqA.upper = 1.0)$solution
+#         }
+#         
+#         E[[weightName]][[strategy]] <- erg
+#         tt[(weightInd-1)*nrow(grid) + which(sentixDataNamesReg == strategy)] <- proc.time()[3]
+#     }
+# }
+# save(E, file = file.path(folderData, "Optimization", paste0("Eserver_", format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+```
+
+# 50 Optimization - with sentiment
+
+## seems to not be used
+
+, we name it *anDisp*. We furthermore assume that the annual dispersion equals the average dispersion.
+
+```{r}
+anDisp <- lapply(sDisp, function(x) {colMeans(x[,-1])})
+```
+
+
+# from "functions.R"
+
+```{r}
+source("parameters.R")
+
+# Data Input --------------------------------------------------------------
+
+
+
+# # data input of Sentex files
+# dataSentex <- function(fileName){
+#   temp <- read.csv2(fileName, stringsAsFactors = F)
+#   for (i in 2:ncol(temp)){
+#     temp[,i] <- as.numeric((temp[,i]))
+#   }
+#   temp[,1] <- as.Date(temp[,1], format = "%d.%m.%Y")
+#   return(temp)
+# }
+
+# # update data
+# ## take data, reduced dates, indexes where duplicated
+# updateDataSentex <- function(dat, dateRed){
+#   temp <- dat[dat$Datum %in% dateRed,]
+#   temp <- unique(temp)
+#   return(temp)
+# }
+
+
+
+# Plot --------------------------------------------------------------------
+
+
+
+# # plot index with sentiment
+# plotIndexSent <- function(dat){
+#   ### in same graph
+#   # https://stackoverflow.com/questions/6142944/how-can-i-plot-with-2-different-y-axes
+#   
+#   pdf(file = paste0(folderPlotIndexSent, "/", deparse(substitute(dat)), ".pdf"), 
+#       width = 12, height = 8)
+#   
+#   # parameter for second y-axis (for sentiment)
+#   ylim2 = c(0.3, 0.9)
+#   # add extra space to right margin of plot within frame
+#   par(mar=c(5, 4, 4, 5) + 0.1)
+#   
+#   plot(dat$Datum, dat$Index, type = "l", xlab = "Date", ylab = "Index",  lwd = 2)
+#   par(new=T)
+#   plot(dat$Datum, dat$Sent_Is, type = "l",  axes = F, 
+#        xlab="", ylab="", col = "red", ylim = ylim2)
+#   par(new=T)
+#   plot(dat$Datum, dat$Sent_Ps, type = "l",  axes = F, 
+#        xlab="", ylab="", col = "blue", ylim = ylim2)
+#   
+#   title(deparse(substitute(dat)))
+#   legend("topleft",legend=c("Index","Is", "Ps"),
+#          text.col=c("black","red", "blue"),lty=c(1,1,1),col=c("black","red", "blue"))
+#   axis(side=4, at = pretty(ylim2))
+#   mtext("Sentiment",side=4,line=3) 
+#   
+#   dev.off()
+# }
+# 
+# 
+# # Optimization ------------------------------------------------------------
+# 
+# 
+# # ** Upgrade Sentex Data --------------------------------------------------
+# 
+# # library(FSelector) # to generate formula easily
+# 
+# ### developped further to regSent
+# # dispersionSent <- function(dat){
+# #   temp <- dat
+# #   
+# #   for(i in 1:nrow(dat)){
+# #     for(k in colnames(dat)){
+# #       # generate formula (regress one column on all the others while using all the previous data (including today))
+# #       form <- as.simple.formula(setdiff(colnames(dat), k), k)
+# #       temp[i, k] <- unname(lm(form, data = dat[1:i,])$coefficients[1])
+# #     }
+# #   }
+# #   
+# #   return(temp)
+# # }
+# 
+# ### take data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+# regSent <- function(dat, consider = 50){
+#     temp <- dat
+#     
+#     for(i in 1:nrow(dat)){
+#         for(k in colnames(dat)){
+#             # generate formula (regress one column on all the others while using 'consider' previous points)
+#             form <- as.simple.formula(setdiff(colnames(dat), k), k)
+#             temp[i, k] <- unname(lm(form, data = dat[max((i-consider),1):i,])$coefficients[1])
+#         }
+#     }
+#     
+#     return(temp)
+# }
+
+### input:  data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+###         days to consider
+### output: list containing regression results
+### problem:    resulting object is large (~ 200mb)
+regSentAll <- function(dat, consider = 50){
+    temp <- list()
+    
+    for(i in 1:nrow(dat)){
+        temp[[i]] <- list()
+        for(k in colnames(dat)){
+            # generate formula (regress one column on all the others while using 'consider' previous points)
+            form <- as.simple.formula(setdiff(colnames(dat), k), k)
+            temp[[i]][[k]] <- unname(lm(form, data = dat[max((i-consider),1):i,]))
+        }
+    }
+    
+    return(temp)
+}
+
+### input:  data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+###         days to consider
+###         func function to apply on residuals
+### output: object of same structure as dat, containing the results of func applied on the residuals
+regSentResidual <- function(dat, consider = 50, func = mean){
+    temp <- dat
+    
+    for(i in 1:nrow(dat)){
+        for(k in colnames(dat)){
+            # generate formula (regress one column on all the others while using 'consider' previous points)
+            form <- as.simple.formula(setdiff(colnames(dat), k), k)
+            temp[i,k] <- func(unname(lm(form, data = dat[max((i-consider),1):i,])$residuals))
+        }
+    }
+    
+    return(temp)
+}
+
+### input:  data with sentiment data (dispersion or herfindahl) with rows (dates) and columns (indizes)
+###         days to consider
+###         func function to apply on residuals
+### proced: regress on everything before
+### output: object of same structure as dat, containing the results of func applied on the residuals
+regSentResidualCorrect <- function(dat, consider = 50, func = mean){
+    temp <- dat
+    
+    for(i in 1:nrow(dat)){
+        for(k in colnames(dat)){
+            # generate formula (regress one column on all the others while using 'consider' previous points)
+            form <- as.simple.formula(setdiff(colnames(dat), k), k)
+            temp[i,k] <- func(unname(lm(form, data = dat[max((i-consider),1):i,])$residuals))
+        }
+    }
+    
+    return(temp)
+}
+
+# ** Actual Optimization -----------------------------------------------------
+
+
+
+g <- function(x){
+  return(c(1.0001-sum(x), sum(x) - 0.9999))
+}
+
+# goal function with 3 criteria
+### give mu and S to speed up (do not need to calculate it every time out of R)
+### TODO: somehow not working -> have to give global parameters
+f <- function(x, w, muStock, SStock, targetRpm, targetVolpa, SSent){
+  y <- numeric(3)
+  y[1] <- -1.0 * w[1] * drop(crossprod(x, muStock)) / targetRpm
+  y[2] <- w[2] * drop(sqrt(t(x) %*% SStock %*% x)) * sqrt(12) / targetVolpa
+  y[3] <- w[3] * sum((mrc(x, SSent))^2)
+  return(y)
+}
+
+h <- function(x){
+  y <- numeric(3)
+  y[1] <- -1.0 * w[1] * drop(crossprod(x, muStock)) / targetRpm
+  y[2] <- w[2] * drop(sqrt(t(x) %*% SStock %*% x)) * sqrt(12) / targetVolpa
+  y[3] <- w[3] * sum((mrc(x, SSent))^2)
+  return(y)
+}
+
+hWeighted <- function(x){
+  return(sum(h(x)))
+}
+
+
+## take dispersion directly and sum ist up, which we want to minimize
+## global parameters: w, muStock, targetRpm, SStock, targetVolpa, dispersion (sentiment values direct)
+hDispersionDirectMin <- function(x){
+    y <- numeric(3)
+    y[1] <- -1.0 * w[1] * drop(crossprod(x, muStock)) / targetRpm
+    y[2] <- w[2] * drop(sqrt(t(x) %*% SStock %*% x)) * sqrt(12) / targetVolpa
+    y[3] <- w[3] * drop(crossprod(x, dispersion))
+    return(sum(y))
+}
+
+
+# library(mco)
+# library(FRAPO)
+# minimize sentiment via marginal contribution to risk 
+### TODO take closer look if this is really how Sentiment can be included (-> portfolio analysis)
+# minSentiment <- function(muStock, SStock, targetRpm, targetVolpa, SSent, w = w, f = f, g = g){
+#   NAsset = length(muStock)
+#   ans <- nsga2(f, NAsset, 3,
+#                w = w, muStock = muStock, SStock = SStock, 
+#                targetRpm = targetRpm, targetVolpa = targetVolpa, SSent = SSent,
+#                lower.bounds = rep(0, NAsset), upper.bounds = rep(1, NAsset), 
+#                constraints = g, cdim = 2, 
+#                popsize = 500)
+#   return(ans)
+# }
+
+minSentiment <- function(SSent){
+  NAsset = length(muStock)
+  ans <- nsga2(h, NAsset, 3,
+               lower.bounds = rep(0, NAsset), upper.bounds = rep(1, NAsset),
+               constraints = g, cdim = 2,
+               popsize = 500)
+  return(ans)
+}
+
+
+# Analysis of Portfolio --------------------------------------------------
+
+## Take weights in each date of datesEval and calculate the portfolio return
+evolve <- function(x){
+    retFac <- ret[rownames(ret)%in%datesEval[2:length(datesEval)],]*
+        x[1:(length(datesEval)-1),] # weight at time t and on these returns to time t+1 made
+    retFac <- 1+rowSums(retFac)
+    retFac <- c(100, retFac) # initialize with 100 and multiply the returns (next line)
+    return(timeSeries(cumprod(retFac), charvec = datesEval))
+}
+
+## Take list (each element is another portfolio) as input and return portfolio characteristics
+## uses global variables: ret, datesEval
+analysePortfolio <- function(l){
+    RsClassic <- matrix(unlist(lapply(l, Return.calculate)), ncol = length(l)) # return from time to time
+    RsTSClassic <- na.omit(xts(RsClassic, order.by = as.Date(datesEval)))
+    bench <- xts(rep(0, nrow(RsTSClassic)), order.by = as.Date(datesEval)[-1]) # benchmark 0 everytime
+    
+    S1 <- as.matrix(table.AnnualizedReturns(RsTSClassic, Rf = bench)) # scale is chosen automatically to 'weekly'
+    S2 <- -1*VaR(RsTSClassic) # 95% as default (outputs small negative value)
+    
+    ans <- rbind(S1, S2)
+    colnames(ans) <- names(l)
+    rownames(ans) <- c("Return (p.a.)", "StdDev. Risk (p.a.)", "Sharpe Ratio", "VaR 95% (p.a.)")
+    return(round(ans, 3))
+}
+
+# Spielwiese --------------------------------------------------------------
+
+
+# library(Rdonlp2) ## needed for donlp2NLP
+optMinSent <- function(SSent){
+  
+}
+```
+
+
+
+# 70 Visualization 
+
+
+## One Dispersion, different weights
+
+We visualize the different portfolio returns of each time window of each dispersion in a histogram.
+
+The results can (also) be found in "\\IR-Phase FIM-Statistik\\R-Research Project Statistics\\Plot Optimization\\Dispersion Const".
+
+### on its own
+
+not so interesting, nicer below
+
+```{r}
+for(d in datesNames){
+    retOverTime <- apply(1+ret[get(d),], 2, prod)
+    
+    for(i in names(xDispConst[[d]])){
+        retDispTime <- numeric(length(xDispConst[[d]][[i]]))
+        names(retDispTime) <- names(xDispConst[[d]][[i]])
+        for(j in 1:length(retDispTime)){
+            retDispTime[j] <- crossprod(xDispConst[[d]][[i]][[j]]$x, retOverTime)
+        }
+        
+        t <- paste(d, i, sep = " - ")
+        pdf(file.path(getwd(), "Plot Optimization", "Dispersion Const", paste0(t, ".pdf")), width = 10, height = 4)
+        plot(retDispTime, main = t)
+        dev.off()
+    }
+}
+```
+
+### together (all different dispersions)
+
+```{r}
+for(d in datesNames){
+    cols <- rainbow(length(xDispConst[[d]]))
+    retOverTime <- apply(1+ret[get(d),], 2, prod)
+    retDispTime <- data.frame(w = names(xDispConst[[d]][[1]]))
+    
+    for(i in names(xDispConst[[d]])){
+        for(j in 1:nrow(retDispTime)){
+            retDispTime[j,i] <- crossprod(xDispConst[[d]][[i]][[j]]$x, retOverTime)
+        }
+    }
+    
+    ylim = c(min(retDispTime[,-1]), max(retDispTime[,-1]))
+    plot(retDispTime[,2], ylim = ylim, col = cols[1], main = d)
+    for(i in 3:ncol(retDispTime)){
+        par(new=T)
+        plot(retDispTime[,i], ylim = ylim, axes = F, xlab = "", ylab = "", col = cols[i-1])
+    }
+    legend("bottomright", legend = names(xDispConst[[d]]), col = cols, lty = 1)
+    
+    pdf(file.path(getwd(), "Plot Optimization", "Dispersion Const", paste0("0", d, ".pdf")), width = 10, height = 8)
+    plot(retDispTime[,2], ylim = ylim, col = cols[1], main = d)
+    for(i in 3:ncol(retDispTime)){
+        par(new=T)
+        plot(retDispTime[,i], ylim = ylim, axes = F, xlab = "", ylab = "", col = cols[i-1])
+    }
+    legend("bottomright", legend = names(xDispConst[[d]]), col = cols, lty = 1)
+    dev.off()
+}
+
+```
+
+
+
+## Change of Portfolio weights
+
+First, we want to depict the change of portfolio weights over time.
+
+#### area plot
+
+We want to generate an area plot of the varying weights.
+
+```{r}
+dat = xDispVarEval$datesEvalBear$P1$x
+
+plotWeightsArea <- function(datName){
+    dat <- datName$x
+    alpha = 0.5 
+    rn <- rownames(dat)
+    dat <- t(apply(dat, 1, cumsum))
+    dat <- as.data.frame(dat)
+    dat$date <- as.Date(rownames(dat))
+    
+    ggplot(dat, aes(x=date)) +
+        geom_area(aes(y=dat[,7], fill=colnames(dat)[7]), alpha=alpha) +
+        geom_area(aes(y=dat[,6], fill=colnames(dat)[6]), alpha=alpha) +
+        geom_area(aes(y=dat[,5], fill=colnames(dat)[5]), alpha=alpha) +
+        geom_area(aes(y=dat[,4], fill=colnames(dat)[4]), alpha=alpha) +
+        geom_area(aes(y=dat[,3], fill=colnames(dat)[3]), alpha=alpha) +
+        geom_area(aes(y=dat[,2], fill=colnames(dat)[2]), alpha=alpha) +
+        geom_area(aes(y=dat[,1], fill=colnames(dat)[1]), alpha=alpha) +
+        scale_fill_discrete(name="Index") +
+        labs(title = deparse(substitute(datName)),
+             y = "Weight",
+             x = "Date")
+}
+
+plotWeightsArea(xDispVarEval[["datesEvalBear"]][["P1"]])
+```
+
+#### Line Plot
+
+As the area might be a bit complicated to understand (just the visible height of the area matters, not the absolute maximal y value), we use a line plot for visualization.
+
+```{r}
+plotWeightsLines
+```

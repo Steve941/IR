@@ -5,12 +5,8 @@ date: "August 2017"
 output: pdf_document
 ---
 
-```{r, include=FALSE}
-source("parameters.R")
-```
-
 ```{r, include=FALSE, cache=T, results='hide'}
-knitr::knit_child("30 Data Visualization.Rmd")
+# knitr::knit_child("40 Analysis.Rmd")
 ```
 
 
@@ -43,12 +39,26 @@ anMu <- (1+mu)^52-1
 anC <- C*52
 ```
 
+We furthermore exclude riskless asset (assume BUND to be risk free)
+
+```{r}
+retRisky <- ret[,-7]
+colnames(retRisky)
+
+muRisky <- colMeans(retRisky)
+CRisky <- cov(retRisky)
+
+anRetRisky <- (1+retRisky)^52-1
+anMuRisky <- (1+muRisky)^52-1
+anCRisky <- CRisky*52
+```
+
 
 ### mean variance diagram
 
 We plot *K* random portfolios.
 
-#### with riskless asset
+#### with riskfree asset
 
 ```{r}
 set.seed(1)
@@ -69,21 +79,7 @@ plot(mvRandom[,2], mvRandom[,1],
 ```
 
 
-#### exclude riskless assets
-
-exclude riskless asset (BUND)
-
-```{r}
-retRisky <- ret[,-7]
-colnames(retRisky)
-
-muRisky <- colMeans(retRisky)
-CRisky <- cov(retRisky)
-
-anRetRisky <- (1+retRisky)^52-1
-anMuRisky <- (1+muRisky)^52-1
-anCRisky <- CRisky*52
-```
+### without risk free asset
 
 
 ```{r}
@@ -104,7 +100,7 @@ plot(mvRandom[,2], mvRandom[,1],
      xlim = c(0, 0.25), ylim = c(0, 0.5))
 ```
 
-### efficiency without risk free portfolio
+### efficiency 
 
 We can use theorem 2.2. of Portfolio Analysis (slide 40). But be careful as C is close to singular.
 
@@ -115,6 +111,12 @@ efficiency line by formula d)
 det(anC)
 det(anCRisky)
 ```
+
+
+
+
+#### without risk free asset
+
 
 ```{r}
 anCRisky1 <- solve(anCRisky)
@@ -167,9 +169,9 @@ c(a/c, xMVPwithoutRF %*% anMuRisky)
 c(sqrt(1/c), sqrt( (xMVPwithoutRF%*%anCRisky)) %*% xMVPwithoutRF)
 ```
 
-### efficiency with risk free portfolio
+#### with risk free asset
 
-assume BOND to be risk free
+assume BUND to be risk free
 
 ```{r}
 r <- anMu[7]
@@ -218,6 +220,7 @@ plot(elWith[,2], elWith[,1], type = "l", col = "green",
      xlim = c(0, 0.25), ylim = c(0, 0.5))
 ```
 
+
 ```{r}
 (xMarket <- 1/(a-c*r)*anCRisky1%*%(anMuRisky-r))
 unname((b-a*r)/(a-c*r))
@@ -229,18 +232,19 @@ unname((c*r^2 - 2*a*r + b)/(a-c*r)^2)
 ```{r}
 rm(a, anCRisky1, b, c, d, elWith, elWithout, i, k, K, mvRandom, r, x)
 rm(anC, anCRisky, anRet, anRetRisky, CRisky, xMarket, anMuRisky, muRisky, retRisky, xMVPwithoutRF)
-rm(compareDispRes)
 ```
 
 
 
 
 \newpage
-## with sentiment (grid search)
+## with sentiment 
+
+### find optimal weights for goal function (grid search)
 
 IDEE: one could also look at just the previous *n* dates to calculate the average annual quantities.
 
-### general setup
+#### general setup
 
 We use several packages for the optimization.
 
@@ -270,16 +274,23 @@ With this setup, we have `r nrow(grid)` combinations of weights.
 Overview of what data we use.
 
 ```{r}
-targetRpa
-targetVolpa
-targetDisp
+# Return
+targetRpa <- 0.06 ## targeted return of 6 % p.a.
+
+# Volatility
+targetVolpa <- 0.04 ## % p.a.
+
+# Dispersion
+targetDisp <- 0.58 ## found as it looks promising and reachable in the analysis
+
+
 
 IneqA <- matrix(1, nrow = 1, ncol = ncol(ret)) # to take care of investments
 ```
 
 
 
-### dispersion direct min
+#### dispersion direct min
 
 We handle dispersion like return in the first place. Therefore we have the following objective functions:
 
@@ -289,11 +300,7 @@ We handle dispersion like return in the first place. Therefore we have the follo
 3. & dispersion & min$\left(w_3 \cdot \frac{x^T\text{d}}{\text{d}_\text{target}}\right)$
 \end{tabular}
 
-where $\text{d}$ denotes the annualized dispersion of each index, we name it *anDisp*. We furthermore assume that the annual dispersion equals the average dispersion.
-
-```{r}
-anDisp <- lapply(sDisp, function(x) {colMeans(x[,-1])})
-```
+where $\text{d}$ denotes the annualized dispersion of each index.
 
 We will minimize the following objective function. Be aware that maximizing something equals minimizing its negative. Furthermore *anDOpt* denotes the annualized dispersion of the indizes. We divide by the target values to have the different components of the objective function comparable (in units of the corresponding target value). We denote *Opt* to be the (newly calculated) data.
 
@@ -309,9 +316,7 @@ hDispersionDirectMin <- function(x){
 
 
 
-#### constant portfolio weights over time window
-
-##### determine weights
+##### constant portfolio weights over time window
 
 NOTE: We keep structure, as we might change lateron the test window to come up with different weights for the different time periods (one test window to get weights for bear market, another test window to get weights for bull market, ...)
 NOTE: Then also adopt for dopar
@@ -336,7 +341,7 @@ library(doSNOW)
 
 We save with saveRDS() to be able to import and compare different results.
 
-```{r, cache=TRUE}
+```{r, eval=FALSE}
 cores <- detectCores()
 
 if(Sys.getenv("USERNAME") == "Stefan"){
@@ -358,8 +363,8 @@ xDispConstTest <- foreach(t = datesTestNames, .export = c(datesTestNames), .pack
     anMuOpt <- (1+colMeans(retOpt))^52-1
     anCOpt <- cov(retOpt)*52
     
-    for(i in names(sDisp)){
-        anDOpt <- colMeans(sDisp[[i]][1:timeInd,-1])
+    for(sentixGroup in names(sDisp)){
+        anDOpt <- colMeans(sDisp[[sentixGroup]][1:timeInd,-1])
         
         for(weightInd in 1:nrow(grid)){
             w <- unlist(grid[weightInd,])
@@ -367,7 +372,8 @@ xDispConstTest <- foreach(t = datesTestNames, .export = c(datesTestNames), .pack
             erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispersionDirectMin, 
                       par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
                       ineqA.lower = 1.0, ineqA.upper = 1.0)
-            L[[i]][[paste(w, collapse = "-")]] <- list(x = erg$solution, obj = erg$objective, time = as.numeric(erg$elapsed))
+            L[[sentixGroup]][[paste(w, collapse = "-")]] <- list(x = erg$solution, obj = erg$objective, 
+                                                       time = as.numeric(erg$elapsed))
         }
     }
     L
@@ -384,6 +390,9 @@ We now add the returns and the variance over the test time window to lateron cal
 
 The function takes the calculated weighted of the assets as inputs and outputs (in the same data structure) the portfolio weights, its return and its variance over the test time window.
 
+```{r}
+xDispConstTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinConstantTest_gloggest2017-08-28---10-33"))
+```
 
 
 ```{r}
@@ -411,11 +420,11 @@ PROBLEM: from *t=1* to *t=50*, we have negative returns of the stocks, therefore
 
 
 ```{r}
-rm(temp, cl)
+rm(temp, cl, calcEvalTestConst, xDispConstTest)
 ```
 
 
-#### different portfolio weights over time window
+##### different portfolio weights over time window
 
 We evaluate an optimal portfolio at each date within our time period and assume that we can redistribute our wealth at no cost.
 
@@ -428,9 +437,9 @@ time window -> dispersion (sentixDataNames) -> weights of goal function -> dates
 
 Last weight for penultimate date of time window (hold until last date).
 
-##### Portfolio Weights
+###### determine portfolio in test time window (for each gridpoint)
 
-```{r}
+```{r, eval=FALSE}
 k <- 50
 
 cores <- detectCores()
@@ -509,14 +518,10 @@ xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryin
 ```
 
 
-```{r}
-rm(erg)
-```
 
 
 
-
-##### Goal weights
+###### determine optimal goal weights (optimal grid point)
 
 We have the portfolio weights for each date (start) in "dat\$datesTest\$P1\$\`0.9-0.05-0.05\`\$x". We hold this for one period, therefore we calculate the portfolio return at each time step.
 
@@ -551,10 +556,10 @@ calcTestVar <- function(dat){
         
         rf <- mean(retTimeWindow[,"BUND"])
         
-        for(sentixGroupName in names(dat[[timeWindowName]])){
+        for(sentixGroup in names(dat[[timeWindowName]])){
             
-            for(goalWeight in names(dat[[timeWindowName]][[sentixGroupName]])){
-                R <- rowSums(dat[[timeWindowName]][[sentixGroupName]][[goalWeight]]$x * retTimeWindow)
+            for(goalWeight in names(dat[[timeWindowName]][[sentixGroup]])){
+                R <- rowSums(dat[[timeWindowName]][[sentixGroup]][[goalWeight]]$x * retTimeWindow)
                 
                 r <- mean(R)
                 sd <- sd(R)
@@ -562,9 +567,9 @@ calcTestVar <- function(dat){
                 anR <- (1+r)^52-1
                 anSd <- sqrt((sd^2)*52)
                 
-                fweight = mean(dat[[timeWindowName]][[sentixGroupName]][[goalWeight]]$obj)
+                fweight = mean(dat[[timeWindowName]][[sentixGroup]][[goalWeight]]$obj)
                     
-                res[[timeWindowName]][[sentixGroupName]][[goalWeight]] <- list(r = r, sd = sd, sr = r/sd,
+                res[[timeWindowName]][[sentixGroup]][[goalWeight]] <- list(r = r, sd = sd, sr = r/sd,
                                                                                anR = anR, anSd = anSd, anSR = anR/anSd,
                                                                                fweight = fweight)
             }
@@ -593,18 +598,18 @@ library(ggtern)
 extractWeightsWithValue <- function(dat, value){
     ret <- list()
     for(timeWindowName in names(dat)){
-        for(sentixGroupName in names(dat[[timeWindowName]])){
-            df <- data.frame(w = names(dat[[timeWindowName]][[sentixGroupName]])[1], value = dat[[timeWindowName]][[sentixGroupName]][[1]][[value]])
+        for(sentixGroup in names(dat[[timeWindowName]])){
+            df <- data.frame(w = names(dat[[timeWindowName]][[sentixGroup]])[1], value = dat[[timeWindowName]][[sentixGroup]][[1]][[value]])
             df$w <- as.character(df$w)
             df$w1 <- as.numeric(unlist(strsplit(df$w, "-"))[1])
             df$w2 <- as.numeric(unlist(strsplit(df$w, "-"))[2])
             df$w3 <- as.numeric(unlist(strsplit(df$w, "-"))[3])
             
-            for(weightsName in names(dat[[timeWindowName]][[sentixGroupName]])[2:length(names(dat[[timeWindowName]][[sentixGroupName]]))]){
-                df <- rbind(df, c(weightsName, dat[[timeWindowName]][[sentixGroupName]][[weightsName]][[value]], unlist(strsplit(weightsName, "-"))))
+            for(weightsName in names(dat[[timeWindowName]][[sentixGroup]])[2:length(names(dat[[timeWindowName]][[sentixGroup]]))]){
+                df <- rbind(df, c(weightsName, dat[[timeWindowName]][[sentixGroup]][[weightsName]][[value]], unlist(strsplit(weightsName, "-"))))
             }
             
-            ret[[timeWindowName]][[sentixGroupName]] <- data.frame(w1 = as.numeric(df[,"w1"]), 
+            ret[[timeWindowName]][[sentixGroup]] <- data.frame(w1 = as.numeric(df[,"w1"]), 
                                                                          w2 = as.numeric(df[,"w2"]), 
                                                                          w3 = as.numeric(df[,"w3"]),
                                                                          value = as.numeric(df[,"value"]))
@@ -680,17 +685,24 @@ now, determine optimal weight, for each *sentixGroup* and *timeWindow*, optimal 
 ```{r}
 wOptSRAn <- list()
 for(timeWindowName in names(srWeightsAn)){
-    for(sentixGroupName in names(srWeightsAn[[timeWindowName]])){
-        df <- srWeightsAn[[timeWindowName]][[sentixGroupName]]
+    for(sentixGroup in names(srWeightsAn[[timeWindowName]])){
+        df <- srWeightsAn[[timeWindowName]][[sentixGroup]]
         
-        wOptSRAn[[timeWindowName]][[sentixGroupName]] <- df[which.max(df$value), c("w1", "w2", "w3")]
+        wOptSRAn[[timeWindowName]][[sentixGroup]] <- df[which.max(df$value), c("w1", "w2", "w3")]
     }
 }
 wOptSRAn$datesTest
 ```
 
+```{r}
+rm(xDispVarTest, xDispVarTestCalc, calcTestVar)
+rm(plotTernary, terntheme, fileConnection, lateximport)
+```
 
-##### determine portfolios for time windows
+
+### find optimal portfolio
+
+#### dispersion direct min
 
 Now, we want to determine the portfolio weights over the time Windows. We use the data structure:
 
@@ -700,7 +712,7 @@ NOTE: change the weights of the test data, if different test time windows are us
 
 We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual dispersion.
 
-```{r}
+```{r, eval=FALSE}
 k <- 50
 
 cores <- detectCores()
@@ -713,17 +725,17 @@ if(Sys.getenv("USERNAME") == "Stefan"){
     stop("Who are you???")
 
 
-xSentixVarying <- list()
+xDispVarEval <- list()
 
 registerDoSNOW(cl)
 for(t in datesEvalNames){
     # timeInd <- datesAll[which(datesAll == min(get(t)))-1] ## one day before start of time window ### not used any more, as we move up to actual date
     
-    xSentixVarying[[t]] <- foreach(i = names(sDisp), .export = c(datesEvalNames), .packages = c("Rdonlp2")) %dopar%{
+    xDispVarEval[[t]] <- foreach(sentixGroup = names(sDisp), .export = c(datesEvalNames), .packages = c("Rdonlp2")) %dopar%{
         L <- list()
         
         
-        w <- unlist(wOptSRAn$datesTest[[i]])
+        w <- unlist(wOptSRAn$datesTest[[sentixGroup]])
         
         mat <- matrix(NA, nrow = (length(get(t))-1), ncol = ncol(ret))
         colnames(mat) <- colnames(ret)
@@ -738,7 +750,7 @@ for(t in datesEvalNames){
         retOpt <- ret[(tInd-k+1):tInd,]
         anMuOpt <- (1+colMeans(retOpt))^52-1
         anCOpt <- cov(retOpt)*52
-        anDOpt <-  as.numeric(sDisp[[i]][tInd,-1])
+        anDOpt <-  as.numeric(sDisp[[sentixGroup]][tInd,-1])
         
         erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispersionDirectMin, 
                          par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
@@ -753,7 +765,7 @@ for(t in datesEvalNames){
             retOpt <- ret[(tInd-k+1):tInd,]
             anMuOpt <- (1+colMeans(retOpt))^52-1
             anCOpt <- cov(retOpt)*52
-            anDOpt <- as.numeric(sDisp[[i]][tInd,-1])
+            anDOpt <- as.numeric(sDisp[[sentixGroup]][tInd,-1])
             
             erg <- donlp2NLP(start = mat[j-1,], fun = hDispersionDirectMin, 
                              par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
@@ -765,17 +777,32 @@ for(t in datesEvalNames){
         
         list(x = mat, obj = obj, time = tim)
     }
-    names(xSentixVarying[[t]]) <- names(sDisp)
+    names(xDispVarEval[[t]]) <- names(sDisp)
 }
 
 stopCluster(cl)
 
-# names(xDispConstTest) <- datesTestNames
+# names(xDispVarTest) <- datesTestNames
 
-saveRDS(xSentixVarying, file = file.path(getwd(), "Optimization", paste0("EDispersionMinVaryingEval_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
-
+saveRDS(xDispVarEval, file = file.path(getwd(), "Optimization", paste0("EDispersionMinVaryingEval_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
 ```
 
+```{r}
+xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_Stefan2017-08-29---12-02"))
+```
+
+### cleanup
+
+```{r}
+rm(grid, IneqA)
+
+detach("package:doSNOW", unload = T)
+unloadNamespace("doParallel")
+detach("package:parallel", unload = T)
+detach("package:foreach", unload = T)
+
+detach("package:ggtern", unload = T)
+```
 
 
 ## without sentiment (classic)
@@ -841,6 +868,9 @@ for(t in datesEvalNames){
 ```
 
 
+```{r}
+rm(rdatTime, rdatTimeSource, t, ew, ans)
+```
 
 
 
@@ -918,11 +948,14 @@ for(timeWindowName in datesEvalNames){
 }
 ```
 
+```{r}
+rm(t, timeEnd, timeEndInd, timeStart, timeWindowName, k, ew, rdatTime, rdatTimeSource, ans)
+```
 
 
 
 
-### different portfolio weights over time window, just risky portfolios
+### different portfolio weights over time window, just risky assets
 
 IDEA: look at portfolio-rollingPortfolios {fPortfolio}
 
@@ -1004,94 +1037,25 @@ for(timeWindowName in datesEvalNames){
 ```
 
 
-
-
-
-
-# ----- TODO -----
-
-```{r, eval=FALSE}
-ergSentixNames <- c()
-i = 1
-parse(text = paste0("ergSentixNames <- ", "c(ergSentixNames, \"erg", sentixDataNames[i], "\")"))
-for(i in sentixDataNames){
-    eval(parse(text = paste0("ergSentixNames <- ", "c(ergSentixNames, \"erg", i, "\")")))
-}
+```{r}
+rm(t, timeEnd, timeEndInd, timeStart, timeWindowName, k, ew, rdatTime, rdatTimeSource, ans)
 ```
 
 
 
 
-### mrc
 
-
-start optimization with equal weights and then start each iteration with result of previous iteration
-
-
-roughly 30 seconds per strategy and weight (on laptop stefan)
-```{r, eval=FALSE}
-nrow(grid)*length(sentixDataNamesReg)*30 # Sekunden
-nrow(grid)*length(sentixDataNamesReg)*30/60 # Minuten
-nrow(grid)*length(sentixDataNamesReg)*30/60/60 # Stunden
-```
-
-roughly 14 seconds per strategy and weight (on laptop stefan)
-```{r, eval=FALSE}
-nrow(grid)*length(sentixDataNamesReg)*14 # Sekunden
-nrow(grid)*length(sentixDataNamesReg)*14/60 # Minuten
-nrow(grid)*length(sentixDataNamesReg)*14/60/60 # Stunden
-```
-
-
-Generate a list holding all data with structure (levels of list)
-weights of goal function -> strategy -> dates -> weights of assets
-
-```{r, eval=FALSE}
-# sentLookback <- 20
-# 
-# E <- list()
-# tt <- numeric(nrow(grid)*length(sentixDataNamesReg)) # track time to evaluate code
-# 
-# for(weightInd in 1:nrow(grid)){
-#     w <- as.numeric(grid[weightInd,])
-#     weightName <- paste(w, collapse = "-") # needed later to store result
-#     
-#     for(strategy in sentixDataNamesReg){
-#         SentData <- get(strategy)
-#         rownames(SentData) <- as.integer(as.Date(rownames(SentData))) # for faster comparison below -> cast date to integer
-#         erg <- matrix(NA, nrow = length(datesEvalLast)+1, ncol = numAsset) # +1 to lookup every weight
-#         rownames(erg) <- c("1000-01-01", paste(datesEvalLast))
-#         erg[1, ] <- rep(1/numAsset, numAsset)
-#         
-#         for(d in datesEvalLast){
-#             dInd <- which(datesEvalLast==d)
-#             
-#             SSent <- cov(SentData[(which(rownames(SentData) == d)-sentLookback):
-#                                       which(rownames(SentData) == d) - 1, ]) # -1 to just look in past
-#             rdat <- ret[unique(pmax(which(rownames(ret)<=d) - 1,1)),] # from beginning to one day in past
-#             muStock <- colMeans(rdat)
-#             SStock <- cov(rdat)
-#             
-#             erg[dInd+1,] <- donlp2NLP(start = erg[dInd,], obj = hWeighted, 
-#                          par.lower = rep(0, numAsset), ineqA = IneqA, 
-#                          ineqA.lower = 1.0, ineqA.upper = 1.0)$solution
-#         }
-#         
-#         E[[weightName]][[strategy]] <- erg
-#         tt[(weightInd-1)*nrow(grid) + which(sentixDataNamesReg == strategy)] <- proc.time()[3]
-#     }
-# }
-# save(E, file = file.path(folderData, "Optimization", paste0("Eserver_", format(Sys.time(), "%Y-%m-%d---%H-%M"))))
-```
-
-
-# END detach
+### detach
 
 ```{r}
-detach("package:FRAPO")
-detach("package:fPortfolio")
-detach("package:fAssets")
-detach("package:fBasics")
-detach("package:timeSeries")
+detach("package:FRAPO", unload = T)
+detach("package:fPortfolio", unload = T)
+detach("package:fAssets", unload = T)
+
+unloadNamespace("fCopulae")
+unloadNamespace("fMultivar")
+detach("package:fBasics", unload = T) # need to unload "fCopulae" and "fMultivar" first, somehow "detach" doesn't work -> use "unloadNamespace()"
+
+detach("package:timeSeries", unload = T)
 ```
 

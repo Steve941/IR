@@ -7,22 +7,13 @@ output: pdf_document
 
 # Overview
 
-Please look at the titles to get an overview of what is done when. You can also refer to the introducing sentences of each main title.
-
-
-# Packages, Functions and Parameters
-
-First we load all the relevant packages (are saved separetly in *libraries.R*). Then we show the global parameters (*parameters.R*) and also load the functions (which are shown when needed).
+Please look at the titles to get an overview of what is done when. You can also refer to the introducing sentences of each chapter. Furthermore an overview is provided as a chart.
 
 ```{r, include=FALSE}
-source("libraries.R")
+sessionInfo() # shows info of session (e.g. loaded packages)
+loadedNamespaces() # shows packages directly
 ```
 
-
-```{r}
-source("parameters.R", echo = T)
-# source("functions.R")
-```
 
 \newpage
 ```{r, child="10 Data Import Preparation.Rmd"}
@@ -39,7 +30,6 @@ source("parameters.R", echo = T)
 \newpage
 ```{r, child="40 Analysis.Rmd"}
 ```
-
 
 \newpage
 ```{r, child="50 Optimization.Rmd"}

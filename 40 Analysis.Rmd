@@ -5,12 +5,8 @@ date: "August 2017"
 output: pdf_document
 ---
 
-```{r, include=FALSE}
-source("parameters.R")
-```
-
 ```{r, include=FALSE, cache=T, results='hide'}
-knitr::knit_child("30 Data Visualization.Rmd")
+# knitr::knit_child("30 Data Visualization.Rmd")
 ```
 
 # Analysis
@@ -27,7 +23,7 @@ Let *n* be the number of periods considered (n=1: just this period, n=2: this an
 ```{r}
 q <- 0.1
 
-compareDispRes <- function(n, m=0){
+compareDispRet <- function(n, m=0){
     res <- matrix(NA, nrow = ncol(ret), ncol = length(sDisp))
     rownames(res) <- colnames(ret)
     colnames(res) <- names(sDisp)
@@ -57,7 +53,7 @@ So I1 seems to be able to predict returns, while P6 does not.
 
 
 ```{r}
-res <- compareDispRes(1)
+res <- compareDispRet(1)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 ```
@@ -68,7 +64,7 @@ dispersion in connection with return of same period
 
 
 ```{r}
-res <- compareDispRes(1, 1)
+res <- compareDispRet(1, 1)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 ```
@@ -78,7 +74,7 @@ matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)
 dispersion of one period with return over next *n* periods (this period up to n-1 period).
 
 ```{r}
-res <- compareDispRes(3)
+res <- compareDispRet(3)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 
@@ -89,7 +85,7 @@ matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)
 dispersion of one period with return over next *n* periods (this period up to n-1 period).
 
 ```{r}
-res <- compareDispRes(6)
+res <- compareDispRet(6)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 ```
@@ -97,6 +93,6 @@ matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)
 
 
 ```{r}
-rm(q, res)
+rm(q, res, compareDispRet)
 ```
 

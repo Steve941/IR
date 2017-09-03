@@ -6,12 +6,8 @@ output: pdf_document
 ---
 
 
-```{r, include=FALSE}
-source("parameters.R")
-```
-
 ```{r, include=FALSE, cache=T, results='hide'}
-knitr::knit_child("50 Optimization.Rmd")
+# knitr::knit_child("50 Optimization.Rmd")
 ```
 
 # Visualization
@@ -49,19 +45,7 @@ USEFUL: we calculate the percentage points of weights that change in each time s
 
 Use an adoption of *calcTestVar()*
 
-difference in function is that fweight is not there for classic portfolios
-```{r}
-calcEvalVarSentix <- function(dat){
-    res <- calcEvalVarClassic(dat)
-    for(timeWindowName in names(dat)){
-        for(portfolioName in names(dat[[timeWindowName]])){
-            fweight = mean(dat[[timeWindowName]][[portfolioName]]$obj)
-            res[[timeWindowName]][[portfolioName]]$fweight <- fweight
-        }
-    }
-    return(res)
-}
-```
+
 
 ```{r}
 calcEvalVarClassic <- function(dat){
@@ -93,6 +77,20 @@ calcEvalVarClassic <- function(dat){
                                                            anR = anR, anSd = anSd, anSR = anR/anSd, 
                                                            turnover = turnover)
             
+        }
+    }
+    return(res)
+}
+```
+
+difference in function is that fweight is not there for classic portfolios
+```{r}
+calcEvalVarSentix <- function(dat){
+    res <- calcEvalVarClassic(dat)
+    for(timeWindowName in names(dat)){
+        for(portfolioName in names(dat[[timeWindowName]])){
+            fweight = mean(dat[[timeWindowName]][[portfolioName]]$obj)
+            res[[timeWindowName]][[portfolioName]]$fweight <- fweight
         }
     }
     return(res)
@@ -180,26 +178,19 @@ plotWeightsLines <- function(datName, d, s){
     dat <- datName[[d]][[s]]$x
     dat <- as.data.frame(dat)
     dat$date <- as.Date(rownames(dat))
-    dat$turnover <- datName[[d]][[s]]$turnover
-    
-    colBackground <- colsEvalDates[d]
-        
     plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
-    for(i in 1:(ncol(dat)-3)){
+	 
+    for(i in 1:(ncol(dat)-2)){
         plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
     }
-    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
-        
+    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-1,"], color = colnames(dat)[", ncol(dat)-1, "]))")
+ 
     eval(parse(text = plotCommand))+
-        ylim(0, 1)+
-        geom_bar(aes(y=dat$turnover, colour = "Turnover"), stat = "identity")+
-        scale_y_continuous(sec.axis = sec_axis(~., name = "Turnover"))+
         labs(title = paste("Time:", d),
              subtitle = paste("Portfolio:", s),
-             y = "Weight ",
+             y = "Weight",
              x = "Date") +
-        scale_color_discrete(name = "Index") +
-        theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
+        scale_color_discrete(name = "Index")
 }
 ```
 
@@ -228,7 +219,62 @@ plotWeightsLinesComplete <- function(dat, fileName){
 }
 ```
 
+### TODO: change of weights with turnover
 
+TODO: include turnover as bar plot with second y-axis to visualize how much a portfolio has to be changed.
+
+```{r, eval=FALSE}
+plotWeightsLines <- function(datName, d, s){
+    dat <- datName[[d]][[s]]$x
+    dat <- as.data.frame(dat)
+    dat$date <- as.Date(rownames(dat))
+    dat$turnover <- datName[[d]][[s]]$turnover
+    
+    colBackground <- colsEvalDates[d]
+        
+    plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
+    for(i in 1:(ncol(dat)-3)){
+        plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
+    }
+    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
+        
+    eval(parse(text = plotCommand))+
+        ylim(0, 1)+
+        geom_bar(aes(y=dat$turnover, colour = "Turnover"), stat = "identity")+
+        scale_y_continuous(sec.axis = sec_axis(~., name = "Turnover"))+
+        labs(title = paste("Time:", d),
+             subtitle = paste("Portfolio:", s),
+             y = "Weight ",
+             x = "Date") +
+        scale_color_discrete(name = "Index") +
+        theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
+}
+```
+
+```{r, eval=FALSE}
+plotWeightsLinesComplete <- function(dat, fileName){
+    lateximport <- c(paste0("\\subsection{",fileName,"}"))
+    
+    for(d in datesEvalNames){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", fileName, " - ", d, "}"))
+        
+        for(s in names(dat[[d]])){
+            # plotWeightsLines(dat, d, s)
+            
+            title <- paste0(fileName, "-", d,"-", s, ".pdf")
+            pdf(file.path(getwd(), "Plot", title), width = 10, height = 4)
+            plot(plotWeightsLines(dat, d, s))
+            dev.off()
+            
+            lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
+        }
+    }
+    
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
 
 
 ### summary statistics
@@ -253,6 +299,7 @@ summaryClassic <- function(datName, d, roundTo = 2){
 ```
 
 ```{r}
+# install.packages("xtable")
 library(xtable)
 ```
 
@@ -293,74 +340,9 @@ wholeAnalysis <- function(dat, fileName){
 ```
 
 
-
-
-## One Dispersion, different weights
-
-We visualize the different portfolio returns of each time window of each dispersion in a histogram.
-
-The results can (also) be found in "\\IR-Phase FIM-Statistik\\R-Research Project Statistics\\Plot Optimization\\Dispersion Const".
-
-### on its own
-
-not so interesting, nicer below
-
-```{r}
-for(d in datesNames){
-    retOverTime <- apply(1+ret[get(d),], 2, prod)
-    
-    for(i in names(xDispConst[[d]])){
-        retDispTime <- numeric(length(xDispConst[[d]][[i]]))
-        names(retDispTime) <- names(xDispConst[[d]][[i]])
-        for(j in 1:length(retDispTime)){
-            retDispTime[j] <- crossprod(xDispConst[[d]][[i]][[j]]$x, retOverTime)
-        }
-        
-        t <- paste(d, i, sep = " - ")
-        pdf(file.path(getwd(), "Plot Optimization", "Dispersion Const", paste0(t, ".pdf")), width = 10, height = 4)
-        plot(retDispTime, main = t)
-        dev.off()
-    }
-}
-```
-
-### together (all different dispersions)
-
-```{r}
-for(d in datesNames){
-    cols <- rainbow(length(xDispConst[[d]]))
-    retOverTime <- apply(1+ret[get(d),], 2, prod)
-    retDispTime <- data.frame(w = names(xDispConst[[d]][[1]]))
-    
-    for(i in names(xDispConst[[d]])){
-        for(j in 1:nrow(retDispTime)){
-            retDispTime[j,i] <- crossprod(xDispConst[[d]][[i]][[j]]$x, retOverTime)
-        }
-    }
-    
-    ylim = c(min(retDispTime[,-1]), max(retDispTime[,-1]))
-    plot(retDispTime[,2], ylim = ylim, col = cols[1], main = d)
-    for(i in 3:ncol(retDispTime)){
-        par(new=T)
-        plot(retDispTime[,i], ylim = ylim, axes = F, xlab = "", ylab = "", col = cols[i-1])
-    }
-    legend("bottomright", legend = names(xDispConst[[d]]), col = cols, lty = 1)
-    
-    pdf(file.path(getwd(), "Plot Optimization", "Dispersion Const", paste0("0", d, ".pdf")), width = 10, height = 8)
-    plot(retDispTime[,2], ylim = ylim, col = cols[1], main = d)
-    for(i in 3:ncol(retDispTime)){
-        par(new=T)
-        plot(retDispTime[,i], ylim = ylim, axes = F, xlab = "", ylab = "", col = cols[i-1])
-    }
-    legend("bottomright", legend = names(xDispConst[[d]]), col = cols, lty = 1)
-    dev.off()
-}
-
-```
-
 ## Classic Optimization
 
-### Constant weights over window
+### Constant weights over time window
 
 We want to visualize the evolvement of a portfolio over each time window.
 
@@ -394,7 +376,7 @@ for(d in datesEvalNames){
     axis(1, at = c(0, 10, 20, 30, 40, 50), labels = retPlot[c(0, 10, 20, 30, 40, 50)+1,1])
     legend("bottomright", legend = names(xClassicConst[[d]]), col = cols, lty = 1)
     
-    pdf(file.path(getwd(), "Plot Optimization", "Classical Const", paste0(d, ".pdf")), width = 10, height = 8)
+    pdf(file.path(getwd(), "Plot", paste0("Performance-ClassicConst-", d, ".pdf")), width = 10, height = 8)
     plot(retPlot[,2], type = "l", ylim = ylim, col = cols[1], main = d, xlab = "Date", ylab = "Value", xaxt='n')
     for(i in 3:ncol(retPlot)){
         par(new=T)
@@ -413,7 +395,7 @@ wholeAnalysis(xClassicVar, "Classic")
 ```
 
 
-### Varying no risk free
+### Varying of portfolio weights no risk free asset
 
 ```{r}
 wholeAnalysis(xClassicVarNoRf, "Classic-No-Risk-Free")
@@ -422,62 +404,23 @@ wholeAnalysis(xClassicVarNoRf, "Classic-No-Risk-Free")
 
 ## Sentix Optimization
 
-### Change of Portfolio weights
-
-First, we want to depict the change of portfolio weights over time.
-
-#### area plot
-
-We want to generate an area plot of the varying weights.
-
 ```{r}
-dat = xSentixVarying$datesEvalBear$P1$x
-
-plotWeightsArea <- function(datName){
-    dat <- datName$x
-    alpha = 0.5 
-    rn <- rownames(dat)
-    dat <- t(apply(dat, 1, cumsum))
-    dat <- as.data.frame(dat)
-    dat$date <- as.Date(rownames(dat))
-    
-    ggplot(dat, aes(x=date)) +
-        geom_area(aes(y=dat[,7], fill=colnames(dat)[7]), alpha=alpha) +
-        geom_area(aes(y=dat[,6], fill=colnames(dat)[6]), alpha=alpha) +
-        geom_area(aes(y=dat[,5], fill=colnames(dat)[5]), alpha=alpha) +
-        geom_area(aes(y=dat[,4], fill=colnames(dat)[4]), alpha=alpha) +
-        geom_area(aes(y=dat[,3], fill=colnames(dat)[3]), alpha=alpha) +
-        geom_area(aes(y=dat[,2], fill=colnames(dat)[2]), alpha=alpha) +
-        geom_area(aes(y=dat[,1], fill=colnames(dat)[1]), alpha=alpha) +
-        scale_fill_discrete(name="Index") +
-        labs(title = deparse(substitute(datName)),
-             y = "Weight",
-             x = "Date")
-}
-
-plotWeightsArea(xSentixVarying[["datesEvalBear"]][["P1"]])
-```
-
-#### Line Plot
-
-As the area might be a bit complicated to understand (just the visible height of the area matters, not the absolute maximal y value), we use a line plot for visualization.
-
-```{r}
-plotWeightsLines
-```
-
-#### Whole Analysis
-
-```{r}
-wholeAnalysis(xSentixVarying, "Sentix")
+wholeAnalysis(xDispVarEval, "Sentix")
 ```
 
 
 ## All together
 
+sentix with classic portfolio with varying weights
+
 ### Performance
 
+
+
 ```{r}
+retPortClassicVarying <- calcEvalVarClassic(xClassicVar)
+retPortSentixVarying <- calcEvalVarClassic(xDispVarEval)
+
 retAllVarying <- retPortClassicVarying
 for(timeWindowName in names(retAllVarying)){
     retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortSentixVarying[[timeWindowName]])
@@ -494,3 +437,17 @@ plotPortfolioComplete(retAllVarying, "Performance-All")
 ```{r}
 summaryClassicComplete(retAllVarying, "SummaryAll")
 ```
+
+```{r}
+rm(retPortClassicVarying, retPortSentixVarying, retAllVarying)
+```
+
+
+## cleanup
+
+```{r}
+rm(calcEvalVarClassic, calcEvalVarSentix, plotPortfolio, plotPortfolioComplete, plotWeightsLines, plotWeightsLinesComplete, summaryClassic, summaryClassicComplete, wholeAnalysis)
+
+detach("package:xtable", unload = T)
+```
+

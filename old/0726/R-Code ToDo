@@ -1,0 +1,14 @@
+# Einlesen
+
+
+
+# Schmankerl
+globale Variablen vermeiden
+ggf detach library after needed
+
+
+
+
+# Done
+Sentex-Daten Einlesen in Funktion schreiben (oder eig. noch geschickter direkt an Rohdaten rankommen, sonst werden doch die Sentex-Daten im Review direkt angegriffen (nicht nachvollziehbar))
+Nicht mit Prozent rechnen, sondern mit anständigen Zahlen
