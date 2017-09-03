@@ -1,7 +1,7 @@
 \subsection{Summary-Classic}
 \subsubsection{datesEvalBear}
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Fri Sep 01 10:16:02 2017
+% Sun Sep 03 18:10:36 2017
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -17,7 +17,7 @@ Mean Return (an) & -0.34 & -0.08 & -0.17 & -0.08 & -0.12 & -0.44 \\
 
 \subsubsection{datesEvalBull}
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Fri Sep 01 10:16:02 2017
+% Sun Sep 03 18:10:37 2017
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -33,7 +33,7 @@ Mean Return (an) & 0.03 & 0.07 & 0.16 & 0.07 & 0.11 & 0.60 \\
 
 \subsubsection{datesEvalLast}
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Fri Sep 01 10:16:02 2017
+% Sun Sep 03 18:10:37 2017
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}

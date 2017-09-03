@@ -1,0 +1,7 @@
+\subsection{Herfindahl}
+\includegraphics[width=\textwidth]{sDisp P1.pdf}\linebreak
+\includegraphics[width=\textwidth]{sDisp P6.pdf}\linebreak
+\includegraphics[width=\textwidth]{sDisp I1.pdf}\linebreak
+\includegraphics[width=\textwidth]{sDisp I6.pdf}\linebreak
+\includegraphics[width=\textwidth]{sDisp G1.pdf}\linebreak
+\includegraphics[width=\textwidth]{sDisp G6.pdf}\linebreak
