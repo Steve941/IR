@@ -1,0 +1,7 @@
+\subsection{Ternary}
+\includegraphics[height=0.45\textheight]{Ternary-Weights P1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Weights P6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Weights I1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Weights I6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Weights G1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Weights G6.pdf}\linebreak

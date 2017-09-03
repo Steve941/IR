@@ -32,6 +32,7 @@ Generate *retPortSentixVarying*, the returns of portfolios with varying portfoli
 
 time window -> dispersion (sentixGroup) -> return of Portfolio, sharpe ratio
 
+x: portfolio weights
 R: return of portfolio on each date
 r: mean return of portfolio over whole time window
 sd: standard deviation of return of portfolio over whole time window
@@ -40,6 +41,11 @@ anR: annualized return of portfolio over whole time window
 anSd: annualized standard deiation
 anSR: sharpe ratio (annual)
 fweight: mean of goal function value
+turnover: turnover of weights (how much of portfolio has to be changed) in percent
+
+Calculation of turnover:
+NOT USEFUL (not comparable as portfolios evolve differently): we fix portfolio weights in t, hold these weights to t+1 (while portfolio raises to (1+ret)\*price_t), and may change weightsin t+1 -> amount changed is (change in weights) \* (value of index in t+1)
+USEFUL: we calculate the percentage points of weights that change in each time step. Divide by 2 as a percentage point is taken from one part of the portfolio and given to another part (so counted twice) -> get amount of portfolio that changes
 
 Use an adoption of *calcTestVar()*
 
@@ -73,6 +79,8 @@ calcEvalVarClassic <- function(dat){
             
             R <- rowSums(dat[[timeWindowName]][[portfolioName]]$x * retTimeWindow)
             
+            turnover <- c(0, rowSums(abs(diff(dat[[timeWindowName]][[portfolioName]]$x)))/2) # start off with 0 to have same length
+            
             r <- mean(R)
             sd <- sd(R)
             
@@ -80,8 +88,10 @@ calcEvalVarClassic <- function(dat){
             anSd <- sqrt((sd^2)*52)
             
             
-            res[[timeWindowName]][[portfolioName]] <- list(R = R, r = r, sd = sd, sr = r/sd,
-                                                                           anR = anR, anSd = anSd, anSR = anR/anSd)
+            res[[timeWindowName]][[portfolioName]] <- list(x = dat[[timeWindowName]][[portfolioName]]$x, 
+                                                           R = R, r = r, sd = sd, sr = r/sd,
+                                                           anR = anR, anSd = anSd, anSR = anR/anSd, 
+                                                           turnover = turnover)
             
         }
     }
@@ -110,6 +120,8 @@ plotPortfolio <- function(data, timeWindowName){
     datWork <- data[[timeWindowName]]
     timeWindow <- get(timeWindowName)
     
+    colBackground <- colsEvalDates[timeWindowName]
+    
     retPlot <- data.frame(date = as.integer(as.Date(get(timeWindowName))))# date is read as character, we need double to plot for x-axis
     class(retPlot$date) <- "Date"
     
@@ -133,10 +145,33 @@ plotPortfolio <- function(data, timeWindowName){
         labs(title = paste("Time:", timeWindowName),
              y = "Value",
              x = "Date") +
-        scale_color_discrete(name = "Index")
+        scale_color_discrete(name = "Index")+
+        theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
 }
 
 ```
+
+```{r}
+plotPortfolioComplete <- function(dat, fileName){
+    lateximport <- c(paste0("\\subsection{",fileName,"}"))
+    
+    for(d in datesEvalNames){
+        plotPortfolio(dat, d)
+        
+        title <- paste0(fileName, "-", d, ".pdf")
+        pdf(file.path(getwd(), "Plot", title), width = 10, height = 4)
+        plot(plotPortfolio(dat, d))
+        dev.off()
+        
+        lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
+    }
+    
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
+
 
 ### change of weights
 
@@ -145,21 +180,56 @@ plotWeightsLines <- function(datName, d, s){
     dat <- datName[[d]][[s]]$x
     dat <- as.data.frame(dat)
     dat$date <- as.Date(rownames(dat))
+    dat$turnover <- datName[[d]][[s]]$turnover
     
+    colBackground <- colsEvalDates[d]
+        
     plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
-    for(i in 1:(ncol(dat)-2)){
+    for(i in 1:(ncol(dat)-3)){
         plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
     }
-    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-1,"], color = colnames(dat)[", ncol(dat)-1, "]))")
+    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
         
     eval(parse(text = plotCommand))+
+        ylim(0, 1)+
+        geom_bar(aes(y=dat$turnover, colour = "Turnover"), stat = "identity")+
+        scale_y_continuous(sec.axis = sec_axis(~., name = "Turnover"))+
         labs(title = paste("Time:", d),
              subtitle = paste("Portfolio:", s),
-             y = "Weight",
+             y = "Weight ",
              x = "Date") +
-        scale_color_discrete(name = "Index")
+        scale_color_discrete(name = "Index") +
+        theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
 }
 ```
+
+```{r}
+plotWeightsLinesComplete <- function(dat, fileName){
+    lateximport <- c(paste0("\\subsection{",fileName,"}"))
+    
+    for(d in datesEvalNames){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", fileName, " - ", d, "}"))
+        
+        for(s in names(dat[[d]])){
+            # plotWeightsLines(dat, d, s)
+            
+            title <- paste0(fileName, "-", d,"-", s, ".pdf")
+            pdf(file.path(getwd(), "Plot", title), width = 10, height = 4)
+            plot(plotWeightsLines(dat, d, s))
+            dev.off()
+            
+            lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
+        }
+    }
+    
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
+
+
+
 
 ### summary statistics
 
@@ -182,6 +252,45 @@ summaryClassic <- function(datName, d, roundTo = 2){
 }
 ```
 
+```{r}
+library(xtable)
+```
+
+
+```{r}
+summaryClassicComplete <- function(dat, fileName, roundTo = 2){
+    lateximport <- c(paste0("\\subsection{",fileName,"}"))
+    
+    for(d in datesEvalNames){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", d, "}"))
+        lateximport <- c(lateximport, print(xtable(summaryClassic(dat, d, roundTo))))
+        print(summaryClassic(dat, d, roundTo))
+    }
+    
+    lateximport <- c(lateximport, "\\clearpage")
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
+
+
+### whole analysis in one command
+
+```{r}
+wholeAnalysis <- function(dat, fileName){
+    retDat <- calcEvalVarClassic(dat)
+    
+    # weights
+    plotWeightsLinesComplete(retDat, paste0("Weights-", fileName))
+    
+    # performance of portfolio
+    plotPortfolioComplete(retDat, paste0("Performance-", fileName))
+    
+    # summary statistics
+    summaryClassicComplete(retDat, paste0("Summary-", fileName))
+}
+```
 
 
 
@@ -299,38 +408,16 @@ for(d in datesEvalNames){
 
 ### Varying of portfolio weights
 
-#### change of portfolio weights
-
-
 ```{r}
-for(d in datesEvalNames){
-    for(s in names(xClassicVar[[d]])){
-        # plotWeightsLines(xClassicVar, d, s)
-        
-        pdf(file.path(getwd(), "Plot", paste0("Weights Classic-", d,"-", s, ".pdf")), width = 10, height = 4)
-        plot(plotWeightsLines(xClassicVar, d, s))
-        dev.off()
-    }
-}
+wholeAnalysis(xClassicVar, "Classic")
 ```
 
 
-#### performance of portfolio
+### Varying no risk free
 
 ```{r}
-retPortClassicVarying <- calcEvalVarClassic(xClassicVar)
+wholeAnalysis(xClassicVarNoRf, "Classic-No-Risk-Free")
 ```
-
-```{r}
-for(d in datesEvalNames){
-    plotPortfolio(retPortClassicVarying, d)
-    
-    pdf(file.path(getwd(), "Plot", paste0("Performance-Classic-", d, ".pdf")), width = 10, height = 4)
-    plot(plotPortfolio(retPortClassicVarying, d))
-    dev.off()
-}
-```
-
 
 
 ## Sentix Optimization
@@ -379,37 +466,11 @@ As the area might be a bit complicated to understand (just the visible height of
 plotWeightsLines
 ```
 
-```{r}
-for(d in datesEvalNames){
-    for(s in names(xSentixVarying[[d]])){
-        # plotWeightsLines(xSentixVarying, d, s)
-        
-        pdf(file.path(getwd(), "Plot", paste0("Weights Sentix-", d,"-", s, ".pdf")), width = 10, height = 4)
-        plot(plotWeightsLines(xSentixVarying, d, s))
-        dev.off()
-    }
-}
-```
-
-
-
-### Resulting Portfolios
-
+#### Whole Analysis
 
 ```{r}
-retPortSentixVarying <- calcEvalVarSentix(xSentixVarying)
+wholeAnalysis(xSentixVarying, "Sentix")
 ```
-
-```{r}
-for(d in datesEvalNames){
-    plotPortfolio(retPortSentixVarying, d)
-    
-    pdf(file.path(getwd(), "Plot", paste0("Performance-Sentix-", d, ".pdf")), width = 10, height = 4)
-    plot(plotPortfolio(retPortSentixVarying, d))
-    dev.off()
-}
-```
-
 
 
 ## All together
@@ -424,22 +485,12 @@ for(timeWindowName in names(retAllVarying)){
 ```
 
 ```{r}
-for(d in datesEvalNames){
-    plotPortfolio(retAllVarying, d)
-    
-    pdf(file.path(getwd(), "Plot", paste0("Performance-All-", d, ".pdf")), width = 10, height = 4)
-    plot(plotPortfolio(retAllVarying, d))
-    dev.off()
-}
+plotPortfolioComplete(retAllVarying, "Performance-All")
 ```
 
 
 ### Summary Statistics
 
 ```{r}
-for(d in datesEvalNames){
-    print(d)
-    print(summaryClassic(retAllVarying, d, 2))
-    cat("\n\n")
-}
+summaryClassicComplete(retAllVarying, "SummaryAll")
 ```

@@ -72,14 +72,17 @@ probierer, funktioniert nicht (wollte alle linien auf einmal plotten)
 store as function to keep structure similar to above (and store at same Place in environment)
 
 ```{r}
-geomRectDateLast <- function(){
-    parse(text = "geom_rect(aes(xmin = min(datesEvalLast), xmax = max(datesEvalLast), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"orange\")")}
+colsEvalDates <- c("red", "green", "orange")
+names(colsEvalDates) <- datesEvalNames
 
 geomRectDateBear <- function(){
     parse(text = "geom_rect(aes(xmin = min(datesEvalBear), xmax = max(datesEvalBear), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"red\")")}
 
 geomRectDateBull <- function(){
     parse(text = "geom_rect(aes(xmin = min(datesEvalBull), xmax = max(datesEvalBull), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"green\")")}
+
+geomRectDateLast <- function(){
+    parse(text = "geom_rect(aes(xmin = min(datesEvalLast), xmax = max(datesEvalLast), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"orange\")")}
 
 geomRectDateTest <- function(){
     parse(text = "geom_rect(aes(xmin = min(datesTest), xmax = max(datesTest), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"blue\")")}

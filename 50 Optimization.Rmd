@@ -618,8 +618,11 @@ srWeightsAn <- extractWeightsWithValue(xDispVarTestCalc, "anSR")
 
 ```{r}
 terntheme <- function(){
-  list(theme_rgbg(), theme(legend.position = c(0, 1),legend.justification = c(0, 1),
-                           plot.margin=unit(c(0, 2,0, 2), "cm")))
+    theme_rgbg() +
+        theme(legend.position = c(0, 1),
+              legend.justification = c(0, 1),
+              plot.margin=unit(c(0, 2,0, 2), "cm"),
+              tern.panel.background = element_rect(fill = "lightskyblue1"))
 }
 ```
 
@@ -628,14 +631,8 @@ note: "Calling 'structure(NULL, \*)' is deprecated, as NULL cannot have attribut
 *..level..* is calculated and then used inside the function
 
 ```{r}
-
-
-```
-
-
-```{r}
 plotTernary <- function(dat){
-    wmax <- dat[which.max(dat$value), c("w1", "w2", "w3")]
+    wmax <- dat[which.max(dat$value), c("w1", "w2", "w3", "value")]
     
     ggtern(dat, aes(x=w1, y=w2, z=w3, value=value)) +
         geom_point(shape=".")+
@@ -655,13 +652,23 @@ plotTernary <- function(dat){
 ```
 
 ```{r}
+lateximport <- c(paste0("\\subsection{Ternary}"))
+
 for(t in names(srWeightsAn$datesTest)){
     plot(plotTernary(srWeightsAn$datesTest[[t]]))
     
-    pdf(file.path(getwd(), "Plot", paste0("Ternary - Weights ",t, ".pdf")), width = 10, height = 10)
+    title <- paste0("Ternary-Weights ",t, ".pdf")
+    pdf(file.path(getwd(), "Plot", title), width = 10, height = 10)
     plot(plotTernary(srWeightsAn$datesTest[[t]]))
     dev.off()
+    
+    lateximport <- c(lateximport, paste0("\\includegraphics[height=0.45\\textheight]{",title,"}\\linebreak"))
 }
+
+fileConnection <- file(file.path(getwd(), "Plot", paste0("0Ternary.txt")))
+writeLines(lateximport, fileConnection)
+close(fileConnection)
+
 ```
 
 
@@ -692,7 +699,6 @@ time window -> dispersion (sentixGroup) -> weights of assets
 NOTE: change the weights of the test data, if different test time windows are used to get weights for different eval time weights
 
 We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual dispersion.
-
 
 ```{r}
 k <- 50
@@ -914,36 +920,90 @@ for(timeWindowName in datesEvalNames){
 
 
 
-```{r, results='hide', eval=FALSE}
 
-Wmsr <- matrix(NA, nrow = length(datesEvalLast), ncol = numAsset)
-Wmdp <- Wgmv <- Werc <- Wmsr
 
-for(d in datesEvalLast){
-    dInd <- which(datesEvalLast==d)
-    class(d) <- "Date"
-    rdatTime <- window(rdatTimeSource, start = start(rdatTimeSource), end = d-1) # just look at period before
+### different portfolio weights over time window, just risky portfolios
+
+IDEA: look at portfolio-rollingPortfolios {fPortfolio}
+
+
+manually rolling
+
+safe results in *xClassicVar* in an anolous manner to above 
+
+time window -> portfolio (classic) -> weights of assets
+
+NOTE: change the weights of the test data, if different test time windows are used to get weights for different eval time weights
+
+We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual dispersion.
+
+we exclude the risk free asset *BUND* of the analysis
+
+
+TODO: risk free rate mit nuller in BUND
+
+```{r}
+k <- 50
+
+xClassicVarNoRf <- list()
+
+# convert rownames back to date format (character!)
+t <- rownames(ret) 
+class(t) <- "Date"
+rdatTimeSource <- timeSeries(ret, charvec = as.character(t))
+
+# equal weights to start with (maybe)
+ew <- rep(1/(ncol(ret)-1), (ncol(ret)-1))
+
+for(timeWindowName in datesEvalNames){
+    datesEvalNow <- get(timeWindowName)
     
-    ans <- tangencyPortfolio(rdatTime)
-    Wmsr[dInd, ] <- getWeights(ans)
+    mat <- matrix(NA, nrow = (length(datesEvalNow)-1), ncol = ncol(rdatTimeSource))
+    colnames(mat) <- colnames(ret)[1:ncol(rdatTimeSource)]
+    rownames(mat) <- datesEvalNow[1:(length(datesEvalNow)-1)]
     
-     
-    ### global minimum variance
-    ans <- PGMV(rdatTime)
-    Wgmv[dInd, ] <- FRAPO::Weights(ans) / 100
+    xClassicVarNoRf[[timeWindowName]][["tanPort"]]$x <- mat
+    xClassicVarNoRf[[timeWindowName]][["mVaPort"]]$x <- mat 
+    xClassicVarNoRf[[timeWindowName]][["rp"]]$x <- mat 
+    xClassicVarNoRf[[timeWindowName]][["PGMV"]]$x <- mat 
+    xClassicVarNoRf[[timeWindowName]][["PMD"]]$x <- mat 
+    xClassicVarNoRf[[timeWindowName]][["ew"]]$x <- mat 
     
-    ### most diversified
-    ans <- PMD(rdatTime)
-    Wmdp[dInd, ] <- FRAPO::Weights(ans) / 100
-    
-    ### risk parity optimization
-    SStock <- cov(rdatTime)
-    ans <- rp(ew, SStock, ew, optctrl = ctrl(trace = FALSE)) # maybe invisible() makes output silent
-    Werc[dInd, ] <- c(getx(ans))
+    for(d in 1:(length(datesEvalNow)-1)){ # last date no portfolio weights
+        
+        timeEndInd <- which(datesAll == datesEvalNow[d]) ## one day before start of time window => NO, we can go up to the date
+        timeEnd <- datesAll[timeEndInd]
+        timeStart <- datesAll[timeEndInd-k+1]
+
+        rdatTime <- timeSeries::window(rdatTimeSource, start = timeStart, end = timeEnd) # note: first day is missing as returns miss first day of datesAll (naturally as no return at start)
+        rf <- mean(rdatTime[,"BUND"])
+        rdatTime <- rdatTime[,setdiff(names(rdatTime), "BUND")] # reduce to all but BUND
+        
+        portfolio <- portfolioSpec()
+        setRiskFreeRate(portfolio) <- rf
+        
+        ans <- tangencyPortfolio(rdatTime, spec = portfolio)
+        xClassicVarNoRf[[timeWindowName]][["tanPort"]]$x[d,] <- c(getWeights(ans), 0)
+        
+        ans <- minvariancePortfolio(rdatTime, spec = portfolio)
+        xClassicVarNoRf[[timeWindowName]][["mVaPort"]]$x[d,] <- c(getWeights(ans), 0)
+        
+        C <- cov(rdatTime)
+        ans <- rp(ew, C, ew, optctrl = ctrl(trace = FALSE)) 
+        xClassicVarNoRf[[timeWindowName]][["rp"]]$x[d,] <- c(getx(ans), 0)
+        
+        ans <- PGMV(rdatTime, optctrl = ctrl(trace = FALSE))
+        xClassicVarNoRf[[timeWindowName]][["PGMV"]]$x[d,] <- c(Weights(ans) / 100, 0)
+        
+        ans <- PMD(rdatTime, optctrl = ctrl(trace = FALSE))
+        xClassicVarNoRf[[timeWindowName]][["PMD"]]$x[d,] <- c(Weights(ans) / 100, 0)
+        
+        xClassicVarNoRf[[timeWindowName]][["ew"]]$x[d,] <- c(ew, 0)
+    }
 }
-
-Eclassic <- list("MSR" = Wmsr, "MDP" = Wmdp, "GMV" = Wgmv, "ERC" = Werc)
 ```
+
+
 
 
 

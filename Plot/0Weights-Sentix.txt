@@ -1,0 +1,22 @@
+\subsection{Weights-Sentix}
+\subsubsection{Weights-Sentix - datesEvalBear}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBear-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBear-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBear-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBear-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBear-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBear-G6.pdf}
+\subsubsection{Weights-Sentix - datesEvalBull}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBull-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBull-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBull-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBull-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBull-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalBull-G6.pdf}
+\subsubsection{Weights-Sentix - datesEvalLast}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-G6.pdf}

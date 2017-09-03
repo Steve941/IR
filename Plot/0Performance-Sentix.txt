@@ -1,0 +1,4 @@
+\subsection{Performance-Sentix}
+\includegraphics[width=\textwidth]{Performance-Sentix-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-datesEvalLast.pdf}

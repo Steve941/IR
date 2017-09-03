@@ -1,0 +1,50 @@
+\subsection{Summary-Sentix}
+\subsubsection{datesEvalBear}
+% latex table generated in R 3.4.1 by xtable 1.8-2 package
+% Fri Sep 01 11:06:21 2017
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrr}
+  \hline
+ & P1 & P6 & I1 & I6 & G1 & G6 \\ 
+  \hline
+Mean Return (an) & 0.05 & 0.07 & 0.04 & 0.06 & 0.05 & 0.07 \\ 
+  Volatility (an) & 0.07 & 0.07 & 0.06 & 0.07 & 0.07 & 0.07 \\ 
+  Sharpe Ratio (an) & 0.79 & 0.89 & 0.59 & 0.84 & 0.78 & 0.90 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{datesEvalBull}
+% latex table generated in R 3.4.1 by xtable 1.8-2 package
+% Fri Sep 01 11:06:21 2017
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrr}
+  \hline
+ & P1 & P6 & I1 & I6 & G1 & G6 \\ 
+  \hline
+Mean Return (an) & 0.11 & 0.16 & 0.11 & 0.09 & 0.11 & 0.16 \\ 
+  Volatility (an) & 0.06 & 0.10 & 0.05 & 0.05 & 0.06 & 0.10 \\ 
+  Sharpe Ratio (an) & 1.89 & 1.59 & 2.01 & 1.71 & 1.85 & 1.59 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{datesEvalLast}
+% latex table generated in R 3.4.1 by xtable 1.8-2 package
+% Fri Sep 01 11:06:21 2017
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrr}
+  \hline
+ & P1 & P6 & I1 & I6 & G1 & G6 \\ 
+  \hline
+Mean Return (an) & 0.12 & 0.13 & 0.12 & 0.12 & 0.12 & 0.13 \\ 
+  Volatility (an) & 0.06 & 0.11 & 0.06 & 0.06 & 0.06 & 0.11 \\ 
+  Sharpe Ratio (an) & 1.84 & 1.25 & 1.81 & 2.06 & 1.83 & 1.25 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\clearpage
