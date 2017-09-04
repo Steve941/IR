@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r, include=FALSE, cache=T, results='hide'}
-# knitr::knit_child("10 Data Import Preparation.Rmd")
+knitr::knit_child("10 Data Import Preparation.Rmd")
 ```
 
 
@@ -228,6 +228,12 @@ class(datesEvalLast) <- "Date"
 
 used later for storing results. trick *deparse(substitute())* to get an error when a window is deleted.
 
+#### all after Test
+
+```{r}
+datesEvalAllAfterTest <- rownames(ret)[(max(which(rownames(ret) %in% datesTest))+1):nrow(ret)]
+class(datesEvalAllAfterTest) <- "Date"
+```
 
 
 #### test period
@@ -248,7 +254,7 @@ length(datesTest)
 #### cleanup
 
 ```{r}
-datesEvalNames <- c(deparse(substitute(datesEvalBear)), deparse(substitute(datesEvalBull)), deparse(substitute(datesEvalLast)))
+datesEvalNames <- c(deparse(substitute(datesEvalBear)), deparse(substitute(datesEvalBull)), deparse(substitute(datesEvalLast)), deparse(substitute(datesEvalAllAfterTest)))
 ```
 
 ```{r}

@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r, include=FALSE, cache=T, results='hide'}
-# knitr::knit_child("20 Data Derivations.Rmd")
+knitr::knit_child("20 Data Derivations.Rmd")
 ```
 
 # Data Visualization
@@ -18,7 +18,7 @@ We visualize the data (stocks and sentix). For consistency, we first specify gen
 Put everything in one function to plot.
 
 ```{r}
-colsEvalDates <- c("red", "green", "orange")
+colsEvalDates <- c("red", "green", "orange", "yellow")
 names(colsEvalDates) <- datesEvalNames
 ```
 

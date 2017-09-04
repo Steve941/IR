@@ -7,7 +7,7 @@ output: pdf_document
 
 
 ```{r, include=FALSE, cache=T, results='hide'}
-# knitr::knit_child("50 Optimization.Rmd")
+knitr::knit_child("50 Optimization.Rmd")
 ```
 
 # Visualization

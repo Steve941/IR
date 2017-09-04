@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r, include=FALSE, cache=T, results='hide'}
-# knitr::knit_child("30 Data Visualization.Rmd")
+knitr::knit_child("30 Data Visualization.Rmd")
 ```
 
 # Analysis
