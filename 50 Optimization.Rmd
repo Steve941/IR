@@ -750,12 +750,12 @@ hHerfDirectMin <- function(x){
 
 We evaluate an optimal portfolio at each date within our time period and assume that we can redistribute our wealth at no cost.
 
-We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual dispersion.
+We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual herfindahl.
 
 We move the parallelization further inside to be sure that we make use of parallelization (might just have one test window).
 
 End result has the following structure:
-time window -> dispersion (sentixDataNames) -> weights of goal function -> dates in time window -> weights of assets
+time window -> herfindahl (sentixDataNames) -> weights of goal function -> dates in time window -> weights of assets
 
 Last weight for penultimate date of time window (hold until last date).
 
@@ -857,7 +857,7 @@ Now, we also want to visualize the data. We use a ternary plot for this.
 
 ```{r}
 srWeightsAn <- extractWeightsWithValue(xHerfVarTestCalc, "anSR")
-ternaryPlot(srWeightsAn, "Ternary-Herfersion")
+ternaryPlot(srWeightsAn, "Ternary-Herfindahl")
 ```
 
 
@@ -974,6 +974,97 @@ saveRDS(xDispVarEval, file = file.path(getwd(), "Optimization", paste0("EDispers
 
 ```{r}
 xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_Stefan2017-09-04---14-57"))
+```
+
+
+
+#### herfindahl direct min
+
+Now, we want to determine the portfolio weights over the time Windows. We use the data structure:
+
+time window -> herfindahl (sentixGroup) -> weights of assets
+
+NOTE: change the weights of the test data, if different test time windows are used to get weights for different eval time weights
+
+We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual herfindahl.
+
+```{r, eval=FALSE}
+k <- 50
+
+cores <- detectCores()
+
+if(Sys.getenv("USERNAME") == "Stefan"){
+    cl <- makeCluster(cores - 1)
+} else if(Sys.getenv("USERNAME") == "gloggest"){
+    cl <- makeCluster(cores) # use server fully
+} else
+    stop("Who are you???")
+
+
+xHerfVarEval <- list()
+
+registerDoSNOW(cl)
+for(t in datesEvalNames){
+    # timeInd <- datesAll[which(datesAll == min(get(t)))-1] ## one day before start of time window ### not used any more, as we move up to actual date
+    
+    xHerfVarEval[[t]] <- foreach(sentixGroup = names(sHerf), .export = c(datesEvalNames), .packages = c("Rdonlp2")) %dopar%{
+        L <- list()
+        
+        
+        w <- unlist(wOptHerfSRAn$datesTest[[sentixGroup]])
+        
+        mat <- matrix(NA, nrow = (length(get(t))-1), ncol = ncol(ret))
+        colnames(mat) <- colnames(ret)
+        rownames(mat) <- get(t)[1:(length(get(t))-1)]
+        obj <- numeric(length(get(t))-1)
+        tim <- numeric(length(get(t))-1)
+        
+        # first separate to then use the previous solution as starting point for next solution
+        ### -------------------
+        j <- 1
+        tInd <- which(datesAll == get(t)[j])
+        retOpt <- ret[(tInd-k+1):tInd,]
+        anMuOpt <- (1+colMeans(retOpt))^52-1
+        anCOpt <- cov(retOpt)*52
+        anHOpt <-  as.numeric(sHerf[[sentixGroup]][tInd,-1])
+        
+        erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hHerfDirectMin, 
+                         par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                         ineqA.lower = 1.0, ineqA.upper = 1.0)
+        mat[1,] <- erg$solution
+        obj[1] <- erg$objective
+        tim[1] <- as.numeric(erg$elapsed)
+        ### -------------------
+        
+        for(j in 2:(length(get(t))-1)){
+            tInd <- which(datesAll == get(t)[j])
+            retOpt <- ret[(tInd-k+1):tInd,]
+            anMuOpt <- (1+colMeans(retOpt))^52-1
+            anCOpt <- cov(retOpt)*52
+            anHOpt <- as.numeric(sHerf[[sentixGroup]][tInd,-1])
+            
+            erg <- donlp2NLP(start = mat[j-1,], fun = hHerfDirectMin, 
+                             par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                             ineqA.lower = 1.0, ineqA.upper = 1.0)
+            mat[j,] <- erg$solution
+            obj[j] <- erg$objective
+            tim[j] <- as.numeric(erg$elapsed)
+        }
+        
+        list(x = mat, obj = obj, time = tim)
+    }
+    names(xHerfVarEval[[t]]) <- names(sHerf)
+}
+
+stopCluster(cl)
+
+# names(xHerfVarTest) <- datesTestNames
+
+saveRDS(xHerfVarEval, file = file.path(getwd(), "Optimization", paste0("EHerfMinVaryingEval_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+```
+
+```{r}
+xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_Stefan2017-09-04---14-57"))
 ```
 
 ### cleanup
