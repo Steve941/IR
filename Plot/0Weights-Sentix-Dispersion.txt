@@ -1,0 +1,30 @@
+\subsection{Weights-Sentix-Dispersion}
+\subsubsection{Weights-Sentix-Dispersion - datesEvalBear}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-G6.pdf}
+\subsubsection{Weights-Sentix-Dispersion - datesEvalRecNBER}
+\subsubsection{Weights-Sentix-Dispersion - datesEvalBull}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-G6.pdf}
+\subsubsection{Weights-Sentix-Dispersion - datesEvalLast}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalLast-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalLast-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalLast-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalLast-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalLast-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalLast-G6.pdf}
+\subsubsection{Weights-Sentix-Dispersion - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalAllAfterTest-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalAllAfterTest-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalAllAfterTest-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalAllAfterTest-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalAllAfterTest-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalAllAfterTest-G6.pdf}

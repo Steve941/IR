@@ -45,7 +45,11 @@ USEFUL: we calculate the percentage points of weights that change in each time s
 
 Use an adoption of *calcTestVar()*
 
+```{r}
+library(PerformanceAnalytics)
+```
 
+use VaR *Value at Risk* and ES *Estimated Shortfall* from *PerformanceAnalytics* with method "historical", as we have historical data.
 
 ```{r}
 calcEvalVarClassic <- function(dat){
@@ -59,11 +63,11 @@ calcEvalVarClassic <- function(dat){
         rf <- mean(retTimeWindow[,"BUND"])
         
         for(portfolioName in names(dat[[timeWindowName]])){
-            
-            
             R <- rowSums(dat[[timeWindowName]][[portfolioName]]$x * retTimeWindow)
             
             turnover <- c(0, rowSums(abs(diff(dat[[timeWindowName]][[portfolioName]]$x)))/2) # start off with 0 to have same length
+            VaR <- VaR(R, method = "historical")
+            ES <- ES(R, method = "historical")
             
             r <- mean(R)
             sd <- sd(R)
@@ -75,7 +79,7 @@ calcEvalVarClassic <- function(dat){
             res[[timeWindowName]][[portfolioName]] <- list(x = dat[[timeWindowName]][[portfolioName]]$x, 
                                                            R = R, r = r, sd = sd, sr = r/sd,
                                                            anR = anR, anSd = anSd, anSR = anR/anSd, 
-                                                           turnover = turnover)
+                                                           turnover = turnover, VaR = VaR, ES = ES)
             
         }
     }
