@@ -174,11 +174,13 @@ plotPortfolioComplete <- function(dat, fileName){
 ### change of weights
 
 ```{r}
-plotWeightsLines <- function(datName, d, s){
-    dat <- datName[[d]][[s]]$x
+plotWeightsLines <- function(datName, timeWindowName, s){
+    dat <- datName[[timeWindowName]][[s]]$x
     dat <- as.data.frame(dat)
     dat$date <- as.Date(rownames(dat))
     plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
+    
+    colBackground <- colsEvalDates[timeWindowName]
 	 
     for(i in 1:(ncol(dat)-2)){
         plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
@@ -186,11 +188,13 @@ plotWeightsLines <- function(datName, d, s){
     plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-1,"], color = colnames(dat)[", ncol(dat)-1, "]))")
  
     eval(parse(text = plotCommand))+
-        labs(title = paste("Time:", d),
-             subtitle = paste("Portfolio:", s),
-             y = "Weight",
-             x = "Date") +
-        scale_color_discrete(name = "Index")
+      ylim(0,1)+
+      labs(title = paste("Time:", timeWindowName),
+           subtitle = paste("Portfolio:", s),
+           y = "Weight",
+           x = "Date") +
+      scale_color_discrete(name = "Index")+
+      theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
 }
 ```
 
@@ -198,15 +202,15 @@ plotWeightsLines <- function(datName, d, s){
 plotWeightsLinesComplete <- function(dat, fileName){
     lateximport <- c(paste0("\\subsection{",fileName,"}"))
     
-    for(d in datesEvalNames){
-        lateximport <- c(lateximport, paste0("\\subsubsection{", fileName, " - ", d, "}"))
+    for(timeWindowName in datesEvalNames){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", fileName, " - ", timeWindowName, "}"))
         
-        for(s in names(dat[[d]])){
+        for(portfolioName in names(dat[[timeWindowName]])){
             # plotWeightsLines(dat, d, s)
             
-            title <- paste0(fileName, "-", d,"-", s, ".pdf")
+            title <- paste0(fileName, "-", timeWindowName,"-", portfolioName, ".pdf")
             pdf(file.path(getwd(), "Plot", title), width = 10, height = 4)
-            plot(plotWeightsLines(dat, d, s))
+            plot(plotWeightsLines(dat, timeWindowName, portfolioName))
             dev.off()
             
             lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
@@ -221,10 +225,59 @@ plotWeightsLinesComplete <- function(dat, fileName){
 
 ### TODO: change of weights with turnover
 
-TODO: include turnover as bar plot with second y-axis to visualize how much a portfolio has to be changed.
+to plot multiple plots on one plot <http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/>
 
-```{r, eval=FALSE}
-plotWeightsLines <- function(datName, d, s){
+```{r}
+# Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+```
+
+
+```{r}
+plotWeightsLinesWithTurnover <- function(datName, d, s){
     dat <- datName[[d]][[s]]$x
     dat <- as.data.frame(dat)
     dat$date <- as.Date(rownames(dat))
@@ -238,21 +291,29 @@ plotWeightsLines <- function(datName, d, s){
     }
     plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
         
-    eval(parse(text = plotCommand))+
-        ylim(0, 1)+
-        geom_bar(aes(y=dat$turnover, colour = "Turnover"), stat = "identity")+
-        scale_y_continuous(sec.axis = sec_axis(~., name = "Turnover"))+
-        labs(title = paste("Time:", d),
-             subtitle = paste("Portfolio:", s),
-             y = "Weight ",
-             x = "Date") +
-        scale_color_discrete(name = "Index") +
-        theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
+    p1 <- eval(parse(text = plotCommand))+
+      ylim(0, 1)+
+      labs(title = paste("Time:", d),
+           subtitle = paste("Portfolio:", s),
+           y = "Weight ",
+           x = "Date",
+           color = "Portfolios") +
+      theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)), legend.position = "bottom")
+    p2 <- ggplot(dat, aes(x=date))+
+      ylim(0,1)+
+      geom_bar(aes(y=dat$turnover), stat = "identity", fill = "black")+
+      labs(title = paste("Time:", d),
+           subtitle = paste("Turnover:", s),
+           y = "Turnover",
+           x = "Date") +
+      theme(panel.background = element_rect(fill = alpha(colBackground, 0.1)))
+    
+    multiplot(p1, p2)
 }
 ```
 
-```{r, eval=FALSE}
-plotWeightsLinesComplete <- function(dat, fileName){
+```{r}
+plotWeightsLinesWithTurnoverComplete <- function(dat, fileName){
     lateximport <- c(paste0("\\subsection{",fileName,"}"))
     
     for(d in datesEvalNames){
@@ -262,8 +323,8 @@ plotWeightsLinesComplete <- function(dat, fileName){
             # plotWeightsLines(dat, d, s)
             
             title <- paste0(fileName, "-", d,"-", s, ".pdf")
-            pdf(file.path(getwd(), "Plot", title), width = 10, height = 4)
-            plot(plotWeightsLines(dat, d, s))
+            pdf(file.path(getwd(), "Plot", title), width = 10, height = 8)
+            plotWeightsLinesWithTurnover(dat, d, s)
             dev.off()
             
             lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
@@ -303,6 +364,8 @@ summaryClassic <- function(datName, d, roundTo = 2){
 library(xtable)
 ```
 
+"floating = FALSE" to eliminate table environment
+
 
 ```{r}
 summaryClassicComplete <- function(dat, fileName, roundTo = 2){
@@ -310,7 +373,7 @@ summaryClassicComplete <- function(dat, fileName, roundTo = 2){
     
     for(d in datesEvalNames){
         lateximport <- c(lateximport, paste0("\\subsubsection{", d, "}"))
-        lateximport <- c(lateximport, print(xtable(summaryClassic(dat, d, roundTo))))
+        lateximport <- c(lateximport, print(xtable(summaryClassic(dat, d, roundTo)), floating = FALSE))
         print(summaryClassic(dat, d, roundTo))
     }
     
@@ -329,7 +392,7 @@ wholeAnalysis <- function(dat, fileName){
     retDat <- calcEvalVarClassic(dat)
     
     # weights
-    plotWeightsLinesComplete(retDat, paste0("Weights-", fileName))
+    plotWeightsLinesWithTurnoverComplete(retDat, paste0("Weights-", fileName))
     
     # performance of portfolio
     plotPortfolioComplete(retDat, paste0("Performance-", fileName))
@@ -413,9 +476,7 @@ wholeAnalysis(xDispVarEval, "Sentix")
 
 sentix with classic portfolio with varying weights
 
-### Performance
-
-
+### classicWithRiskFree
 
 ```{r}
 retPortClassicVarying <- calcEvalVarClassic(xClassicVar)
@@ -425,18 +486,29 @@ retAllVarying <- retPortClassicVarying
 for(timeWindowName in names(retAllVarying)){
     retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortSentixVarying[[timeWindowName]])
 }
+
+
+
+plotPortfolioComplete(retAllVarying, "Performance-All-classicWithRiskFree")
+summaryClassicComplete(retAllVarying, "SummaryAll-classicWithRiskFree")
 ```
+
+### classicWithOutRiskFree
 
 ```{r}
-plotPortfolioComplete(retAllVarying, "Performance-All")
+retPortClassicVarying <- calcEvalVarClassic(xClassicVarNoRf)
+retPortSentixVarying <- calcEvalVarClassic(xDispVarEval)
+
+retAllVarying <- retPortClassicVarying
+for(timeWindowName in names(retAllVarying)){
+    retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortSentixVarying[[timeWindowName]])
+}
+
+
+plotPortfolioComplete(retAllVarying, "Performance-All-classicNoRiskFree")
+summaryClassicComplete(retAllVarying, "SummaryAll-classicNoRiskFree")
 ```
 
-
-### Summary Statistics
-
-```{r}
-summaryClassicComplete(retAllVarying, "SummaryAll")
-```
 
 ```{r}
 rm(retPortClassicVarying, retPortSentixVarying, retAllVarying)

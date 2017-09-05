@@ -231,6 +231,20 @@ axis(1, pretty(1:length(retTotal)), names(retTotal)[pretty(1:length(retTotal))+1
 axis(2)
 ```
 
+#### bear according to NBER
+
+add recession according to NBER: <http://www.nber.org/cycles/cyclesmain.html>
+
+```{r}
+tmp <- rownames(ret)
+class(tmp) <- "Date"
+tmp <- as.character(tmp)
+
+datesEvalRecNBER <- rownames(ret)[min(which(substring(tmp, 1,7) == "2007-12")):max(which(substring(tmp, 1, 7) == "2009-06"))]
+class(datesEvalRecNBER) <- "Date"
+```
+
+
 #### last data
 
 We also look at the most actual data.
@@ -256,7 +270,7 @@ class(datesEvalAllAfterTest) <- "Date"
 #### cleanup
 
 ```{r}
-datesEvalNames <- c(deparse(substitute(datesEvalBear)), deparse(substitute(datesEvalBull)), deparse(substitute(datesEvalLast)), deparse(substitute(datesEvalAllAfterTest)))
+datesEvalNames <- c(deparse(substitute(datesEvalBear)), deparse(substitute(datesEvalRecNBER)), deparse(substitute(datesEvalBull)), deparse(substitute(datesEvalLast)), deparse(substitute(datesEvalAllAfterTest)))
 ```
 
 ```{r}

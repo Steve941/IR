@@ -20,3 +20,10 @@
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalLast-PGMV.pdf}
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalLast-PMD.pdf}
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalLast-ew.pdf}
+\subsubsection{Weights-Classic-No-Risk-Free - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-tanPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-mVaPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-rp.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PGMV.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PMD.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-ew.pdf}

@@ -1,0 +1,7 @@
+\subsection{Ternary-Herfindahl}
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-P1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-P6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-I1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-I6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-G1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-G6.pdf}\linebreak

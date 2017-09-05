@@ -280,17 +280,165 @@ targetRpa <- 0.06 ## targeted return of 6 % p.a.
 # Volatility
 targetVolpa <- 0.04 ## % p.a.
 
-# Dispersion
-targetDisp <- 0.58 ## found as it looks promising and reachable in the analysis
-
-
-
 IneqA <- matrix(1, nrow = 1, ncol = ncol(ret)) # to take care of investments
 ```
 
+##### visualization ternary
 
+```{r}
+library(ggtern)
+```
+
+
+```{r}
+extractWeightsWithValue <- function(dat, value){
+    ret <- list()
+    for(timeWindowName in names(dat)){
+        for(sentixGroup in names(dat[[timeWindowName]])){
+            df <- data.frame(w = names(dat[[timeWindowName]][[sentixGroup]])[1], value = dat[[timeWindowName]][[sentixGroup]][[1]][[value]])
+            df$w <- as.character(df$w)
+            df$w1 <- as.numeric(unlist(strsplit(df$w, "-"))[1])
+            df$w2 <- as.numeric(unlist(strsplit(df$w, "-"))[2])
+            df$w3 <- as.numeric(unlist(strsplit(df$w, "-"))[3])
+            
+            for(weightsName in names(dat[[timeWindowName]][[sentixGroup]])[2:length(names(dat[[timeWindowName]][[sentixGroup]]))]){
+                df <- rbind(df, c(weightsName, dat[[timeWindowName]][[sentixGroup]][[weightsName]][[value]], unlist(strsplit(weightsName, "-"))))
+            }
+            
+            ret[[timeWindowName]][[sentixGroup]] <- data.frame(w1 = as.numeric(df[,"w1"]), 
+                                                                         w2 = as.numeric(df[,"w2"]), 
+                                                                         w3 = as.numeric(df[,"w3"]),
+                                                                         value = as.numeric(df[,"value"]))
+        }
+    }
+    return(ret)
+}
+```
+
+visualization of weights and results via ternary plot
+
+```{r}
+terntheme <- function(){
+    theme_rgbg() +
+        theme(legend.position = c(0, 1),
+              legend.justification = c(0, 1),
+              plot.margin=unit(c(0, 2,0, 2), "cm"),
+              tern.panel.background = element_rect(fill = "lightskyblue1"))
+}
+```
+
+note: "Calling 'structure(NULL, \*)' is deprecated, as NULL cannot have attributes. Consider 'structure(list(), \*)' instead." is just a message, not an error. it is due to strict checks in the newer R-version <https://stat.ethz.ch/pipermail/r-devel/2016-December/073554.html>
+
+*..level..* is calculated and then used inside the function
+
+```{r}
+plotTernary <- function(dat){
+    wmax <- dat[which.max(dat$value), c("w1", "w2", "w3", "value")]
+    
+    ggtern(dat, aes(x=w1, y=w2, z=w3, value=value)) +
+        geom_point(shape=".")+
+        geom_text(aes(x=w1, y=w2, label=round(value,1)), data = dat[dat$value>(dat[(dat$w1==wmax$w1) & (dat$w2==wmax$w2),"value"]*0.95),]) +
+        geom_interpolate_tern(aes(value=value, color = ..level..)) +
+        geom_point(aes(x=w1, y=w2), dat = wmax, color = "red") + 
+        geom_text(aes(x=w1, y=w2, label=round(dat[(dat$w1==wmax$w1) & (dat$w2==wmax$w2),"value"],1)), data = wmax, color = "red" )+
+        terntheme() +
+        Lline(Lintercept =  wmax$w1, colour = theme_rgbg()$tern.axis.line.L$colour, linetype = 2, lwd=1) + ## w1 on Left axis
+        Tline(Tintercept = wmax$w2, colour = theme_rgbg()$tern.axis.line.T$colour, linetype = 2, lwd=1) + ## w2 on Top axis
+        Rline(Rintercept = wmax$w3, color = theme_rgbg()$tern.axis.line.R$colour, linetype = 2, lwd=1) + ## w3 on Right axis
+        scale_color_gradient(low = "green", high = "red") +
+        labs(x = "return", y = "variation", z = "dispersion",
+             title = paste0("Ternary Plot with Sharpe Ratio Contour Lines -", deparse(substitute(dat)), "-", t),
+             color = "Level")
+}
+```
+
+```{r}
+ternaryPlot <- function(dat, titleFile){
+  lateximport <- c(paste0("\\subsection{", titleFile, "}"))
+  
+  for(t in names(dat$datesTest)){
+    plot(plotTernary(dat$datesTest[[t]]))
+    
+    title <- paste0(titleFile, "-", t, ".pdf")
+    pdf(file.path(getwd(), "Plot", title), width = 10, height = 10)
+    plot(plotTernary(dat$datesTest[[t]]))
+    dev.off()
+    
+    lateximport <- c(lateximport, paste0("\\includegraphics[height=0.45\\textheight]{",title,"}\\linebreak"))
+  }
+  
+  fileConnection <- file(file.path(getwd(), "Plot", paste0("0", titleFile, ".txt")))
+  writeLines(lateximport, fileConnection)
+  close(fileConnection)
+}
+
+```
+
+
+##### functions for calculating the variables needed to determine optimal goal weights (optimal grid point)
+
+We have the portfolio weights for each date (start) in "dat\$datesTest\$P1\$\`0.9-0.05-0.05\`\$x". We hold this for one period, therefore we calculate the portfolio return at each time step.
+
+The datastructure is the following
+
+dat -> datesTest -> P1 -> 0.9-0.05-0.05 -> x
+
+We want the datastrucute
+
+dat -> datesTest -> P1 -> 0.9-0.05-0.05 -> r, sd, sr, fweight
+
+with
+
+r: return (overall)
+sd: standard deviation (overall)
+sr: sharpe ratio
+fweight: mean of goal function
+
+For the calculation of r, we procede as: $\mu = \text{E}[\text{R}] = \sum_{t=1}^T \text{R}_t$
+and for sd: $\text{sd}(\text{R})=\sqrt{\text{Var}(\text{R})}$
+
+In *ret* we have how much return was done at the current date (row), so we have to make a one period shift (hold portfolio up to next period and the return we make is given as the next stored return).
+
+```{r}
+calcTestVar <- function(dat){
+    res <- list()
+    for(timeWindowName in names(dat)){
+        timeWindow <- get(timeWindowName)
+        retTimeWindow <- ret[timeWindow,]
+        retTimeWindow <- retTimeWindow[-1,]
+        colnames(retTimeWindow) <- colnames(ret)
+        
+        rf <- mean(retTimeWindow[,"BUND"])
+        
+        for(sentixGroup in names(dat[[timeWindowName]])){
+            
+            for(goalWeight in names(dat[[timeWindowName]][[sentixGroup]])){
+                R <- rowSums(dat[[timeWindowName]][[sentixGroup]][[goalWeight]]$x * retTimeWindow)
+                
+                r <- mean(R)
+                sd <- sd(R)
+                
+                anR <- (1+r)^52-1
+                anSd <- sqrt((sd^2)*52)
+                
+                fweight = mean(dat[[timeWindowName]][[sentixGroup]][[goalWeight]]$obj)
+                    
+                res[[timeWindowName]][[sentixGroup]][[goalWeight]] <- list(r = r, sd = sd, sr = r/sd,
+                                                                               anR = anR, anSd = anSd, anSR = anR/anSd,
+                                                                               fweight = fweight)
+            }
+        }
+    }
+    return(res)
+}
+```
 
 #### dispersion direct min
+
+```{r}
+# Dispersion
+targetDisp <- 0.58 ## found as it looks promising and reachable in the analysis (quite low in the reachable values)
+```
 
 We handle dispersion like return in the first place. Therefore we have the following objective functions:
 
@@ -305,7 +453,7 @@ where $\text{d}$ denotes the annualized dispersion of each index.
 We will minimize the following objective function. Be aware that maximizing something equals minimizing its negative. Furthermore *anDOpt* denotes the annualized dispersion of the indizes. We divide by the target values to have the different components of the objective function comparable (in units of the corresponding target value). We denote *Opt* to be the (newly calculated) data.
 
 ```{r}
-hDispersionDirectMin <- function(x){
+hDispDirectMin <- function(x){
     y <- numeric(3)
     y[1] <- -1.0 * w[1] * drop(crossprod(x, anMuOpt)) / targetRpa
     y[2] <- w[2] * drop(sqrt(t(x) %*% anCOpt %*% x)) * sqrt(12) / targetVolpa
@@ -369,7 +517,7 @@ xDispConstTest <- foreach(t = datesTestNames, .export = c(datesTestNames), .pack
         for(weightInd in 1:nrow(grid)){
             w <- unlist(grid[weightInd,])
             
-            erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispersionDirectMin, 
+            erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispDirectMin, 
                       par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
                       ineqA.lower = 1.0, ineqA.upper = 1.0)
             L[[sentixGroup]][[paste(w, collapse = "-")]] <- list(x = erg$solution, obj = erg$objective, 
@@ -391,7 +539,7 @@ We now add the returns and the variance over the test time window to lateron cal
 The function takes the calculated weighted of the assets as inputs and outputs (in the same data structure) the portfolio weights, its return and its variance over the test time window.
 
 ```{r}
-xDispConstTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinConstantTest_gloggest2017-08-28---10-33"))
+xDispConstTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinConstantTest_gloggest2017-09-05---13-47"))
 ```
 
 
@@ -477,7 +625,7 @@ for(t in datesTestNames){
             anCOpt <- cov(retOpt)*52
             anDOpt <-  as.numeric(sDisp[[i]][tInd,-1])
             
-            erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispersionDirectMin, 
+            erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispDirectMin, 
                              par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
                              ineqA.lower = 1.0, ineqA.upper = 1.0)
             mat[1,] <- erg$solution
@@ -492,7 +640,7 @@ for(t in datesTestNames){
                 anCOpt <- cov(retOpt)*52
                 anDOpt <- as.numeric(sDisp[[i]][tInd,-1])
                 
-                erg <- donlp2NLP(start = mat[j-1,], fun = hDispersionDirectMin, 
+                erg <- donlp2NLP(start = mat[j-1,], fun = hDispDirectMin, 
                                  par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
                                  ineqA.lower = 1.0, ineqA.upper = 1.0)
                 mat[j,] <- erg$solution
@@ -514,70 +662,13 @@ stopCluster(cl)
 ```
 
 ```{r}
-xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2017-08-28---11-03"))
+xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2017-09-05---13-54"))
 ```
-
 
 
 
 
 ###### determine optimal goal weights (optimal grid point)
-
-We have the portfolio weights for each date (start) in "dat\$datesTest\$P1\$\`0.9-0.05-0.05\`\$x". We hold this for one period, therefore we calculate the portfolio return at each time step.
-
-The datastructure is the following
-
-dat -> datesTest -> P1 -> 0.9-0.05-0.05 -> x
-
-We want the datastrucute
-
-dat -> datesTest -> P1 -> 0.9-0.05-0.05 -> r, sd, sr, fweight
-
-with
-
-r: return (overall)
-sd: standard deviation (overall)
-sr: sharpe ratio
-fweight: mean of goal function
-
-For the calculation of r, we procede as: $\mu = \text{E}[\text{R}] = \sum_{t=1}^T \text{R}_t$
-and for sd: $\text{sd}(\text{R})=\sqrt{\text{Var}(\text{R})}$
-
-In *ret* we have how much return was done at the current date (row), so we have to make a one period shift (hold portfolio up to next period and the return we make is given as the next stored return).
-
-```{r}
-calcTestVar <- function(dat){
-    res <- list()
-    for(timeWindowName in names(dat)){
-        timeWindow <- get(timeWindowName)
-        retTimeWindow <- ret[timeWindow,]
-        retTimeWindow <- retTimeWindow[-1,]
-        colnames(retTimeWindow) <- colnames(ret)
-        
-        rf <- mean(retTimeWindow[,"BUND"])
-        
-        for(sentixGroup in names(dat[[timeWindowName]])){
-            
-            for(goalWeight in names(dat[[timeWindowName]][[sentixGroup]])){
-                R <- rowSums(dat[[timeWindowName]][[sentixGroup]][[goalWeight]]$x * retTimeWindow)
-                
-                r <- mean(R)
-                sd <- sd(R)
-                
-                anR <- (1+r)^52-1
-                anSd <- sqrt((sd^2)*52)
-                
-                fweight = mean(dat[[timeWindowName]][[sentixGroup]][[goalWeight]]$obj)
-                    
-                res[[timeWindowName]][[sentixGroup]][[goalWeight]] <- list(r = r, sd = sd, sr = r/sd,
-                                                                               anR = anR, anSd = anSd, anSR = anR/anSd,
-                                                                               fweight = fweight)
-            }
-        }
-    }
-    return(res)
-}
-```
 
 ```{r}
 xDispVarTestCalc <- calcTestVar(xDispVarTest)
@@ -589,91 +680,10 @@ now, determine optimal weight, for each *sentixGroup* and *timeWindow*, optimal 
 
 Now, we also want to visualize the data. We use a ternary plot for this. 
 
-```{r}
-library(ggtern)
-```
-
 
 ```{r}
-extractWeightsWithValue <- function(dat, value){
-    ret <- list()
-    for(timeWindowName in names(dat)){
-        for(sentixGroup in names(dat[[timeWindowName]])){
-            df <- data.frame(w = names(dat[[timeWindowName]][[sentixGroup]])[1], value = dat[[timeWindowName]][[sentixGroup]][[1]][[value]])
-            df$w <- as.character(df$w)
-            df$w1 <- as.numeric(unlist(strsplit(df$w, "-"))[1])
-            df$w2 <- as.numeric(unlist(strsplit(df$w, "-"))[2])
-            df$w3 <- as.numeric(unlist(strsplit(df$w, "-"))[3])
-            
-            for(weightsName in names(dat[[timeWindowName]][[sentixGroup]])[2:length(names(dat[[timeWindowName]][[sentixGroup]]))]){
-                df <- rbind(df, c(weightsName, dat[[timeWindowName]][[sentixGroup]][[weightsName]][[value]], unlist(strsplit(weightsName, "-"))))
-            }
-            
-            ret[[timeWindowName]][[sentixGroup]] <- data.frame(w1 = as.numeric(df[,"w1"]), 
-                                                                         w2 = as.numeric(df[,"w2"]), 
-                                                                         w3 = as.numeric(df[,"w3"]),
-                                                                         value = as.numeric(df[,"value"]))
-        }
-    }
-    return(ret)
-}
-
 srWeightsAn <- extractWeightsWithValue(xDispVarTestCalc, "anSR")
-```
-
-```{r}
-terntheme <- function(){
-    theme_rgbg() +
-        theme(legend.position = c(0, 1),
-              legend.justification = c(0, 1),
-              plot.margin=unit(c(0, 2,0, 2), "cm"),
-              tern.panel.background = element_rect(fill = "lightskyblue1"))
-}
-```
-
-note: "Calling 'structure(NULL, \*)' is deprecated, as NULL cannot have attributes. Consider 'structure(list(), \*)' instead." is just a message, not an error. it is due to strict checks in the newer R-version <https://stat.ethz.ch/pipermail/r-devel/2016-December/073554.html>
-
-*..level..* is calculated and then used inside the function
-
-```{r}
-plotTernary <- function(dat){
-    wmax <- dat[which.max(dat$value), c("w1", "w2", "w3", "value")]
-    
-    ggtern(dat, aes(x=w1, y=w2, z=w3, value=value)) +
-        geom_point(shape=".")+
-        geom_text(aes(x=w1, y=w2, label=round(value,1)), data = dat[dat$value>(dat[(dat$w1==wmax$w1) & (dat$w2==wmax$w2),"value"]*0.95),]) +
-        geom_interpolate_tern(aes(value=value, color = ..level..)) +
-        geom_point(aes(x=w1, y=w2), dat = wmax, color = "red") + 
-        geom_text(aes(x=w1, y=w2, label=round(dat[(dat$w1==wmax$w1) & (dat$w2==wmax$w2),"value"],1)), data = wmax, color = "red" )+
-        terntheme() +
-        Lline(Lintercept =  wmax$w1, colour = theme_rgbg()$tern.axis.line.L$colour, linetype = 2, lwd=1) + ## w1 on Left axis
-        Tline(Tintercept = wmax$w2, colour = theme_rgbg()$tern.axis.line.T$colour, linetype = 2, lwd=1) + ## w2 on Top axis
-        Rline(Rintercept = wmax$w3, color = theme_rgbg()$tern.axis.line.R$colour, linetype = 2, lwd=1) + ## w3 on Right axis
-        scale_color_gradient(low = "green", high = "red") +
-        labs(x = "return", y = "variation", z = "dispersion",
-             title = paste0("Ternary Plot with Sharpe Ratio Contour Lines -", deparse(substitute(dat)), "-", t),
-             color = "Level")
-}
-```
-
-```{r}
-lateximport <- c(paste0("\\subsection{Ternary}"))
-
-for(t in names(srWeightsAn$datesTest)){
-    plot(plotTernary(srWeightsAn$datesTest[[t]]))
-    
-    title <- paste0("Ternary-Weights ",t, ".pdf")
-    pdf(file.path(getwd(), "Plot", title), width = 10, height = 10)
-    plot(plotTernary(srWeightsAn$datesTest[[t]]))
-    dev.off()
-    
-    lateximport <- c(lateximport, paste0("\\includegraphics[height=0.45\\textheight]{",title,"}\\linebreak"))
-}
-
-fileConnection <- file(file.path(getwd(), "Plot", paste0("0Ternary.txt")))
-writeLines(lateximport, fileConnection)
-close(fileConnection)
-
+ternaryPlot(srWeightsAn, "Ternary-Dispersion")
 ```
 
 
@@ -683,21 +693,189 @@ now, determine optimal weight, for each *sentixGroup* and *timeWindow*, optimal 
 
 
 ```{r}
-wOptSRAn <- list()
+wOptDispSRAn <- list()
 for(timeWindowName in names(srWeightsAn)){
     for(sentixGroup in names(srWeightsAn[[timeWindowName]])){
         df <- srWeightsAn[[timeWindowName]][[sentixGroup]]
         
-        wOptSRAn[[timeWindowName]][[sentixGroup]] <- df[which.max(df$value), c("w1", "w2", "w3")]
+        wOptDispSRAn[[timeWindowName]][[sentixGroup]] <- df[which.max(df$value), c("w1", "w2", "w3")]
     }
 }
-wOptSRAn$datesTest
+wOptDispSRAn$datesTest
 ```
 
 ```{r}
-rm(xDispVarTest, xDispVarTestCalc, calcTestVar)
-rm(plotTernary, terntheme, fileConnection, lateximport)
+rm(xDispVarTest, xDispVarTestCalc)
 ```
+
+
+
+### herfindahl direct min
+
+```{r}
+# Herfindahl
+targetHerf <- -0.50 ## found as it looks promising and reachable in the analysis (quite low in the reachable values)
+```
+
+We handle herfindahl like return in the first place. Therefore we have the following objective functions:
+
+\begin{tabular}{lll}
+1. & return & max$\left(w_1 \cdot \frac{x^T\mu}{\mu_{target}}\right)$\\
+2. & volatility & min$\left(w_2 \cdot \frac{\sqrt{x^T C x}}{\sigma_\text{target}}\right)$)\\
+3. & herfindahl & min$\left(w_3 \cdot \frac{x^T\text{h}}{\text{h}_\text{target}}\right)$
+\end{tabular}
+
+where $\text{h}$ denotes the annualized herfindahl of each index.
+
+We will minimize the following objective function. Be aware that maximizing something equals minimizing its negative. Furthermore *anHOpt* denotes the annualized herfindahl of the indizes. We divide by the target values to have the different components of the objective function comparable (in units of the corresponding target value). We denote *Opt* to be the (newly calculated) data.
+
+```{r}
+hHerfDirectMin <- function(x){
+    y <- numeric(3)
+    y[1] <- -1.0 * w[1] * drop(crossprod(x, anMuOpt)) / targetRpa
+    y[2] <- w[2] * drop(sqrt(t(x) %*% anCOpt %*% x)) * sqrt(12) / targetVolpa
+    y[3] <- w[3] * drop(crossprod(x, anHOpt)) / targetHerf
+    return(sum(y))
+}
+```
+
+
+##### different portfolio weights over time window
+
+We evaluate an optimal portfolio at each date within our time period and assume that we can redistribute our wealth at no cost.
+
+We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual herfindahl.
+
+We move the parallelization further inside to be sure that we make use of parallelization (might just have one test window).
+
+End result has the following structure:
+time window -> herfindahl (sentixDataNames) -> weights of goal function -> dates in time window -> weights of assets
+
+Last weight for penultimate date of time window (hold until last date).
+
+###### determine portfolio in test time window (for each gridpoint)
+
+```{r, eval=FALSE}
+k <- 50
+
+cores <- detectCores()
+
+if(Sys.getenv("USERNAME") == "Stefan"){
+    cl <- makeCluster(cores - 1)
+} else if(Sys.getenv("USERNAME") == "gloggest"){
+    cl <- makeCluster(cores) # use server fully
+} else
+    stop("Who are you???")
+
+
+xHerfVarTest <- list()
+
+for(t in datesTestNames){
+    
+    xHerfVarTest[[t]] <- foreach(i = names(sHerf), .export = c(datesTestNames), .packages = c("Rdonlp2")) %dopar%{
+        L <- list()
+        
+        for(weightInd in 1:nrow(grid)){
+            w <- unlist(grid[weightInd,])
+            
+            mat <- matrix(NA, nrow = (length(get(t))-1), ncol = ncol(ret))
+            colnames(mat) <- colnames(ret)
+            rownames(mat) <- get(t)[1:(length(get(t))-1)]
+            obj <- numeric(length(get(t))-1)
+            tim <- numeric(length(get(t))-1)
+            
+            # first separate to then use the previous solution as starting point for next solution
+            ### -------------------
+            j <- 1
+            tInd <- which(datesAll == get(t)[j])
+            retOpt <- ret[(tInd-k+1):tInd,]
+            anMuOpt <- (1+colMeans(retOpt))^52-1
+            anCOpt <- cov(retOpt)*52
+            anHOpt <-  as.numeric(sHerf[[i]][tInd,-1])
+            
+            erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hHerfDirectMin, 
+                             par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                             ineqA.lower = 1.0, ineqA.upper = 1.0)
+            mat[1,] <- erg$solution
+            obj[1] <- erg$objective
+            tim[1] <- as.numeric(erg$elapsed)
+            ### -------------------
+            
+            for(j in 2:(length(get(t))-1)){
+                tInd <- which(datesAll == get(t)[j])
+                retOpt <- ret[(tInd-k+1):tInd,]
+                anMuOpt <- (1+colMeans(retOpt))^52-1
+                anCOpt <- cov(retOpt)*52
+                anHOpt <- as.numeric(sHerf[[i]][tInd,-1])
+                
+                erg <- donlp2NLP(start = mat[j-1,], fun = hHerfDirectMin, 
+                                 par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                                 ineqA.lower = 1.0, ineqA.upper = 1.0)
+                mat[j,] <- erg$solution
+                obj[j] <- erg$objective
+                tim[j] <- as.numeric(erg$elapsed)
+            }
+            
+            L[[paste(w, collapse = "-")]] <- list(x = mat, obj = obj, time = tim)
+            print(weightInd/nrow(grid))
+        }
+        L
+    }
+    names(xHerfVarTest[[t]]) <- names(sHerf)
+}
+
+saveRDS(xHerfVarTest, file = file.path(getwd(), "Optimization", paste0("EHerfMinVaryingTest_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+
+stopCluster(cl)
+```
+
+```{r}
+xHerfVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingTest_gloggest2017-09-05---14-06"))
+```
+
+
+
+
+###### determine optimal goal weights (optimal grid point)
+
+```{r}
+xHerfVarTestCalc <- calcTestVar(xHerfVarTest)
+```
+
+
+now, determine optimal weight, for each *sentixGroup* and *timeWindow*, optimal meaning maximum sharpe ratio
+
+
+Now, we also want to visualize the data. We use a ternary plot for this. 
+
+
+```{r}
+srWeightsAn <- extractWeightsWithValue(xHerfVarTestCalc, "anSR")
+ternaryPlot(srWeightsAn, "Ternary-Herfindahl")
+```
+
+
+
+
+now, determine optimal weight, for each *sentixGroup* and *timeWindow*, optimal meaning maximum sharpe ratio
+
+
+```{r}
+wOptHerfSRAn <- list()
+for(timeWindowName in names(srWeightsAn)){
+    for(sentixGroup in names(srWeightsAn[[timeWindowName]])){
+        df <- srWeightsAn[[timeWindowName]][[sentixGroup]]
+        
+        wOptHerfSRAn[[timeWindowName]][[sentixGroup]] <- df[which.max(df$value), c("w1", "w2", "w3")]
+    }
+}
+wOptHerfSRAn$datesTest
+```
+
+```{r}
+rm(xHerfVarTest, xHerfVarTestCalc)
+```
+
 
 
 ### find optimal portfolio
@@ -735,7 +913,7 @@ for(t in datesEvalNames){
         L <- list()
         
         
-        w <- unlist(wOptSRAn$datesTest[[sentixGroup]])
+        w <- unlist(wOptDispSRAn$datesTest[[sentixGroup]])
         
         mat <- matrix(NA, nrow = (length(get(t))-1), ncol = ncol(ret))
         colnames(mat) <- colnames(ret)
@@ -752,7 +930,7 @@ for(t in datesEvalNames){
         anCOpt <- cov(retOpt)*52
         anDOpt <-  as.numeric(sDisp[[sentixGroup]][tInd,-1])
         
-        erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispersionDirectMin, 
+        erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hDispDirectMin, 
                          par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
                          ineqA.lower = 1.0, ineqA.upper = 1.0)
         mat[1,] <- erg$solution
@@ -767,7 +945,7 @@ for(t in datesEvalNames){
             anCOpt <- cov(retOpt)*52
             anDOpt <- as.numeric(sDisp[[sentixGroup]][tInd,-1])
             
-            erg <- donlp2NLP(start = mat[j-1,], fun = hDispersionDirectMin, 
+            erg <- donlp2NLP(start = mat[j-1,], fun = hDispDirectMin, 
                              par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
                              ineqA.lower = 1.0, ineqA.upper = 1.0)
             mat[j,] <- erg$solution
@@ -788,13 +966,105 @@ saveRDS(xDispVarEval, file = file.path(getwd(), "Optimization", paste0("EDispers
 ```
 
 ```{r}
-xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_Stefan2017-08-29---12-02"))
+xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2017-09-05---14-15"))
+```
+
+
+
+#### herfindahl direct min
+
+Now, we want to determine the portfolio weights over the time Windows. We use the data structure:
+
+time window -> herfindahl (sentixGroup) -> weights of assets
+
+NOTE: change the weights of the test data, if different test time windows are used to get weights for different eval time weights
+
+We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual herfindahl.
+
+```{r, eval=FALSE}
+k <- 50
+
+cores <- detectCores()
+
+if(Sys.getenv("USERNAME") == "Stefan"){
+    cl <- makeCluster(cores - 1)
+} else if(Sys.getenv("USERNAME") == "gloggest"){
+    cl <- makeCluster(cores) # use server fully
+} else
+    stop("Who are you???")
+
+
+xHerfVarEval <- list()
+
+registerDoSNOW(cl)
+for(t in datesEvalNames){
+    # timeInd <- datesAll[which(datesAll == min(get(t)))-1] ## one day before start of time window ### not used any more, as we move up to actual date
+    
+    xHerfVarEval[[t]] <- foreach(sentixGroup = names(sHerf), .export = c(datesEvalNames), .packages = c("Rdonlp2")) %dopar%{
+        L <- list()
+        
+        
+        w <- unlist(wOptHerfSRAn$datesTest[[sentixGroup]])
+        
+        mat <- matrix(NA, nrow = (length(get(t))-1), ncol = ncol(ret))
+        colnames(mat) <- colnames(ret)
+        rownames(mat) <- get(t)[1:(length(get(t))-1)]
+        obj <- numeric(length(get(t))-1)
+        tim <- numeric(length(get(t))-1)
+        
+        # first separate to then use the previous solution as starting point for next solution
+        ### -------------------
+        j <- 1
+        tInd <- which(datesAll == get(t)[j])
+        retOpt <- ret[(tInd-k+1):tInd,]
+        anMuOpt <- (1+colMeans(retOpt))^52-1
+        anCOpt <- cov(retOpt)*52
+        anHOpt <-  as.numeric(sHerf[[sentixGroup]][tInd,-1])
+        
+        erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hHerfDirectMin, 
+                         par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                         ineqA.lower = 1.0, ineqA.upper = 1.0)
+        mat[1,] <- erg$solution
+        obj[1] <- erg$objective
+        tim[1] <- as.numeric(erg$elapsed)
+        ### -------------------
+        
+        for(j in 2:(length(get(t))-1)){
+            tInd <- which(datesAll == get(t)[j])
+            retOpt <- ret[(tInd-k+1):tInd,]
+            anMuOpt <- (1+colMeans(retOpt))^52-1
+            anCOpt <- cov(retOpt)*52
+            anHOpt <- as.numeric(sHerf[[sentixGroup]][tInd,-1])
+            
+            erg <- donlp2NLP(start = mat[j-1,], fun = hHerfDirectMin, 
+                             par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                             ineqA.lower = 1.0, ineqA.upper = 1.0)
+            mat[j,] <- erg$solution
+            obj[j] <- erg$objective
+            tim[j] <- as.numeric(erg$elapsed)
+        }
+        
+        list(x = mat, obj = obj, time = tim)
+    }
+    names(xHerfVarEval[[t]]) <- names(sHerf)
+}
+
+stopCluster(cl)
+
+# names(xHerfVarTest) <- datesTestNames
+
+saveRDS(xHerfVarEval, file = file.path(getwd(), "Optimization", paste0("EHerfMinVaryingEval_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+```
+
+```{r}
+xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_gloggest2017-09-05---14-16"))
 ```
 
 ### cleanup
 
 ```{r}
 rm(grid, IneqA)
+rm(plotTernary, terntheme, ternaryPlot, calcTestVar)
 
 detach("package:doSNOW", unload = T)
 unloadNamespace("doParallel")
