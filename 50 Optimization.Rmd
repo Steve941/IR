@@ -662,7 +662,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2017-09-05---13-54"))
+xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2017-09-05---15-44"))
 ```
 
 
@@ -830,7 +830,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xHerfVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingTest_gloggest2017-09-05---14-06"))
+xHerfVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingTest_gloggest2017-09-05---16-07"))
 ```
 
 
@@ -966,7 +966,7 @@ saveRDS(xDispVarEval, file = file.path(getwd(), "Optimization", paste0("EDispers
 ```
 
 ```{r}
-xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2017-09-05---14-15"))
+xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2017-09-05---16-09"))
 ```
 
 
@@ -1057,7 +1057,7 @@ saveRDS(xHerfVarEval, file = file.path(getwd(), "Optimization", paste0("EHerfMin
 ```
 
 ```{r}
-xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_gloggest2017-09-05---14-16"))
+xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_gloggest2017-09-05---16-11"))
 ```
 
 ### cleanup
