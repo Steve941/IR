@@ -174,20 +174,6 @@ C <- cov(ret)
 
 ### time window 
 
-#### test period
-
-We furthermore define a test period to determine the optimal weights of the goal function. Therefore we choose the first time period before the actual evaluating time periods. From *startDateTest* up to *startEvalTime* minus *timeBefore*, to leave some space before the actual analysis starts.
-
-```{r}
-startDateTest <- 50
-timeBefore <- 50
-( startEvalTime <- which(datesAll == min(c(min(datesEvalBear), min(datesEvalBull), min(datesEvalLast)))) )
-
-datesTest <- rownames(ret)[startDateTest:(startEvalTime-timeBefore)]
-class(datesTest) <- "Date"
-length(datesTest)
-```
-
 #### bull and bear
 
 Fix length of time window (*l*). Calculate return for all stocks (*retWindow*) for all possible time windows (1, l+1, l+2, ..., T). Equal weights for all returns (of the different indices). Calculate (arithmetic) average of all returns in each possible time window (*retTotal*). Choose the one with lowest (*datesEvalBear*) and highest (*datesEvalBull*).
@@ -231,6 +217,39 @@ axis(1, pretty(1:length(retTotal)), names(retTotal)[pretty(1:length(retTotal))+1
 axis(2)
 ```
 
+#### last data
+
+We also look at the most actual data.
+
+```{r}
+datesEvalLast <- rownames(ret)[(nrow(ret)-l+1):nrow(ret)]
+class(datesEvalLast) <- "Date"
+```
+
+used later for storing results. trick *deparse(substitute())* to get an error when a window is deleted.
+
+#### test period
+
+We furthermore define a test period to determine the optimal weights of the goal function. Therefore we choose the first time period before the actual evaluating time periods. From *startDateTest* up to *startEvalTime* minus *timeBefore*, to leave some space before the actual analysis starts.
+
+```{r}
+startDateTest <- 50
+timeBefore <- 50
+( startEvalTime <- which(datesAll == min(c(min(datesEvalBear), min(datesEvalBull), min(datesEvalLast)))) )
+
+datesTest <- rownames(ret)[startDateTest:(startEvalTime-timeBefore)]
+class(datesTest) <- "Date"
+length(datesTest)
+```
+
+
+#### all after Test
+
+```{r}
+datesEvalAllAfterTest <- rownames(ret)[(max(which(rownames(ret) %in% datesTest))+1):nrow(ret)]
+class(datesEvalAllAfterTest) <- "Date"
+```
+
 #### bear according to NBER
 
 add recession according to NBER: <http://www.nber.org/cycles/cyclesmain.html>
@@ -243,26 +262,6 @@ tmp <- as.character(tmp)
 datesEvalRecNBER <- rownames(ret)[min(which(substring(tmp, 1,7) == "2007-12")):max(which(substring(tmp, 1, 7) == "2009-06"))]
 class(datesEvalRecNBER) <- "Date"
 ```
-
-
-#### last data
-
-We also look at the most actual data.
-
-```{r}
-datesEvalLast <- rownames(ret)[(nrow(ret)-l+1):nrow(ret)]
-class(datesEvalLast) <- "Date"
-```
-
-used later for storing results. trick *deparse(substitute())* to get an error when a window is deleted.
-
-#### all after Test
-
-```{r}
-datesEvalAllAfterTest <- rownames(ret)[(max(which(rownames(ret) %in% datesTest))+1):nrow(ret)]
-class(datesEvalAllAfterTest) <- "Date"
-```
-
 
 
 
