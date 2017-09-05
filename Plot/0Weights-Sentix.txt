@@ -20,3 +20,10 @@
 \includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-I6.pdf}
 \includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-G1.pdf}
 \includegraphics[width=\textwidth]{Weights-Sentix-datesEvalLast-G6.pdf}
+\subsubsection{Weights-Sentix - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalAllAfterTest-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalAllAfterTest-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalAllAfterTest-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalAllAfterTest-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalAllAfterTest-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-datesEvalAllAfterTest-G6.pdf}

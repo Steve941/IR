@@ -18,7 +18,7 @@ We visualize the data (stocks and sentix). For consistency, we first specify gen
 Put everything in one function to plot.
 
 ```{r}
-colsEvalDates <- c("red", "green", "orange", "yellow")
+colsEvalDates <- c("red", "darkred", "green", "orange", "yellow")
 names(colsEvalDates) <- datesEvalNames
 ```
 
@@ -55,6 +55,9 @@ plotData <- function(x, title = "Indices"){
     geomRectDateBear <- function(){
         parse(text = "geom_rect(aes(xmin = min(datesEvalBear), xmax = max(datesEvalBear), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"red\")")}
     
+    geomRectDateRecNBER <- function(){
+      parse(text = "geom_rect(aes(xmin = min(datesEvalRecNBER), xmax = max(datesEvalRecNBER), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"darkred\")")}
+    
     geomRectDateBull <- function(){
         parse(text = "geom_rect(aes(xmin = min(datesEvalBull), xmax = max(datesEvalBull), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"green\")")}
     
@@ -66,19 +69,20 @@ plotData <- function(x, title = "Indices"){
     
     
     ggplot() +
-        eval(geomLineDataDAX(x)) +
-        eval(geomLineDataTEC(x)) +
-        eval(geomLineDataESX50(x)) +
-        eval(geomLineDataNASDAQ(x)) +
-        eval(geomLineDataNIKKEI(x)) +
-        eval(geomLineDataBUND(x)) +
-        eval(geomRectDateLast()) +
-        eval(geomRectDateBear()) +
-        eval(geomRectDateBull()) +
-        eval(geomRectDateTest()) +
-        labs(x = "Time", y = "Value") + 
-        labs(title = title) +
-        theme(plot.title = element_text(hjust = 0.5)) # align title in center
+      eval(geomLineDataDAX(x)) +
+      eval(geomLineDataTEC(x)) +
+      eval(geomLineDataESX50(x)) +
+      eval(geomLineDataNASDAQ(x)) +
+      eval(geomLineDataNIKKEI(x)) +
+      eval(geomLineDataBUND(x)) +
+      eval(geomRectDateLast()) +
+      eval(geomRectDateBear()) +
+      eval(geomRectDateRecNBER())+
+      eval(geomRectDateBull()) +
+      eval(geomRectDateTest()) +
+      labs(x = "Time", y = "Value") + 
+      labs(title = title) +
+      theme(plot.title = element_text(hjust = 0.5)) # align title in center
 }
 
 ## if a special name is given, take it, otherwise take x (plot sentix by using same dataframe (adopted))

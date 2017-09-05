@@ -1,4 +1,0 @@
-\subsection{Performance-All}
-\includegraphics[width=\textwidth]{Performance-All-datesEvalBear.pdf}
-\includegraphics[width=\textwidth]{Performance-All-datesEvalBull.pdf}
-\includegraphics[width=\textwidth]{Performance-All-datesEvalLast.pdf}

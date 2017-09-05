@@ -682,3 +682,195 @@ As the area might be a bit complicated to understand (just the visible height of
 ```{r}
 plotWeightsLines
 ```
+
+### TODO: change of weights with turnover
+
+TODO: include turnover as bar plot with second y-axis to visualize how much a portfolio has to be changed.
+
+```{r, eval=FALSE}
+plotWeightsLines <- function(datName, d, s){
+    dat <- datName[[d]][[s]]$x
+    dat <- as.data.frame(dat)
+    dat$date <- as.Date(rownames(dat))
+    dat$turnover <- datName[[d]][[s]]$turnover
+    
+    colBackground <- colsEvalDates[d]
+        
+    plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
+    for(i in 1:(ncol(dat)-3)){
+        plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
+    }
+    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
+        
+    eval(parse(text = plotCommand))+
+        ylim(0, 1)+
+        geom_bar(aes(y=dat$turnover, colour = "Turnover"), stat = "identity")+
+        scale_y_continuous(sec.axis = sec_axis(~., name = "Turnover"))+
+        labs(title = paste("Time:", d),
+             subtitle = paste("Portfolio:", s),
+             y = "Weight ",
+             x = "Date") +
+        scale_color_discrete(name = "Index") +
+        theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
+}
+```
+
+```{r, eval=FALSE}
+plotWeightsLinesComplete <- function(dat, fileName){
+    lateximport <- c(paste0("\\subsection{",fileName,"}"))
+    
+    for(d in datesEvalNames){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", fileName, " - ", d, "}"))
+        
+        for(s in names(dat[[d]])){
+            # plotWeightsLines(dat, d, s)
+            
+            title <- paste0(fileName, "-", d,"-", s, ".pdf")
+            pdf(file.path(getwd(), "Plot", title), width = 10, height = 4)
+            plot(plotWeightsLines(dat, d, s))
+            dev.off()
+            
+            lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
+        }
+    }
+    
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
+
+to plot multiple plots on one plot <http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/>
+
+```{r}
+# Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+```
+
+##### weights turnover underneath
+
+use those package to generate equal width plots <https://stackoverflow.com/questions/16255579/how-can-i-make-consistent-width-plots-in-ggplot-with-legends>
+
+
+```{r}
+library(gtable)    
+library(grid)
+library(gridExtra) 
+
+```
+
+
+```{r}
+plotWeightsLinesWithTurnover <- function(datName, d, s){
+    dat <- datName[[d]][[s]]$x
+    dat <- as.data.frame(dat)
+    dat$date <- as.Date(rownames(dat))
+    dat$turnover <- datName[[d]][[s]]$turnover
+    
+    colBackground <- colsEvalDates[d]
+        
+    plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
+    for(i in 1:(ncol(dat)-3)){
+        plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
+    }
+    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
+        
+    p1 <- eval(parse(text = plotCommand))+
+      ylim(0, 1)+
+      labs(title = paste("Time:", d),
+           subtitle = paste("Portfolio:", s),
+           y = "Weight ",
+           x = "Date",
+           color = "Portfolios") +
+      theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
+    p2 <- ggplot(dat, aes(x=date))+
+      ylim(0,1)+
+      geom_bar(aes(y=dat$turnover), stat = "identity", fill = "black")+
+      labs(title = paste("Time:", d),
+           subtitle = paste("Turnover:", s),
+           y = "Turnover",
+           x = "Date") +
+      theme(panel.background = element_rect(fill = alpha(colBackground, 0.1)))
+    
+    # equal width
+    gA <- ggplotGrob(p1)
+    gB <- ggplotGrob(p2)
+    
+    # Set the widths
+    gB$widths <- gA$widths
+    
+    # Arrange the two charts.
+    # The legend boxes are centered
+    grid.newpage()
+    grid.arrange(gA, gB, nrow = 2)
+    
+}
+```
+
+```{r}
+plotWeightsLinesWithTurnoverComplete <- function(dat, fileName){
+    lateximport <- c(paste0("\\subsection{",fileName,"}"))
+    
+    for(d in datesEvalNames){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", fileName, " - ", d, "}"))
+        
+        for(s in names(dat[[d]])){
+            # plotWeightsLines(dat, d, s)
+            
+            title <- paste0(fileName, "-", d,"-", s, ".pdf")
+            pdf(file.path(getwd(), "Plot", title), width = 10, height = 8)
+            plotWeightsLinesWithTurnover(dat, d, s)
+            dev.off()
+            
+            lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
+        }
+    }
+    
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```

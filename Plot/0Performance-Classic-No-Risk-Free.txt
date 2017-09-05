@@ -2,3 +2,4 @@
 \includegraphics[width=\textwidth]{Performance-Classic-No-Risk-Free-datesEvalBear.pdf}
 \includegraphics[width=\textwidth]{Performance-Classic-No-Risk-Free-datesEvalBull.pdf}
 \includegraphics[width=\textwidth]{Performance-Classic-No-Risk-Free-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{Performance-Classic-No-Risk-Free-datesEvalAllAfterTest.pdf}
