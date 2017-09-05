@@ -174,6 +174,20 @@ C <- cov(ret)
 
 ### time window 
 
+#### test period
+
+We furthermore define a test period to determine the optimal weights of the goal function. Therefore we choose the first time period before the actual evaluating time periods. From *startDateTest* up to *startEvalTime* minus *timeBefore*, to leave some space before the actual analysis starts.
+
+```{r}
+startDateTest <- 50
+timeBefore <- 50
+( startEvalTime <- which(datesAll == min(c(min(datesEvalBear), min(datesEvalBull), min(datesEvalLast)))) )
+
+datesTest <- rownames(ret)[startDateTest:(startEvalTime-timeBefore)]
+class(datesTest) <- "Date"
+length(datesTest)
+```
+
 #### bull and bear
 
 Fix length of time window (*l*). Calculate return for all stocks (*retWindow*) for all possible time windows (1, l+1, l+2, ..., T). Equal weights for all returns (of the different indices). Calculate (arithmetic) average of all returns in each possible time window (*retTotal*). Choose the one with lowest (*datesEvalBear*) and highest (*datesEvalBull*).
@@ -236,19 +250,7 @@ class(datesEvalAllAfterTest) <- "Date"
 ```
 
 
-#### test period
 
-We furthermore define a test period to determine the optimal weights of the goal function. Therefore we choose the first time period before the actual evaluating time periods. From *startDateTest* up to *startEvalTime* minus *timeBefore*, to leave some space before the actual analysis starts.
-
-```{r}
-startDateTest <- 50
-timeBefore <- 50
-( startEvalTime <- which(datesAll == min(c(min(datesEvalBear), min(datesEvalBull), min(datesEvalLast)))) )
-
-datesTest <- rownames(ret)[startDateTest:(startEvalTime-timeBefore)]
-class(datesTest) <- "Date"
-length(datesTest)
-```
 
 
 #### cleanup
