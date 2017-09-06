@@ -469,6 +469,8 @@ wholeAnalysis(xClassicVarNoRf, "Classic-No-Risk-Free")
 ```{r}
 wholeAnalysis(xDispVarEval, "Sentix-Dispersion")
 wholeAnalysis(xHerfVarEval, "Sentix-Herfindahl")
+wholeAnalysis(xDispNoRFVarEval, "Sentix-Disperion-No-Risk-Free")
+wholeAnalysis(xHerfNoRFVarEval, "Sentix-Herfindahl-No-Risk-Free")
 ```
 
 

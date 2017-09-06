@@ -1,0 +1,6 @@
+\subsection{Performance-Sentix-Disperion-No-Risk-Free}
+\includegraphics[width=\textwidth]{Performance-Sentix-Disperion-No-Risk-Free-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Disperion-No-Risk-Free-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Disperion-No-Risk-Free-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest.pdf}
