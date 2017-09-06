@@ -6,6 +6,13 @@
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalBear-PGMV.pdf}
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalBear-PMD.pdf}
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalBear-ew.pdf}
+\subsubsection{Weights-Classic-No-Risk-Free - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalRecNBER-tanPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalRecNBER-mVaPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalRecNBER-rp.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalRecNBER-PGMV.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalRecNBER-PMD.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalRecNBER-ew.pdf}
 \subsubsection{Weights-Classic-No-Risk-Free - datesEvalBull}
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalBull-tanPort.pdf}
 \includegraphics[width=\textwidth]{Weights-Classic-No-Risk-Free-datesEvalBull-mVaPort.pdf}

@@ -1,5 +1,6 @@
 \subsection{Performance-All-classicNoRiskFree}
 \includegraphics[width=\textwidth]{Performance-All-classicNoRiskFree-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{Performance-All-classicNoRiskFree-datesEvalRecNBER.pdf}
 \includegraphics[width=\textwidth]{Performance-All-classicNoRiskFree-datesEvalBull.pdf}
 \includegraphics[width=\textwidth]{Performance-All-classicNoRiskFree-datesEvalLast.pdf}
 \includegraphics[width=\textwidth]{Performance-All-classicNoRiskFree-datesEvalAllAfterTest.pdf}

@@ -11,7 +11,7 @@ knitr::knit_child("30 Data Visualization.Rmd")
 
 # Analysis
 
-## Dispersion to Returns
+## Sentix to Returns
 
 We first want to look on how dispersion affects returns. We hypothesize that (future) return is higher if dispersion is lower. Therefore, we look at the mean return of the *q* quantil of dispersion and the mean return of its *1-q* quantil. We do this for all the sentiments in comparison with all stocks. 
 
@@ -20,22 +20,24 @@ We also depict the ranks (higher rank = higher value). Be careful as the absolut
 
 Let *n* be the number of periods considered (n=1: just this period, n=2: this and next period) and let *m* be the time lapse (m=0: returns starting right now, m=1: returns starting 1 one period behind).
 
+We specify the data (sDisp or sHerf) to allow more general access.
+
 ```{r}
 q <- 0.1
 
-compareDispRet <- function(n, m=0){
-    res <- matrix(NA, nrow = ncol(ret), ncol = length(sDisp))
+compareSentRet <- function(n, m=0, dat){
+    res <- matrix(NA, nrow = ncol(ret), ncol = length(dat))
     rownames(res) <- colnames(ret)
-    colnames(res) <- names(sDisp)
+    colnames(res) <- names(dat)
     
-    for(d in 1:length(names(sDisp))){
+    for(d in 1:length(dat)){
         for(s in 1:ncol(ret)){
-            dat <- data.frame(disp = sDisp[[d]][2:(nrow(sDisp[[d]])-n+1-m),s+1])
+            tmp <- data.frame(disp = dat[[d]][2:(nrow(dat[[d]])-n+1-m),s+1]) # 2 as returns start one date behind
             for(k in 1:(nrow(ret)-n+1-m)){
-                dat[k,"r"] <- prod(1+ret[(k+m):(k+m+n-1),s])-1
+                tmp[k,"r"] <- prod(1+ret[(k+m):(k+m+n-1),s])-1
             }
-            dat <- dat[order(dat$disp),] # ascending by default
-            res[s, d] <- round( mean(dat[1:(q*nrow(dat)),"r"]) - mean(dat[((1-q)*nrow(dat)):nrow(dat), "r"]) , 3)
+            tmp <- tmp[order(tmp$disp),] # ascending by default
+            res[s, d] <- round( mean(tmp[1:(q*nrow(tmp)),"r"]) - mean(tmp[((1-q)*nrow(tmp)):nrow(tmp), "r"]) , 3)
         }
     }
     return(res)
@@ -53,7 +55,7 @@ So I1 seems to be able to predict returns, while P6 does not.
 
 
 ```{r}
-res <- compareDispRet(1)
+res <- compareSentRet(1, dat = sDisp)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 ```
@@ -64,7 +66,7 @@ dispersion in connection with return of same period
 
 
 ```{r}
-res <- compareDispRet(1, 1)
+res <- compareSentRet(1, 1, dat = sDisp)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 ```
@@ -74,7 +76,7 @@ matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)
 dispersion of one period with return over next *n* periods (this period up to n-1 period).
 
 ```{r}
-res <- compareDispRet(3)
+res <- compareSentRet(3, dat = sDisp)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 
@@ -85,14 +87,96 @@ matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)
 dispersion of one period with return over next *n* periods (this period up to n-1 period).
 
 ```{r}
-res <- compareDispRet(6)
+res <- compareSentRet(6, dat = sDisp)
 res
 matrix(rank(res), ncol = ncol(res), dimnames = list(rownames(res), colnames(res)))
 ```
 
 
 
+
+
+### comparison overview general
+
+m lag: 0, 2, 4
+n periods considered: 1, 3, 6
+
+generate an overview of dispersion with different periods considered in rows and different lags in columns. Each cell contains the results of the quantile difference for each stock.
+
+function for comparison
+
 ```{r}
-rm(q, res, compareDispRet)
+compareOverview <- function(nVec, mVec, dat){
+  res <- list()
+  for(sentixGroup in names(dat)){
+    rowVec <- integer()
+    for(n in nVec){
+      rowVec <- c(rowVec, n, rep("", ncol(ret))) # one empty line
+    }
+    res[[sentixGroup]] <- data.frame(Periods = rowVec)
+  }
+  
+  # fill each column rowwise
+  for(m in c(0,2,4)){
+    # again reserve space first
+    for(sentixGroup in names(dat)){
+      res[[sentixGroup]] <- cbind(res[[sentixGroup]], setNames(data.frame(rep(c(colnames(ret), ""), length(nVec))), paste("Lag", m)))
+      res[[sentixGroup]] <- cbind(res[[sentixGroup]], as.data.frame(matrix("", ncol=1, nrow=(length(nVec)*(ncol(ret)+1))), stringsAsFactors = F))
+    }
+    
+    for(n in c(1,3,6)){
+      tmp <- as.data.frame(compareSentRet(n, m, dat))
+      
+      # assign the values
+      for(sentixGroup in names(dat)){
+        res[[sentixGroup]][((ncol(ret)+1)*(which(n==nVec)-1)+1):((ncol(ret)+1)*which(n==nVec)-1), 
+                           (1+(2*which(m==mVec)))] <- tmp[, sentixGroup]
+      }    
+      
+    }
+  }
+  return(res)
+}
+
+compareOverviewTXT <- function(nVec, mVec, dat, fileName){
+  res <- compareOverview(nVec, mVec, dat)
+  
+  lateximport <- c(paste0("\\subsection{", fileName, "}"))
+  for(sentixGroup in names(sDisp)){
+    lateximport <- c(lateximport, paste0("\\subsubsection{", sentixGroup, "}"))
+    lateximport <- c(lateximport, print(xtable(res[[sentixGroup]]), floating = FALSE))
+  }
+  
+  lateximport <- c(lateximport, "\\clearpage")
+  
+  fileConnection <- file(file.path(getwd(), "Plot", paste0("0Analysis", fileName,".txt")))
+  writeLines(lateximport, fileConnection)
+  close(fileConnection)
+}
 ```
 
+#### comparison overview dispersion
+
+```{r}
+# initialize
+nVec <- c(1,3,6)
+mVec <- c(0,2,4)
+
+compareOverviewTXT(nVec, mVec, sDisp, "Dispersion")
+```
+
+#### comparison overview herfindahl
+
+```{r}
+# initialize
+nVec <- c(1,3,6)
+mVec <- c(0,2,4)
+
+compareOverviewTXT(nVec, mVec, sHerf, "Herfindahl")
+```
+
+
+### cleanup
+```{r}
+rm(q, res, compareSentRet, compare)
+```

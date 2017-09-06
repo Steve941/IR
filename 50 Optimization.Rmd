@@ -878,6 +878,178 @@ rm(xHerfVarTest, xHerfVarTestCalc)
 
 
 
+### herfindahl direct min - no Risk free
+
+force last parameter in optimization to be 0 (weight for BUND)
+
+```{r}
+# Herfindahl
+targetHerf <- -0.50 ## found as it looks promising and reachable in the analysis (quite low in the reachable values)
+```
+
+We handle herfindahl like return in the first place. Therefore we have the following objective functions:
+
+\begin{tabular}{lll}
+1. & return & max$\left(w_1 \cdot \frac{x^T\mu}{\mu_{target}}\right)$\\
+2. & volatility & min$\left(w_2 \cdot \frac{\sqrt{x^T C x}}{\sigma_\text{target}}\right)$)\\
+3. & herfindahl & min$\left(w_3 \cdot \frac{x^T\text{h}}{\text{h}_\text{target}}\right)$
+\end{tabular}
+
+where $\text{h}$ denotes the annualized herfindahl of each index.
+
+We will minimize the following objective function. Be aware that maximizing something equals minimizing its negative. Furthermore *anHOpt* denotes the annualized herfindahl of the indizes. We divide by the target values to have the different components of the objective function comparable (in units of the corresponding target value). We denote *Opt* to be the (newly calculated) data.
+
+```{r}
+hHerfDirectMin <- function(x){
+    y <- numeric(3)
+    y[1] <- -1.0 * w[1] * drop(crossprod(x, anMuOpt)) / targetRpa
+    y[2] <- w[2] * drop(sqrt(t(x) %*% anCOpt %*% x)) * sqrt(12) / targetVolpa
+    y[3] <- w[3] * drop(crossprod(x, anHOpt)) / targetHerf
+    return(sum(y))
+}
+```
+
+
+##### different portfolio weights over time window
+
+We evaluate an optimal portfolio at each date within our time period and assume that we can redistribute our wealth at no cost.
+
+We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual herfindahl.
+
+We move the parallelization further inside to be sure that we make use of parallelization (might just have one test window).
+
+End result has the following structure:
+time window -> herfindahl (sentixDataNames) -> weights of goal function -> dates in time window -> weights of assets
+
+Last weight for penultimate date of time window (hold until last date).
+
+###### determine portfolio in test time window (for each gridpoint)
+
+```{r, eval=FALSE}
+k <- 50
+
+cores <- detectCores()
+
+if(Sys.getenv("USERNAME") == "Stefan"){
+    cl <- makeCluster(cores - 1)
+} else if(Sys.getenv("USERNAME") == "gloggest"){
+    cl <- makeCluster(cores) # use server fully
+} else
+    stop("Who are you???")
+
+
+xHerfNoRFVarTest <- list()
+
+for(t in datesTestNames){
+    
+    xHerfNoRFVarTest[[t]] <- foreach(i = names(sHerf), .export = c(datesTestNames), .packages = c("Rdonlp2")) %dopar%{
+        L <- list()
+        
+        for(weightInd in 1:nrow(grid)){
+            w <- unlist(grid[weightInd,])
+            
+            mat <- matrix(NA, nrow = (length(get(t))-1), ncol = ncol(ret))
+            colnames(mat) <- colnames(ret)
+            rownames(mat) <- get(t)[1:(length(get(t))-1)]
+            obj <- numeric(length(get(t))-1)
+            tim <- numeric(length(get(t))-1)
+            
+            # first separate to then use the previous solution as starting point for next solution
+            ### -------------------
+            j <- 1
+            tInd <- which(datesAll == get(t)[j])
+            retOpt <- ret[(tInd-k+1):tInd,]
+            anMuOpt <- (1+colMeans(retOpt))^52-1
+            anCOpt <- cov(retOpt)*52
+            anHOpt <-  as.numeric(sHerf[[i]][tInd,-1])
+            
+            erg <- donlp2NLP(start = rep(1/ncol(retOpt), ncol(retOpt)), fun = hHerfDirectMin, 
+                             par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                             ineqA.lower = 1.0, ineqA.upper = 1.0)
+            mat[1,] <- erg$solution
+            obj[1] <- erg$objective
+            tim[1] <- as.numeric(erg$elapsed)
+            ### -------------------
+            
+            for(j in 2:(length(get(t))-1)){
+                tInd <- which(datesAll == get(t)[j])
+                retOpt <- ret[(tInd-k+1):tInd,]
+                anMuOpt <- (1+colMeans(retOpt))^52-1
+                anCOpt <- cov(retOpt)*52
+                anHOpt <- as.numeric(sHerf[[i]][tInd,-1])
+                
+                erg <- donlp2NLP(start = mat[j-1,], fun = hHerfDirectMin, 
+                                 par.lower = rep(0, ncol(retOpt)), ineqA = IneqA, 
+                                 ineqA.lower = 1.0, ineqA.upper = 1.0,
+                                 eqA = c(rep(0, ncol(retOpt)-1), 1), eqA.bound = 0) # set last to zero (BUND, risk free)
+                mat[j,] <- erg$solution
+                obj[j] <- erg$objective
+                tim[j] <- as.numeric(erg$elapsed)
+            }
+            
+            L[[paste(w, collapse = "-")]] <- list(x = mat, obj = obj, time = tim)
+            print(weightInd/nrow(grid))
+        }
+        L
+    }
+    names(xHerfNoRFVarTest[[t]]) <- names(sHerf)
+}
+
+saveRDS(xHerfNoRFVarTest, file = file.path(getwd(), "Optimization", paste0("EHerfNoRFMinVaryingTest_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+
+stopCluster(cl)
+```
+
+```{r}
+xHerfNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingTest_gloggest2017-09-05---16-07"))
+```
+
+
+
+
+###### determine optimal goal weights (optimal grid point)
+
+```{r}
+xHerfNoRFVarTestCalc <- calcTestVar(xHerfNoRFVarTest)
+```
+
+
+now, determine optimal weight, for each *sentixGroup* and *timeWindow*, optimal meaning maximum sharpe ratio
+
+
+Now, we also want to visualize the data. We use a ternary plot for this. 
+
+
+```{r}
+srWeightsAn <- extractWeightsWithValue(xHerfNoRFVarTestCalc, "anSR")
+ternaryPlot(srWeightsAn, "Ternary-Herfindahl-No-Risk-free")
+```
+
+
+
+
+now, determine optimal weight, for each *sentixGroup* and *timeWindow*, optimal meaning maximum sharpe ratio
+
+
+```{r}
+wOptHerfNoRFSRAn <- list()
+for(timeWindowName in names(srWeightsAn)){
+    for(sentixGroup in names(srWeightsAn[[timeWindowName]])){
+        df <- srWeightsAn[[timeWindowName]][[sentixGroup]]
+        
+        wOptHerfNoRFSRAn[[timeWindowName]][[sentixGroup]] <- df[which.max(df$value), c("w1", "w2", "w3")]
+    }
+}
+wOptHerfNoRFSRAn$datesTest
+```
+
+```{r}
+rm(xHerfNoRFVarTest, xHerfNoRFVarTestCalc)
+```
+
+
+
+
 ### find optimal portfolio
 
 #### dispersion direct min

@@ -180,7 +180,7 @@ rm(retPlot, cols, ylim)
 Graphs can be found in "\\R-Research Project Statistics\\Plot Data".
 
 ```{r, warning=FALSE}
-lateximport <- c(paste0("\\subsection{Herfindahl}"))
+lateximport <- c(paste0("\\subsection{Dispersion}"))
 
 for(sentixGroup in names(sDisp)){
     title <- paste("sDisp", sentixGroup)

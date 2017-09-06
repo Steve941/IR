@@ -128,14 +128,10 @@ plotPortfolio <- function(data, timeWindowName){
     class(retPlot$date) <- "Date"
     
     for(s in names(datWork)){
-        ret <- cumprod(1+datWork[[s]]$R)
-        retPlot[[s]] <- c(100, 100*ret)
+        tmp <- cumprod(1+datWork[[s]]$R)
+        retPlot[[s]] <- c(100, 100*tmp)
     }
 
-    
-    ggplot(retPlot, aes(x=date))+
-        geom_line(aes(y=retPlot[,2], color = colnames(retPlot)[2]))
-    
     
     plotCommand <- paste0(text = "ggplot(retPlot, aes(x=date))+")
     for (i in 2:(ncol(retPlot)-1)){
@@ -150,7 +146,6 @@ plotPortfolio <- function(data, timeWindowName){
         scale_color_discrete(name = "Index")+
         theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
 }
-
 ```
 
 ```{r}
@@ -227,7 +222,7 @@ plotWeightsLinesComplete <- function(dat, fileName){
 }
 ```
 
-### TODO: change of weights with turnover
+### change of weights with turnover
 
 to plot multiple plots on one plot <http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/>
 
@@ -472,7 +467,8 @@ wholeAnalysis(xClassicVarNoRf, "Classic-No-Risk-Free")
 ## Sentix Optimization
 
 ```{r}
-wholeAnalysis(xDispVarEval, "Sentix")
+wholeAnalysis(xDispVarEval, "Sentix-Dispersion")
+wholeAnalysis(xHerfVarEval, "Sentix-Herfindahl")
 ```
 
 

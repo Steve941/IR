@@ -7,6 +7,12 @@
 \includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-G1.pdf}
 \includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBear-G6.pdf}
 \subsubsection{Weights-Sentix-Dispersion - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalRecNBER-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalRecNBER-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalRecNBER-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalRecNBER-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalRecNBER-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalRecNBER-G6.pdf}
 \subsubsection{Weights-Sentix-Dispersion - datesEvalBull}
 \includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-P1.pdf}
 \includegraphics[width=\textwidth]{Weights-Sentix-Dispersion-datesEvalBull-P6.pdf}

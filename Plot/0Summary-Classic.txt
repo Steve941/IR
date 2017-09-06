@@ -1,7 +1,7 @@
 \subsection{Summary-Classic}
 \subsubsection{datesEvalBear}
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 10:45:09 2017
+% Tue Sep 05 16:25:44 2017
 \begin{tabular}{rrrrrrr}
   \hline
  & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
@@ -12,9 +12,22 @@ Mean Return (an) & -0.34 & -0.08 & -0.17 & -0.08 & -0.12 & -0.44 \\
    \hline
 \end{tabular}
 
+\subsubsection{datesEvalRecNBER}
+% latex table generated in R 3.4.1 by xtable 1.8-2 package
+% Tue Sep 05 16:25:44 2017
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+Mean Return (an) & -0.23 & -0.03 & -0.07 & -0.03 & -0.04 & -0.21 \\ 
+  Volatility (an) & 0.24 & 0.08 & 0.11 & 0.08 & 0.08 & 0.31 \\ 
+  Sharpe Ratio (an) & -0.96 & -0.34 & -0.66 & -0.33 & -0.50 & -0.68 \\ 
+   \hline
+\end{tabular}
+
 \subsubsection{datesEvalBull}
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 10:45:09 2017
+% Tue Sep 05 16:25:44 2017
 \begin{tabular}{rrrrrrr}
   \hline
  & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
@@ -27,7 +40,7 @@ Mean Return (an) & 0.03 & 0.07 & 0.16 & 0.07 & 0.11 & 0.60 \\
 
 \subsubsection{datesEvalLast}
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 10:45:09 2017
+% Tue Sep 05 16:25:44 2017
 \begin{tabular}{rrrrrrr}
   \hline
  & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
@@ -40,7 +53,7 @@ Mean Return (an) & 0.01 & 0.10 & 0.04 & 0.10 & 0.07 & -0.02 \\
 
 \subsubsection{datesEvalAllAfterTest}
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 10:45:10 2017
+% Tue Sep 05 16:25:45 2017
 \begin{tabular}{rrrrrrr}
   \hline
  & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
