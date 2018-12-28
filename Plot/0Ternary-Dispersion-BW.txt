@@ -1,0 +1,7 @@
+\subsection{Ternary-Dispersion-BW}
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-BW-P1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-BW-P6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-BW-I1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-BW-I6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-BW-G1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-BW-G6.pdf}\linebreak

@@ -1,0 +1,6 @@
+\subsection{Performance-Classic}
+\includegraphics[width=\textwidth]{Performance-Classic-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{Performance-Classic-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{Performance-Classic-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{Performance-Classic-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{Performance-Classic-datesEvalAllAfterTest.pdf}

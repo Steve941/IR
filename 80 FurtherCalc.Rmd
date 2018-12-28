@@ -1,0 +1,348 @@
+---
+title: "Further Calculations"
+author: "Stefan Glogger"
+date: "August 2017"
+output: pdf_document
+---
+
+
+```{r, include=FALSE, cache=T, results='hide'}
+knitr::knit_child("70 Visualization.Rmd")
+```
+
+```{r}
+library(PerformanceAnalytics)
+library(ggplot2)
+library(xtable)
+library(PeerPerformance)
+```
+
+
+# Further Calculations
+
+## Parameters
+
+We want to adopt for trading costs.
+
+```{r}
+costTrade = 0.0002
+```
+
+## Adopt portfolios for trading costs
+
+We reuse most of the calcEvalVarClassiv function and just adopt slightly for the inclusion of trading costs (in the returns).
+
+Turnover is calculated as the percentage of the portfolio that changes. This doesn't help us with the calculations. Therefore, we set things up new.
+
+Calculate the portfolio returns new. Note: for portfolio optimization, the concrete value of underlying is irrelevant (just the weights are important). Therefore, we can accumulate the costs of transaction, to obtain a true value of the portfolio (less transaction costs) in the end.
+
+buy/sell stocks at closing prices (actual day)
+
+
+
+```{r}
+calcEvalVarClassicTradCost <- function(dat){
+    res <- list()
+    for(timeWindowName in names(dat)){
+        timeWindow <- get(timeWindowName)
+        retTimeWindow <- ret[timeWindow,]
+        colnames(retTimeWindow) <- colnames(ret)
+        
+        # stocks2 <- as.matrix(stocks[,2:ncol(stocks)])
+        # rownames(stocks2) <- stocks[, 1]
+        # stocksTimeWindow <- stocks2[timeWindow,]
+        
+        # rf <- mean(retTimeWindow[,"BUND"])
+        
+        for(portfolioName in names(dat[[timeWindowName]])){
+            # CALCULATION OF R FIRST TRY
+            # turnoverStocks <- abs(diff(dat[[timeWindowName]][[portfolioName]]$x))
+            # turnoverStocks <- rbind(turnoverStocks, 0) # on last day, no turnover (keep portfolio)
+            # 
+            # costsTransact <- rowSums(stocksTimeWindow[-1,]*turnoverStocks*costTrade)
+            # costsTransact <- c(0, costsTransact) # no costs for setting up portfolio
+            # 
+            # valuePort_Start <- rowSums(dat[[timeWindowName]][[portfolioName]]$x*stocksTimeWindow[-nrow(stocksTimeWindow),]) # start of day
+            # valuePort_End <- rowSums(dat[[timeWindowName]][[portfolioName]]$x*stocksTimeWindow[-1,]) # end of day
+            # 
+            # R <- (valuePort_End)/(valuePort_Start)-1 ## returns without Trading Costs
+            # R <- (valuePort_End - cumsum(costsTransact[-1]))/(valuePort_Start - cumsum(costsTransact[-length(costsTransact)]))-1 ## returns with Trading Costs at end of period
+            # R <- (valuePort_End - c(0, cumsum(costsTransact[-c(1, length(costsTransact))])))/(valuePort_Start - c(0,0, cumsum(costsTransact[-c(1, length(costsTransact)-1, length(costsTransact))])))-1 ## returns with Trading Costs at start of period
+            
+            # R NEW VERSION; SHOULD BE CORRECT (COMPARE TO MAIL 8.11.)
+            ## no transaction costs
+            # R <- numeric(length(timeWindow)-1)
+            # R <- rowSums(dat[[timeWindowName]][[portfolioName]]$x*(1+retTimeWindow[-1,]))/1-1
+            ## with transaction costs (at start of period)
+            turnoverStocks <- rowSums(abs(diff(dat[[timeWindowName]][[portfolioName]]$x)))
+            R <- numeric(length(timeWindow)-1)
+            R <- (rowSums(dat[[timeWindowName]][[portfolioName]]$x*(1+retTimeWindow[-1,])) - c(0, turnoverStocks)*costTrade)/1 - 1
+            
+            turnover <- c(0, rowSums(abs(diff(dat[[timeWindowName]][[portfolioName]]$x)))/2) # start off with 0 to have same length
+            VaR <- VaR(R, method = "historical")
+            ES <- ES(R, method = "historical")
+            
+            r <- mean(R)
+            sd <- sd(R)
+            
+            anR <- (1+r)^52-1
+            anSd <- sqrt((sd^2)*52)
+            
+            omega <- Omega(R)
+            cVaR <- CVaR(R)
+            
+            res[[timeWindowName]][[portfolioName]] <- list(x = dat[[timeWindowName]][[portfolioName]]$x, 
+                                                           R = R, r = r, sd = sd, sr = r/sd,
+                                                           anR = anR, anSd = anSd, anSR = anR/anSd, 
+                                                           turnover = turnover, VaR = VaR, ES = ES,
+                                                           omega = omega, cVaR = cVaR)
+            
+        }
+    }
+    return(res)
+}
+```
+
+difference in function is that fweight is not there for classic portfolios
+```{r}
+calcEvalVarSentixTradCost <- function(dat){
+    res <- calcEvalVarClassicTradCost(dat)
+    for(timeWindowName in names(dat)){
+        for(portfolioName in names(dat[[timeWindowName]])){
+            fweight = mean(dat[[timeWindowName]][[portfolioName]]$obj)
+            res[[timeWindowName]][[portfolioName]]$fweight <- fweight
+        }
+    }
+    return(res)
+}
+```
+
+```{r}
+wholeAnalysisTradCost <- function(dat, fileName){
+    retDat <- calcEvalVarClassicTradCost(dat)
+    
+    # weights
+    plotWeightsLinesWithTurnoverComplete(retDat, paste0("Weights-", fileName))
+    
+    # performance of portfolio
+    plotPortfolioComplete(retDat, paste0("Performance-", fileName))
+    
+    # summary statistics
+    summaryClassicComplete(retDat, paste0("Summary-", fileName))
+}
+```
+
+
+### Varying of portfolio weights
+
+```{r}
+wholeAnalysisTradCost(xClassicVar, "Classic")
+```
+
+
+### Varying of portfolio weights no risk free asset
+
+```{r}
+wholeAnalysisTradCost(xClassicVarNoRf, "Classic-No-Risk-Free")
+```
+
+
+## Sentix Optimization
+
+```{r}
+wholeAnalysisTradCost(xDispVarEval, "Sentix-Dispersion")
+wholeAnalysisTradCost(xHerfVarEval, "Sentix-Herfindahl")
+wholeAnalysisTradCost(xDispNoRFVarEval, "Sentix-Disperion-No-Risk-Free")
+wholeAnalysisTradCost(xHerfNoRFVarEval, "Sentix-Herfindahl-No-Risk-Free")
+```
+
+
+## Sole Performance of Stock
+
+We want to also plot the performance of the single indexes in the time window (100\% invested in one index and hold).
+
+```{r}
+xIndexEval <- list()
+for(t in datesEvalNames){
+  for(p in colnames(ret)){
+    tmp <- matrix(0, ncol = ncol(ret), nrow = length(get(t))-1)
+    colnames(tmp) <- colnames(ret)
+    rownames(tmp) <- get(t)[1:(length(get(t))-1)]
+        
+    
+    tmp[,which(colnames(ret) == p)] <- 1
+    
+    xIndexEval[[t]][[p]]$x <- tmp
+  }
+}
+wholeAnalysisTradCost(xIndexEval, "Indices")
+```
+
+
+## All together
+
+sentix with classic portfolio with varying weights
+
+### classicWithRiskFree
+
+```{r}
+retPortClassicVarying <- calcEvalVarClassicTradCost(xClassicVar)
+retPortSentixVarying <- calcEvalVarClassicTradCost(xDispVarEval)
+
+retAllVarying <- retPortClassicVarying
+for(timeWindowName in names(retAllVarying)){
+    retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortSentixVarying[[timeWindowName]])
+}
+
+
+
+plotPortfolioComplete(retAllVarying, "Performance-All-classicWithRiskFree")
+summaryClassicComplete(retAllVarying, "SummaryAll-classicWithRiskFree")
+```
+
+### classicWithOutRiskFree
+
+```{r}
+retPortClassicVarying <- calcEvalVarClassicTradCost(xClassicVarNoRf)
+retPortSentixVarying <- calcEvalVarClassicTradCost(xDispNoRFVarEval)
+
+retAllVarying <- retPortClassicVarying
+for(timeWindowName in names(retAllVarying)){
+    retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortSentixVarying[[timeWindowName]])
+}
+
+
+plotPortfolioComplete(retAllVarying, "Performance-All-classicNoRiskFree")
+summaryClassicComplete(retAllVarying, "SummaryAll-classicNoRiskFree")
+```
+
+
+```{r}
+# rm(retPortClassicVarying, retPortSentixVarying, retAllVarying)
+```
+
+
+## Sharpe Ratio comparison
+
+We test if the sharpe ratio of the sentiment strategies is higher than the Sharpe Ratio of the classical portfolio optimization techniques. Use function *sharpeTesting* of package *PeerPerformance* and depict the p-values (should be that sentiment strategy does not have higher sharpe ratio than classical strategy).
+row: Sentiment Strategy
+column: Classical Strategy
+
+```{r}
+# install.packages("PeerPerformance")
+library(PeerPerformance)
+```
+
+
+```{r}
+printSharpeRatioComparison <- function(datSent, datClas, fileName){
+    lateximport <- c(paste0("\\subsection{",fileName," - p-Values that sharpe of Row is not higher}"))
+    
+    sentCalc <- calcEvalVarClassicTradCost(datSent)
+    clasCalc <- calcEvalVarClassicTradCost(datClas)
+    
+    for(timeWindowName in names(sentCalc)){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", timeWindowName, "}"))
+        
+        mat <- matrix(NA, nrow = length(names(sentCalc[[timeWindowName]])), 
+                      ncol = length(names(clasCalc[[timeWindowName]])))
+        rownames(mat) <- names(sentCalc[[timeWindowName]])
+        colnames(mat) <- names(clasCalc[[timeWindowName]])
+        
+        for(portfolioName in names(sentCalc[[timeWindowName]])){
+            rSent <- sentCalc[[timeWindowName]][[portfolioName]]$R
+            
+            for(portfolioName2 in names(clasCalc[[timeWindowName]])){
+                rClas <- clasCalc[[timeWindowName]][[portfolioName2]]$R
+                
+                mat[which(names(sentCalc[[timeWindowName]]) == portfolioName),
+                    which(names(clasCalc[[timeWindowName]]) == portfolioName2)] <- round(sharpeTesting(rSent, rClas)$pval, 4)
+            }
+        }
+        lateximport <- c(lateximport, print(xtable(mat, digits = 4), floating = FALSE))
+        print(mat)
+    
+    }
+    
+    lateximport <- c(lateximport, "\\clearpage")
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0SharpeRatioComparison-",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
+
+```{r}
+printSharpeRatioComparison(xDispVarEval, xClassicVar, "Dispersion")
+printSharpeRatioComparison(xHerfVarEval, xClassicVar, "Herfindahl")
+```
+
+
+## Presenation of results
+
+Generate table as Dominik did by hand previously.
+
+```{r}
+summaryClassic <- function(datName, d, roundTo = 4){
+    dat <- datName[[d]]
+    
+    mat <- matrix(NA, nrow = 6, ncol = length(dat))
+    rownames(mat) <- c("Mean Return (an)", "Volatility (an)", "Sharpe Ratio (an)", "Omega", "VaR", "CVaR")
+    colnames(mat) <- names(dat)
+    
+    for(sInd in 1:length(dat)){
+        mat[1,sInd] <- round(dat[[sInd]]$anR, roundTo)
+        mat[2,sInd] <- round(dat[[sInd]]$anSd, roundTo)
+        mat[3,sInd] <- round(dat[[sInd]]$anSR, roundTo)
+        mat[4,sInd] <- round(dat[[sInd]]$omega, roundTo)
+        mat[5,sInd] <- round(dat[[sInd]]$VaR, roundTo)
+        mat[6,sInd] <- round(dat[[sInd]]$cVaR, roundTo)
+    }
+    return(mat)
+}
+```
+
+
+```{r}
+# Code-Schnipsel, wohl nicht vollständig
+summaryTableDominik <- function(dat, fileName, roundTo = 4){
+  lateximport <- c(paste0("\\subsection{",fileName," - summaryTableDominik}"))
+        
+    datesWeWant <- c("datesEvalBear", "datesEvalRecNBER", "datesEvalBull", "datesEvalAllAfterTest")
+    
+    tab <- matrix(0, nrow = 6*length(datesWeWant), ncol = 18)
+    rownames(tab) <- rep(c("Ret. (an)", "Vol. (an)", "SR (an)", "Omega", "VaR", "CoVaR"), 4)
+    
+    for(d in datesWeWant){
+        datInside <- dat[[d]]
+        for(s in names(dat[[d]])){
+            tab[(which(datesWeWant == d)-1)+1, which(names(dat[[d]]) == s)] = dat[[d]][[s]]$sr
+        }
+        tab <- c(lateximport, print(xtable(summaryClassic(dat, d, roundTo)), floating = FALSE))
+        print(summaryClassic(dat, d, roundTo))
+    }
+    
+    lateximport <- c(lateximport, "\\clearpage")
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
+
+
+```{r}
+retPortClassicVarying <- calcEvalVarClassicTradCost(xClassicVar)
+retPortSentixVarying <- calcEvalVarClassicTradCost(xDispVarEval)
+retPortHerfVarying <- calcEvalVarClassicTradCost(xHerfVarEval)
+
+retAllVarying <- retPortClassicVarying
+for(timeWindowName in names(retAllVarying)){
+    retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortSentixVarying[[timeWindowName]])
+}
+for(timeWindowName in names(retAllVarying)){
+    retAllVarying[[timeWindowName]] <- append(retAllVarying[[timeWindowName]], retPortHerfVarying[[timeWindowName]])
+}
+
+
+summaryTableDominik(retAllVarying, "SummaryDominik-classicNoRiskFree")
+```
+

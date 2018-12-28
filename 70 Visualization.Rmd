@@ -34,10 +34,12 @@ r: mean return of portfolio over whole time window
 sd: standard deviation of return of portfolio over whole time window
 sr: sharpe ratio (weekly)
 anR: annualized return of portfolio over whole time window
-anSd: annualized standard deiation
+anSd: annualized standard deviation
 anSR: sharpe ratio (annual)
 fweight: mean of goal function value
 turnover: turnover of weights (how much of portfolio has to be changed) in percent
+omega: Omega calculated by *PerformanceAnalytics*
+
 
 Calculation of turnover:
 NOT USEFUL (not comparable as portfolios evolve differently): we fix portfolio weights in t, hold these weights to t+1 (while portfolio raises to (1+ret)\*price_t), and may change weightsin t+1 -> amount changed is (change in weights) \* (value of index in t+1)
@@ -46,6 +48,7 @@ USEFUL: we calculate the percentage points of weights that change in each time s
 Use an adoption of *calcTestVar()*
 
 ```{r}
+# install.packages("PerformanceAnalytics")
 library(PerformanceAnalytics)
 ```
 
@@ -63,7 +66,7 @@ calcEvalVarClassic <- function(dat){
         rf <- mean(retTimeWindow[,"BUND"])
         
         for(portfolioName in names(dat[[timeWindowName]])){
-            R <- rowSums(dat[[timeWindowName]][[portfolioName]]$x * retTimeWindow)
+            R <- rowSums(dat[[timeWindowName]][[portfolioName]]$x * retTimeWindow) ## returns calculated old way
             
             turnover <- c(0, rowSums(abs(diff(dat[[timeWindowName]][[portfolioName]]$x)))/2) # start off with 0 to have same length
             VaR <- VaR(R, method = "historical")
@@ -75,11 +78,14 @@ calcEvalVarClassic <- function(dat){
             anR <- (1+r)^52-1
             anSd <- sqrt((sd^2)*52)
             
+            omega <- Omega(R)
+            cVaR <- CVaR(R)
             
             res[[timeWindowName]][[portfolioName]] <- list(x = dat[[timeWindowName]][[portfolioName]]$x, 
                                                            R = R, r = r, sd = sd, sr = r/sd,
                                                            anR = anR, anSd = anSd, anSR = anR/anSd, 
-                                                           turnover = turnover, VaR = VaR, ES = ES)
+                                                           turnover = turnover, VaR = VaR, ES = ES,
+                                                           omega = omega, cVaR = cVaR)
             
         }
     }
@@ -118,38 +124,108 @@ NOTE: returns occur one date later as stated here (in the data)
 There has been an issue with *date*. It is getted as character and we need to transform it to integer and then back to date to store date as a numeric value (formatted as a date) and then used as x-axis
 
 ```{r}
-plotPortfolio <- function(data, timeWindowName){
-    datWork <- data[[timeWindowName]]
-    timeWindow <- get(timeWindowName)
-    
-    colBackground <- colsEvalDates[timeWindowName]
-    
-    retPlot <- data.frame(date = as.integer(as.Date(get(timeWindowName))))# date is read as character, we need double to plot for x-axis
-    class(retPlot$date) <- "Date"
-    
-    for(s in names(datWork)){
-        tmp <- cumprod(1+datWork[[s]]$R)
-        retPlot[[s]] <- c(100, 100*tmp)
+plotPortfolio <- function(data, timeWindowName, bw=F){
+    if(bw){
+        datWork <- data[[timeWindowName]]
+        timeWindow <- get(timeWindowName)
+        
+        retPlot <- data.frame(date = as.integer(as.Date(get(timeWindowName))))# date is read as character, we need double to plot for x-axis
+        class(retPlot$date) <- "Date"
+        
+        for(s in names(datWork)){
+            tmp <- cumprod(1+datWork[[s]]$R)
+            if(s == "tanPort"){
+                s <- "TP"
+            }else if(s == "mVaPort"){
+                s <- "MV"
+            }else if(s == "rp"){
+                s <- "RP"
+            }else if(s == "PGMV"){
+                s <- "GMV"
+            }else if(s == "PMD"){
+                s <- "MD"
+            }else if(s == "ew"){
+                s <- "EW"
+            }
+            retPlot[[s]] <- c(100, 100*tmp)
+        }
+        
+        retPlotLong <<- gather(retPlot, portfolio, value, -date)
+        retPlotLong$portfolio = factor(retPlotLong$portfolio, levels = c("P1", "P6", "I1", "I6", "G1", "G6", "TP", "MV", "RP", "GMV", "MD", "EW", "DAX", "TEC", "ESX50", "SP500", "NASDAQ", "NIKKEI", "BUND"))
+        ggplot(retPlotLong, aes(x = date, y = value, col = portfolio, linetype = portfolio))+
+            geom_line(lwd=1)+
+            scale_linetype_manual(values = c(rep("solid", 2), rep("longdash", 2), rep("twodash", 2), "dotted", "dashed", "dotdash", "F1", "4C88C488", "12345678")) +
+            scale_color_grey()+
+            theme_bw() + 
+            labs(x = "Time", y = "Value", colour = "Portfolio", linetype = "Portfolio")
+  
+    }else{
+        datWork <- data[[timeWindowName]]
+        timeWindow <- get(timeWindowName)
+        
+        retPlot <- data.frame(date = as.integer(as.Date(get(timeWindowName))))# date is read as character, we need double to plot for x-axis
+        class(retPlot$date) <- "Date"
+        
+        for(s in names(datWork)){
+            tmp <- cumprod(1+datWork[[s]]$R)
+            if(s == "tanPort"){
+                s <- "TP"
+            }else if(s == "mVaPort"){
+                s <- "MV"
+            }else if(s == "rp"){
+                s <- "RP"
+            }else if(s == "PGMV"){
+                s <- "GMV"
+            }else if(s == "PMD"){
+                s <- "MD"
+            }else if(s == "ew"){
+                s <- "EW"
+            }
+            retPlot[[s]] <- c(100, 100*tmp)
+        }
+        
+        retPlotLong <<- gather(retPlot, portfolio, value, -date)
+        retPlotLong$portfolio = factor(retPlotLong$portfolio, levels = c("P1", "P6", "I1", "I6", "G1", "G6", "TP", "MV", "RP", "GMV", "MD", "EW", "DAX", "TEC", "ESX50", "SP500", "NASDAQ", "NIKKEI", "BUND"))
+        ggplot(retPlotLong, aes(x = date, y = value, col = portfolio))+
+            geom_line(lwd=1)+
+            theme_rgbw()+
+            # theme_bw()+
+            labs(x = "Time", y = "Value", colour = "Portfolio")
+        
+        
+    #     # --------------------- OLD --------------------------------
+    #     datWork <- data[[timeWindowName]]
+    #     timeWindow <- get(timeWindowName)
+    #     
+    #     colBackground <- colsEvalDates[timeWindowName]
+    #     
+    #     retPlot <- data.frame(date = as.integer(as.Date(get(timeWindowName))))# date is read as character, we need double to plot for x-axis
+    #     class(retPlot$date) <- "Date"
+    #     
+    #     for(s in names(datWork)){
+    #         tmp <- cumprod(1+datWork[[s]]$R)
+    #         retPlot[[s]] <- c(100, 100*tmp)
+    #     }
+    #     
+    #     
+    #     plotCommand <- paste0(text = "ggplot(retPlot, aes(x=date))+")
+    #     for (i in 2:(ncol(retPlot)-1)){
+    #         plotCommand <- paste0(plotCommand, "geom_line(aes(y=retPlot[,",i,"], color = colnames(retPlot)[",i,"])) + ")
+    #     }
+    #     plotCommand <- paste0(plotCommand, "geom_line(aes(y=retPlot[,",ncol(retPlot),"], color = colnames(retPlot)[",ncol(retPlot),"])) ")
+    #     
+    #     eval(parse(text = plotCommand))+  
+    #         labs(title = paste("Time:", timeWindowName),
+    #              y = "Value",
+    #              x = "Date") +
+    #         scale_color_discrete(name = "Index")+
+    #         theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
     }
-
-    
-    plotCommand <- paste0(text = "ggplot(retPlot, aes(x=date))+")
-    for (i in 2:(ncol(retPlot)-1)){
-        plotCommand <- paste0(plotCommand, "geom_line(aes(y=retPlot[,",i,"], color = colnames(retPlot)[",i,"])) + ")
-    }
-    plotCommand <- paste0(plotCommand, "geom_line(aes(y=retPlot[,",ncol(retPlot),"], color = colnames(retPlot)[",ncol(retPlot),"])) ")
-    
-    eval(parse(text = plotCommand))+  
-        labs(title = paste("Time:", timeWindowName),
-             y = "Value",
-             x = "Date") +
-        scale_color_discrete(name = "Index")+
-        theme(panel.background = element_rect(fill = alpha(colBackground, 0.2)))
 }
 ```
 
 ```{r}
-plotPortfolioComplete <- function(dat, fileName){
+plotPortfolioComplete <- function(dat, fileName, bw=F){
     lateximport <- c(paste0("\\subsection{",fileName,"}"))
     
     for(d in datesEvalNames){
@@ -157,7 +233,7 @@ plotPortfolioComplete <- function(dat, fileName){
         
         title <- paste0(fileName, "-", d, ".pdf")
         pdf(file.path(getwd(), "Plot", title), width = 10, height = 4)
-        plot(plotPortfolio(dat, d))
+        plot(plotPortfolio(dat, d, bw))
         dev.off()
         
         lateximport <- c(lateximport, paste0("\\includegraphics[width=\\textwidth]{",title,"}"))
@@ -174,9 +250,9 @@ plotPortfolioComplete <- function(dat, fileName){
 
 ```{r}
 plotWeightsLines <- function(datName, timeWindowName, s){
-    dat <- datName[[timeWindowName]][[s]]$x
-    dat <- as.data.frame(dat)
-    dat$date <- as.Date(rownames(dat))
+    dat <<- datName[[timeWindowName]][[s]]$x
+    dat <<- as.data.frame(dat)
+    dat$date <<- as.Date(rownames(dat))
     plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
     
     colBackground <- colsEvalDates[timeWindowName]
@@ -276,20 +352,32 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 
 
 ```{r}
+# Define 'dat' in global environment with "<<-" in order to circumvent the (new, i.e. after review) special plotting behaviour of ggplot2
+# More details in https://stackoverflow.com/questions/10904124/global-and-local-variables-in-r
 plotWeightsLinesWithTurnover <- function(datName, d, s){
-    dat <- datName[[d]][[s]]$x
-    dat <- as.data.frame(dat)
-    dat$date <- as.Date(rownames(dat))
-    dat$turnover <- datName[[d]][[s]]$turnover
-    
+    dat <<- datName[[d]][[s]]$x
+    dat <<- as.data.frame(dat)
+    dat$date <<- as.Date(rownames(dat))
+    dat$turnover <<- datName[[d]][[s]]$turnover
+
     colBackground <- colsEvalDates[d]
         
-    plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
-    for(i in 1:(ncol(dat)-3)){
-        plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
+    plotCommand <- paste0('ggplot(dat, aes(x=date)) +')
+    for(i in colnames(dat)[1:(ncol(dat)-2)]){
+      plotCommand <- paste0(plotCommand, 'geom_line(aes(y=dat[["',i,'"]], color = "', i, '")) +')
     }
-    plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
-        
+    plotCommand <- substr(plotCommand, 1, nchar(plotCommand)-2)
+    
+    
+    ## OLD code (from before review)
+    # plotCommand <- paste0("ggplot(dat, aes(x=date)) +")
+    # for(i in 1:(ncol(dat)-3)){
+    #     plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",i,"], color = colnames(dat)[", i, "])) +")
+    # }
+    # plotCommand <- paste0(plotCommand, "geom_line(aes(y=dat[,",ncol(dat)-2,"], color = colnames(dat)[", ncol(dat)-2, "]))")
+    
+    
+    
     p1 <- eval(parse(text = plotCommand))+
       ylim(0, 1)+
       labs(title = paste("Time:", d),
@@ -306,9 +394,13 @@ plotWeightsLinesWithTurnover <- function(datName, d, s){
            y = "Turnover",
            x = "Date") +
       theme(panel.background = element_rect(fill = alpha(colBackground, 0.1)))
-    
+
     multiplot(p1, p2)
 }
+
+ 
+# plotWeightsLinesWithTurnover(datName, d, s)
+
 ```
 
 ```{r}
@@ -342,17 +434,20 @@ plotWeightsLinesWithTurnoverComplete <- function(dat, fileName){
 print the summary (in matrix to pass it on to LaTeX-Table lateron)
 
 ```{r}
-summaryClassic <- function(datName, d, roundTo = 2){
+summaryClassic <- function(datName, d, roundTo = 4){
     dat <- datName[[d]]
     
-    mat <- matrix(NA, nrow = 3, ncol = length(dat))
-    rownames(mat) <- c("Mean Return (an)", "Volatility (an)", "Sharpe Ratio (an)")
+    mat <- matrix(NA, nrow = 6, ncol = length(dat))
+    rownames(mat) <- c("Mean Return (an)", "Volatility (an)", "Sharpe Ratio (an)", "Omega", "VaR", "CVaR")
     colnames(mat) <- names(dat)
     
     for(sInd in 1:length(dat)){
         mat[1,sInd] <- round(dat[[sInd]]$anR, roundTo)
         mat[2,sInd] <- round(dat[[sInd]]$anSd, roundTo)
         mat[3,sInd] <- round(dat[[sInd]]$anSR, roundTo)
+        mat[4,sInd] <- round(dat[[sInd]]$omega, roundTo)
+        mat[5,sInd] <- round(dat[[sInd]]$VaR, roundTo)
+        mat[6,sInd] <- round(dat[[sInd]]$cVaR, roundTo)
     }
     return(mat)
 }
@@ -367,7 +462,7 @@ library(xtable)
 
 
 ```{r}
-summaryClassicComplete <- function(dat, fileName, roundTo = 2){
+summaryClassicComplete <- function(dat, fileName, roundTo = 4){
     lateximport <- c(paste0("\\subsection{",fileName,"}"))
     
     for(d in datesEvalNames){
@@ -453,6 +548,12 @@ for(d in datesEvalNames){
 ### Varying of portfolio weights
 
 ```{r}
+# install.packages("tidyr")
+library(tidyr)
+```
+
+
+```{r}
 wholeAnalysis(xClassicVar, "Classic")
 ```
 
@@ -474,6 +575,28 @@ wholeAnalysis(xHerfNoRFVarEval, "Sentix-Herfindahl-No-Risk-Free")
 ```
 
 
+## Sole Performance of Stock
+
+We want to also plot the performance of the single indexes in the time window (100\% invested in one index and hold).
+
+```{r}
+xIndexEval <- list()
+for(t in datesEvalNames){
+  for(p in colnames(ret)){
+    tmp <- matrix(0, ncol = ncol(ret), nrow = length(get(t))-1)
+    colnames(tmp) <- colnames(ret)
+    rownames(tmp) <- get(t)[1:(length(get(t))-1)]
+        
+    
+    tmp[,which(colnames(ret) == p)] <- 1
+    
+    xIndexEval[[t]][[p]]$x <- tmp
+  }
+}
+wholeAnalysis(xIndexEval, "Indices")
+```
+
+
 ## All together
 
 sentix with classic portfolio with varying weights
@@ -492,6 +615,7 @@ for(timeWindowName in names(retAllVarying)){
 
 
 plotPortfolioComplete(retAllVarying, "Performance-All-classicWithRiskFree")
+plotPortfolioComplete(retAllVarying, "Performance-All-classicWithRiskFree", bw=T)
 summaryClassicComplete(retAllVarying, "SummaryAll-classicWithRiskFree")
 ```
 
@@ -499,7 +623,7 @@ summaryClassicComplete(retAllVarying, "SummaryAll-classicWithRiskFree")
 
 ```{r}
 retPortClassicVarying <- calcEvalVarClassic(xClassicVarNoRf)
-retPortSentixVarying <- calcEvalVarClassic(xDispVarEval)
+retPortSentixVarying <- calcEvalVarClassic(xDispNoRFVarEval)
 
 retAllVarying <- retPortClassicVarying
 for(timeWindowName in names(retAllVarying)){
@@ -517,9 +641,66 @@ rm(retPortClassicVarying, retPortSentixVarying, retAllVarying)
 ```
 
 
-## cleanup
+## Sharpe Ratio comparison
+
+We test if the sharpe ratio of the sentiment strategies is higher than the Sharpe Ratio of the classical portfolio optimization techniques. Use function *sharpeTesting* of package *PeerPerformance* and depict the p-values (should be that sentiment strategy does not have higher sharpe ratio than classical strategy).
+row: Sentiment Strategy
+column: Classical Strategy
 
 ```{r}
+# install.packages("PeerPerformance")
+library(PeerPerformance)
+```
+
+
+```{r}
+printSharpeRatioComparison <- function(datSent, datClas, fileName){
+    lateximport <- c(paste0("\\subsection{",fileName," - p-Values that sharpe of Row is not higher}"))
+    
+    sentCalc <- calcEvalVarClassic(datSent)
+    clasCalc <- calcEvalVarClassic(datClas)
+    
+    for(timeWindowName in names(sentCalc)){
+        lateximport <- c(lateximport, paste0("\\subsubsection{", timeWindowName, "}"))
+        
+        mat <- matrix(NA, nrow = length(names(sentCalc[[timeWindowName]])), 
+                      ncol = length(names(clasCalc[[timeWindowName]])))
+        rownames(mat) <- names(sentCalc[[timeWindowName]])
+        colnames(mat) <- names(clasCalc[[timeWindowName]])
+        
+        for(portfolioName in names(sentCalc[[timeWindowName]])){
+            rSent <- sentCalc[[timeWindowName]][[portfolioName]]$R
+            
+            for(portfolioName2 in names(clasCalc[[timeWindowName]])){
+                rClas <- clasCalc[[timeWindowName]][[portfolioName2]]$R
+                
+                mat[which(names(sentCalc[[timeWindowName]]) == portfolioName),
+                    which(names(clasCalc[[timeWindowName]]) == portfolioName2)] <- round(sharpeTesting(rSent, rClas)$pval, 4)
+            }
+        }
+        lateximport <- c(lateximport, print(xtable(mat), floating = FALSE))
+        print(mat)
+    
+    }
+    
+    lateximport <- c(lateximport, "\\clearpage")
+    fileConnection <- file(file.path(getwd(), "Plot", paste0("0SharpeRatioComparison-",fileName,".txt")))
+    writeLines(lateximport, fileConnection)
+    close(fileConnection)
+}
+```
+
+```{r}
+printSharpeRatioComparison(xDispVarEval, xClassicVar, "Dispersion")
+printSharpeRatioComparison(xHerfVarEval, xClassicVar, "Herfindahl")
+```
+
+
+
+
+## cleanup
+
+```{r, eval=FALSE}
 rm(calcEvalVarClassic, calcEvalVarSentix, plotPortfolio, plotPortfolioComplete, plotWeightsLines, plotWeightsLinesComplete, summaryClassic, summaryClassicComplete, wholeAnalysis)
 
 detach("package:xtable", unload = T)

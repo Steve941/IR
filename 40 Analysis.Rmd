@@ -106,6 +106,8 @@ generate an overview of dispersion with different periods considered in rows and
 function for comparison
 
 ```{r}
+library(xtable)
+
 compareOverview <- function(nVec, mVec, dat){
   res <- list()
   for(sentixGroup in names(dat)){
@@ -178,5 +180,5 @@ compareOverviewTXT(nVec, mVec, sHerf, "Herfindahl")
 
 ### cleanup
 ```{r}
-rm(q, res, compareSentRet, compare)
+rm(q, res, compareSentRet)
 ```

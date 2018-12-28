@@ -1,66 +1,81 @@
 \subsection{Summary-Sentix-Dispersion}
 \subsubsection{datesEvalBear}
-% latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 16:27:25 2017
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 14:18:03 2018
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
   \hline
-Mean Return (an) & 0.05 & 0.07 & 0.04 & 0.06 & 0.05 & 0.07 \\ 
-  Volatility (an) & 0.07 & 0.07 & 0.06 & 0.07 & 0.07 & 0.07 \\ 
-  Sharpe Ratio (an) & 0.79 & 0.89 & 0.59 & 0.84 & 0.78 & 0.90 \\ 
+Mean Return (an) & -0.29 & -0.29 & -0.29 & -0.29 & -0.29 & -0.29 \\ 
+  Volatility (an) & 0.26 & 0.26 & 0.26 & 0.26 & 0.26 & 0.26 \\ 
+  Sharpe Ratio (an) & -1.10 & -1.10 & -1.11 & -1.10 & -1.11 & -1.10 \\ 
+  Omega & 0.61 & 0.61 & 0.61 & 0.61 & 0.61 & 0.61 \\ 
+  VaR & -0.06 & -0.06 & -0.06 & -0.06 & -0.06 & -0.06 \\ 
+  CVaR & -0.13 & -0.13 & -0.13 & -0.13 & -0.13 & -0.13 \\ 
    \hline
 \end{tabular}
 
 \subsubsection{datesEvalRecNBER}
-% latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 16:27:26 2017
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 14:18:03 2018
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
   \hline
-Mean Return (an) & 0.04 & 0.04 & 0.04 & 0.04 & 0.04 & 0.04 \\ 
-  Volatility (an) & 0.07 & 0.07 & 0.07 & 0.07 & 0.07 & 0.07 \\ 
-  Sharpe Ratio (an) & 0.63 & 0.53 & 0.54 & 0.61 & 0.62 & 0.53 \\ 
+Mean Return (an) & -0.11 & -0.11 & -0.11 & -0.11 & -0.11 & -0.11 \\ 
+  Volatility (an) & 0.26 & 0.26 & 0.25 & 0.25 & 0.26 & 0.26 \\ 
+  Sharpe Ratio (an) & -0.42 & -0.43 & -0.44 & -0.42 & -0.43 & -0.42 \\ 
+  Omega & 0.85 & 0.84 & 0.84 & 0.85 & 0.84 & 0.85 \\ 
+  VaR & -0.05 & -0.05 & -0.05 & -0.05 & -0.05 & -0.05 \\ 
+  CVaR & -0.12 & -0.12 & -0.12 & -0.11 & -0.11 & -0.12 \\ 
    \hline
 \end{tabular}
 
 \subsubsection{datesEvalBull}
-% latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 16:27:26 2017
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 14:18:03 2018
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
   \hline
-Mean Return (an) & 0.11 & 0.16 & 0.11 & 0.09 & 0.11 & 0.16 \\ 
-  Volatility (an) & 0.06 & 0.10 & 0.05 & 0.05 & 0.06 & 0.10 \\ 
-  Sharpe Ratio (an) & 1.89 & 1.59 & 2.01 & 1.71 & 1.85 & 1.59 \\ 
+Mean Return (an) & 0.58 & 0.59 & 0.59 & 0.59 & 0.59 & 0.59 \\ 
+  Volatility (an) & 0.18 & 0.18 & 0.18 & 0.18 & 0.18 & 0.18 \\ 
+  Sharpe Ratio (an) & 3.25 & 3.36 & 3.37 & 3.36 & 3.34 & 3.36 \\ 
+  Omega & 2.58 & 2.68 & 2.69 & 2.67 & 2.65 & 2.68 \\ 
+  VaR & -0.02 & -0.02 & -0.02 & -0.02 & -0.02 & -0.02 \\ 
+  CVaR & -0.03 & -0.03 & -0.03 & -0.03 & -0.03 & -0.03 \\ 
    \hline
 \end{tabular}
 
 \subsubsection{datesEvalLast}
-% latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 16:27:26 2017
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 14:18:04 2018
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
   \hline
-Mean Return (an) & 0.12 & 0.13 & 0.12 & 0.12 & 0.12 & 0.13 \\ 
-  Volatility (an) & 0.06 & 0.11 & 0.06 & 0.06 & 0.06 & 0.11 \\ 
-  Sharpe Ratio (an) & 1.84 & 1.25 & 1.81 & 2.06 & 1.83 & 1.25 \\ 
+Mean Return (an) & 0.12 & 0.12 & 0.12 & 0.12 & 0.12 & 0.12 \\ 
+  Volatility (an) & 0.18 & 0.18 & 0.18 & 0.18 & 0.18 & 0.18 \\ 
+  Sharpe Ratio (an) & 0.65 & 0.66 & 0.65 & 0.65 & 0.63 & 0.66 \\ 
+  Omega & 1.25 & 1.25 & 1.25 & 1.25 & 1.24 & 1.26 \\ 
+  VaR & -0.05 & -0.05 & -0.05 & -0.05 & -0.05 & -0.05 \\ 
+  CVaR & -0.05 & -0.05 & -0.05 & -0.05 & -0.05 & -0.05 \\ 
    \hline
 \end{tabular}
 
 \subsubsection{datesEvalAllAfterTest}
-% latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Tue Sep 05 16:27:26 2017
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 14:18:04 2018
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
   \hline
-Mean Return (an) & 0.15 & 0.19 & 0.14 & 0.14 & 0.15 & 0.19 \\ 
-  Volatility (an) & 0.08 & 0.10 & 0.08 & 0.07 & 0.08 & 0.10 \\ 
-  Sharpe Ratio (an) & 1.92 & 1.81 & 1.91 & 1.85 & 1.92 & 1.81 \\ 
+Mean Return (an) & 0.22 & 0.22 & 0.22 & 0.22 & 0.22 & 0.22 \\ 
+  Volatility (an) & 0.19 & 0.19 & 0.19 & 0.19 & 0.19 & 0.19 \\ 
+  Sharpe Ratio (an) & 1.13 & 1.15 & 1.14 & 1.14 & 1.13 & 1.15 \\ 
+  Omega & 1.45 & 1.46 & 1.45 & 1.46 & 1.45 & 1.46 \\ 
+  VaR & -0.04 & -0.04 & -0.04 & -0.04 & -0.04 & -0.04 \\ 
+  CVaR & -0.07 & -0.07 & -0.07 & -0.07 & -0.07 & -0.07 \\ 
    \hline
 \end{tabular}
 

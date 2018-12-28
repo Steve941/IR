@@ -1,0 +1,6 @@
+\subsection{Performance-Indices}
+\includegraphics[width=\textwidth]{Performance-Indices-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{Performance-Indices-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{Performance-Indices-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{Performance-Indices-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{Performance-Indices-datesEvalAllAfterTest.pdf}

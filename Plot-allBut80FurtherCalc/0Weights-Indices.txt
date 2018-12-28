@@ -1,0 +1,41 @@
+\subsection{Weights-Indices}
+\subsubsection{Weights-Indices - datesEvalBear}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBear-DAX.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBear-TEC.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBear-ESX50.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBear-SP500.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBear-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBear-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBear-BUND.pdf}
+\subsubsection{Weights-Indices - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalRecNBER-DAX.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalRecNBER-TEC.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalRecNBER-ESX50.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalRecNBER-SP500.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalRecNBER-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalRecNBER-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalRecNBER-BUND.pdf}
+\subsubsection{Weights-Indices - datesEvalBull}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBull-DAX.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBull-TEC.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBull-ESX50.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBull-SP500.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBull-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBull-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalBull-BUND.pdf}
+\subsubsection{Weights-Indices - datesEvalLast}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalLast-DAX.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalLast-TEC.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalLast-ESX50.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalLast-SP500.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalLast-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalLast-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalLast-BUND.pdf}
+\subsubsection{Weights-Indices - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalAllAfterTest-DAX.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalAllAfterTest-TEC.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalAllAfterTest-ESX50.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalAllAfterTest-SP500.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalAllAfterTest-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalAllAfterTest-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{Weights-Indices-datesEvalAllAfterTest-BUND.pdf}

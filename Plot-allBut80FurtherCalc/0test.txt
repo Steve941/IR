@@ -1,0 +1,41 @@
+\subsection{test}
+\subsubsection{test - datesEvalBear}
+\includegraphics[width=\textwidth]{test-datesEvalBear-DAX.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBear-TEC.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBear-ESX50.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBear-SP500.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBear-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBear-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBear-BUND.pdf}
+\subsubsection{test - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{test-datesEvalRecNBER-DAX.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalRecNBER-TEC.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalRecNBER-ESX50.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalRecNBER-SP500.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalRecNBER-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalRecNBER-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalRecNBER-BUND.pdf}
+\subsubsection{test - datesEvalBull}
+\includegraphics[width=\textwidth]{test-datesEvalBull-DAX.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBull-TEC.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBull-ESX50.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBull-SP500.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBull-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBull-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalBull-BUND.pdf}
+\subsubsection{test - datesEvalLast}
+\includegraphics[width=\textwidth]{test-datesEvalLast-DAX.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalLast-TEC.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalLast-ESX50.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalLast-SP500.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalLast-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalLast-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalLast-BUND.pdf}
+\subsubsection{test - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{test-datesEvalAllAfterTest-DAX.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalAllAfterTest-TEC.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalAllAfterTest-ESX50.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalAllAfterTest-SP500.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalAllAfterTest-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalAllAfterTest-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{test-datesEvalAllAfterTest-BUND.pdf}

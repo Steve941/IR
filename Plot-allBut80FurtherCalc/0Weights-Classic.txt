@@ -1,0 +1,36 @@
+\subsection{Weights-Classic}
+\subsubsection{Weights-Classic - datesEvalBear}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBear-tanPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBear-mVaPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBear-rp.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBear-PGMV.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBear-PMD.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBear-ew.pdf}
+\subsubsection{Weights-Classic - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalRecNBER-tanPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalRecNBER-mVaPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalRecNBER-rp.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalRecNBER-PGMV.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalRecNBER-PMD.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalRecNBER-ew.pdf}
+\subsubsection{Weights-Classic - datesEvalBull}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBull-tanPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBull-mVaPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBull-rp.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBull-PGMV.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBull-PMD.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalBull-ew.pdf}
+\subsubsection{Weights-Classic - datesEvalLast}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalLast-tanPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalLast-mVaPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalLast-rp.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalLast-PGMV.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalLast-PMD.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalLast-ew.pdf}
+\subsubsection{Weights-Classic - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalAllAfterTest-tanPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalAllAfterTest-mVaPort.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalAllAfterTest-rp.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalAllAfterTest-PGMV.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalAllAfterTest-PMD.pdf}
+\includegraphics[width=\textwidth]{Weights-Classic-datesEvalAllAfterTest-ew.pdf}
