@@ -1,0 +1,36 @@
+\subsection{-adoptedTradingCosts-Weights-Classic}
+\subsubsection{-adoptedTradingCosts-Weights-Classic - datesEvalBear}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBear-tanPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBear-mVaPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBear-rp.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBear-PGMV.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBear-PMD.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBear-ew.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Classic - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalRecNBER-tanPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalRecNBER-mVaPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalRecNBER-rp.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalRecNBER-PGMV.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalRecNBER-PMD.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalRecNBER-ew.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Classic - datesEvalBull}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBull-tanPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBull-mVaPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBull-rp.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBull-PGMV.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBull-PMD.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalBull-ew.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Classic - datesEvalLast}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalLast-tanPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalLast-mVaPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalLast-rp.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalLast-PGMV.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalLast-PMD.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalLast-ew.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Classic - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalAllAfterTest-tanPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalAllAfterTest-mVaPort.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalAllAfterTest-rp.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalAllAfterTest-PGMV.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalAllAfterTest-PMD.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Classic-datesEvalAllAfterTest-ew.pdf}

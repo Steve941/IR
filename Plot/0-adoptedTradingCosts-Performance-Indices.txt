@@ -1,0 +1,6 @@
+\subsection{-adoptedTradingCosts-Performance-Indices}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Indices-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Indices-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Indices-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Indices-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Indices-datesEvalAllAfterTest.pdf}

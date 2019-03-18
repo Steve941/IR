@@ -1,0 +1,6 @@
+\subsection{-adoptedTradingCosts-Performance-Classic}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Classic-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Classic-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Classic-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Classic-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Classic-datesEvalAllAfterTest.pdf}

@@ -1670,7 +1670,7 @@ xHerfNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVary
 
 ### cleanup
 
-```{r}
+```{r, eval=FALSE}
 rm(grid, IneqA)
 rm(plotTernary, terntheme, ternaryPlot, calcTestVar)
 

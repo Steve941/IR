@@ -1,0 +1,6 @@
+\subsection{-adoptedTradingCosts-Performance-Sentix-Dispersion}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Dispersion-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Dispersion-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Dispersion-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Dispersion-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Dispersion-datesEvalAllAfterTest.pdf}

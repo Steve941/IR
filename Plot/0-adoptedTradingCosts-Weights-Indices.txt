@@ -1,0 +1,41 @@
+\subsection{-adoptedTradingCosts-Weights-Indices}
+\subsubsection{-adoptedTradingCosts-Weights-Indices - datesEvalBear}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBear-DAX.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBear-TEC.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBear-ESX50.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBear-SP500.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBear-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBear-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBear-BUND.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Indices - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalRecNBER-DAX.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalRecNBER-TEC.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalRecNBER-ESX50.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalRecNBER-SP500.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalRecNBER-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalRecNBER-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalRecNBER-BUND.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Indices - datesEvalBull}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBull-DAX.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBull-TEC.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBull-ESX50.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBull-SP500.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBull-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBull-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalBull-BUND.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Indices - datesEvalLast}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalLast-DAX.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalLast-TEC.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalLast-ESX50.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalLast-SP500.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalLast-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalLast-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalLast-BUND.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Indices - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalAllAfterTest-DAX.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalAllAfterTest-TEC.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalAllAfterTest-ESX50.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalAllAfterTest-SP500.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalAllAfterTest-NASDAQ.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalAllAfterTest-NIKKEI.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Indices-datesEvalAllAfterTest-BUND.pdf}

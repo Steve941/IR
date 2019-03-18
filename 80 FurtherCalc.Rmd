@@ -122,13 +122,13 @@ wholeAnalysisTradCost <- function(dat, fileName){
     retDat <- calcEvalVarClassicTradCost(dat)
     
     # weights
-    plotWeightsLinesWithTurnoverComplete(retDat, paste0("Weights-", fileName))
+    plotWeightsLinesWithTurnoverComplete(retDat, paste0("-adoptedTradingCosts-Weights-", fileName))
     
     # performance of portfolio
-    plotPortfolioComplete(retDat, paste0("Performance-", fileName))
+    plotPortfolioComplete(retDat, paste0("-adoptedTradingCosts-Performance-", fileName))
     
     # summary statistics
-    summaryClassicComplete(retDat, paste0("Summary-", fileName))
+    summaryClassicComplete(retDat, paste0("-adoptedTradingCosts-Summary-", fileName))
 }
 ```
 

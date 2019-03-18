@@ -1,0 +1,6 @@
+\subsection{-adoptedTradingCosts-Performance-Sentix-Herfindahl}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Herfindahl-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Herfindahl-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Herfindahl-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Herfindahl-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Performance-Sentix-Herfindahl-datesEvalAllAfterTest.pdf}

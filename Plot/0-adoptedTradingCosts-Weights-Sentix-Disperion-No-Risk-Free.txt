@@ -1,0 +1,36 @@
+\subsection{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free}
+\subsubsection{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free - datesEvalBear}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G6.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G6.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free - datesEvalBull}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G6.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free - datesEvalLast}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G6.pdf}
+\subsubsection{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I6.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G1.pdf}
+\includegraphics[width=\textwidth]{-adoptedTradingCosts-Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G6.pdf}
