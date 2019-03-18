@@ -1,0 +1,7 @@
+\subsection{Ternary-Herfindahl-No-Risk-free}
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-No-Risk-free-P1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-No-Risk-free-P6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-No-Risk-free-I1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-No-Risk-free-I6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-No-Risk-free-G1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Herfindahl-No-Risk-free-G6.pdf}\linebreak

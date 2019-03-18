@@ -1,0 +1,4001 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.5)  22 NOV 2017 08:14
+entering extended mode
+**"./00 ALL Plots together.tex"
+("00 ALL Plots together.tex"
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrbook.cls"
+Document Class: scrbook 2017/09/07 v3.24 KOMA-Script document class (book)
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrkbase.sty"
+Package: scrkbase 2017/09/07 v3.24 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrbase.sty"
+Package: scrbase 2017/09/07 v3.24 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrlfile.sty"
+Package: scrlfile 2017/09/07 v3.24 KOMA-Script package (loading files)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\tocbasic.sty"
+Package: tocbasic 2017/09/07 v3.24 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip41
+\scr@dte@tocline@numbox=\box26
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 135.
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 137.
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 138.
+Package tocbasic Info: defining new hook before heading of `' on input line 162
+3.
+Class scrbook Info: File `scrsize11pt.clo' used instead of
+(scrbook)           file `scrsize11.clo' to setup font sizes on input line 2296
+.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrsize11pt.clo"
+File: scrsize11pt.clo 2017/09/07 v3.24 KOMA-Script font size class option (11pt
+)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\koma-script\typearea.sty"
+Package: typearea 2017/09/07 v3.24 KOMA-Script package (type area)
+\ta@bcor=\skip42
+\ta@div=\count79
+\ta@hblk=\skip43
+\ta@vblk=\skip44
+\ta@temp=\skip45
+\footheight=\skip46
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 10
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 418.25555pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 47.2316pt
+(typearea)              \oddsidemargin  = -12.5192pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 595.80026pt
+(typearea)              \topmargin      = -25.16531pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.6pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 1686.
+)
+\c@part=\count80
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\scr@dte@part@maxnumwidth=\skip47
+\scr@dte@chapter@maxnumwidth=\skip48
+\scr@dte@section@maxnumwidth=\skip49
+\scr@dte@subsection@maxnumwidth=\skip50
+\scr@dte@subsubsection@maxnumwidth=\skip51
+\scr@dte@paragraph@maxnumwidth=\skip52
+\scr@dte@subparagraph@maxnumwidth=\skip53
+LaTeX Info: Redefining \textsubscript on input line 4966.
+\abovecaptionskip=\skip54
+\belowcaptionskip=\skip55
+\c@pti@nb@sid@b@x=\box27
+\c@figure=\count87
+\c@table=\count88
+Class scrbook Info: Redefining `\numberline' on input line 6142.
+\bibindent=\dimen102
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count89
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgffor.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.tex"
+\pgfutil@everybye=\toks15
+\pgfutil@tempdima=\dimen105
+\pgfutil@tempdimb=\dimen106
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common-lists.te
+x")) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-latex.def"
+\pgfutil@abb=\box28
+("C:\Program Files\MiKTeX 2.9\tex\latex\ms\everyshi.sty"
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfrcs.code.tex"
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfkeys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"
+\pgfkeys@pathtoks=\toks16
+\pgfkeys@temptoks=\toks17
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.code.te
+x"
+\pgfkeys@tmptoks=\toks18
+))) ("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\math\pgfmath.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathcalc.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathutil.code.tex"
+\pgf@x=\dimen107
+\pgf@xa=\dimen108
+\pgf@xb=\dimen109
+\pgf@xc=\dimen110
+\pgf@y=\dimen111
+\pgf@ya=\dimen112
+\pgf@yb=\dimen113
+\pgf@yc=\dimen114
+\c@pgf@counta=\count90
+\c@pgf@countb=\count91
+\c@pgf@countc=\count92
+\c@pgf@countd=\count93
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathparser.code.tex"
+\pgfmath@dimen=\dimen115
+\pgfmath@count=\count94
+\pgfmath@box=\box29
+\pgfmath@toks=\toks19
+\pgfmath@stack@operand=\toks20
+\pgfmath@stack@operation=\toks21
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.basic.code.
+tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.trigonometr
+ic.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.random.code
+.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.comparison.
+code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.base.code.t
+ex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.round.code.
+tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.misc.code.t
+ex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.integerarit
+hmetics.code.tex")))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfloat.code.tex"
+\c@pgfmathroundto@lastzeros=\count95
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgffor.code.tex"
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex")
+\pgffor@iter=\dimen116
+\pgffor@skip=\dimen117
+\pgffor@stack=\toks22
+\pgffor@toks=\toks23
+))
+("00 ALL Plots together.aux")
+\openout1 = `"00 ALL Plots together.aux"'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count96
+\scratchdimen=\dimen118
+\scratchbox=\box30
+\nofMPsegments=\count97
+\nofMParguments=\count98
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count99
+\MPscratchDim=\dimen119
+\MPnumerator=\count100
+\makeMPintoPDFobject=\count101
+\everyMPtoPDFconversion=\toks25
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+ABD: EveryShipout initializing macros
+chapter 1.
+<missingDates.pdf, id=1, 722.7pt x 289.08pt>
+File: missingDates.pdf Graphic file (type pdf)
+ <use missingDates.pdf>
+Package pdftex.def Info: missingDates.pdf used on input line 9.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+ [1
+
+
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./missingDates.pdf>] [2
+
+
+]
+chapter 2.
+<retPlot.pdf, id=17, 722.7pt x 289.08pt>
+File: retPlot.pdf Graphic file (type pdf)
+ <use retPlot.pdf>
+Package pdftex.def Info: retPlot.pdf used on input line 13.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+ (0sentixDisp.txt
+<sDisp-P1.pdf, id=18, 722.7pt x 289.08pt>
+File: sDisp-P1.pdf Graphic file (type pdf)
+ <use sDisp-P1.pdf>
+Package pdftex.def Info: sDisp-P1.pdf used on input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sDisp-P6.pdf, id=19, 722.7pt x 289.08pt>
+File: sDisp-P6.pdf Graphic file (type pdf)
+ <use sDisp-P6.pdf>
+Package pdftex.def Info: sDisp-P6.pdf used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sDisp-I1.pdf, id=20, 722.7pt x 289.08pt>
+File: sDisp-I1.pdf Graphic file (type pdf)
+ <use sDisp-I1.pdf>
+Package pdftex.def Info: sDisp-I1.pdf used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sDisp-I6.pdf, id=21, 722.7pt x 289.08pt>
+File: sDisp-I6.pdf Graphic file (type pdf)
+ <use sDisp-I6.pdf>
+Package pdftex.def Info: sDisp-I6.pdf used on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sDisp-G1.pdf, id=22, 722.7pt x 289.08pt>
+File: sDisp-G1.pdf Graphic file (type pdf)
+ <use sDisp-G1.pdf>
+Package pdftex.def Info: sDisp-G1.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sDisp-G6.pdf, id=23, 722.7pt x 289.08pt>
+File: sDisp-G6.pdf Graphic file (type pdf)
+ <use sDisp-G6.pdf>
+Package pdftex.def Info: sDisp-G6.pdf used on input line 7.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+) (0sentixHerf.txt
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3 <./retPlot.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4 <./sDisp-P1.pdf> <./sDisp-P6.pdf> <./sDisp-I1.pdf>]
+<sHerf-P1.pdf, id=63, 722.7pt x 289.08pt>
+File: sHerf-P1.pdf Graphic file (type pdf)
+ <use sHerf-P1.pdf>
+Package pdftex.def Info: sHerf-P1.pdf used on input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sHerf-P6.pdf, id=64, 722.7pt x 289.08pt>
+File: sHerf-P6.pdf Graphic file (type pdf)
+ <use sHerf-P6.pdf>
+Package pdftex.def Info: sHerf-P6.pdf used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sHerf-I1.pdf, id=65, 722.7pt x 289.08pt>
+File: sHerf-I1.pdf Graphic file (type pdf)
+ <use sHerf-I1.pdf>
+Package pdftex.def Info: sHerf-I1.pdf used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sHerf-I6.pdf, id=66, 722.7pt x 289.08pt>
+File: sHerf-I6.pdf Graphic file (type pdf)
+ <use sHerf-I6.pdf>
+Package pdftex.def Info: sHerf-I6.pdf used on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sHerf-G1.pdf, id=67, 722.7pt x 289.08pt>
+File: sHerf-G1.pdf Graphic file (type pdf)
+ <use sHerf-G1.pdf>
+Package pdftex.def Info: sHerf-G1.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<sHerf-G6.pdf, id=68, 722.7pt x 289.08pt>
+File: sHerf-G6.pdf Graphic file (type pdf)
+ <use sHerf-G6.pdf>
+Package pdftex.def Info: sHerf-G6.pdf used on input line 7.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--18
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5 <./sDisp-I6.pdf> <./sDisp-G1.pdf> <./sDisp-G6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6 <./sHerf-P1.pdf> <./sHerf-P6.pdf> <./sHerf-I1.pdf>] [7 <./sHerf-I6.pdf> <./
+sHerf-G1.pdf> <./sHerf-G6.pdf>] [8
+
+
+]
+chapter 3.
+(0AnalysisDispersion.txt
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 5.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13]
+[14]) (0AnalysisHerfindahl.txt
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19]
+[20])
+chapter 4.
+[21
+
+
+
+] (0Ternary-Dispersion.txt
+<Ternary-Dispersion-P1.pdf, id=195, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-P1.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-P1.pdf>
+Package pdftex.def Info: Ternary-Dispersion-P1.pdf used on input line 2.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-P6.pdf, id=196, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-P6.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-P6.pdf>
+Package pdftex.def Info: Ternary-Dispersion-P6.pdf used on input line 3.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-I1.pdf, id=197, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-I1.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-I1.pdf>
+Package pdftex.def Info: Ternary-Dispersion-I1.pdf used on input line 4.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-I6.pdf, id=198, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-I6.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-I6.pdf>
+Package pdftex.def Info: Ternary-Dispersion-I6.pdf used on input line 5.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-G1.pdf, id=199, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-G1.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-G1.pdf>
+Package pdftex.def Info: Ternary-Dispersion-G1.pdf used on input line 6.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-G6.pdf, id=200, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-G6.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-G6.pdf>
+Package pdftex.def Info: Ternary-Dispersion-G6.pdf used on input line 7.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+) (0Ternary-Dispersion-No-Risk-Free.txt
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [22
+
+ <./Ternary-Dispersion-P1.pdf> <./Ternary-Dispersion-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23 <./Ternary-Dispersion-I1.pdf> <./Ternary-Dispersion-I6.pdf>]
+<Ternary-Dispersion-No-Risk-Free-P1.pdf, id=235, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-No-Risk-Free-P1.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-No-Risk-Free-P1.pdf>
+Package pdftex.def Info: Ternary-Dispersion-No-Risk-Free-P1.pdf used on input l
+ine 2.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-No-Risk-Free-P6.pdf, id=236, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-No-Risk-Free-P6.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-No-Risk-Free-P6.pdf>
+Package pdftex.def Info: Ternary-Dispersion-No-Risk-Free-P6.pdf used on input l
+ine 3.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-No-Risk-Free-I1.pdf, id=237, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-No-Risk-Free-I1.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-No-Risk-Free-I1.pdf>
+Package pdftex.def Info: Ternary-Dispersion-No-Risk-Free-I1.pdf used on input l
+ine 4.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-No-Risk-Free-I6.pdf, id=238, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-No-Risk-Free-I6.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-No-Risk-Free-I6.pdf>
+Package pdftex.def Info: Ternary-Dispersion-No-Risk-Free-I6.pdf used on input l
+ine 5.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-No-Risk-Free-G1.pdf, id=239, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-No-Risk-Free-G1.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-No-Risk-Free-G1.pdf>
+Package pdftex.def Info: Ternary-Dispersion-No-Risk-Free-G1.pdf used on input l
+ine 6.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Dispersion-No-Risk-Free-G6.pdf, id=240, 722.7pt x 722.7pt>
+File: Ternary-Dispersion-No-Risk-Free-G6.pdf Graphic file (type pdf)
+
+<use Ternary-Dispersion-No-Risk-Free-G6.pdf>
+Package pdftex.def Info: Ternary-Dispersion-No-Risk-Free-G6.pdf used on input l
+ine 7.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+) (0Ternary-Herfindahl.txt
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24 <./Ternary-Dispersion-G1.pdf> <./Ternary-Dispersion-G6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25 <./Ternary-Dispersion-No-Risk-Free-P1.pdf> <./Ternary-Dispersion-No-Risk-F
+ree-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26 <./Ternary-Dispersion-No-Risk-Free-I1.pdf> <./Ternary-Dispersion-No-Risk-F
+ree-I6.pdf>] <Ternary-Herfindahl-P1.pdf, id=293, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-P1.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-P1.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-P1.pdf used on input line 2.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-P6.pdf, id=294, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-P6.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-P6.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-P6.pdf used on input line 3.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-I1.pdf, id=295, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-I1.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-I1.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-I1.pdf used on input line 4.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-I6.pdf, id=296, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-I6.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-I6.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-I6.pdf used on input line 5.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-G1.pdf, id=297, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-G1.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-G1.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-G1.pdf used on input line 6.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-G6.pdf, id=298, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-G6.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-G6.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-G6.pdf used on input line 7.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+) (0Ternary-Herfindahl-No-Risk-free.txt
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27 <./Ternary-Dispersion-No-Risk-Free-G1.pdf> <./Ternary-Dispersion-No-Risk-F
+ree-G6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28 <./Ternary-Herfindahl-P1.pdf> <./Ternary-Herfindahl-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29 <./Ternary-Herfindahl-I1.pdf> <./Ternary-Herfindahl-I6.pdf>]
+<Ternary-Herfindahl-No-Risk-free-P1.pdf, id=350, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-No-Risk-free-P1.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-No-Risk-free-P1.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-No-Risk-free-P1.pdf used on input l
+ine 2.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-No-Risk-free-P6.pdf, id=351, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-No-Risk-free-P6.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-No-Risk-free-P6.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-No-Risk-free-P6.pdf used on input l
+ine 3.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-No-Risk-free-I1.pdf, id=352, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-No-Risk-free-I1.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-No-Risk-free-I1.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-No-Risk-free-I1.pdf used on input l
+ine 4.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-No-Risk-free-I6.pdf, id=353, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-No-Risk-free-I6.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-No-Risk-free-I6.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-No-Risk-free-I6.pdf used on input l
+ine 5.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-No-Risk-free-G1.pdf, id=354, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-No-Risk-free-G1.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-No-Risk-free-G1.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-No-Risk-free-G1.pdf used on input l
+ine 6.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+
+<Ternary-Herfindahl-No-Risk-free-G6.pdf, id=355, 722.7pt x 722.7pt>
+File: Ternary-Herfindahl-No-Risk-free-G6.pdf Graphic file (type pdf)
+
+<use Ternary-Herfindahl-No-Risk-free-G6.pdf>
+Package pdftex.def Info: Ternary-Herfindahl-No-Risk-free-G6.pdf used on input l
+ine 7.
+(pdftex.def)             Requested size: 268.11159pt x 268.10829pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--33
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--33
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--33
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--33
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--33
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--33
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--33
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [30 <./Ternary-Herfindahl-G1.pdf> <./Ternary-Herfindahl-G6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31 <./Ternary-Herfindahl-No-Risk-free-P1.pdf> <./Ternary-Herfindahl-No-Risk-f
+ree-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32 <./Ternary-Herfindahl-No-Risk-free-I1.pdf> <./Ternary-Herfindahl-No-Risk-f
+ree-I6.pdf>] [33 <./Ternary-Herfindahl-No-Risk-free-G1.pdf> <./Ternary-Herfinda
+hl-No-Risk-free-G6.pdf>]
+<Performance-Classic-datesEvalBear.pdf, id=425, 722.7pt x 289.08pt>
+File: Performance-Classic-datesEvalBear.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalBear.pdf used on input li
+ne 38.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-datesEvalBull.pdf, id=426, 722.7pt x 289.08pt>
+File: Performance-Classic-datesEvalBull.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalBull.pdf used on input li
+ne 39.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-datesEvalLast.pdf, id=427, 722.7pt x 289.08pt>
+File: Performance-Classic-datesEvalLast.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalLast.pdf used on input li
+ne 40.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-datesEvalAllAfterTest.pdf, id=428, 722.7pt x 289.08pt>
+File: Performance-Classic-datesEvalAllAfterTest.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalAllAfterTest.pdf used on 
+input line 41.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [34
+
+ <./Performance-Classic-datesEvalBear.pdf> <./Performance-Classic-datesEvalBull
+.pdf> <./Performance-Classic-datesEvalLast.pdf>] [35 <./Performance-Classic-dat
+esEvalAllAfterTest.pdf>] (0Performance-Indices.txt
+<Performance-Indices-datesEvalBear.pdf, id=467, 722.7pt x 289.08pt>
+File: Performance-Indices-datesEvalBear.pdf Graphic file (type pdf)
+
+<use Performance-Indices-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Indices-datesEvalBear.pdf used on input li
+ne 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Indices-datesEvalRecNBER.pdf, id=468, 722.7pt x 289.08pt>
+File: Performance-Indices-datesEvalRecNBER.pdf Graphic file (type pdf)
+
+<use Performance-Indices-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-Indices-datesEvalRecNBER.pdf used on input
+ line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Indices-datesEvalBull.pdf, id=469, 722.7pt x 289.08pt>
+File: Performance-Indices-datesEvalBull.pdf Graphic file (type pdf)
+
+<use Performance-Indices-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Indices-datesEvalBull.pdf used on input li
+ne 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Indices-datesEvalLast.pdf, id=470, 722.7pt x 289.08pt>
+File: Performance-Indices-datesEvalLast.pdf Graphic file (type pdf)
+
+<use Performance-Indices-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Indices-datesEvalLast.pdf used on input li
+ne 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Indices-datesEvalAllAfterTest.pdf, id=471, 722.7pt x 289.08pt>
+File: Performance-Indices-datesEvalAllAfterTest.pdf Graphic file (type pdf)
+
+<use Performance-Indices-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Indices-datesEvalAllAfterTest.pdf used on 
+input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--45
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36
+
+ <./Performance-Indices-datesEvalBear.pdf> <./Performance-Indices-datesEvalRecN
+BER.pdf> <./Performance-Indices-datesEvalBull.pdf>] [37 <./Performance-Indices-
+datesEvalLast.pdf> <./Performance-Indices-datesEvalAllAfterTest.pdf>]
+(0Performance-Sentix-Dispersion.txt
+<Performance-Sentix-Dispersion-datesEvalBear.pdf, id=519, 722.7pt x 289.08pt>
+File: Performance-Sentix-Dispersion-datesEvalBear.pdf Graphic file (type pdf)
+
+<use Performance-Sentix-Dispersion-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Sentix-Dispersion-datesEvalBear.pdf used o
+n input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Dispersion-datesEvalRecNBER.pdf, id=520, 722.7pt x 289.08pt
+>
+File: Performance-Sentix-Dispersion-datesEvalRecNBER.pdf Graphic file (type pdf
+)
+ <use Performance-Sentix-Dispersion-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-Sentix-Dispersion-datesEvalRecNBER.pdf use
+d on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Dispersion-datesEvalBull.pdf, id=521, 722.7pt x 289.08pt>
+File: Performance-Sentix-Dispersion-datesEvalBull.pdf Graphic file (type pdf)
+
+<use Performance-Sentix-Dispersion-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Sentix-Dispersion-datesEvalBull.pdf used o
+n input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Dispersion-datesEvalLast.pdf, id=522, 722.7pt x 289.08pt>
+File: Performance-Sentix-Dispersion-datesEvalLast.pdf Graphic file (type pdf)
+
+<use Performance-Sentix-Dispersion-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Sentix-Dispersion-datesEvalLast.pdf used o
+n input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Dispersion-datesEvalAllAfterTest.pdf, id=523, 722.7pt x 289
+.08pt>
+File: Performance-Sentix-Dispersion-datesEvalAllAfterTest.pdf Graphic file (typ
+e pdf)
+ <use Performance-Sentix-Dispersion-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Sentix-Dispersion-datesEvalAllAfterTest.pd
+f used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--48
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38
+
+ <./Performance-Sentix-Dispersion-datesEvalBear.pdf> <./Performance-Sentix-Disp
+ersion-datesEvalRecNBER.pdf> <./Performance-Sentix-Dispersion-datesEvalBull.pdf
+>]
+[39 <./Performance-Sentix-Dispersion-datesEvalLast.pdf> <./Performance-Sentix-D
+ispersion-datesEvalAllAfterTest.pdf>]
+(0Performance-Sentix-Disperion-No-Risk-Free.txt
+<Performance-Sentix-Disperion-No-Risk-Free-datesEvalBear.pdf, id=570, 722.7pt x
+ 289.08pt>
+File: Performance-Sentix-Disperion-No-Risk-Free-datesEvalBear.pdf Graphic file 
+(type pdf)
+ <use Performance-Sentix-Disperion-No-Risk-Free-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Sentix-Disperion-No-Risk-Free-datesEvalBea
+r.pdf used on input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER.pdf, id=571, 722.7p
+t x 289.08pt>
+File: Performance-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER.pdf Graphic fi
+le (type pdf)
+
+<use Performance-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-Sentix-Disperion-No-Risk-Free-datesEvalRec
+NBER.pdf used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Disperion-No-Risk-Free-datesEvalBull.pdf, id=572, 722.7pt x
+ 289.08pt>
+File: Performance-Sentix-Disperion-No-Risk-Free-datesEvalBull.pdf Graphic file 
+(type pdf)
+ <use Performance-Sentix-Disperion-No-Risk-Free-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Sentix-Disperion-No-Risk-Free-datesEvalBul
+l.pdf used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Disperion-No-Risk-Free-datesEvalLast.pdf, id=573, 722.7pt x
+ 289.08pt>
+File: Performance-Sentix-Disperion-No-Risk-Free-datesEvalLast.pdf Graphic file 
+(type pdf)
+ <use Performance-Sentix-Disperion-No-Risk-Free-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Sentix-Disperion-No-Risk-Free-datesEvalLas
+t.pdf used on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest.pdf, id=574, 7
+22.7pt x 289.08pt>
+File: Performance-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest.pdf Graph
+ic file (type pdf)
+
+<use Performance-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Sentix-Disperion-No-Risk-Free-datesEvalAll
+AfterTest.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--50
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40
+
+ <./Performance-Sentix-Disperion-No-Risk-Free-datesEvalBear.pdf> <./Performance
+-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER.pdf> <./Performance-Sentix-Disp
+erion-No-Risk-Free-datesEvalBull.pdf>] [41 <./Performance-Sentix-Disperion-No-R
+isk-Free-datesEvalLast.pdf> <./Performance-Sentix-Disperion-No-Risk-Free-datesE
+valAllAfterTest.pdf>] (0Performance-Sentix-Herfindahl.txt
+<Performance-Sentix-Herfindahl-datesEvalBear.pdf, id=621, 722.7pt x 289.08pt>
+File: Performance-Sentix-Herfindahl-datesEvalBear.pdf Graphic file (type pdf)
+
+<use Performance-Sentix-Herfindahl-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-datesEvalBear.pdf used o
+n input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-datesEvalRecNBER.pdf, id=622, 722.7pt x 289.08pt
+>
+File: Performance-Sentix-Herfindahl-datesEvalRecNBER.pdf Graphic file (type pdf
+)
+ <use Performance-Sentix-Herfindahl-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-datesEvalRecNBER.pdf use
+d on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-datesEvalBull.pdf, id=623, 722.7pt x 289.08pt>
+File: Performance-Sentix-Herfindahl-datesEvalBull.pdf Graphic file (type pdf)
+
+<use Performance-Sentix-Herfindahl-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-datesEvalBull.pdf used o
+n input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-datesEvalLast.pdf, id=624, 722.7pt x 289.08pt>
+File: Performance-Sentix-Herfindahl-datesEvalLast.pdf Graphic file (type pdf)
+
+<use Performance-Sentix-Herfindahl-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-datesEvalLast.pdf used o
+n input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-datesEvalAllAfterTest.pdf, id=625, 722.7pt x 289
+.08pt>
+File: Performance-Sentix-Herfindahl-datesEvalAllAfterTest.pdf Graphic file (typ
+e pdf)
+ <use Performance-Sentix-Herfindahl-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-datesEvalAllAfterTest.pd
+f used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--52
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42
+
+ <./Performance-Sentix-Herfindahl-datesEvalBear.pdf> <./Performance-Sentix-Herf
+indahl-datesEvalRecNBER.pdf> <./Performance-Sentix-Herfindahl-datesEvalBull.pdf
+>]
+[43 <./Performance-Sentix-Herfindahl-datesEvalLast.pdf> <./Performance-Sentix-H
+erfindahl-datesEvalAllAfterTest.pdf>]
+(0Performance-Sentix-Herfindahl-No-Risk-Free.txt
+<Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBear.pdf, id=673, 722.7pt 
+x 289.08pt>
+File: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBear.pdf Graphic file
+ (type pdf)
+ <use Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBe
+ar.pdf used on input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER.pdf, id=674, 722.7
+pt x 289.08pt>
+File: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER.pdf Graphic f
+ile (type pdf)
+
+<use Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalRe
+cNBER.pdf used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBull.pdf, id=675, 722.7pt 
+x 289.08pt>
+File: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBull.pdf Graphic file
+ (type pdf)
+ <use Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBu
+ll.pdf used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalLast.pdf, id=676, 722.7pt 
+x 289.08pt>
+File: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalLast.pdf Graphic file
+ (type pdf)
+ <use Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalLa
+st.pdf used on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest.pdf, id=677, 
+722.7pt x 289.08pt>
+File: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest.pdf Grap
+hic file (type pdf)
+
+<use Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalAl
+lAfterTest.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--54
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [44
+
+ <./Performance-Sentix-Herfindahl-No-Risk-Free-datesEvalBear.pdf> <./Performanc
+e-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER.pdf> <./Performance-Sentix-He
+rfindahl-No-Risk-Free-datesEvalBull.pdf>] [45 <./Performance-Sentix-Herfindahl-
+No-Risk-Free-datesEvalLast.pdf> <./Performance-Sentix-Herfindahl-No-Risk-Free-d
+atesEvalAllAfterTest.pdf>] (0Performance-Classic.txt
+File: Performance-Classic-datesEvalBear.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalBear.pdf used on input li
+ne 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-datesEvalRecNBER.pdf, id=724, 722.7pt x 289.08pt>
+File: Performance-Classic-datesEvalRecNBER.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalRecNBER.pdf used on input
+ line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+File: Performance-Classic-datesEvalBull.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalBull.pdf used on input li
+ne 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+File: Performance-Classic-datesEvalLast.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalLast.pdf used on input li
+ne 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+File: Performance-Classic-datesEvalAllAfterTest.pdf Graphic file (type pdf)
+
+<use Performance-Classic-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Classic-datesEvalAllAfterTest.pdf used on 
+input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--56
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [46
+
+ <./Performance-Classic-datesEvalRecNBER.pdf>] [47]
+(0Performance-Classic-No-Risk-Free.txt
+<Performance-Classic-No-Risk-Free-datesEvalBear.pdf, id=739, 722.7pt x 289.08pt
+>
+File: Performance-Classic-No-Risk-Free-datesEvalBear.pdf Graphic file (type pdf
+)
+ <use Performance-Classic-No-Risk-Free-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-Classic-No-Risk-Free-datesEvalBear.pdf use
+d on input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-No-Risk-Free-datesEvalRecNBER.pdf, id=740, 722.7pt x 289.0
+8pt>
+File: Performance-Classic-No-Risk-Free-datesEvalRecNBER.pdf Graphic file (type 
+pdf)
+ <use Performance-Classic-No-Risk-Free-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-Classic-No-Risk-Free-datesEvalRecNBER.pdf 
+used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-No-Risk-Free-datesEvalBull.pdf, id=741, 722.7pt x 289.08pt
+>
+File: Performance-Classic-No-Risk-Free-datesEvalBull.pdf Graphic file (type pdf
+)
+ <use Performance-Classic-No-Risk-Free-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-Classic-No-Risk-Free-datesEvalBull.pdf use
+d on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-No-Risk-Free-datesEvalLast.pdf, id=742, 722.7pt x 289.08pt
+>
+File: Performance-Classic-No-Risk-Free-datesEvalLast.pdf Graphic file (type pdf
+)
+ <use Performance-Classic-No-Risk-Free-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-Classic-No-Risk-Free-datesEvalLast.pdf use
+d on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-Classic-No-Risk-Free-datesEvalAllAfterTest.pdf, id=743, 722.7pt x 
+289.08pt>
+File: Performance-Classic-No-Risk-Free-datesEvalAllAfterTest.pdf Graphic file (
+type pdf)
+ <use Performance-Classic-No-Risk-Free-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-Classic-No-Risk-Free-datesEvalAllAfterTest
+.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--58
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [48
+
+ <./Performance-Classic-No-Risk-Free-datesEvalBear.pdf> <./Performance-Classic-
+No-Risk-Free-datesEvalRecNBER.pdf> <./Performance-Classic-No-Risk-Free-datesEva
+lBull.pdf>] [49 <./Performance-Classic-No-Risk-Free-datesEvalLast.pdf> <./Perfo
+rmance-Classic-No-Risk-Free-datesEvalAllAfterTest.pdf>]
+(0Performance-All-classicWithRiskFree.txt
+<Performance-All-classicWithRiskFree-datesEvalBear.pdf, id=791, 722.7pt x 289.0
+8pt>
+File: Performance-All-classicWithRiskFree-datesEvalBear.pdf Graphic file (type 
+pdf)
+ <use Performance-All-classicWithRiskFree-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-All-classicWithRiskFree-datesEvalBear.pdf 
+used on input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicWithRiskFree-datesEvalRecNBER.pdf, id=792, 722.7pt x 28
+9.08pt>
+File: Performance-All-classicWithRiskFree-datesEvalRecNBER.pdf Graphic file (ty
+pe pdf)
+ <use Performance-All-classicWithRiskFree-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-All-classicWithRiskFree-datesEvalRecNBER.p
+df used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicWithRiskFree-datesEvalBull.pdf, id=793, 722.7pt x 289.0
+8pt>
+File: Performance-All-classicWithRiskFree-datesEvalBull.pdf Graphic file (type 
+pdf)
+ <use Performance-All-classicWithRiskFree-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-All-classicWithRiskFree-datesEvalBull.pdf 
+used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicWithRiskFree-datesEvalLast.pdf, id=794, 722.7pt x 289.0
+8pt>
+File: Performance-All-classicWithRiskFree-datesEvalLast.pdf Graphic file (type 
+pdf)
+ <use Performance-All-classicWithRiskFree-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-All-classicWithRiskFree-datesEvalLast.pdf 
+used on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicWithRiskFree-datesEvalAllAfterTest.pdf, id=795, 722.7pt
+ x 289.08pt>
+File: Performance-All-classicWithRiskFree-datesEvalAllAfterTest.pdf Graphic fil
+e (type pdf)
+
+<use Performance-All-classicWithRiskFree-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-All-classicWithRiskFree-datesEvalAllAfterT
+est.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--60
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [50
+
+ <./Performance-All-classicWithRiskFree-datesEvalBear.pdf> <./Performance-All-c
+lassicWithRiskFree-datesEvalRecNBER.pdf> <./Performance-All-classicWithRiskFree
+-datesEvalBull.pdf>] [51 <./Performance-All-classicWithRiskFree-datesEvalLast.p
+df> <./Performance-All-classicWithRiskFree-datesEvalAllAfterTest.pdf>]
+(0Performance-All-classicNoRiskFree.txt
+<Performance-All-classicNoRiskFree-datesEvalBear.pdf, id=842, 722.7pt x 289.08p
+t>
+File: Performance-All-classicNoRiskFree-datesEvalBear.pdf Graphic file (type pd
+f)
+ <use Performance-All-classicNoRiskFree-datesEvalBear.pdf>
+Package pdftex.def Info: Performance-All-classicNoRiskFree-datesEvalBear.pdf us
+ed on input line 2.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicNoRiskFree-datesEvalRecNBER.pdf, id=843, 722.7pt x 289.
+08pt>
+File: Performance-All-classicNoRiskFree-datesEvalRecNBER.pdf Graphic file (type
+ pdf)
+ <use Performance-All-classicNoRiskFree-datesEvalRecNBER.pdf>
+Package pdftex.def Info: Performance-All-classicNoRiskFree-datesEvalRecNBER.pdf
+ used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicNoRiskFree-datesEvalBull.pdf, id=844, 722.7pt x 289.08p
+t>
+File: Performance-All-classicNoRiskFree-datesEvalBull.pdf Graphic file (type pd
+f)
+ <use Performance-All-classicNoRiskFree-datesEvalBull.pdf>
+Package pdftex.def Info: Performance-All-classicNoRiskFree-datesEvalBull.pdf us
+ed on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicNoRiskFree-datesEvalLast.pdf, id=845, 722.7pt x 289.08p
+t>
+File: Performance-All-classicNoRiskFree-datesEvalLast.pdf Graphic file (type pd
+f)
+ <use Performance-All-classicNoRiskFree-datesEvalLast.pdf>
+Package pdftex.def Info: Performance-All-classicNoRiskFree-datesEvalLast.pdf us
+ed on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+
+<Performance-All-classicNoRiskFree-datesEvalAllAfterTest.pdf, id=846, 722.7pt x
+ 289.08pt>
+File: Performance-All-classicNoRiskFree-datesEvalAllAfterTest.pdf Graphic file 
+(type pdf)
+ <use Performance-All-classicNoRiskFree-datesEvalAllAfterTest.pdf>
+Package pdftex.def Info: Performance-All-classicNoRiskFree-datesEvalAllAfterTes
+t.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 167.3004pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 2--62
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [52
+
+ <./Performance-All-classicNoRiskFree-datesEvalBear.pdf> <./Performance-All-cla
+ssicNoRiskFree-datesEvalRecNBER.pdf> <./Performance-All-classicNoRiskFree-dates
+EvalBull.pdf>] [53 <./Performance-All-classicNoRiskFree-datesEvalLast.pdf> <./P
+erformance-All-classicNoRiskFree-datesEvalAllAfterTest.pdf>] (0Summary-Indices.
+txt
+[54
+
+] [55]) (0Summary-Sentix-Dispersion.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [56
+
+]
+[57]) (0Summary-Sentix-Disperion-No-Risk-Free.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [58
+
+]
+[59]) (0Summary-Sentix-Herfindahl.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [60
+
+]
+[61]) (0Summary-Sentix-Herfindahl-No-Risk-Free.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [62
+
+]
+[63]) (0Summary-Classic.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [64
+
+]
+[65]) (0Summary-Classic-No-Risk-Free.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [66
+
+]
+[67]) (0SummaryAll-classicWithRiskFree.txt
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 5--17
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 21--33
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 37--49
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 53--65
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 69--81
+[] 
+ []
+
+
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [68
+
+]
+[69]) (0SummaryAll-classicNoRiskFree.txt
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 5--17
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 21--33
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 37--49
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 53--65
+[] 
+ []
+
+
+Overfull \hbox (150.36235pt too wide) in paragraph at lines 69--81
+[] 
+ []
+
+
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [70
+
+]
+[71]) (0SharpeRatioComparison-Dispersion.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [72
+
+]
+[73]) (0SharpeRatioComparison-Herfindahl.txt
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+ [74
+
+]
+[75]) (0Weights-Indices.txt
+<Weights-Indices-datesEvalBear-DAX.pdf, id=963, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBear-DAX.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBear-DAX.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBear-DAX.pdf used on input li
+ne 3.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBear-TEC.pdf, id=964, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBear-TEC.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBear-TEC.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBear-TEC.pdf used on input li
+ne 4.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBear-ESX50.pdf, id=965, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBear-ESX50.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBear-ESX50.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBear-ESX50.pdf used on input 
+line 5.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBear-SP5.pdf, id=966, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBear-SP5.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBear-SP5.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBear-SP5.pdf used on input li
+ne 6.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBear-NASDAQ.pdf, id=967, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBear-NASDAQ.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBear-NASDAQ.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBear-NASDAQ.pdf used on input
+ line 7.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBear-NIKKEI.pdf, id=968, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBear-NIKKEI.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBear-NIKKEI.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBear-NIKKEI.pdf used on input
+ line 8.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBear-BUND.pdf, id=969, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBear-BUND.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBear-BUND.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBear-BUND.pdf used on input l
+ine 9.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76
+
+
+]
+Overfull \vbox (141.11774pt too high) has occurred while \output is active []
+
+
+[77 <./Weights-Indices-datesEvalBear-DAX.pdf> <./Weights-Indices-datesEvalBear-
+TEC.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [78 <./Weights-Indices-datesEvalBear-ESX50.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [79 <./Weights-Indices-datesEvalBear-SP5.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [80 <./Weights-Indices-datesEvalBear-NASDAQ.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [81 <./Weights-Indices-datesEvalBear-NIKKEI.pdf>]
+<Weights-Indices-datesEvalRecNBER-DAX.pdf, id=1043, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalRecNBER-DAX.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalRecNBER-DAX.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalRecNBER-DAX.pdf used on input
+ line 11.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalRecNBER-TEC.pdf, id=1044, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalRecNBER-TEC.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalRecNBER-TEC.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalRecNBER-TEC.pdf used on input
+ line 12.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalRecNBER-ESX50.pdf, id=1045, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalRecNBER-ESX50.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalRecNBER-ESX50.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalRecNBER-ESX50.pdf used on inp
+ut line 13.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalRecNBER-SP5.pdf, id=1046, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalRecNBER-SP5.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalRecNBER-SP5.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalRecNBER-SP5.pdf used on input
+ line 14.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalRecNBER-NASDAQ.pdf, id=1047, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalRecNBER-NASDAQ.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalRecNBER-NASDAQ.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalRecNBER-NASDAQ.pdf used on in
+put line 15.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalRecNBER-NIKKEI.pdf, id=1048, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalRecNBER-NIKKEI.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalRecNBER-NIKKEI.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalRecNBER-NIKKEI.pdf used on in
+put line 16.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalRecNBER-BUND.pdf, id=1049, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalRecNBER-BUND.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalRecNBER-BUND.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalRecNBER-BUND.pdf used on inpu
+t line 17.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [82 <./Weights-Indices-datesEvalBear-BUND.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[83 <./Weights-Indices-datesEvalRecNBER-DAX.pdf> <./Weights-Indices-datesEvalRe
+cNBER-TEC.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [84 <./Weights-Indices-datesEvalRecNBER-ESX50.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [85 <./Weights-Indices-datesEvalRecNBER-SP5.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [86 <./Weights-Indices-datesEvalRecNBER-NASDAQ.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [87 <./Weights-Indices-datesEvalRecNBER-NIKKEI.pdf>]
+<Weights-Indices-datesEvalBull-DAX.pdf, id=1132, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBull-DAX.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBull-DAX.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBull-DAX.pdf used on input li
+ne 19.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBull-TEC.pdf, id=1133, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBull-TEC.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBull-TEC.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBull-TEC.pdf used on input li
+ne 20.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBull-ESX50.pdf, id=1134, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBull-ESX50.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBull-ESX50.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBull-ESX50.pdf used on input 
+line 21.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBull-SP5.pdf, id=1135, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBull-SP5.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBull-SP5.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBull-SP5.pdf used on input li
+ne 22.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBull-NASDAQ.pdf, id=1136, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBull-NASDAQ.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBull-NASDAQ.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBull-NASDAQ.pdf used on input
+ line 23.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBull-NIKKEI.pdf, id=1137, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBull-NIKKEI.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBull-NIKKEI.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBull-NIKKEI.pdf used on input
+ line 24.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalBull-BUND.pdf, id=1138, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalBull-BUND.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalBull-BUND.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalBull-BUND.pdf used on input l
+ine 25.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [88 <./Weights-Indices-datesEvalRecNBER-BUND.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[89 <./Weights-Indices-datesEvalBull-DAX.pdf> <./Weights-Indices-datesEvalBull-
+TEC.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [90 <./Weights-Indices-datesEvalBull-ESX50.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [91 <./Weights-Indices-datesEvalBull-SP5.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [92 <./Weights-Indices-datesEvalBull-NASDAQ.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [93 <./Weights-Indices-datesEvalBull-NIKKEI.pdf>]
+<Weights-Indices-datesEvalLast-DAX.pdf, id=1221, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalLast-DAX.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalLast-DAX.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalLast-DAX.pdf used on input li
+ne 27.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalLast-TEC.pdf, id=1222, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalLast-TEC.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalLast-TEC.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalLast-TEC.pdf used on input li
+ne 28.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalLast-ESX50.pdf, id=1223, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalLast-ESX50.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalLast-ESX50.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalLast-ESX50.pdf used on input 
+line 29.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalLast-SP5.pdf, id=1224, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalLast-SP5.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalLast-SP5.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalLast-SP5.pdf used on input li
+ne 30.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalLast-NASDAQ.pdf, id=1225, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalLast-NASDAQ.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalLast-NASDAQ.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalLast-NASDAQ.pdf used on input
+ line 31.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalLast-NIKKEI.pdf, id=1226, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalLast-NIKKEI.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalLast-NIKKEI.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalLast-NIKKEI.pdf used on input
+ line 32.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalLast-BUND.pdf, id=1227, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalLast-BUND.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalLast-BUND.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalLast-BUND.pdf used on input l
+ine 33.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [94 <./Weights-Indices-datesEvalBull-BUND.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[95 <./Weights-Indices-datesEvalLast-DAX.pdf> <./Weights-Indices-datesEvalLast-
+TEC.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [96 <./Weights-Indices-datesEvalLast-ESX50.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [97 <./Weights-Indices-datesEvalLast-SP5.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [98 <./Weights-Indices-datesEvalLast-NASDAQ.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [99 <./Weights-Indices-datesEvalLast-NIKKEI.pdf>]
+<Weights-Indices-datesEvalAllAfterTest-DAX.pdf, id=1310, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalAllAfterTest-DAX.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalAllAfterTest-DAX.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalAllAfterTest-DAX.pdf used on 
+input line 35.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalAllAfterTest-TEC.pdf, id=1311, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalAllAfterTest-TEC.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalAllAfterTest-TEC.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalAllAfterTest-TEC.pdf used on 
+input line 36.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalAllAfterTest-ESX50.pdf, id=1312, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalAllAfterTest-ESX50.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalAllAfterTest-ESX50.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalAllAfterTest-ESX50.pdf used o
+n input line 37.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalAllAfterTest-SP5.pdf, id=1313, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalAllAfterTest-SP5.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalAllAfterTest-SP5.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalAllAfterTest-SP5.pdf used on 
+input line 38.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalAllAfterTest-NASDAQ.pdf, id=1314, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalAllAfterTest-NASDAQ.pdf Graphic file (type pdf)
+<use Weights-Indices-datesEvalAllAfterTest-NASDAQ.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalAllAfterTest-NASDAQ.pdf used 
+on input line 39.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalAllAfterTest-NIKKEI.pdf, id=1315, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalAllAfterTest-NIKKEI.pdf Graphic file (type pdf)
+<use Weights-Indices-datesEvalAllAfterTest-NIKKEI.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalAllAfterTest-NIKKEI.pdf used 
+on input line 40.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Indices-datesEvalAllAfterTest-BUND.pdf, id=1316, 722.7pt x 578.16pt>
+File: Weights-Indices-datesEvalAllAfterTest-BUND.pdf Graphic file (type pdf)
+
+<use Weights-Indices-datesEvalAllAfterTest-BUND.pdf>
+Package pdftex.def Info: Weights-Indices-datesEvalAllAfterTest-BUND.pdf used on
+ input line 41.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 35--84
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [100 <./Weights-Indices-datesEvalLast-BUND.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[101 <./Weights-Indices-datesEvalAllAfterTest-DAX.pdf> <./Weights-Indices-dates
+EvalAllAfterTest-TEC.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [102 <./Weights-Indices-datesEvalAllAfterTest-ESX50.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [103 <./Weights-Indices-datesEvalAllAfterTest-SP5.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [104 <./Weights-Indices-datesEvalAllAfterTest-NASDAQ.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [105 <./Weights-Indices-datesEvalAllAfterTest-NIKKEI.pdf>]
+(0Weights-Sentix-Dispersion.txt
+<Weights-Sentix-Dispersion-datesEvalBear-P1.pdf, id=1399, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBear-P1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBear-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBear-P1.pdf used on
+ input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBear-P6.pdf, id=1400, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBear-P6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBear-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBear-P6.pdf used on
+ input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBear-I1.pdf, id=1401, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBear-I1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBear-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBear-I1.pdf used on
+ input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBear-I6.pdf, id=1402, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBear-I6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBear-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBear-I6.pdf used on
+ input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBear-G1.pdf, id=1403, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBear-G1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBear-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBear-G1.pdf used on
+ input line 7.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBear-G6.pdf, id=1404, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBear-G6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBear-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBear-G6.pdf used on
+ input line 8.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [106 <./Weights-Indices-datesEvalAllAfterTest-BUND.pdf>]
+Overfull \vbox (116.27422pt too high) has occurred while \output is active []
+
+
+[107 <./Weights-Sentix-Dispersion-datesEvalBear-P1.pdf> <./Weights-Sentix-Dispe
+rsion-datesEvalBear-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [108 <./Weights-Sentix-Dispersion-datesEvalBear-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [109 <./Weights-Sentix-Dispersion-datesEvalBear-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [110 <./Weights-Sentix-Dispersion-datesEvalBear-G1.pdf>]
+<Weights-Sentix-Dispersion-datesEvalRecNBER-P1.pdf, id=1475, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Dispersion-datesEvalRecNBER-P1.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Dispersion-datesEvalRecNBER-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalRecNBER-P1.pdf used
+ on input line 10.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalRecNBER-P6.pdf, id=1476, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Dispersion-datesEvalRecNBER-P6.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Dispersion-datesEvalRecNBER-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalRecNBER-P6.pdf used
+ on input line 11.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalRecNBER-I1.pdf, id=1477, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Dispersion-datesEvalRecNBER-I1.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Dispersion-datesEvalRecNBER-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalRecNBER-I1.pdf used
+ on input line 12.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalRecNBER-I6.pdf, id=1478, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Dispersion-datesEvalRecNBER-I6.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Dispersion-datesEvalRecNBER-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalRecNBER-I6.pdf used
+ on input line 13.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalRecNBER-G1.pdf, id=1479, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Dispersion-datesEvalRecNBER-G1.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Dispersion-datesEvalRecNBER-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalRecNBER-G1.pdf used
+ on input line 14.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalRecNBER-G6.pdf, id=1480, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Dispersion-datesEvalRecNBER-G6.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Dispersion-datesEvalRecNBER-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalRecNBER-G6.pdf used
+ on input line 15.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [111 <./Weights-Sentix-Dispersion-datesEvalBear-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[112 <./Weights-Sentix-Dispersion-datesEvalRecNBER-P1.pdf> <./Weights-Sentix-Di
+spersion-datesEvalRecNBER-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [113 <./Weights-Sentix-Dispersion-datesEvalRecNBER-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [114 <./Weights-Sentix-Dispersion-datesEvalRecNBER-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [115 <./Weights-Sentix-Dispersion-datesEvalRecNBER-G1.pdf>]
+<Weights-Sentix-Dispersion-datesEvalBull-P1.pdf, id=1551, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBull-P1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBull-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBull-P1.pdf used on
+ input line 17.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBull-P6.pdf, id=1552, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBull-P6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBull-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBull-P6.pdf used on
+ input line 18.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBull-I1.pdf, id=1553, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBull-I1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBull-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBull-I1.pdf used on
+ input line 19.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBull-I6.pdf, id=1554, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBull-I6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBull-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBull-I6.pdf used on
+ input line 20.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBull-G1.pdf, id=1555, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBull-G1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBull-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBull-G1.pdf used on
+ input line 21.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalBull-G6.pdf, id=1556, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalBull-G6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalBull-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalBull-G6.pdf used on
+ input line 22.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [116 <./Weights-Sentix-Dispersion-datesEvalRecNBER-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[117 <./Weights-Sentix-Dispersion-datesEvalBull-P1.pdf> <./Weights-Sentix-Dispe
+rsion-datesEvalBull-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [118 <./Weights-Sentix-Dispersion-datesEvalBull-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [119 <./Weights-Sentix-Dispersion-datesEvalBull-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [120 <./Weights-Sentix-Dispersion-datesEvalBull-G1.pdf>]
+<Weights-Sentix-Dispersion-datesEvalLast-P1.pdf, id=1626, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalLast-P1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalLast-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalLast-P1.pdf used on
+ input line 24.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalLast-P6.pdf, id=1627, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalLast-P6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalLast-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalLast-P6.pdf used on
+ input line 25.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalLast-I1.pdf, id=1628, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalLast-I1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalLast-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalLast-I1.pdf used on
+ input line 26.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalLast-I6.pdf, id=1629, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalLast-I6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalLast-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalLast-I6.pdf used on
+ input line 27.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalLast-G1.pdf, id=1630, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalLast-G1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalLast-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalLast-G1.pdf used on
+ input line 28.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalLast-G6.pdf, id=1631, 722.7pt x 578.16pt>
+File: Weights-Sentix-Dispersion-datesEvalLast-G6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Dispersion-datesEvalLast-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalLast-G6.pdf used on
+ input line 29.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [121 <./Weights-Sentix-Dispersion-datesEvalBull-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[122 <./Weights-Sentix-Dispersion-datesEvalLast-P1.pdf> <./Weights-Sentix-Dispe
+rsion-datesEvalLast-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [123 <./Weights-Sentix-Dispersion-datesEvalLast-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [124 <./Weights-Sentix-Dispersion-datesEvalLast-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [125 <./Weights-Sentix-Dispersion-datesEvalLast-G1.pdf>]
+<Weights-Sentix-Dispersion-datesEvalAllAfterTest-P1.pdf, id=1702, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Dispersion-datesEvalAllAfterTest-P1.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Dispersion-datesEvalAllAfterTest-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalAllAfterTest-P1.pdf
+ used on input line 31.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalAllAfterTest-P6.pdf, id=1703, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Dispersion-datesEvalAllAfterTest-P6.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Dispersion-datesEvalAllAfterTest-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalAllAfterTest-P6.pdf
+ used on input line 32.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalAllAfterTest-I1.pdf, id=1704, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Dispersion-datesEvalAllAfterTest-I1.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Dispersion-datesEvalAllAfterTest-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalAllAfterTest-I1.pdf
+ used on input line 33.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalAllAfterTest-I6.pdf, id=1705, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Dispersion-datesEvalAllAfterTest-I6.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Dispersion-datesEvalAllAfterTest-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalAllAfterTest-I6.pdf
+ used on input line 34.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalAllAfterTest-G1.pdf, id=1706, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Dispersion-datesEvalAllAfterTest-G1.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Dispersion-datesEvalAllAfterTest-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalAllAfterTest-G1.pdf
+ used on input line 35.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Dispersion-datesEvalAllAfterTest-G6.pdf, id=1707, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Dispersion-datesEvalAllAfterTest-G6.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Dispersion-datesEvalAllAfterTest-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Dispersion-datesEvalAllAfterTest-G6.pdf
+ used on input line 36.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+)
+(0Weights-Sentix-Disperion-No-Risk-Free.txt
+Underfull \hbox (badness 10000) in paragraph at lines 31--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [126 <./Weights-Sentix-Dispersion-datesEvalLast-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[127 <./Weights-Sentix-Dispersion-datesEvalAllAfterTest-P1.pdf> <./Weights-Sent
+ix-Dispersion-datesEvalAllAfterTest-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [128 <./Weights-Sentix-Dispersion-datesEvalAllAfterTest-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [129 <./Weights-Sentix-Dispersion-datesEvalAllAfterTest-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [130 <./Weights-Sentix-Dispersion-datesEvalAllAfterTest-G1.pdf>]
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P1.pdf, id=1778, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P1
+.pdf used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P6.pdf, id=1779, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P6
+.pdf used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I1.pdf, id=1780, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I1
+.pdf used on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I6.pdf, id=1781, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I6
+.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G1.pdf, id=1782, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G1
+.pdf used on input line 7.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G6.pdf, id=1783, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G6
+.pdf used on input line 8.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [131 <./Weights-Sentix-Dispersion-datesEvalAllAfterTest-G6.pdf>]
+Overfull \vbox (116.27422pt too high) has occurred while \output is active []
+
+
+[132 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-P1.pdf> <./Weights-
+Sentix-Disperion-No-Risk-Free-datesEvalBear-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [133 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [134 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [135 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G1.pdf>]
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P1.pdf, id=1854, 722.7p
+t x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P1.pdf Graphic fil
+e (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER
+-P1.pdf used on input line 10.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P6.pdf, id=1855, 722.7p
+t x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P6.pdf Graphic fil
+e (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER
+-P6.pdf used on input line 11.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I1.pdf, id=1856, 722.7p
+t x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I1.pdf Graphic fil
+e (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER
+-I1.pdf used on input line 12.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I6.pdf, id=1857, 722.7p
+t x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I6.pdf Graphic fil
+e (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER
+-I6.pdf used on input line 13.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G1.pdf, id=1858, 722.7p
+t x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G1.pdf Graphic fil
+e (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER
+-G1.pdf used on input line 14.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G6.pdf, id=1859, 722.7p
+t x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G6.pdf Graphic fil
+e (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER
+-G6.pdf used on input line 15.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [136 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBear-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[137 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P1.pdf> <./Weigh
+ts-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [138 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [139 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [140 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G1.pdf>]
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P1.pdf, id=1930, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P1
+.pdf used on input line 17.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P6.pdf, id=1931, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P6
+.pdf used on input line 18.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I1.pdf, id=1932, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I1
+.pdf used on input line 19.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I6.pdf, id=1933, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I6
+.pdf used on input line 20.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G1.pdf, id=1934, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G1
+.pdf used on input line 21.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G6.pdf, id=1935, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G6
+.pdf used on input line 22.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [141 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalRecNBER-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[142 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-P1.pdf> <./Weights-
+Sentix-Disperion-No-Risk-Free-datesEvalBull-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [143 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [144 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [145 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G1.pdf>]
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P1.pdf, id=2006, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P1
+.pdf used on input line 24.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P6.pdf, id=2007, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P6
+.pdf used on input line 25.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I1.pdf, id=2008, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I1
+.pdf used on input line 26.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I6.pdf, id=2009, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I6
+.pdf used on input line 27.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G1.pdf, id=2010, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G1.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G1
+.pdf used on input line 28.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G6.pdf, id=2011, 722.7pt x
+ 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G6.pdf Graphic file (
+type pdf)
+ <use Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G6
+.pdf used on input line 29.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [146 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalBull-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[147 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-P1.pdf> <./Weights-
+Sentix-Disperion-No-Risk-Free-datesEvalLast-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [148 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [149 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [150 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G1.pdf>]
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P1.pdf, id=2081, 7
+22.7pt x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P1.pdf Graphi
+c file (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfte
+rTest-P1.pdf used on input line 31.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P6.pdf, id=2082, 7
+22.7pt x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P6.pdf Graphi
+c file (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfte
+rTest-P6.pdf used on input line 32.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I1.pdf, id=2083, 7
+22.7pt x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I1.pdf Graphi
+c file (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfte
+rTest-I1.pdf used on input line 33.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I6.pdf, id=2084, 7
+22.7pt x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I6.pdf Graphi
+c file (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfte
+rTest-I6.pdf used on input line 34.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G1.pdf, id=2085, 7
+22.7pt x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G1.pdf Graphi
+c file (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfte
+rTest-G1.pdf used on input line 35.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G6.pdf, id=2086, 7
+22.7pt x 578.16pt>
+File: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G6.pdf Graphi
+c file (type pdf)
+
+<use Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfte
+rTest-G6.pdf used on input line 36.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+)
+(0Weights-Sentix-Herfindahl.txt
+Underfull \hbox (badness 10000) in paragraph at lines 31--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [151 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalLast-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[152 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P1.pdf> <./
+Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [153 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [154 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [155 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G1.pdf>]
+<Weights-Sentix-Herfindahl-datesEvalBear-P1.pdf, id=2157, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBear-P1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBear-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBear-P1.pdf used on
+ input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBear-P6.pdf, id=2158, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBear-P6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBear-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBear-P6.pdf used on
+ input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBear-I1.pdf, id=2159, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBear-I1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBear-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBear-I1.pdf used on
+ input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBear-I6.pdf, id=2160, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBear-I6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBear-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBear-I6.pdf used on
+ input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBear-G1.pdf, id=2161, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBear-G1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBear-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBear-G1.pdf used on
+ input line 7.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBear-G6.pdf, id=2162, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBear-G6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBear-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBear-G6.pdf used on
+ input line 8.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [156 <./Weights-Sentix-Disperion-No-Risk-Free-datesEvalAllAfterTest-G6.pdf>]
+Overfull \vbox (116.27422pt too high) has occurred while \output is active []
+
+
+[157 <./Weights-Sentix-Herfindahl-datesEvalBear-P1.pdf> <./Weights-Sentix-Herfi
+ndahl-datesEvalBear-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [158 <./Weights-Sentix-Herfindahl-datesEvalBear-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [159 <./Weights-Sentix-Herfindahl-datesEvalBear-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [160 <./Weights-Sentix-Herfindahl-datesEvalBear-G1.pdf>]
+<Weights-Sentix-Herfindahl-datesEvalRecNBER-P1.pdf, id=2233, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Herfindahl-datesEvalRecNBER-P1.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Herfindahl-datesEvalRecNBER-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalRecNBER-P1.pdf used
+ on input line 10.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalRecNBER-P6.pdf, id=2234, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Herfindahl-datesEvalRecNBER-P6.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Herfindahl-datesEvalRecNBER-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalRecNBER-P6.pdf used
+ on input line 11.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalRecNBER-I1.pdf, id=2235, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Herfindahl-datesEvalRecNBER-I1.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Herfindahl-datesEvalRecNBER-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalRecNBER-I1.pdf used
+ on input line 12.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalRecNBER-I6.pdf, id=2236, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Herfindahl-datesEvalRecNBER-I6.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Herfindahl-datesEvalRecNBER-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalRecNBER-I6.pdf used
+ on input line 13.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalRecNBER-G1.pdf, id=2237, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Herfindahl-datesEvalRecNBER-G1.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Herfindahl-datesEvalRecNBER-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalRecNBER-G1.pdf used
+ on input line 14.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalRecNBER-G6.pdf, id=2238, 722.7pt x 578.16pt
+>
+File: Weights-Sentix-Herfindahl-datesEvalRecNBER-G6.pdf Graphic file (type pdf)
+
+ <use Weights-Sentix-Herfindahl-datesEvalRecNBER-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalRecNBER-G6.pdf used
+ on input line 15.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [161 <./Weights-Sentix-Herfindahl-datesEvalBear-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[162 <./Weights-Sentix-Herfindahl-datesEvalRecNBER-P1.pdf> <./Weights-Sentix-He
+rfindahl-datesEvalRecNBER-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [163 <./Weights-Sentix-Herfindahl-datesEvalRecNBER-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [164 <./Weights-Sentix-Herfindahl-datesEvalRecNBER-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [165 <./Weights-Sentix-Herfindahl-datesEvalRecNBER-G1.pdf>]
+<Weights-Sentix-Herfindahl-datesEvalBull-P1.pdf, id=2309, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBull-P1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBull-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBull-P1.pdf used on
+ input line 17.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBull-P6.pdf, id=2310, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBull-P6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBull-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBull-P6.pdf used on
+ input line 18.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBull-I1.pdf, id=2311, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBull-I1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBull-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBull-I1.pdf used on
+ input line 19.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBull-I6.pdf, id=2312, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBull-I6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBull-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBull-I6.pdf used on
+ input line 20.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBull-G1.pdf, id=2313, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBull-G1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBull-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBull-G1.pdf used on
+ input line 21.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalBull-G6.pdf, id=2314, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalBull-G6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalBull-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalBull-G6.pdf used on
+ input line 22.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [166 <./Weights-Sentix-Herfindahl-datesEvalRecNBER-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[167 <./Weights-Sentix-Herfindahl-datesEvalBull-P1.pdf> <./Weights-Sentix-Herfi
+ndahl-datesEvalBull-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [168 <./Weights-Sentix-Herfindahl-datesEvalBull-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [169 <./Weights-Sentix-Herfindahl-datesEvalBull-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [170 <./Weights-Sentix-Herfindahl-datesEvalBull-G1.pdf>]
+<Weights-Sentix-Herfindahl-datesEvalLast-P1.pdf, id=2385, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalLast-P1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalLast-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalLast-P1.pdf used on
+ input line 24.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalLast-P6.pdf, id=2386, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalLast-P6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalLast-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalLast-P6.pdf used on
+ input line 25.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalLast-I1.pdf, id=2387, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalLast-I1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalLast-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalLast-I1.pdf used on
+ input line 26.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalLast-I6.pdf, id=2388, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalLast-I6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalLast-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalLast-I6.pdf used on
+ input line 27.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalLast-G1.pdf, id=2389, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalLast-G1.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalLast-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalLast-G1.pdf used on
+ input line 28.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalLast-G6.pdf, id=2390, 722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalLast-G6.pdf Graphic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-datesEvalLast-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalLast-G6.pdf used on
+ input line 29.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [171 <./Weights-Sentix-Herfindahl-datesEvalBull-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[172 <./Weights-Sentix-Herfindahl-datesEvalLast-P1.pdf> <./Weights-Sentix-Herfi
+ndahl-datesEvalLast-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [173 <./Weights-Sentix-Herfindahl-datesEvalLast-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [174 <./Weights-Sentix-Herfindahl-datesEvalLast-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [175 <./Weights-Sentix-Herfindahl-datesEvalLast-G1.pdf>]
+<Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P1.pdf, id=2461, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P1.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P1.pdf
+ used on input line 31.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P6.pdf, id=2462, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P6.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P6.pdf
+ used on input line 32.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I1.pdf, id=2463, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I1.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I1.pdf
+ used on input line 33.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I6.pdf, id=2464, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I6.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I6.pdf
+ used on input line 34.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G1.pdf, id=2465, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G1.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G1.pdf
+ used on input line 35.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G6.pdf, id=2466, 722.7pt x 578
+.16pt>
+File: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G6.pdf Graphic file (type
+ pdf)
+ <use Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G6.pdf
+ used on input line 36.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+)
+(0Weights-Sentix-Herfindahl-No-Risk-Free.txt
+Underfull \hbox (badness 10000) in paragraph at lines 31--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [176 <./Weights-Sentix-Herfindahl-datesEvalLast-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[177 <./Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P1.pdf> <./Weights-Sent
+ix-Herfindahl-datesEvalAllAfterTest-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [178 <./Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [179 <./Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [180 <./Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G1.pdf>]
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P1.pdf, id=2536, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P
+1.pdf used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P6.pdf, id=2537, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P
+6.pdf used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I1.pdf, id=2538, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I
+1.pdf used on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I6.pdf, id=2539, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I
+6.pdf used on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G1.pdf, id=2540, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G
+1.pdf used on input line 7.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G6.pdf, id=2541, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G
+6.pdf used on input line 8.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [181 <./Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G6.pdf>]
+Overfull \vbox (116.27422pt too high) has occurred while \output is active []
+
+
+[182 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P1.pdf> <./Weights
+-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [183 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [184 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [185 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G1.pdf>]
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P1.pdf, id=2612, 722.7
+pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P1.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBE
+R-P1.pdf used on input line 10.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P6.pdf, id=2613, 722.7
+pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P6.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBE
+R-P6.pdf used on input line 11.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I1.pdf, id=2614, 722.7
+pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I1.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBE
+R-I1.pdf used on input line 12.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I6.pdf, id=2615, 722.7
+pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I6.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBE
+R-I6.pdf used on input line 13.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G1.pdf, id=2616, 722.7
+pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G1.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBE
+R-G1.pdf used on input line 14.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G6.pdf, id=2617, 722.7
+pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G6.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBE
+R-G6.pdf used on input line 15.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [186 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBear-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[187 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P1.pdf> <./Weig
+hts-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [188 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [189 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [190 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G1.pdf>]
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P1.pdf, id=2688, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P
+1.pdf used on input line 17.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P6.pdf, id=2689, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P
+6.pdf used on input line 18.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I1.pdf, id=2690, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I
+1.pdf used on input line 19.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I6.pdf, id=2691, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I
+6.pdf used on input line 20.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G1.pdf, id=2692, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G
+1.pdf used on input line 21.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G6.pdf, id=2693, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G
+6.pdf used on input line 22.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [191 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalRecNBER-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[192 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P1.pdf> <./Weights
+-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [193 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [194 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [195 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G1.pdf>]
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P1.pdf, id=2764, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P
+1.pdf used on input line 24.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P6.pdf, id=2765, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P
+6.pdf used on input line 25.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I1.pdf, id=2766, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I
+1.pdf used on input line 26.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I6.pdf, id=2767, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I
+6.pdf used on input line 27.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G1.pdf, id=2768, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G1.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G
+1.pdf used on input line 28.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G6.pdf, id=2769, 722.7pt 
+x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G6.pdf Graphic file 
+(type pdf)
+ <use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G
+6.pdf used on input line 29.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [196 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalBull-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[197 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P1.pdf> <./Weights
+-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [198 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [199 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [200 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G1.pdf>]
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P1.pdf, id=2840, 
+722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P1.pdf Graph
+ic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAft
+erTest-P1.pdf used on input line 31.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P6.pdf, id=2841, 
+722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P6.pdf Graph
+ic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAft
+erTest-P6.pdf used on input line 32.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I1.pdf, id=2842, 
+722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I1.pdf Graph
+ic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAft
+erTest-I1.pdf used on input line 33.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I6.pdf, id=2843, 
+722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I6.pdf Graph
+ic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAft
+erTest-I6.pdf used on input line 34.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G1.pdf, id=2844, 
+722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G1.pdf Graph
+ic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G1.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAft
+erTest-G1.pdf used on input line 35.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G6.pdf, id=2845, 
+722.7pt x 578.16pt>
+File: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G6.pdf Graph
+ic file (type pdf)
+
+<use Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G6.pdf>
+Package pdftex.def Info: Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAft
+erTest-G6.pdf used on input line 36.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+)
+(0Weights-Classic.txt
+Underfull \hbox (badness 10000) in paragraph at lines 31--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [201 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalLast-G6.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[202 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P1.pdf> <.
+/Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-P6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [203 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [204 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-I6.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [205 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G1.pdf>]
+<Weights-Classic-datesEvalBear-tanPort.pdf, id=2916, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBear-tanPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBear-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBear-tanPort.pdf used on inpu
+t line 3.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBear-mVaPort.pdf, id=2917, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBear-mVaPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBear-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBear-mVaPort.pdf used on inpu
+t line 4.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBear-rp.pdf, id=2918, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBear-rp.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBear-rp.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBear-rp.pdf used on input lin
+e 5.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBear-PGMV.pdf, id=2919, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBear-PGMV.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBear-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBear-PGMV.pdf used on input l
+ine 6.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBear-PMD.pdf, id=2920, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBear-PMD.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBear-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBear-PMD.pdf used on input li
+ne 7.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBear-ew.pdf, id=2921, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBear-ew.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBear-ew.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBear-ew.pdf used on input lin
+e 8.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [206 <./Weights-Sentix-Herfindahl-No-Risk-Free-datesEvalAllAfterTest-G6.pdf>]
+Overfull \vbox (116.27422pt too high) has occurred while \output is active []
+
+
+[207 <./Weights-Classic-datesEvalBear-tanPort.pdf> <./Weights-Classic-datesEval
+Bear-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [208 <./Weights-Classic-datesEvalBear-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [209 <./Weights-Classic-datesEvalBear-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [210 <./Weights-Classic-datesEvalBear-PMD.pdf>]
+<Weights-Classic-datesEvalRecNBER-tanPort.pdf, id=2991, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalRecNBER-tanPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalRecNBER-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalRecNBER-tanPort.pdf used on i
+nput line 10.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalRecNBER-mVaPort.pdf, id=2992, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalRecNBER-mVaPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalRecNBER-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalRecNBER-mVaPort.pdf used on i
+nput line 11.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalRecNBER-rp.pdf, id=2993, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalRecNBER-rp.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalRecNBER-rp.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalRecNBER-rp.pdf used on input 
+line 12.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalRecNBER-PGMV.pdf, id=2994, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalRecNBER-PGMV.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalRecNBER-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalRecNBER-PGMV.pdf used on inpu
+t line 13.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalRecNBER-PMD.pdf, id=2995, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalRecNBER-PMD.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalRecNBER-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalRecNBER-PMD.pdf used on input
+ line 14.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalRecNBER-ew.pdf, id=2996, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalRecNBER-ew.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalRecNBER-ew.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalRecNBER-ew.pdf used on input 
+line 15.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [211 <./Weights-Classic-datesEvalBear-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[212 <./Weights-Classic-datesEvalRecNBER-tanPort.pdf> <./Weights-Classic-datesE
+valRecNBER-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [213 <./Weights-Classic-datesEvalRecNBER-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [214 <./Weights-Classic-datesEvalRecNBER-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [215 <./Weights-Classic-datesEvalRecNBER-PMD.pdf>]
+<Weights-Classic-datesEvalBull-tanPort.pdf, id=3067, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBull-tanPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBull-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBull-tanPort.pdf used on inpu
+t line 17.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBull-mVaPort.pdf, id=3068, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBull-mVaPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBull-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBull-mVaPort.pdf used on inpu
+t line 18.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBull-rp.pdf, id=3069, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBull-rp.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBull-rp.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBull-rp.pdf used on input lin
+e 19.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBull-PGMV.pdf, id=3070, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBull-PGMV.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBull-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBull-PGMV.pdf used on input l
+ine 20.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBull-PMD.pdf, id=3071, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBull-PMD.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBull-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBull-PMD.pdf used on input li
+ne 21.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalBull-ew.pdf, id=3072, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalBull-ew.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalBull-ew.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalBull-ew.pdf used on input lin
+e 22.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [216 <./Weights-Classic-datesEvalRecNBER-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[217 <./Weights-Classic-datesEvalBull-tanPort.pdf> <./Weights-Classic-datesEval
+Bull-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [218 <./Weights-Classic-datesEvalBull-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [219 <./Weights-Classic-datesEvalBull-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [220 <./Weights-Classic-datesEvalBull-PMD.pdf>]
+<Weights-Classic-datesEvalLast-tanPort.pdf, id=3143, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalLast-tanPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalLast-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalLast-tanPort.pdf used on inpu
+t line 24.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalLast-mVaPort.pdf, id=3144, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalLast-mVaPort.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalLast-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalLast-mVaPort.pdf used on inpu
+t line 25.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalLast-rp.pdf, id=3145, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalLast-rp.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalLast-rp.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalLast-rp.pdf used on input lin
+e 26.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalLast-PGMV.pdf, id=3146, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalLast-PGMV.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalLast-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalLast-PGMV.pdf used on input l
+ine 27.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalLast-PMD.pdf, id=3147, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalLast-PMD.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalLast-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalLast-PMD.pdf used on input li
+ne 28.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalLast-ew.pdf, id=3148, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalLast-ew.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalLast-ew.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalLast-ew.pdf used on input lin
+e 29.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [221 <./Weights-Classic-datesEvalBull-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[222 <./Weights-Classic-datesEvalLast-tanPort.pdf> <./Weights-Classic-datesEval
+Last-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [223 <./Weights-Classic-datesEvalLast-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [224 <./Weights-Classic-datesEvalLast-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [225 <./Weights-Classic-datesEvalLast-PMD.pdf>]
+<Weights-Classic-datesEvalAllAfterTest-tanPort.pdf, id=3219, 722.7pt x 578.16pt
+>
+File: Weights-Classic-datesEvalAllAfterTest-tanPort.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-datesEvalAllAfterTest-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalAllAfterTest-tanPort.pdf used
+ on input line 31.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalAllAfterTest-mVaPort.pdf, id=3220, 722.7pt x 578.16pt
+>
+File: Weights-Classic-datesEvalAllAfterTest-mVaPort.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-datesEvalAllAfterTest-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalAllAfterTest-mVaPort.pdf used
+ on input line 32.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalAllAfterTest-rp.pdf, id=3221, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalAllAfterTest-rp.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalAllAfterTest-rp.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalAllAfterTest-rp.pdf used on i
+nput line 33.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalAllAfterTest-PGMV.pdf, id=3222, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalAllAfterTest-PGMV.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalAllAfterTest-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalAllAfterTest-PGMV.pdf used on
+ input line 34.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalAllAfterTest-PMD.pdf, id=3223, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalAllAfterTest-PMD.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalAllAfterTest-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalAllAfterTest-PMD.pdf used on 
+input line 35.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-datesEvalAllAfterTest-ew.pdf, id=3224, 722.7pt x 578.16pt>
+File: Weights-Classic-datesEvalAllAfterTest-ew.pdf Graphic file (type pdf)
+
+<use Weights-Classic-datesEvalAllAfterTest-ew.pdf>
+Package pdftex.def Info: Weights-Classic-datesEvalAllAfterTest-ew.pdf used on i
+nput line 36.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+)
+(0Weights-Classic-No-Risk-Free.txt
+Underfull \hbox (badness 10000) in paragraph at lines 31--1
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [226 <./Weights-Classic-datesEvalLast-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[227 <./Weights-Classic-datesEvalAllAfterTest-tanPort.pdf> <./Weights-Classic-d
+atesEvalAllAfterTest-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [228 <./Weights-Classic-datesEvalAllAfterTest-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [229 <./Weights-Classic-datesEvalAllAfterTest-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [230 <./Weights-Classic-datesEvalAllAfterTest-PMD.pdf>]
+<Weights-Classic-No-Risk-Free-datesEvalBear-tanPort.pdf, id=3295, 722.7pt x 578
+.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalBear-tanPort.pdf Graphic file (type
+ pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalBear-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBear-tanPort.pdf
+ used on input line 3.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBear-mVaPort.pdf, id=3296, 722.7pt x 578
+.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalBear-mVaPort.pdf Graphic file (type
+ pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalBear-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBear-mVaPort.pdf
+ used on input line 4.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBear-rp.pdf, id=3297, 722.7pt x 578.16pt
+>
+File: Weights-Classic-No-Risk-Free-datesEvalBear-rp.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-No-Risk-Free-datesEvalBear-rp.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBear-rp.pdf used
+ on input line 5.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBear-PGMV.pdf, id=3298, 722.7pt x 578.16
+pt>
+File: Weights-Classic-No-Risk-Free-datesEvalBear-PGMV.pdf Graphic file (type pd
+f)
+ <use Weights-Classic-No-Risk-Free-datesEvalBear-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBear-PGMV.pdf us
+ed on input line 6.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBear-PMD.pdf, id=3299, 722.7pt x 578.16p
+t>
+File: Weights-Classic-No-Risk-Free-datesEvalBear-PMD.pdf Graphic file (type pdf
+)
+ <use Weights-Classic-No-Risk-Free-datesEvalBear-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBear-PMD.pdf use
+d on input line 7.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBear-ew.pdf, id=3300, 722.7pt x 578.16pt
+>
+File: Weights-Classic-No-Risk-Free-datesEvalBear-ew.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-No-Risk-Free-datesEvalBear-ew.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBear-ew.pdf used
+ on input line 8.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [231 <./Weights-Classic-datesEvalAllAfterTest-ew.pdf>]
+Overfull \vbox (116.27422pt too high) has occurred while \output is active []
+
+
+[232 <./Weights-Classic-No-Risk-Free-datesEvalBear-tanPort.pdf> <./Weights-Clas
+sic-No-Risk-Free-datesEvalBear-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [233 <./Weights-Classic-No-Risk-Free-datesEvalBear-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [234 <./Weights-Classic-No-Risk-Free-datesEvalBear-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [235 <./Weights-Classic-No-Risk-Free-datesEvalBear-PMD.pdf>]
+<Weights-Classic-No-Risk-Free-datesEvalRecNBER-tanPort.pdf, id=3371, 722.7pt x 
+578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalRecNBER-tanPort.pdf Graphic file (t
+ype pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalRecNBER-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalRecNBER-tanPort.
+pdf used on input line 10.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalRecNBER-mVaPort.pdf, id=3372, 722.7pt x 
+578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalRecNBER-mVaPort.pdf Graphic file (t
+ype pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalRecNBER-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalRecNBER-mVaPort.
+pdf used on input line 11.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalRecNBER-rp.pdf, id=3373, 722.7pt x 578.1
+6pt>
+File: Weights-Classic-No-Risk-Free-datesEvalRecNBER-rp.pdf Graphic file (type p
+df)
+ <use Weights-Classic-No-Risk-Free-datesEvalRecNBER-rp.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalRecNBER-rp.pdf u
+sed on input line 12.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalRecNBER-PGMV.pdf, id=3374, 722.7pt x 578
+.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalRecNBER-PGMV.pdf Graphic file (type
+ pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalRecNBER-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalRecNBER-PGMV.pdf
+ used on input line 13.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalRecNBER-PMD.pdf, id=3375, 722.7pt x 578.
+16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalRecNBER-PMD.pdf Graphic file (type 
+pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalRecNBER-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalRecNBER-PMD.pdf 
+used on input line 14.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalRecNBER-ew.pdf, id=3376, 722.7pt x 578.1
+6pt>
+File: Weights-Classic-No-Risk-Free-datesEvalRecNBER-ew.pdf Graphic file (type p
+df)
+ <use Weights-Classic-No-Risk-Free-datesEvalRecNBER-ew.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalRecNBER-ew.pdf u
+sed on input line 15.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [236 <./Weights-Classic-No-Risk-Free-datesEvalBear-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[237 <./Weights-Classic-No-Risk-Free-datesEvalRecNBER-tanPort.pdf> <./Weights-C
+lassic-No-Risk-Free-datesEvalRecNBER-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [238 <./Weights-Classic-No-Risk-Free-datesEvalRecNBER-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [239 <./Weights-Classic-No-Risk-Free-datesEvalRecNBER-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [240 <./Weights-Classic-No-Risk-Free-datesEvalRecNBER-PMD.pdf>]
+<Weights-Classic-No-Risk-Free-datesEvalBull-tanPort.pdf, id=3446, 722.7pt x 578
+.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalBull-tanPort.pdf Graphic file (type
+ pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalBull-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBull-tanPort.pdf
+ used on input line 17.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBull-mVaPort.pdf, id=3447, 722.7pt x 578
+.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalBull-mVaPort.pdf Graphic file (type
+ pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalBull-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBull-mVaPort.pdf
+ used on input line 18.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBull-rp.pdf, id=3448, 722.7pt x 578.16pt
+>
+File: Weights-Classic-No-Risk-Free-datesEvalBull-rp.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-No-Risk-Free-datesEvalBull-rp.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBull-rp.pdf used
+ on input line 19.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBull-PGMV.pdf, id=3449, 722.7pt x 578.16
+pt>
+File: Weights-Classic-No-Risk-Free-datesEvalBull-PGMV.pdf Graphic file (type pd
+f)
+ <use Weights-Classic-No-Risk-Free-datesEvalBull-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBull-PGMV.pdf us
+ed on input line 20.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBull-PMD.pdf, id=3450, 722.7pt x 578.16p
+t>
+File: Weights-Classic-No-Risk-Free-datesEvalBull-PMD.pdf Graphic file (type pdf
+)
+ <use Weights-Classic-No-Risk-Free-datesEvalBull-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBull-PMD.pdf use
+d on input line 21.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalBull-ew.pdf, id=3451, 722.7pt x 578.16pt
+>
+File: Weights-Classic-No-Risk-Free-datesEvalBull-ew.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-No-Risk-Free-datesEvalBull-ew.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalBull-ew.pdf used
+ on input line 22.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [241 <./Weights-Classic-No-Risk-Free-datesEvalRecNBER-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[242 <./Weights-Classic-No-Risk-Free-datesEvalBull-tanPort.pdf> <./Weights-Clas
+sic-No-Risk-Free-datesEvalBull-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [243 <./Weights-Classic-No-Risk-Free-datesEvalBull-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [244 <./Weights-Classic-No-Risk-Free-datesEvalBull-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [245 <./Weights-Classic-No-Risk-Free-datesEvalBull-PMD.pdf>]
+<Weights-Classic-No-Risk-Free-datesEvalLast-tanPort.pdf, id=3522, 722.7pt x 578
+.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalLast-tanPort.pdf Graphic file (type
+ pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalLast-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalLast-tanPort.pdf
+ used on input line 24.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalLast-mVaPort.pdf, id=3523, 722.7pt x 578
+.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalLast-mVaPort.pdf Graphic file (type
+ pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalLast-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalLast-mVaPort.pdf
+ used on input line 25.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalLast-rp.pdf, id=3524, 722.7pt x 578.16pt
+>
+File: Weights-Classic-No-Risk-Free-datesEvalLast-rp.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-No-Risk-Free-datesEvalLast-rp.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalLast-rp.pdf used
+ on input line 26.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalLast-PGMV.pdf, id=3525, 722.7pt x 578.16
+pt>
+File: Weights-Classic-No-Risk-Free-datesEvalLast-PGMV.pdf Graphic file (type pd
+f)
+ <use Weights-Classic-No-Risk-Free-datesEvalLast-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalLast-PGMV.pdf us
+ed on input line 27.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalLast-PMD.pdf, id=3526, 722.7pt x 578.16p
+t>
+File: Weights-Classic-No-Risk-Free-datesEvalLast-PMD.pdf Graphic file (type pdf
+)
+ <use Weights-Classic-No-Risk-Free-datesEvalLast-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalLast-PMD.pdf use
+d on input line 28.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalLast-ew.pdf, id=3527, 722.7pt x 578.16pt
+>
+File: Weights-Classic-No-Risk-Free-datesEvalLast-ew.pdf Graphic file (type pdf)
+
+ <use Weights-Classic-No-Risk-Free-datesEvalLast-ew.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalLast-ew.pdf used
+ on input line 29.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [246 <./Weights-Classic-No-Risk-Free-datesEvalBull-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[247 <./Weights-Classic-No-Risk-Free-datesEvalLast-tanPort.pdf> <./Weights-Clas
+sic-No-Risk-Free-datesEvalLast-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [248 <./Weights-Classic-No-Risk-Free-datesEvalLast-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [249 <./Weights-Classic-No-Risk-Free-datesEvalLast-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [250 <./Weights-Classic-No-Risk-Free-datesEvalLast-PMD.pdf>]
+<Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-tanPort.pdf, id=3598, 722.7
+pt x 578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-tanPort.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-tanPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-tan
+Port.pdf used on input line 31.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-mVaPort.pdf, id=3599, 722.7
+pt x 578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-mVaPort.pdf Graphic fi
+le (type pdf)
+
+<use Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-mVaPort.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-mVa
+Port.pdf used on input line 32.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-rp.pdf, id=3600, 722.7pt x 
+578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-rp.pdf Graphic file (t
+ype pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-rp.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-rp.
+pdf used on input line 33.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PGMV.pdf, id=3601, 722.7pt 
+x 578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PGMV.pdf Graphic file 
+(type pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PGMV.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PGM
+V.pdf used on input line 34.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PMD.pdf, id=3602, 722.7pt x
+ 578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PMD.pdf Graphic file (
+type pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PMD.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PMD
+.pdf used on input line 35.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+
+<Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-ew.pdf, id=3603, 722.7pt x 
+578.16pt>
+File: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-ew.pdf Graphic file (t
+ype pdf)
+ <use Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-ew.pdf>
+Package pdftex.def Info: Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-ew.
+pdf used on input line 36.
+(pdftex.def)             Requested size: 418.25555pt x 334.6008pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 31--91
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [251 <./Weights-Classic-No-Risk-Free-datesEvalLast-ew.pdf>]
+Overfull \vbox (95.60236pt too high) has occurred while \output is active []
+
+
+[252 <./Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-tanPort.pdf> <./Weig
+hts-Classic-No-Risk-Free-datesEvalAllAfterTest-mVaPort.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [253 <./Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-rp.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [254 <./Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PGMV.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [255 <./Weights-Classic-No-Risk-Free-datesEvalAllAfterTest-PMD.pdf>] [256 <./W
+eights-Classic-No-Risk-Free-datesEvalAllAfterTest-ew.pdf>] ("00 ALL Plots toget
+her.aux") ) 
+Here is how much of TeX's memory you used:
+ 10264 strings out of 493323
+ 249201 string characters out of 3139063
+ 313539 words of memory out of 3000000
+ 13311 multiletter control sequences out of 15000+200000
+ 8213 words of font info for 29 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 48i,7n,66p,8836b,171s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
+Output written on "00 ALL Plots together.pdf" (256 pages, 3387439 bytes).
+PDF statistics:
+ 3707 PDF objects out of 4296 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1491 words of extra memory for PDF output out of 10000 (max. 10000000)
+

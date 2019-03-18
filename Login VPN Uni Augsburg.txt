@@ -1,0 +1,8 @@
+Any Connect
+asa.rz.uni-augsburg.de
+Benutzername: gloggest
+Passwort von Uni Augsburg
+
+Rechner-ID in Windows Remotedesktopverbindung
+137.250.42.225
+Benutzername: UNI-AUGSBURG\gloggest

@@ -26,7 +26,11 @@ Rectangle for Date periods:
 store as function to keep structure similar to above (and store at same Place in environment)
 
 ```{r}
-plotData <- function(x, title = "Indices"){
+plotData <- function(x, title = "Indices", bw = FALSE){
+    if(bw){
+        
+    }else{
+        
     
     # lines with data
     geomLineDataDAX <- function(x){
@@ -61,8 +65,8 @@ plotData <- function(x, title = "Indices"){
     geomRectDateBull <- function(){
         parse(text = "geom_rect(aes(xmin = min(datesEvalBull), xmax = max(datesEvalBull), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"green\")")}
     
-    geomRectDateLast <- function(){
-      parse(text = "geom_rect(aes(xmin = min(datesEvalLast), xmax = max(datesEvalLast), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"orange\")")}
+    # geomRectDateLast <- function(){
+    #   parse(text = "geom_rect(aes(xmin = min(datesEvalLast), xmax = max(datesEvalLast), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"orange\")")}
     
     geomRectDateTest <- function(){
       parse(text = "geom_rect(aes(xmin = min(datesTest), xmax = max(datesTest), ymin = -Inf, ymax = Inf), alpha = 0.2 , fill = \"blue\")")}
@@ -75,7 +79,7 @@ plotData <- function(x, title = "Indices"){
       eval(geomLineDataNASDAQ(x)) +
       eval(geomLineDataNIKKEI(x)) +
       eval(geomLineDataBUND(x)) +
-      eval(geomRectDateLast()) +
+      # eval(geomRectDateLast()) +
       eval(geomRectDateBear()) +
       eval(geomRectDateRecNBER()) +
       eval(geomRectDateBull()) +
@@ -83,6 +87,7 @@ plotData <- function(x, title = "Indices"){
       labs(x = "Time", y = "Value") + 
       labs(title = title) +
       theme(plot.title = element_text(hjust = 0.5)) # align title in center
+    }
 }
 
 ## if a special name is given, take it, otherwise take x (plot sentix by using same dataframe (adopted))
@@ -142,6 +147,8 @@ for(sentixGroup in 2:ncol(retPlot)){
 }
 legend("topleft", legend = colnames(stocks)[2:ncol(stocks)], col = cols, lty = 1)
 
+
+
 rm(retPlot, xNames, ylim, sentixGroup)
 ```
 
@@ -170,10 +177,75 @@ ylim <- c(min(retPlot[,1:(ncol(retPlot)-1)]), max(retPlot[,1:(ncol(retPlot)-1)])
 plotData("retPlot")
 plotDataPDF("retPlot")
 
-rm(retPlot, cols, ylim)
 ```
 
+### new plots (black white and analogy)
 
+```{r, warning=FALSE}
+## plot Data Black White (print)
+library(tidyverse)
+retPlotLong <- gather(retPlot, index, value, -Datum)
+retPlotLong$index <- factor(retPlotLong$index)
+
+bearMinMax <- data.frame("date" = c(min(datesEvalBear), max(datesEvalBear)))
+RecNBERMinMax <- data.frame("date" = c(min(datesEvalRecNBER), max(datesEvalRecNBER)))
+bullMinMax <- data.frame("date" = c(min(datesEvalBull), max(datesEvalBull)))
+TestSplit <- data.frame("date" = min(datesEvalAllAfterTest))
+
+
+pdf(file.path(getwd(), "Plot", paste0("retPlot-BW", ".pdf")), width = 10, height = 4)
+ggplot(retPlotLong, aes(x = Datum, y=value, col=index, linetype = index)) + 
+    geom_line(lwd=1) +
+    scale_color_grey() +
+    scale_linetype_discrete() +
+    geom_vline(data = bearMinMax, aes(xintercept=as.numeric(date)),
+               linetype=4, colour="black") +
+    geom_vline(data = RecNBERMinMax, aes(xintercept=as.numeric(date)),
+               linetype=3, colour="black") +
+    geom_vline(data = bullMinMax, aes(xintercept=as.numeric(date)),
+               linetype=2, colour="black") +
+    geom_vline(data = TestSplit, aes(xintercept=as.numeric(date)),
+               linetype=1, colour="black") +
+    theme_bw()+
+    labs(x = "Time", y = "Value", colour = "Index", linetype = "Index")
+dev.off()
+
+# rm(retPlot, cols, ylim)
+```
+
+```{r, warning=FALSE}
+## plot Data Black White (print)
+library(tidyverse)
+library(ggtern)
+retPlotLong <- gather(retPlot, index, value, -Datum)
+retPlotLong$index <- factor(retPlotLong$index)
+
+bearMinMax <- data.frame("date" = c(min(datesEvalBear), max(datesEvalBear)))
+RecNBERMinMax <- data.frame("date" = c(min(datesEvalRecNBER), max(datesEvalRecNBER)))
+bullMinMax <- data.frame("date" = c(min(datesEvalBull), max(datesEvalBull)))
+TestSplit <- data.frame("date" = min(datesEvalAllAfterTest))
+
+
+pdf(file.path(getwd(), "Plot", paste0("retPlot", ".pdf")), width = 10, height = 4)
+ggplot(retPlotLong, aes(x = Datum, y=value, col=index)) + 
+    geom_line(lwd=1) +
+    # scale_color_grey() +
+    geom_vline(data = bearMinMax, aes(xintercept=as.numeric(date)),
+               linetype=4, colour="black") +
+    geom_vline(data = RecNBERMinMax, aes(xintercept=as.numeric(date)),
+               linetype=3, colour="black") +
+    geom_vline(data = bullMinMax, aes(xintercept=as.numeric(date)),
+               linetype=2, colour="black") +
+    geom_vline(data = TestSplit, aes(xintercept=as.numeric(date)),
+               linetype=1, colour="black") +
+    # theme_rgbg() +
+    theme_bw()+
+    labs(x = "Time", y = "Value", colour = "Index")
+    
+dev.off()
+
+# rm(retPlot, cols, ylim)
+```
 
 ## Dispersion
 
@@ -183,7 +255,7 @@ Graphs can be found in "\\R-Research Project Statistics\\Plot Data".
 lateximport <- c(paste0("\\subsection{Dispersion}"))
 
 for(sentixGroup in names(sDisp)){
-    title <- paste("sDisp", sentixGroup)
+    title <- paste0("sDisp-", sentixGroup)
     
     sPlot <- sDisp[[sentixGroup]]
     plotDataPDF("sPlot", title)
@@ -213,7 +285,7 @@ Graphs can be found in "\\R-Research Project Statistics\\Plot Data".
 lateximport <- c(paste0("\\subsection{Herfindahl}"))
 
 for(sentixGroup in names(sHerf)){
-    title <- paste("sHerf", sentixGroup)
+    title <- paste0("sHerf-", sentixGroup)
     
     sPlot <- sHerf[[sentixGroup]]
     plotDataPDF("sPlot", title)

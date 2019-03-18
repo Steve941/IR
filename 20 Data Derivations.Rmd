@@ -55,7 +55,7 @@ sDispDataFrame <- function(period, group){
   res$DAX <- sDispColumn(sentixRaw[[period[1]]], group)
   res$TEC <- sDispColumn(sentixRaw[[period[2]]], group)
   res$ESX50 <- sDispColumn(sentixRaw[[period[3]]], group)
-  res$SP5 <- sDispColumn(sentixRaw[[period[4]]], group)
+  res$SP500 <- sDispColumn(sentixRaw[[period[4]]], group)
   res$NASDAQ <- sDispColumn(sentixRaw[[period[5]]], group)
   res$NIKKEI <- sDispColumn(sentixRaw[[period[6]]], group)
   res$BUND <- sDispColumn(sentixRaw[[period[7]]], group)
@@ -118,7 +118,7 @@ sHerfDataFrame <- function(period, group){
   res$DAX <- sHerfColumn(sentixRaw[[period[1]]], group)
   res$TEC <- sHerfColumn(sentixRaw[[period[2]]], group)
   res$ESX50 <- sHerfColumn(sentixRaw[[period[3]]], group)
-  res$SP5 <- sHerfColumn(sentixRaw[[period[4]]], group)
+  res$SP500 <- sHerfColumn(sentixRaw[[period[4]]], group)
   res$NASDAQ <- sHerfColumn(sentixRaw[[period[5]]], group)
   res$NIKKEI <- sHerfColumn(sentixRaw[[period[6]]], group)
   res$BUND <- sHerfColumn(sentixRaw[[period[7]]], group)
@@ -182,6 +182,12 @@ $$ \text{retWindow}_{\text{stock}} = \prod_{k=1}^{l} (1+\text{ret}_{\text{stock}
 
 As we calculate with closing prices, we assume that the return is actually of that day (or better spoken of that week). We investment at the very beginning to the opening price, which should be rathly the closing price of the day (week) before).
 
+NEW: We look at the total returns before. And adopt the min return (hard-coded).
+
+
+
+
+
 ```{r}
 l <- 50
 
@@ -196,10 +202,27 @@ for(i in 1:nrow(retWindow)){
 retTotal <- numeric(nrow(retWindow))
 retTotal <- apply(retWindow, 1, mean) # 1 -> rowwise
 names(retTotal) <- rownames(retWindow)
+```
 
+```{r}
+plot(retTotal)
+```
+
+
+NEW:  
+```{r}
+# old code
 iMin <- which(retTotal==min(retTotal))
 iMax <- which(retTotal==max(retTotal))
 
+# adopted code
+retTotal[270:300]
+iMin <- which(retTotal == min(retTotal[270:300]))
+iMax <- which(retTotal==max(retTotal))
+```
+
+
+```{r}
 # dates of which the returns have been calculated
 datesEvalBear <- rownames(ret)[(iMin):(iMin+l-1)]
 datesEvalBull <- rownames(ret)[(iMax):(iMax+l-1)]
@@ -207,7 +230,7 @@ class(datesEvalBear) <- "Date"
 class(datesEvalBull) <- "Date"
 ```
 
-additional visualization of the resturns over each time window
+additional visualization of the returns over each time window
 
 ```{r}
 plot(retTotal, type = "l", axes = FALSE, main = "returns over the time window")

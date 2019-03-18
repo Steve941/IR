@@ -9,7 +9,7 @@ output: pdf_document
 
 Please look at the titles to get an overview of what is done when. You can also refer to the introducing sentences of each chapter. Furthermore an overview is provided as a chart.
 
-```{r, include=FALSE}
+```{r, include=FALSE, eval=FALSE}
 sessionInfo() # shows info of session (e.g. loaded packages)
 loadedNamespaces() # shows packages directly
 ```

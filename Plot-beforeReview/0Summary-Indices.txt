@@ -1,0 +1,82 @@
+\subsection{Summary-Indices}
+\subsubsection{datesEvalBear}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:11:51 2017
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & DAX & TEC & ESX50 & SP5 & NASDAQ & NIKKEI & BUND \\ 
+  \hline
+Mean Return (an) & -0.46 & -0.54 & -0.50 & -0.47 & -0.50 & -0.51 & 0.07 \\ 
+  Volatility (an) & 0.37 & 0.45 & 0.35 & 0.32 & 0.33 & 0.38 & 0.08 \\ 
+  Sharpe Ratio (an) & -1.25 & -1.21 & -1.45 & -1.48 & -1.49 & -1.34 & 0.90 \\ 
+  Omega & 0.48 & 0.51 & 0.42 & 0.45 & 0.48 & 0.45 & 1.37 \\ 
+  VaR & -0.09 & -0.11 & -0.07 & -0.08 & -0.08 & -0.07 & -0.01 \\ 
+  CVaR & -0.19 & -0.19 & -0.19 & -0.15 & -0.12 & -0.21 & -0.02 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalRecNBER}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:11:51 2017
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & DAX & TEC & ESX50 & SP5 & NASDAQ & NIKKEI & BUND \\ 
+  \hline
+Mean Return (an) & -0.26 & -0.21 & -0.31 & -0.26 & -0.19 & -0.24 & 0.05 \\ 
+  Volatility (an) & 0.40 & 0.47 & 0.38 & 0.35 & 0.34 & 0.38 & 0.08 \\ 
+  Sharpe Ratio (an) & -0.65 & -0.45 & -0.82 & -0.75 & -0.56 & -0.62 & 0.58 \\ 
+  Omega & 0.75 & 0.83 & 0.69 & 0.72 & 0.80 & 0.76 & 1.21 \\ 
+  VaR & -0.09 & -0.09 & -0.08 & -0.07 & -0.08 & -0.07 & -0.02 \\ 
+  CVaR & -0.15 & -0.17 & -0.16 & -0.12 & -0.10 & -0.19 & -0.02 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalBull}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:11:51 2017
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & DAX & TEC & ESX50 & SP5 & NASDAQ & NIKKEI & BUND \\ 
+  \hline
+Mean Return (an) & 0.67 & 1.12 & 0.60 & 0.66 & 0.80 & 0.57 & -0.00 \\ 
+  Volatility (an) & 0.23 & 0.29 & 0.24 & 0.20 & 0.20 & 0.28 & 0.07 \\ 
+  Sharpe Ratio (an) & 2.88 & 3.82 & 2.52 & 3.24 & 4.06 & 2.07 & -0.07 \\ 
+  Omega & 2.13 & 2.79 & 1.96 & 2.53 & 3.01 & 1.88 & 0.98 \\ 
+  VaR & -0.04 & -0.04 & -0.04 & -0.04 & -0.03 & -0.04 & -0.02 \\ 
+  CVaR & -0.05 & -0.05 & -0.05 & -0.04 & -0.04 & -0.05 & -0.02 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalLast}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:11:52 2017
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & DAX & TEC & ESX50 & SP5 & NASDAQ & NIKKEI & BUND \\ 
+  \hline
+Mean Return (an) & -0.05 & 0.04 & -0.15 & 0.04 & 0.09 & -0.19 & 0.13 \\ 
+  Volatility (an) & 0.26 & 0.23 & 0.25 & 0.14 & 0.20 & 0.29 & 0.06 \\ 
+  Sharpe Ratio (an) & -0.20 & 0.19 & -0.60 & 0.31 & 0.47 & -0.65 & 2.18 \\ 
+  Omega & 0.93 & 1.07 & 0.80 & 1.11 & 1.17 & 0.77 & 2.04 \\ 
+  VaR & -0.05 & -0.05 & -0.06 & -0.04 & -0.05 & -0.07 & -0.01 \\ 
+  CVaR & -0.09 & -0.07 & -0.08 & -0.04 & -0.06 & -0.09 & -0.02 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalAllAfterTest}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:11:52 2017
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & DAX & TEC & ESX50 & SP5 & NASDAQ & NIKKEI & BUND \\ 
+  \hline
+Mean Return (an) & 0.10 & 0.15 & -0.00 & 0.07 & 0.15 & 0.03 & 0.04 \\ 
+  Volatility (an) & 0.25 & 0.26 & 0.25 & 0.20 & 0.21 & 0.25 & 0.07 \\ 
+  Sharpe Ratio (an) & 0.39 & 0.58 & -0.00 & 0.38 & 0.70 & 0.13 & 0.66 \\ 
+  Omega & 1.15 & 1.24 & 1.00 & 1.16 & 1.27 & 1.05 & 1.25 \\ 
+  VaR & -0.05 & -0.06 & -0.05 & -0.04 & -0.05 & -0.06 & -0.02 \\ 
+  CVaR & -0.11 & -0.13 & -0.11 & -0.09 & -0.08 & -0.12 & -0.02 \\ 
+   \hline
+\end{tabular}
+
+\clearpage

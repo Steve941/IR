@@ -248,7 +248,7 @@ IDEE: one could also look at just the previous *n* dates to calculate the averag
 
 We use several packages for the optimization.
 
-```{r}
+```{r, eval = False}
 library(Rdonlp2)
 ```
 
@@ -320,10 +320,19 @@ visualization of weights and results via ternary plot
 ```{r}
 terntheme <- function(){
     theme_rgbg() +
+        # theme_rgbw()+
         theme(legend.position = c(0, 1),
               legend.justification = c(0, 1),
-              plot.margin=unit(c(0, 2,0, 2), "cm"),
-              tern.panel.background = element_rect(fill = "lightskyblue1"))
+              plot.margin=unit(c(0, 2,0, 2), "cm"))
+              # tern.panel.background = element_rect(fill = "lightskyblue1")
+              
+}
+
+ternthemeBW <- function(){
+    theme_bw() +
+        theme(legend.position = c(0, 1),
+              legend.justification = c(0, 1),
+              plot.margin=unit(c(0, 2,0, 2), "cm"))
 }
 ```
 
@@ -332,36 +341,64 @@ note: "Calling 'structure(NULL, \*)' is deprecated, as NULL cannot have attribut
 *..level..* is calculated and then used inside the function
 
 ```{r}
-plotTernary <- function(dat){
-    wmax <- dat[which.max(dat$value), c("w1", "w2", "w3", "value")]
-    
-    ggtern(dat, aes(x=w1, y=w2, z=w3, value=value)) +
+plotTernary <- function(dat3, wmax, bw=FALSE){
+    if(bw){
+    return(ggtern(dat3, aes(x=w1, y=w2, z=w3, value=value)) +
         geom_point(shape=".")+
-        geom_text(aes(x=w1, y=w2, label=round(value,1)), data = dat[dat$value>(dat[(dat$w1==wmax$w1) & (dat$w2==wmax$w2),"value"]*0.95),]) +
+        geom_text(aes(x=w1, y=w2, label=round(value,1)), data = dat3[dat3[["value"]]>(dat3[(dat3[["w1"]]==wmax$w1) & (dat3[["w2"]]==wmax$w2),"value"]*0.95),], color = "grey50") +
         geom_interpolate_tern(aes(value=value, color = ..level..)) +
-        geom_point(aes(x=w1, y=w2), dat = wmax, color = "red") + 
-        geom_text(aes(x=w1, y=w2, label=round(dat[(dat$w1==wmax$w1) & (dat$w2==wmax$w2),"value"],1)), data = wmax, color = "red" )+
+        geom_point(aes(x=w1, y=w2), data = wmax, color = "black") +
+        geom_text(aes(x=w1, y=w2, label=round(value,1)), data = wmax, color = "black" )+
+        ternthemeBW() +
+        Lline(Lintercept =  wmax$w1, colour = "Black", linetype = 2, lwd=1) + ## w1 on Left axis
+        Tline(Tintercept = wmax$w2, colour = "Black", linetype = 2, lwd=1) + ## w2 on Top axis
+        Rline(Rintercept = wmax$w3, color = "Black", linetype = 2, lwd=1) + ## w3 on Right axis
+        scale_color_gradient(low = "grey90", high = "grey0") +
+        labs(x = "Return", y = "Volatility", z = "Disagreement",
+             color = "Level")
+    )
+    }else{
+    
+    return(ggtern(dat3, aes(x=w1, y=w2, z=w3, value=value)) +
+        geom_point(shape=".")+
+        geom_text(aes(x=w1, y=w2, label=round(value,1)), data = dat3[dat3[["value"]]>(dat3[(dat3[["w1"]]==wmax$w1) & (dat3[["w2"]]==wmax$w2),"value"]*0.95),]) +
+        geom_interpolate_tern(aes(value=value, color = ..level..)) +
+        geom_point(aes(x=w1, y=w2), data = wmax, color = "red") +
+        geom_text(aes(x=w1, y=w2, label=round(value,1)), data = wmax, color = "red" ) +
         terntheme() +
         Lline(Lintercept =  wmax$w1, colour = theme_rgbg()$tern.axis.line.L$colour, linetype = 2, lwd=1) + ## w1 on Left axis
         Tline(Tintercept = wmax$w2, colour = theme_rgbg()$tern.axis.line.T$colour, linetype = 2, lwd=1) + ## w2 on Top axis
         Rline(Rintercept = wmax$w3, color = theme_rgbg()$tern.axis.line.R$colour, linetype = 2, lwd=1) + ## w3 on Right axis
         scale_color_gradient(low = "green", high = "red") +
-        labs(x = "return", y = "variation", z = "dispersion",
-             title = paste0("Ternary Plot with Sharpe Ratio Contour Lines -", deparse(substitute(dat)), "-", t),
+        labs(x = "Return", y = "Volatility", z = "Disagreement",
              color = "Level")
+        
+        
+        # labs(x = "return", y = "variation", z = "dispersion",
+        #      # title = paste0("Ternary Plot with Sharpe Ratio Contour Lines -", deparse(substitute(dat3)), "-", t),
+        #      color = "Level")
+    )
+    }
+    
+    
 }
+
+# plotTernary(dat4, wmax2, T)
 ```
 
 ```{r}
-ternaryPlot <- function(dat, titleFile){
+ternaryPlot <- function(dat, titleFile, bw=FALSE){
   lateximport <- c(paste0("\\subsection{", titleFile, "}"))
   
   for(t in names(dat$datesTest)){
-    plot(plotTernary(dat$datesTest[[t]]))
+    dat3 <- dat$datesTest[[t]]
+    wmax <- dat3[which.max(dat3$value), c("w1", "w2", "w3", "value")]
     
+    plot(plotTernary(dat3, wmax))
+    print("yea")
     title <- paste0(titleFile, "-", t, ".pdf")
-    pdf(file.path(getwd(), "Plot", title), width = 10, height = 10)
-    plot(plotTernary(dat$datesTest[[t]]))
+    pdf(file.path(getwd(), "Plot", title), width = 12, height = 10)
+    plot(plotTernary(dat3, wmax, bw))
     dev.off()
     
     lateximport <- c(lateximport, paste0("\\includegraphics[height=0.45\\textheight]{",title,"}\\linebreak"))
@@ -372,7 +409,49 @@ ternaryPlot <- function(dat, titleFile){
   close(fileConnection)
 }
 
+# ternaryPlot(srWeightsAn, "test")
 ```
+
+```{r}
+# not important; to generate the correct plots (above)
+colours <- list(~class, ~drv, ~fl)
+
+plotg <- function(colour){
+  return(ggplot(mpg, aes_(~ displ, ~ hwy, colour = colour)) +
+    geom_point())
+}
+
+# Doesn't seem to do anything!
+for (colour in colours) {
+  plotg(colour)
+}
+
+# Works when we explicitly print the plots
+for (colour in colours) {
+  print(plotg(colour))
+}
+```
+```{r}
+# not important; to generate the correct plots (above)
+m <- c(13.8, 14.8)
+cond <- c(1, 2)
+means <- data.frame(means=m, condition=cond)
+means
+# The output should be:
+#     means    condition
+#   1 13.8     1
+#   2 14.8     2
+
+testplot <- function(meansdf)
+{
+  p <- ggplot(meansdf, aes(fill=condition, y=means, x = condition))
+  p + geom_bar(position="dodge", stat="identity")
+}
+
+plot(testplot(means))
+```
+
+
 
 
 ##### functions for calculating the variables needed to determine optimal goal weights (optimal grid point)
@@ -489,7 +568,7 @@ library(doSNOW)
 
 We save with saveRDS() to be able to import and compare different results.
 
-```{r, eval=FALSE}
+```{r}
 cores <- detectCores()
 
 if(Sys.getenv("USERNAME") == "Stefan"){
@@ -539,7 +618,7 @@ We now add the returns and the variance over the test time window to lateron cal
 The function takes the calculated weighted of the assets as inputs and outputs (in the same data structure) the portfolio weights, its return and its variance over the test time window.
 
 ```{r}
-xDispConstTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinConstantTest_gloggest2017-09-05---13-47"))
+xDispConstTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinConstantTest_gloggest2019-03-18---17-04"))
 ```
 
 
@@ -587,7 +666,7 @@ Last weight for penultimate date of time window (hold until last date).
 
 ###### determine portfolio in test time window (for each gridpoint)
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -663,7 +742,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2017-09-05---15-44"))
+xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2019-03-18---17-23"))
 ```
 
 
@@ -685,6 +764,7 @@ Now, we also want to visualize the data. We use a ternary plot for this.
 ```{r}
 srWeightsAn <- extractWeightsWithValue(xDispVarTestCalc, "anSR")
 ternaryPlot(srWeightsAn, "Ternary-Dispersion")
+ternaryPlot(srWeightsAn, "Ternary-Dispersion-BW", bw=TRUE)
 ```
 
 
@@ -754,7 +834,7 @@ Last weight for penultimate date of time window (hold until last date).
 
 ###### determine portfolio in test time window (for each gridpoint)
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -826,13 +906,13 @@ for(t in datesTestNames){
     names(xDispNoRFVarTest[[t]]) <- names(sDisp)
 }
 
-saveRDS(xDispNoRFVarTest, file = file.path(getwd(), "Optimization", paste0("EDispersionMinVaryingTest_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+saveRDS(xDispNoRFVarTest, file = file.path(getwd(), "Optimization", paste0("EDispersionNoRFMinVaryingTest_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
 
 stopCluster(cl)
 ```
 
 ```{r}
-xDispNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2017-09-06---14-13"))
+xDispNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionNoRFMinVaryingTest_gloggest2019-03-18---17-29"))
 ```
 
 
@@ -924,7 +1004,7 @@ Last weight for penultimate date of time window (hold until last date).
 
 ###### determine portfolio in test time window (for each gridpoint)
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -1000,7 +1080,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xHerfVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingTest_gloggest2017-09-05---16-07"))
+xHerfVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingTest_gloggest2019-03-18---17-40"))
 ```
 
 
@@ -1095,7 +1175,7 @@ Last weight for penultimate date of time window (hold until last date).
 
 ###### determine portfolio in test time window (for each gridpoint)
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -1173,7 +1253,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xHerfNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingTest_gloggest2017-09-06---13-43"))
+xHerfNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingTest_gloggest2019-03-18---17-47"))
 ```
 
 
@@ -1234,7 +1314,7 @@ NOTE: change the weights of the test data, if different test time windows are us
 
 We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual dispersion.
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -1310,7 +1390,7 @@ saveRDS(xDispVarEval, file = file.path(getwd(), "Optimization", paste0("EDispers
 ```
 
 ```{r}
-xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2017-09-05---16-09"))
+xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2019-03-18---17-51"))
 ```
 
 #### dispersion direct min - no risk free
@@ -1323,7 +1403,7 @@ NOTE: change the weights of the test data, if different test time windows are us
 
 We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual dispersion.
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -1397,11 +1477,11 @@ stopCluster(cl)
 
 # names(xDispVarTest) <- datesTestNames
 
-saveRDS(xDispNoRFVarEval, file = file.path(getwd(), "Optimization", paste0("EDispersionMinVaryingEval_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
+saveRDS(xDispNoRFVarEval, file = file.path(getwd(), "Optimization", paste0("EDispersionNoRFMinVaryingEval_", Sys.getenv("USERNAME"), format(Sys.time(), "%Y-%m-%d---%H-%M"))))
 ```
 
 ```{r}
-xDispNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2017-09-06---14-22"))
+xDispNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionNoRFMinVaryingEval_gloggest2019-03-18---17-51"))
 ```
 
 
@@ -1416,7 +1496,7 @@ NOTE: change the weights of the test data, if different test time windows are us
 
 We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual herfindahl.
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -1492,7 +1572,7 @@ saveRDS(xHerfVarEval, file = file.path(getwd(), "Optimization", paste0("EHerfMin
 ```
 
 ```{r}
-xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_gloggest2017-09-05---16-11"))
+xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_gloggest2019-03-18---17-51"))
 ```
 
 
@@ -1506,7 +1586,7 @@ NOTE: change the weights of the test data, if different test time windows are us
 
 We use a moving time window of *k* dates before the actual date to determine mean and variance and therefore to determine the portfolio. Furthermore, we just use the actual herfindahl.
 
-```{r, eval=FALSE}
+```{r}
 k <- 50
 
 cores <- detectCores()
@@ -1584,7 +1664,7 @@ saveRDS(xHerfNoRFVarEval, file = file.path(getwd(), "Optimization", paste0("EHer
 ```
 
 ```{r}
-xHerfNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingEval_gloggest2017-09-06---14-00"))
+xHerfNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingEval_gloggest2019-03-18---17-51"))
 ```
 
 

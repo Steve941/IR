@@ -1,0 +1,6 @@
+\subsection{Performance-Sentix-Herfindahl}
+\includegraphics[width=\textwidth]{Performance-Sentix-Herfindahl-datesEvalBear.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Herfindahl-datesEvalRecNBER.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Herfindahl-datesEvalBull.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Herfindahl-datesEvalLast.pdf}
+\includegraphics[width=\textwidth]{Performance-Sentix-Herfindahl-datesEvalAllAfterTest.pdf}

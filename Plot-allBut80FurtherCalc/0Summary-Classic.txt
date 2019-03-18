@@ -1,0 +1,82 @@
+\subsection{Summary-Classic}
+\subsubsection{datesEvalBear}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 13:59:14 2018
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+Mean Return (an) & -0.00 & -0.06 & -0.15 & -0.06 & -0.11 & -0.39 \\ 
+  Volatility (an) & 0.16 & 0.08 & 0.11 & 0.08 & 0.10 & 0.27 \\ 
+  Sharpe Ratio (an) & -0.00 & -0.74 & -1.36 & -0.75 & -1.11 & -1.46 \\ 
+  Omega & 1.00 & 0.70 & 0.49 & 0.70 & 0.56 & 0.49 \\ 
+  VaR & -0.04 & -0.01 & -0.01 & -0.01 & -0.01 & -0.04 \\ 
+  CVaR & -0.04 & -0.06 & -0.08 & -0.06 & -0.07 & -0.14 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalRecNBER}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 13:59:14 2018
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+Mean Return (an) & 0.00 & -0.02 & -0.07 & -0.02 & -0.04 & -0.19 \\ 
+  Volatility (an) & 0.14 & 0.08 & 0.11 & 0.08 & 0.09 & 0.28 \\ 
+  Sharpe Ratio (an) & 0.02 & -0.28 & -0.62 & -0.29 & -0.49 & -0.69 \\ 
+  Omega & 1.01 & 0.89 & 0.75 & 0.89 & 0.80 & 0.75 \\ 
+  VaR & -0.03 & -0.01 & -0.02 & -0.01 & -0.01 & -0.05 \\ 
+  CVaR & -0.04 & -0.05 & -0.07 & -0.05 & -0.07 & -0.12 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalBull}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 13:59:14 2018
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+Mean Return (an) & 0.06 & 0.06 & 0.17 & 0.06 & 0.10 & 0.58 \\ 
+  Volatility (an) & 0.06 & 0.05 & 0.05 & 0.05 & 0.04 & 0.15 \\ 
+  Sharpe Ratio (an) & 1.03 & 1.35 & 3.61 & 1.36 & 2.41 & 3.75 \\ 
+  Omega & 1.40 & 1.56 & 3.42 & 1.57 & 2.20 & 2.93 \\ 
+  VaR & -0.01 & -0.01 & -0.01 & -0.01 & -0.01 & -0.02 \\ 
+  CVaR & -0.02 & -0.01 & -0.01 & -0.01 & -0.01 & -0.03 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalLast}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 13:59:14 2018
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+Mean Return (an) & 0.03 & 0.07 & 0.07 & 0.07 & 0.06 & 0.07 \\ 
+  Volatility (an) & 0.07 & 0.05 & 0.08 & 0.05 & 0.06 & 0.16 \\ 
+  Sharpe Ratio (an) & 0.46 & 1.30 & 0.81 & 1.31 & 0.94 & 0.48 \\ 
+  Omega & 1.17 & 1.54 & 1.33 & 1.54 & 1.38 & 1.18 \\ 
+  VaR & -0.02 & -0.01 & -0.02 & -0.01 & -0.01 & -0.04 \\ 
+  CVaR & -0.02 & -0.02 & -0.02 & -0.02 & -0.02 & -0.05 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalAllAfterTest}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Dec 28 13:59:14 2018
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+Mean Return (an) & 0.09 & 0.04 & 0.05 & 0.04 & 0.04 & 0.08 \\ 
+  Volatility (an) & 0.11 & 0.06 & 0.08 & 0.06 & 0.06 & 0.17 \\ 
+  Sharpe Ratio (an) & 0.87 & 0.73 & 0.71 & 0.74 & 0.67 & 0.49 \\ 
+  Omega & 1.39 & 1.31 & 1.31 & 1.31 & 1.29 & 1.20 \\ 
+  VaR & -0.02 & -0.01 & -0.01 & -0.01 & -0.01 & -0.03 \\ 
+  CVaR & -0.04 & -0.03 & -0.04 & -0.03 & -0.04 & -0.08 \\ 
+   \hline
+\end{tabular}
+
+\clearpage

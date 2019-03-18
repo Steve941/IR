@@ -30,7 +30,7 @@ relevant_rows <- c("Datum","P+","Pn","P-","I+","In","I-","G+","Gn","G-")
 sentixRaw <- list()
 
 for(i in sheets){
-  sentixRaw[[i]] <- read.xlsx(file.path(folderSentix, "sentix_anzahlen_bis_02092016xlsx.xlsx"),sheet=i,colNames=T,rowNames=F,detectDates=T)
+  sentixRaw[[i]] <- read.xlsx(file.path(folderSentix, "sentix_anzahlen_Review-xlsx.xlsx"),sheet=i,colNames=T,rowNames=F,detectDates=T)
   sentixRaw[[i]] <- sentixRaw[[i]][,relevant_rows]
   sentixRaw[[i]] <- sentixRaw[[i]][order(sentixRaw[[i]][,1]),]
 }
@@ -41,6 +41,7 @@ unlist(lapply(sentixRaw, nrow))
 
 datesSentix <- unique(sentixRaw[[1]]$Datum)
 for(i in names(sentixRaw)[2:length(sentixRaw)]){
+  print(i)
   if(!(setequal(datesSentix, sentixRaw[[i]]$Datum)))
     stop("Sentix Data of different indices have not same dates. Handle manually.")
 }
@@ -121,7 +122,7 @@ colnames(SP500) <- "Close"
 SP500$Datum <- as.Date(row.names(SP500))
 # sum(is.na(SP500$Close))
 
-stocks$SP5 <- merge(stocks, SP500, by = "Datum", all.x = T)$Close
+stocks$SP500 <- merge(stocks, SP500, by = "Datum", all.x = T)$Close
 
 
 # NASDAQ
@@ -149,7 +150,7 @@ stocks$NIKKEI <- merge(stocks, NIKKEI, by = "Datum", all.x = T)$Close
 Bund 
 
 ```{r, cache=T}
-BUND <- read.csv(file.path(getwd(), "Data", "Bundfuture", "Bundfuture2001-2017.csv"), sep = ";")
+BUND <- read.csv(file.path(getwd(), "Data", "Bundfuture", "Bundfuture2001-2018.csv"), sep = ";")
 BUND[,1] <- as.Date(BUND[,1], format = "%d.%m.%Y")
 BUND <- BUND[BUND[,1] %in% datesSentix,]
 BUND <- as.data.frame(BUND)
@@ -271,6 +272,48 @@ sentixRaw <- lapply(sentixRaw, function(x) {x[(x[,1] %in% datesAll),]})
 
 unlist(lapply(sentixRaw, nrow))
 ```
+
+
+## Foreign Exchange
+
+```{r}
+fxEURUSD <- read.csv(file.path(getwd(), "Data-New-ExchangeRates", "data.csv"), sep = ",", skip = 4)
+colnames(fxEURUSD) <- c("Datum", "EUR/USD")
+fxEURUSD$Datum <- as.Date(fxEURUSD$Datum)
+fxEURUSD$`EUR/USD` <- as.numeric(levels(fxEURUSD$`EUR/USD`))[fxEURUSD$`EUR/USD`]
+head(fxEURUSD)
+
+fxEURYEN <- read.csv(file.path(getwd(), "Data-New-ExchangeRates", "yen_euro.csv"), sep = ",", skip = 4)
+colnames(fxEURYEN) <- c("Datum", "EUR/YEN")
+fxEURYEN$Datum <- as.Date(fxEURYEN$Datum)
+fxEURYEN$`EUR/YEN` <- as.numeric(levels(fxEURYEN$`EUR/YEN`))[fxEURYEN$`EUR/YEN`]
+head(fxEURYEN)
+```
+
+Reduce to dates of stock-data and align the data (same order of dates).
+
+```{r}
+fxEURUSD <- fxEURUSD[fxEURUSD$Datum %in% stocks$Datum,]
+fxEURYEN <- fxEURYEN[fxEURYEN$Datum %in% stocks$Datum,]
+
+fxEURUSD <- fxEURUSD[order(fxEURUSD$Datum),]
+fxEURYEN <- fxEURYEN[order(fxEURYEN$Datum),]
+
+sum(stocks$Datum != fxEURUSD$Datum) + sum(stocks$Datum != fxEURYEN$Datum)
+
+colSums(is.na(fxEURUSD))
+colSums(is.na(fxEURYEN))
+```
+
+Convert stock data to be indexed in EUR.
+
+```{r}
+stocks$SP500 <- stocks$SP500/fxEURUSD$`EUR/USD`
+stocks$NASDAQ <- stocks$NASDAQ/fxEURUSD$`EUR/USD`
+stocks$NIKKEI <- stocks$NIKKEI/fxEURYEN$`EUR/YEN`
+```
+
+
 
 
 ### other approach (not implemented)

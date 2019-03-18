@@ -1,0 +1,7 @@
+\subsection{Ternary-Dispersion-No-Risk-Free}
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-No-Risk-Free-P1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-No-Risk-Free-P6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-No-Risk-Free-I1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-No-Risk-Free-I6.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-No-Risk-Free-G1.pdf}\linebreak
+\includegraphics[height=0.45\textheight]{Ternary-Dispersion-No-Risk-Free-G6.pdf}\linebreak

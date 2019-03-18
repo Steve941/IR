@@ -1,0 +1,36 @@
+\subsection{Weights-Sentix-Herfindahl}
+\subsubsection{Weights-Sentix-Herfindahl - datesEvalBear}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBear-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBear-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBear-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBear-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBear-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBear-G6.pdf}
+\subsubsection{Weights-Sentix-Herfindahl - datesEvalRecNBER}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalRecNBER-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalRecNBER-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalRecNBER-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalRecNBER-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalRecNBER-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalRecNBER-G6.pdf}
+\subsubsection{Weights-Sentix-Herfindahl - datesEvalBull}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBull-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBull-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBull-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBull-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBull-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalBull-G6.pdf}
+\subsubsection{Weights-Sentix-Herfindahl - datesEvalLast}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalLast-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalLast-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalLast-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalLast-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalLast-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalLast-G6.pdf}
+\subsubsection{Weights-Sentix-Herfindahl - datesEvalAllAfterTest}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalAllAfterTest-P6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalAllAfterTest-I6.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G1.pdf}
+\includegraphics[width=\textwidth]{Weights-Sentix-Herfindahl-datesEvalAllAfterTest-G6.pdf}

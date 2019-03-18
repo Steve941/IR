@@ -1,0 +1,82 @@
+\subsection{Dispersion - p-Values that sharpe of Row is not higher}
+\subsubsection{datesEvalBear}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:13:45 2017
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+P1 & 0.1232 & 0.0741 & 0.0736 & 0.0757 & 0.0665 & 0.0930 \\ 
+  P6 & 0.1079 & 0.0795 & 0.0630 & 0.0809 & 0.0624 & 0.0725 \\ 
+  I1 & 0.1379 & 0.0771 & 0.0776 & 0.0788 & 0.0674 & 0.1030 \\ 
+  I6 & 0.1160 & 0.0698 & 0.0682 & 0.0711 & 0.0618 & 0.0853 \\ 
+  G1 & 0.1239 & 0.0757 & 0.0743 & 0.0772 & 0.0674 & 0.0933 \\ 
+  G6 & 0.1075 & 0.0791 & 0.0626 & 0.0806 & 0.0622 & 0.0720 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalRecNBER}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:13:46 2017
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+P1 & 0.1285 & 0.1531 & 0.2296 & 0.1561 & 0.2042 & 0.3026 \\ 
+  P6 & 0.1381 & 0.1922 & 0.2602 & 0.1958 & 0.2375 & 0.3324 \\ 
+  I1 & 0.1314 & 0.1458 & 0.2326 & 0.1491 & 0.2004 & 0.3153 \\ 
+  I6 & 0.1271 & 0.1546 & 0.2329 & 0.1577 & 0.2060 & 0.3062 \\ 
+  G1 & 0.1294 & 0.1557 & 0.2320 & 0.1588 & 0.2065 & 0.3050 \\ 
+  G6 & 0.1380 & 0.1919 & 0.2599 & 0.1954 & 0.2371 & 0.3321 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalBull}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:13:46 2017
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+P1 & 0.0039 & 0.6433 & 0.1677 & 0.6631 & 0.2889 & 0.5819 \\ 
+  P6 & 0.3236 & 0.9858 & 0.0999 & 1.0000 & 0.2883 & 0.3577 \\ 
+  I1 & 0.0013 & 0.5106 & 0.1942 & 0.5291 & 0.3367 & 0.6343 \\ 
+  I6 & 0.0028 & 0.7657 & 0.1395 & 0.7910 & 0.1858 & 0.5335 \\ 
+  G1 & 0.0063 & 0.6778 & 0.1597 & 0.6977 & 0.2770 & 0.5674 \\ 
+  G6 & 0.3233 & 0.9854 & 0.1000 & 0.9996 & 0.2885 & 0.3579 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalLast}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:13:47 2017
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+P1 & 0.0001 & 0.6809 & 0.1051 & 0.7173 & 0.2697 & 0.0631 \\ 
+  P6 & 0.0783 & 0.4379 & 0.3926 & 0.4558 & 0.8594 & 0.1670 \\ 
+  I1 & 0.0001 & 0.6504 & 0.0988 & 0.6866 & 0.2666 & 0.0588 \\ 
+  I6 & 0.0002 & 0.9046 & 0.1107 & 0.9423 & 0.2325 & 0.0682 \\ 
+  G1 & 0.0001 & 0.6770 & 0.1068 & 0.7131 & 0.2758 & 0.0637 \\ 
+  G6 & 0.0785 & 0.4388 & 0.3925 & 0.4567 & 0.8590 & 0.1668 \\ 
+   \hline
+\end{tabular}
+
+\subsubsection{datesEvalAllAfterTest}
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Nov 22 08:13:47 2017
+\begin{tabular}{rrrrrrr}
+  \hline
+ & tanPort & mVaPort & rp & PGMV & PMD & ew \\ 
+  \hline
+P1 & 0.0118 & 0.0035 & 0.0038 & 0.0037 & 0.0049 & 0.0021 \\ 
+  P6 & 0.0171 & 0.0275 & 0.0132 & 0.0289 & 0.0248 & 0.0032 \\ 
+  I1 & 0.0110 & 0.0031 & 0.0028 & 0.0033 & 0.0039 & 0.0017 \\ 
+  I6 & 0.0145 & 0.0058 & 0.0084 & 0.0062 & 0.0092 & 0.0045 \\ 
+  G1 & 0.0121 & 0.0041 & 0.0041 & 0.0044 & 0.0055 & 0.0022 \\ 
+  G6 & 0.0171 & 0.0274 & 0.0131 & 0.0287 & 0.0247 & 0.0032 \\ 
+   \hline
+\end{tabular}
+
+\clearpage
