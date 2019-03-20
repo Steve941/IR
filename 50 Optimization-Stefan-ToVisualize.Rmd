@@ -1673,7 +1673,9 @@ xHerfNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVary
 ```{r}
 rm(grid, IneqA)
 rm(plotTernary, terntheme, ternaryPlot, calcTestVar)
+```
 
+```{r, eval=FALSE}
 detach("package:doSNOW", unload = T)
 unloadNamespace("doParallel")
 detach("package:parallel", unload = T)
@@ -1681,6 +1683,7 @@ detach("package:foreach", unload = T)
 
 detach("package:ggtern", unload = T)
 ```
+
 
 
 ## without sentiment (classic)

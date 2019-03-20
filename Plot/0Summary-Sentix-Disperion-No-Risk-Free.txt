@@ -1,7 +1,7 @@
 \subsection{Summary-Sentix-Disperion-No-Risk-Free}
 \subsubsection{datesEvalBear}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Mar 18 20:26:10 2019
+% Wed Mar 20 23:48:50 2019
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
@@ -17,7 +17,7 @@ Mean Return (an) & -0.28 & -0.27 & -0.28 & -0.27 & -0.27 & -0.28 \\
 
 \subsubsection{datesEvalRecNBER}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Mar 18 20:26:10 2019
+% Wed Mar 20 23:48:51 2019
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
@@ -33,7 +33,7 @@ Mean Return (an) & -0.12 & -0.12 & -0.12 & -0.12 & -0.12 & -0.11 \\
 
 \subsubsection{datesEvalBull}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Mar 18 20:26:10 2019
+% Wed Mar 20 23:48:51 2019
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
@@ -49,33 +49,33 @@ Mean Return (an) & 0.62 & 0.61 & 0.62 & 0.62 & 0.62 & 0.60 \\
 
 \subsubsection{datesEvalLast}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Mar 18 20:26:10 2019
+% Wed Mar 20 23:48:51 2019
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
   \hline
-Mean Return (an) & 0.19 & 0.19 & 0.19 & 0.20 & 0.19 & 0.47 \\ 
-  Volatility (an) & 0.17 & 0.17 & 0.17 & 0.18 & 0.17 & 0.34 \\ 
-  Sharpe Ratio (an) & 1.10 & 1.10 & 1.10 & 1.16 & 1.11 & 1.39 \\ 
-  Omega & 1.48 & 1.50 & 1.48 & 1.54 & 1.49 & 1.97 \\ 
-  VaR & -0.03 & -0.03 & -0.03 & -0.03 & -0.03 & -0.03 \\ 
-  CVaR & -0.03 & -0.03 & -0.03 & -0.03 & -0.03 & -0.29 \\ 
+Mean Return (an) & 0.10 & 0.09 & 0.10 & 0.11 & 0.10 & 0.10 \\ 
+  Volatility (an) & 0.19 & 0.20 & 0.19 & 0.20 & 0.19 & 0.22 \\ 
+  Sharpe Ratio (an) & 0.53 & 0.44 & 0.53 & 0.55 & 0.54 & 0.48 \\ 
+  Omega & 1.21 & 1.17 & 1.21 & 1.22 & 1.22 & 1.19 \\ 
+  VaR & -0.04 & -0.05 & -0.04 & -0.04 & -0.04 & -0.05 \\ 
+  CVaR & -0.06 & -0.06 & -0.06 & -0.06 & -0.06 & -0.06 \\ 
    \hline
 \end{tabular}
 
 \subsubsection{datesEvalAllAfterTest}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Mar 18 20:26:11 2019
+% Wed Mar 20 23:48:51 2019
 \begin{tabular}{rrrrrrr}
   \hline
  & P1 & P6 & I1 & I6 & G1 & G6 \\ 
   \hline
-Mean Return (an) & 0.18 & 0.19 & 0.18 & 0.19 & 0.19 & 0.24 \\ 
-  Volatility (an) & 0.18 & 0.18 & 0.18 & 0.18 & 0.18 & 0.21 \\ 
-  Sharpe Ratio (an) & 1.04 & 1.06 & 1.04 & 1.09 & 1.05 & 1.13 \\ 
-  Omega & 1.42 & 1.43 & 1.42 & 1.44 & 1.42 & 1.49 \\ 
+Mean Return (an) & 0.20 & 0.20 & 0.20 & 0.21 & 0.20 & 0.22 \\ 
+  Volatility (an) & 0.17 & 0.17 & 0.17 & 0.17 & 0.17 & 0.19 \\ 
+  Sharpe Ratio (an) & 1.16 & 1.16 & 1.16 & 1.19 & 1.16 & 1.20 \\ 
+  Omega & 1.47 & 1.47 & 1.47 & 1.49 & 1.47 & 1.48 \\ 
   VaR & -0.04 & -0.04 & -0.04 & -0.04 & -0.04 & -0.04 \\ 
-  CVaR & -0.07 & -0.07 & -0.07 & -0.07 & -0.07 & -0.02 \\ 
+  CVaR & -0.07 & -0.07 & -0.07 & -0.07 & -0.07 & -0.07 \\ 
    \hline
 \end{tabular}
 
