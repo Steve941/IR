@@ -1,204 +1,204 @@
 \subsection{Herfindahl}
 \subsubsection{P1}
-% latex table generated in R 3.4.1 by xtable 1.8-3 package
-% Mon Mar 18 16:49:48 2019
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Mar 20 22:44:46 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
   \hline
-1 & 1 & DAX & 0.017 & DAX & -0.006 & DAX & -0.008 \\ 
-  2 &  & TEC & 0.007 & TEC & -0.005 & TEC & -0.011 \\ 
-  3 &  & ESX50 & 0.008 & ESX50 & -0.01 & ESX50 & -0.008 \\ 
-  4 &  & SP500 & 0.005 & SP500 & -0.009 & SP500 & -0.003 \\ 
-  5 &  & NASDAQ & 0.002 & NASDAQ & -0.003 & NASDAQ & -0.003 \\ 
-  6 &  & NIKKEI & 0 & NIKKEI & -0.003 & NIKKEI & -0.004 \\ 
+1 & 1 & DAX & 0.013 & DAX & -0.003 & DAX & -0.008 \\ 
+  2 &  & TEC & 0.005 & TEC & -0.001 & TEC & -0.01 \\ 
+  3 &  & ESX50 & 0.008 & ESX50 & -0.008 & ESX50 & -0.006 \\ 
+  4 &  & SP500 & 0.004 & SP500 & -0.008 & SP500 & -0.002 \\ 
+  5 &  & NASDAQ & 0.002 & NASDAQ & -0.008 & NASDAQ & -0.005 \\ 
+  6 &  & NIKKEI & 0.001 & NIKKEI & -0.007 & NIKKEI & -0.003 \\ 
   7 &  & BUND & 0.001 & BUND & -0.003 & BUND & 0 \\ 
   8 &  &  &  &  &  &  &  \\ 
-  9 & 3 & DAX & 0.004 & DAX & -0.021 & DAX & -0.002 \\ 
-  10 &  & TEC & -0.008 & TEC & -0.011 & TEC & 0 \\ 
-  11 &  & ESX50 & -0.001 & ESX50 & -0.021 & ESX50 & -0.002 \\ 
-  12 &  & SP500 & -0.007 & SP500 & -0.016 & SP500 & 0.004 \\ 
-  13 &  & NASDAQ & -0.002 & NASDAQ & -0.006 & NASDAQ & 0.004 \\ 
-  14 &  & NIKKEI & -0.002 & NIKKEI & -0.008 & NIKKEI & -0.012 \\ 
-  15 &  & BUND & -0.002 & BUND & -0.004 & BUND & -0.001 \\ 
+  9 & 3 & DAX & 0.002 & DAX & -0.01 & DAX & -0.004 \\ 
+  10 &  & TEC & -0.007 & TEC & -0.008 & TEC & -0.006 \\ 
+  11 &  & ESX50 & 0 & ESX50 & -0.014 & ESX50 & 0 \\ 
+  12 &  & SP500 & -0.01 & SP500 & -0.015 & SP500 & 0.003 \\ 
+  13 &  & NASDAQ & -0.005 & NASDAQ & -0.017 & NASDAQ & -0.001 \\ 
+  14 &  & NIKKEI & -0.006 & NIKKEI & -0.013 & NIKKEI & -0.011 \\ 
+  15 &  & BUND & -0.002 & BUND & -0.003 & BUND & -0.002 \\ 
   16 &  &  &  &  &  &  &  \\ 
-  17 & 6 & DAX & -0.008 & DAX & -0.017 & DAX & -0.009 \\ 
-  18 &  & TEC & -0.006 & TEC & 0.009 & TEC & 0.007 \\ 
-  19 &  & ESX50 & -0.009 & ESX50 & -0.018 & ESX50 & -0.011 \\ 
-  20 &  & SP500 & -0.01 & SP500 & -0.007 & SP500 & 0.011 \\ 
-  21 &  & NASDAQ & 0.004 & NASDAQ & 0.001 & NASDAQ & 0.003 \\ 
-  22 &  & NIKKEI & -0.016 & NIKKEI & -0.014 & NIKKEI & -0.004 \\ 
-  23 &  & BUND & -0.004 & BUND & -0.005 & BUND & -0.001 \\ 
+  17 & 6 & DAX & -0.003 & DAX & -0.01 & DAX & -0.013 \\ 
+  18 &  & TEC & -0.013 & TEC & 0.001 & TEC & -0.006 \\ 
+  19 &  & ESX50 & -0.007 & ESX50 & -0.01 & ESX50 & -0.009 \\ 
+  20 &  & SP500 & -0.011 & SP500 & -0.009 & SP500 & 0.003 \\ 
+  21 &  & NASDAQ & -0.008 & NASDAQ & -0.012 & NASDAQ & -0.006 \\ 
+  22 &  & NIKKEI & -0.019 & NIKKEI & -0.02 & NIKKEI & -0.006 \\ 
+  23 &  & BUND & -0.004 & BUND & -0.006 & BUND & -0.003 \\ 
   24 &  &  &  &  &  &  &  \\ 
    \hline
 \end{tabular}
 
 \subsubsection{P6}
-% latex table generated in R 3.4.1 by xtable 1.8-3 package
-% Mon Mar 18 16:49:48 2019
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Mar 20 22:44:46 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
   \hline
-1 & 1 & DAX & -0.003 & DAX & -0.004 & DAX & 0.004 \\ 
-  2 &  & TEC & -0.008 & TEC & -0.007 & TEC & -0.008 \\ 
-  3 &  & ESX50 & -0.008 & ESX50 & -0.005 & ESX50 & 0.005 \\ 
-  4 &  & SP500 & -0.004 & SP500 & -0.009 & SP500 & -0.002 \\ 
-  5 &  & NASDAQ & -0.001 & NASDAQ & -0.001 & NASDAQ & 0.001 \\ 
-  6 &  & NIKKEI & 0.006 & NIKKEI & -0.003 & NIKKEI & 0 \\ 
-  7 &  & BUND & 0.002 & BUND & 0.001 & BUND & -0.001 \\ 
+1 & 1 & DAX & -0.003 & DAX & -0.001 & DAX & 0.005 \\ 
+  2 &  & TEC & -0.005 & TEC & -0.005 & TEC & -0.006 \\ 
+  3 &  & ESX50 & -0.008 & ESX50 & -0.004 & ESX50 & 0.005 \\ 
+  4 &  & SP500 & -0.003 & SP500 & -0.009 & SP500 & 0 \\ 
+  5 &  & NASDAQ & 0 & NASDAQ & -0.001 & NASDAQ & 0.002 \\ 
+  6 &  & NIKKEI & 0.003 & NIKKEI & -0.004 & NIKKEI & 0 \\ 
+  7 &  & BUND & 0.002 & BUND & 0.001 & BUND & -0.002 \\ 
   8 &  &  &  &  &  &  &  \\ 
-  9 & 3 & DAX & -0.012 & DAX & -0.001 & DAX & -0.006 \\ 
-  10 &  & TEC & -0.025 & TEC & -0.022 & TEC & -0.01 \\ 
-  11 &  & ESX50 & -0.02 & ESX50 & 0 & ESX50 & 0.001 \\ 
-  12 &  & SP500 & -0.023 & SP500 & -0.016 & SP500 & -0.006 \\ 
-  13 &  & NASDAQ & -0.011 & NASDAQ & -0.005 & NASDAQ & 0.007 \\ 
-  14 &  & NIKKEI & 0.001 & NIKKEI & -0.005 & NIKKEI & 0.003 \\ 
-  15 &  & BUND & 0.002 & BUND & -0.001 & BUND & -0.005 \\ 
+  9 & 3 & DAX & -0.007 & DAX & 0.004 & DAX & -0.002 \\ 
+  10 &  & TEC & -0.022 & TEC & -0.019 & TEC & -0.003 \\ 
+  11 &  & ESX50 & -0.018 & ESX50 & -0.001 & ESX50 & 0.003 \\ 
+  12 &  & SP500 & -0.021 & SP500 & -0.013 & SP500 & -0.005 \\ 
+  13 &  & NASDAQ & -0.009 & NASDAQ & -0.003 & NASDAQ & 0.007 \\ 
+  14 &  & NIKKEI & -0.003 & NIKKEI & -0.004 & NIKKEI & 0.001 \\ 
+  15 &  & BUND & 0.002 & BUND & -0.002 & BUND & -0.005 \\ 
   16 &  &  &  &  &  &  &  \\ 
-  17 & 6 & DAX & -0.017 & DAX & -0.016 & DAX & -0.012 \\ 
-  18 &  & TEC & -0.046 & TEC & -0.035 & TEC & -0.031 \\ 
-  19 &  & ESX50 & -0.015 & ESX50 & -0.014 & ESX50 & -0.013 \\ 
-  20 &  & SP500 & -0.03 & SP500 & -0.024 & SP500 & -0.014 \\ 
-  21 &  & NASDAQ & -0.014 & NASDAQ & -0.007 & NASDAQ & -0.008 \\ 
-  22 &  & NIKKEI & 0 & NIKKEI & -0.004 & NIKKEI & 0.004 \\ 
-  23 &  & BUND & -0.002 & BUND & -0.005 & BUND & -0.002 \\ 
+  17 & 6 & DAX & -0.008 & DAX & -0.009 & DAX & -0.009 \\ 
+  18 &  & TEC & -0.038 & TEC & -0.024 & TEC & -0.015 \\ 
+  19 &  & ESX50 & -0.017 & ESX50 & -0.013 & ESX50 & -0.013 \\ 
+  20 &  & SP500 & -0.025 & SP500 & -0.023 & SP500 & -0.015 \\ 
+  21 &  & NASDAQ & -0.008 & NASDAQ & -0.008 & NASDAQ & -0.007 \\ 
+  22 &  & NIKKEI & -0.005 & NIKKEI & -0.005 & NIKKEI & 0.001 \\ 
+  23 &  & BUND & -0.003 & BUND & -0.007 & BUND & -0.004 \\ 
   24 &  &  &  &  &  &  &  \\ 
    \hline
 \end{tabular}
 
 \subsubsection{I1}
-% latex table generated in R 3.4.1 by xtable 1.8-3 package
-% Mon Mar 18 16:49:48 2019
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Mar 20 22:44:46 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
   \hline
-1 & 1 & DAX & 0.022 & DAX & -0.008 & DAX & -0.005 \\ 
-  2 &  & TEC & 0.011 & TEC & -0.001 & TEC & -0.003 \\ 
-  3 &  & ESX50 & 0.02 & ESX50 & -0.002 & ESX50 & -0.006 \\ 
-  4 &  & SP500 & 0.014 & SP500 & -0.003 & SP500 & -0.001 \\ 
-  5 &  & NASDAQ & 0.008 & NASDAQ & -0.002 & NASDAQ & -0.006 \\ 
-  6 &  & NIKKEI & 0.007 & NIKKEI & 0.005 & NIKKEI & -0.001 \\ 
-  7 &  & BUND & 0 & BUND & 0 & BUND & 0 \\ 
+1 & 1 & DAX & 0.019 & DAX & -0.004 & DAX & -0.005 \\ 
+  2 &  & TEC & 0.008 & TEC & -0.002 & TEC & -0.009 \\ 
+  3 &  & ESX50 & 0.017 & ESX50 & 0 & ESX50 & -0.004 \\ 
+  4 &  & SP500 & 0.013 & SP500 & -0.002 & SP500 & -0.002 \\ 
+  5 &  & NASDAQ & 0.009 & NASDAQ & -0.003 & NASDAQ & -0.004 \\ 
+  6 &  & NIKKEI & 0.008 & NIKKEI & 0.003 & NIKKEI & 0 \\ 
+  7 &  & BUND & -0.001 & BUND & 0 & BUND & -0.001 \\ 
   8 &  &  &  &  &  &  &  \\ 
-  9 & 3 & DAX & 0.018 & DAX & -0.027 & DAX & -0.009 \\ 
-  10 &  & TEC & 0.027 & TEC & -0.008 & TEC & -0.014 \\ 
-  11 &  & ESX50 & 0.02 & ESX50 & -0.018 & ESX50 & -0.002 \\ 
-  12 &  & SP500 & 0.011 & SP500 & -0.008 & SP500 & -0.005 \\ 
-  13 &  & NASDAQ & 0.011 & NASDAQ & -0.015 & NASDAQ & 0.009 \\ 
-  14 &  & NIKKEI & 0.016 & NIKKEI & 0.01 & NIKKEI & 0 \\ 
-  15 &  & BUND & 0 & BUND & -0.001 & BUND & -0.001 \\ 
+  9 & 3 & DAX & 0.015 & DAX & -0.022 & DAX & -0.008 \\ 
+  10 &  & TEC & 0.02 & TEC & -0.016 & TEC & -0.022 \\ 
+  11 &  & ESX50 & 0.016 & ESX50 & -0.014 & ESX50 & -0.003 \\ 
+  12 &  & SP500 & 0.011 & SP500 & -0.009 & SP500 & -0.002 \\ 
+  13 &  & NASDAQ & 0.012 & NASDAQ & -0.018 & NASDAQ & 0.007 \\ 
+  14 &  & NIKKEI & 0.016 & NIKKEI & 0.007 & NIKKEI & 0.003 \\ 
+  15 &  & BUND & -0.001 & BUND & -0.001 & BUND & -0.003 \\ 
   16 &  &  &  &  &  &  &  \\ 
-  17 & 6 & DAX & -0.005 & DAX & -0.024 & DAX & -0.007 \\ 
-  18 &  & TEC & -0.001 & TEC & -0.011 & TEC & 0.003 \\ 
-  19 &  & ESX50 & -0.001 & ESX50 & -0.014 & ESX50 & -0.008 \\ 
-  20 &  & SP500 & -0.001 & SP500 & -0.005 & SP500 & 0 \\ 
-  21 &  & NASDAQ & 0.004 & NASDAQ & 0.011 & NASDAQ & 0.025 \\ 
-  22 &  & NIKKEI & 0.019 & NIKKEI & 0.005 & NIKKEI & -0.002 \\ 
-  23 &  & BUND & -0.002 & BUND & -0.002 & BUND & 0 \\ 
+  17 & 6 & DAX & -0.008 & DAX & -0.019 & DAX & -0.005 \\ 
+  18 &  & TEC & -0.013 & TEC & -0.024 & TEC & -0.015 \\ 
+  19 &  & ESX50 & -0.001 & ESX50 & -0.014 & ESX50 & -0.011 \\ 
+  20 &  & SP500 & 0.002 & SP500 & -0.005 & SP500 & -0.003 \\ 
+  21 &  & NASDAQ & 0.003 & NASDAQ & 0.002 & NASDAQ & 0.015 \\ 
+  22 &  & NIKKEI & 0.02 & NIKKEI & 0.006 & NIKKEI & -0.002 \\ 
+  23 &  & BUND & -0.003 & BUND & -0.005 & BUND & -0.005 \\ 
   24 &  &  &  &  &  &  &  \\ 
    \hline
 \end{tabular}
 
 \subsubsection{I6}
-% latex table generated in R 3.4.1 by xtable 1.8-3 package
-% Mon Mar 18 16:49:48 2019
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Mar 20 22:44:46 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
   \hline
-1 & 1 & DAX & 0.005 & DAX & -0.003 & DAX & 0.001 \\ 
-  2 &  & TEC & 0.007 & TEC & 0.007 & TEC & 0.005 \\ 
-  3 &  & ESX50 & 0.004 & ESX50 & 0 & ESX50 & 0.003 \\ 
-  4 &  & SP500 & 0.009 & SP500 & 0.001 & SP500 & 0.003 \\ 
-  5 &  & NASDAQ & 0.003 & NASDAQ & 0.005 & NASDAQ & 0.001 \\ 
-  6 &  & NIKKEI & 0.004 & NIKKEI & -0.007 & NIKKEI & 0.005 \\ 
-  7 &  & BUND & 0.002 & BUND & 0 & BUND & 0.001 \\ 
+1 & 1 & DAX & 0.004 & DAX & -0.001 & DAX & 0 \\ 
+  2 &  & TEC & 0.006 & TEC & 0.006 & TEC & 0.005 \\ 
+  3 &  & ESX50 & 0.003 & ESX50 & 0.001 & ESX50 & 0.004 \\ 
+  4 &  & SP500 & 0.011 & SP500 & 0.001 & SP500 & 0.002 \\ 
+  5 &  & NASDAQ & 0.003 & NASDAQ & 0.006 & NASDAQ & 0 \\ 
+  6 &  & NIKKEI & 0.006 & NIKKEI & -0.007 & NIKKEI & 0.005 \\ 
+  7 &  & BUND & 0.002 & BUND & -0.001 & BUND & 0.001 \\ 
   8 &  &  &  &  &  &  &  \\ 
-  9 & 3 & DAX & 0.013 & DAX & -0.003 & DAX & 0 \\ 
-  10 &  & TEC & 0.026 & TEC & 0.02 & TEC & 0.014 \\ 
-  11 &  & ESX50 & 0.008 & ESX50 & 0.009 & ESX50 & 0.004 \\ 
-  12 &  & SP500 & 0.008 & SP500 & 0.005 & SP500 & 0 \\ 
-  13 &  & NASDAQ & 0.018 & NASDAQ & 0.013 & NASDAQ & 0.005 \\ 
-  14 &  & NIKKEI & 0.002 & NIKKEI & 0.006 & NIKKEI & 0.003 \\ 
+  9 & 3 & DAX & 0.013 & DAX & -0.003 & DAX & -0.003 \\ 
+  10 &  & TEC & 0.026 & TEC & 0.018 & TEC & 0.013 \\ 
+  11 &  & ESX50 & 0.011 & ESX50 & 0.008 & ESX50 & 0.002 \\ 
+  12 &  & SP500 & 0.013 & SP500 & 0.007 & SP500 & 0.003 \\ 
+  13 &  & NASDAQ & 0.019 & NASDAQ & 0.016 & NASDAQ & 0.004 \\ 
+  14 &  & NIKKEI & 0.004 & NIKKEI & 0.004 & NIKKEI & 0.002 \\ 
   15 &  & BUND & 0.001 & BUND & 0 & BUND & 0.003 \\ 
   16 &  &  &  &  &  &  &  \\ 
-  17 & 6 & DAX & 0.015 & DAX & -0.005 & DAX & -0.001 \\ 
-  18 &  & TEC & 0.051 & TEC & 0.032 & TEC & 0.014 \\ 
-  19 &  & ESX50 & 0.019 & ESX50 & 0.004 & ESX50 & 0.001 \\ 
-  20 &  & SP500 & 0.011 & SP500 & -0.004 & SP500 & -0.015 \\ 
-  21 &  & NASDAQ & 0.033 & NASDAQ & 0.015 & NASDAQ & 0.002 \\ 
-  22 &  & NIKKEI & 0.019 & NIKKEI & 0.003 & NIKKEI & -0.01 \\ 
-  23 &  & BUND & 0.002 & BUND & 0.002 & BUND & 0 \\ 
+  17 & 6 & DAX & 0.013 & DAX & -0.006 & DAX & -0.001 \\ 
+  18 &  & TEC & 0.046 & TEC & 0.029 & TEC & 0.021 \\ 
+  19 &  & ESX50 & 0.018 & ESX50 & 0 & ESX50 & 0.002 \\ 
+  20 &  & SP500 & 0.018 & SP500 & 0.003 & SP500 & -0.009 \\ 
+  21 &  & NASDAQ & 0.036 & NASDAQ & 0.017 & NASDAQ & 0.001 \\ 
+  22 &  & NIKKEI & 0.017 & NIKKEI & 0 & NIKKEI & -0.013 \\ 
+  23 &  & BUND & 0.002 & BUND & 0.001 & BUND & -0.001 \\ 
   24 &  &  &  &  &  &  &  \\ 
    \hline
 \end{tabular}
 
 \subsubsection{G1}
-% latex table generated in R 3.4.1 by xtable 1.8-3 package
-% Mon Mar 18 16:49:48 2019
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Mar 20 22:44:46 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
   \hline
-1 & 1 & DAX & 0.02 & DAX & -0.009 & DAX & -0.011 \\ 
-  2 &  & TEC & 0.018 & TEC & -0.015 & TEC & -0.006 \\ 
-  3 &  & ESX50 & 0.012 & ESX50 & -0.015 & ESX50 & -0.005 \\ 
-  4 &  & SP500 & 0.008 & SP500 & -0.009 & SP500 & 0 \\ 
-  5 &  & NASDAQ & 0.003 & NASDAQ & 0.004 & NASDAQ & -0.002 \\ 
-  6 &  & NIKKEI & 0.003 & NIKKEI & -0.004 & NIKKEI & -0.007 \\ 
+1 & 1 & DAX & 0.019 & DAX & -0.006 & DAX & -0.008 \\ 
+  2 &  & TEC & 0.013 & TEC & -0.013 & TEC & -0.009 \\ 
+  3 &  & ESX50 & 0.011 & ESX50 & -0.01 & ESX50 & -0.006 \\ 
+  4 &  & SP500 & 0.008 & SP500 & -0.007 & SP500 & 0.001 \\ 
+  5 &  & NASDAQ & 0.001 & NASDAQ & -0.001 & NASDAQ & -0.003 \\ 
+  6 &  & NIKKEI & 0.005 & NIKKEI & -0.007 & NIKKEI & -0.005 \\ 
   7 &  & BUND & 0.001 & BUND & -0.003 & BUND & 0 \\ 
   8 &  &  &  &  &  &  &  \\ 
-  9 & 3 & DAX & 0.008 & DAX & -0.026 & DAX & -0.009 \\ 
-  10 &  & TEC & -0.002 & TEC & -0.021 & TEC & -0.001 \\ 
-  11 &  & ESX50 & -0.004 & ESX50 & -0.029 & ESX50 & 0.003 \\ 
-  12 &  & SP500 & -0.003 & SP500 & -0.011 & SP500 & 0.004 \\ 
-  13 &  & NASDAQ & 0.011 & NASDAQ & -0.001 & NASDAQ & -0.004 \\ 
-  14 &  & NIKKEI & 0.005 & NIKKEI & -0.007 & NIKKEI & -0.015 \\ 
-  15 &  & BUND & -0.001 & BUND & -0.004 & BUND & 0 \\ 
+  9 & 3 & DAX & 0.008 & DAX & -0.022 & DAX & -0.005 \\ 
+  10 &  & TEC & -0.005 & TEC & -0.021 & TEC & -0.008 \\ 
+  11 &  & ESX50 & -0.002 & ESX50 & -0.024 & ESX50 & 0 \\ 
+  12 &  & SP500 & -0.001 & SP500 & -0.009 & SP500 & 0.003 \\ 
+  13 &  & NASDAQ & 0.006 & NASDAQ & -0.008 & NASDAQ & -0.006 \\ 
+  14 &  & NIKKEI & 0 & NIKKEI & -0.009 & NIKKEI & -0.012 \\ 
+  15 &  & BUND & -0.001 & BUND & -0.003 & BUND & -0.002 \\ 
   16 &  &  &  &  &  &  &  \\ 
-  17 & 6 & DAX & -0.011 & DAX & -0.023 & DAX & -0.009 \\ 
-  18 &  & TEC & -0.006 & TEC & -0.01 & TEC & 0.003 \\ 
-  19 &  & ESX50 & -0.015 & ESX50 & -0.028 & ESX50 & -0.004 \\ 
-  20 &  & SP500 & -0.004 & SP500 & -0.006 & SP500 & 0.006 \\ 
-  21 &  & NASDAQ & 0.005 & NASDAQ & 0 & NASDAQ & -0.007 \\ 
-  22 &  & NIKKEI & -0.003 & NIKKEI & -0.017 & NIKKEI & -0.009 \\ 
-  23 &  & BUND & -0.002 & BUND & -0.005 & BUND & 0 \\ 
+  17 & 6 & DAX & -0.011 & DAX & -0.018 & DAX & -0.009 \\ 
+  18 &  & TEC & -0.015 & TEC & -0.017 & TEC & -0.007 \\ 
+  19 &  & ESX50 & -0.015 & ESX50 & -0.022 & ESX50 & -0.004 \\ 
+  20 &  & SP500 & -0.002 & SP500 & -0.006 & SP500 & 0 \\ 
+  21 &  & NASDAQ & 0 & NASDAQ & -0.007 & NASDAQ & -0.012 \\ 
+  22 &  & NIKKEI & -0.008 & NIKKEI & -0.02 & NIKKEI & -0.005 \\ 
+  23 &  & BUND & -0.002 & BUND & -0.007 & BUND & -0.003 \\ 
   24 &  &  &  &  &  &  &  \\ 
    \hline
 \end{tabular}
 
 \subsubsection{G6}
-% latex table generated in R 3.4.1 by xtable 1.8-3 package
-% Mon Mar 18 16:49:48 2019
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Mar 20 22:44:46 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
   \hline
-1 & 1 & DAX & -0.007 & DAX & -0.006 & DAX & -0.005 \\ 
-  2 &  & TEC & -0.004 & TEC & -0.007 & TEC & -0.007 \\ 
-  3 &  & ESX50 & -0.004 & ESX50 & -0.009 & ESX50 & 0.006 \\ 
-  4 &  & SP500 & 0 & SP500 & -0.003 & SP500 & -0.003 \\ 
-  5 &  & NASDAQ & -0.004 & NASDAQ & 0.004 & NASDAQ & -0.002 \\ 
-  6 &  & NIKKEI & 0.002 & NIKKEI & -0.007 & NIKKEI & -0.002 \\ 
-  7 &  & BUND & 0.003 & BUND & -0.001 & BUND & 0 \\ 
+1 & 1 & DAX & -0.003 & DAX & -0.003 & DAX & -0.001 \\ 
+  2 &  & TEC & -0.004 & TEC & -0.004 & TEC & -0.007 \\ 
+  3 &  & ESX50 & -0.003 & ESX50 & -0.008 & ESX50 & 0.006 \\ 
+  4 &  & SP500 & -0.002 & SP500 & -0.002 & SP500 & -0.001 \\ 
+  5 &  & NASDAQ & 0 & NASDAQ & 0.003 & NASDAQ & -0.002 \\ 
+  6 &  & NIKKEI & 0.003 & NIKKEI & -0.006 & NIKKEI & -0.002 \\ 
+  7 &  & BUND & 0.003 & BUND & 0 & BUND & 0 \\ 
   8 &  &  &  &  &  &  &  \\ 
-  9 & 3 & DAX & -0.019 & DAX & -0.017 & DAX & -0.009 \\ 
-  10 &  & TEC & -0.012 & TEC & -0.016 & TEC & -0.011 \\ 
-  11 &  & ESX50 & -0.019 & ESX50 & -0.001 & ESX50 & 0.004 \\ 
-  12 &  & SP500 & -0.008 & SP500 & -0.013 & SP500 & -0.009 \\ 
-  13 &  & NASDAQ & -0.003 & NASDAQ & 0.001 & NASDAQ & -0.002 \\ 
-  14 &  & NIKKEI & 0.001 & NIKKEI & -0.009 & NIKKEI & 0.005 \\ 
-  15 &  & BUND & 0 & BUND & -0.001 & BUND & -0.003 \\ 
+  9 & 3 & DAX & -0.008 & DAX & -0.006 & DAX & 0.001 \\ 
+  10 &  & TEC & -0.007 & TEC & -0.013 & TEC & -0.004 \\ 
+  11 &  & ESX50 & -0.017 & ESX50 & -0.001 & ESX50 & 0.004 \\ 
+  12 &  & SP500 & -0.01 & SP500 & -0.012 & SP500 & -0.005 \\ 
+  13 &  & NASDAQ & 0.001 & NASDAQ & -0.002 & NASDAQ & 0 \\ 
+  14 &  & NIKKEI & 0.002 & NIKKEI & -0.01 & NIKKEI & 0.006 \\ 
+  15 &  & BUND & 0.001 & BUND & -0.002 & BUND & -0.003 \\ 
   16 &  &  &  &  &  &  &  \\ 
-  17 & 6 & DAX & -0.036 & DAX & -0.028 & DAX & -0.023 \\ 
-  18 &  & TEC & -0.021 & TEC & -0.023 & TEC & -0.015 \\ 
-  19 &  & ESX50 & -0.013 & ESX50 & -0.011 & ESX50 & -0.008 \\ 
-  20 &  & SP500 & -0.02 & SP500 & -0.026 & SP500 & -0.028 \\ 
-  21 &  & NASDAQ & -0.005 & NASDAQ & -0.005 & NASDAQ & -0.014 \\ 
-  22 &  & NIKKEI & 0.002 & NIKKEI & -0.004 & NIKKEI & 0.001 \\ 
-  23 &  & BUND & -0.002 & BUND & -0.004 & BUND & -0.001 \\ 
+  17 & 6 & DAX & -0.013 & DAX & -0.007 & DAX & -0.003 \\ 
+  18 &  & TEC & -0.014 & TEC & -0.013 & TEC & -0.003 \\ 
+  19 &  & ESX50 & -0.012 & ESX50 & -0.011 & ESX50 & -0.01 \\ 
+  20 &  & SP500 & -0.02 & SP500 & -0.023 & SP500 & -0.025 \\ 
+  21 &  & NASDAQ & -0.001 & NASDAQ & -0.005 & NASDAQ & -0.014 \\ 
+  22 &  & NIKKEI & 0.002 & NIKKEI & -0.005 & NIKKEI & 0.002 \\ 
+  23 &  & BUND & -0.002 & BUND & -0.004 & BUND & -0.002 \\ 
   24 &  &  &  &  &  &  &  \\ 
    \hline
 \end{tabular}
