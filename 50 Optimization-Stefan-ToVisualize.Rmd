@@ -618,7 +618,7 @@ We now add the returns and the variance over the test time window to lateron cal
 The function takes the calculated weighted of the assets as inputs and outputs (in the same data structure) the portfolio weights, its return and its variance over the test time window.
 
 ```{r}
-xDispConstTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinConstantTest_gloggest2019-03-18---17-04"))
+xDispConstTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinConstantTest_gloggest2019-03-20---22-53"))
 ```
 
 
@@ -742,7 +742,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2019-03-18---17-23"))
+xDispVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingTest_gloggest2019-03-20---23-00"))
 ```
 
 
@@ -912,7 +912,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xDispNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionNoRFMinVaryingTest_gloggest2019-03-18---17-29"))
+xDispNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EDispersionNoRFMinVaryingTest_gloggest2019-03-20---23-05"))
 ```
 
 
@@ -1080,7 +1080,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xHerfVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingTest_gloggest2019-03-18---17-40"))
+xHerfVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingTest_gloggest2019-03-20---23-13"))
 ```
 
 
@@ -1253,7 +1253,7 @@ stopCluster(cl)
 ```
 
 ```{r}
-xHerfNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingTest_gloggest2019-03-18---17-47"))
+xHerfNoRFVarTest <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingTest_gloggest2019-03-20---23-18"))
 ```
 
 
@@ -1390,7 +1390,7 @@ saveRDS(xDispVarEval, file = file.path(getwd(), "Optimization", paste0("EDispers
 ```
 
 ```{r}
-xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2019-03-18---17-51"))
+xDispVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionMinVaryingEval_gloggest2019-03-20---23-18"))
 ```
 
 #### dispersion direct min - no risk free
@@ -1481,7 +1481,7 @@ saveRDS(xDispNoRFVarEval, file = file.path(getwd(), "Optimization", paste0("EDis
 ```
 
 ```{r}
-xDispNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionNoRFMinVaryingEval_gloggest2019-03-18---17-51"))
+xDispNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EDispersionNoRFMinVaryingEval_gloggest2019-03-20---23-18"))
 ```
 
 
@@ -1572,7 +1572,7 @@ saveRDS(xHerfVarEval, file = file.path(getwd(), "Optimization", paste0("EHerfMin
 ```
 
 ```{r}
-xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_gloggest2019-03-18---17-51"))
+xHerfVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfMinVaryingEval_gloggest2019-03-20---23-19"))
 ```
 
 
@@ -1664,7 +1664,7 @@ saveRDS(xHerfNoRFVarEval, file = file.path(getwd(), "Optimization", paste0("EHer
 ```
 
 ```{r}
-xHerfNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingEval_gloggest2019-03-18---17-51"))
+xHerfNoRFVarEval <- readRDS(file.path(getwd(), "Optimization", "EHerfNoRFMinVaryingEval_gloggest2019-03-20---23-19"))
 ```
 
 

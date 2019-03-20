@@ -1,7 +1,7 @@
 \subsection{Dispersion}
 \subsubsection{P1}
-% latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Wed Mar 20 22:44:30 2019
+% latex table generated in R 3.4.1 by xtable 1.8-3 package
+% Wed Mar 20 22:52:10 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
@@ -34,8 +34,8 @@
 \end{tabular}
 
 \subsubsection{P6}
-% latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Wed Mar 20 22:44:30 2019
+% latex table generated in R 3.4.1 by xtable 1.8-3 package
+% Wed Mar 20 22:52:10 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
@@ -68,8 +68,8 @@
 \end{tabular}
 
 \subsubsection{I1}
-% latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Wed Mar 20 22:44:30 2019
+% latex table generated in R 3.4.1 by xtable 1.8-3 package
+% Wed Mar 20 22:52:10 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
@@ -102,8 +102,8 @@
 \end{tabular}
 
 \subsubsection{I6}
-% latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Wed Mar 20 22:44:30 2019
+% latex table generated in R 3.4.1 by xtable 1.8-3 package
+% Wed Mar 20 22:52:10 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
@@ -136,8 +136,8 @@
 \end{tabular}
 
 \subsubsection{G1}
-% latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Wed Mar 20 22:44:30 2019
+% latex table generated in R 3.4.1 by xtable 1.8-3 package
+% Wed Mar 20 22:52:10 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
@@ -170,8 +170,8 @@
 \end{tabular}
 
 \subsubsection{G6}
-% latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Wed Mar 20 22:44:30 2019
+% latex table generated in R 3.4.1 by xtable 1.8-3 package
+% Wed Mar 20 22:52:10 2019
 \begin{tabular}{rlllllll}
   \hline
  & Periods & Lag 0 & V1 & Lag 2 & V1 & Lag 4 & V1 \\ 
